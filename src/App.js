@@ -1,10 +1,9 @@
-import './App.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './component/Home.js'
-import SignUp from './component/SignUp.js'
-import LogIn from './component/LogIn.js'
-import Error from './component/Error.js'
+import Home from './pages/Home.js'
+import SignUp from './pages/SignUp.js'
+import LogIn from './pages/LogIn.js'
+import Error from './pages/Error.js'
 
 function App() {
   return (
