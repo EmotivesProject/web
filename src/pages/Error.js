@@ -1,8 +1,8 @@
 function Error() {
   return (
     <div>
-		Error
-	</div>
+		404 page not found or created yet
+    </div>
   );
 }
 

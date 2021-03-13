@@ -1,20 +1,19 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Home from './pages/Home.js'
-import SignUp from './pages/SignUp.js'
-import LogIn from './pages/LogIn.js'
-import Error from './pages/Error.js'
+import {Route, Switch} from 'react-router-dom';
+import Home from './pages/Home.js';
+import SignUp from './pages/Register.js';
+import Error from './pages/Error.js';
+import './site.css';
 
 function App() {
   return (
-        <main>
-            <Switch>
-                <Route path='/' component={Home} exact />
-                <Route path='/sign_up' component={SignUp} />
-                <Route path='/log_in' component={LogIn} />
-				<Route component={Error} />
-            </Switch>
-        </main>
+    <main>
+      <Switch>
+        <Route path='/' component={Home} exact />
+        <Route path='/register' component={SignUp} />
+        <Route component={Error} />
+      </Switch>
+    </main>
   );
 }
 
