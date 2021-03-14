@@ -7,6 +7,8 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
     "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "dotenv-expand": "^5.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -20,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-	"lint": "npx eslint src/**/*.jsx --fix"
+    "lint": "npx eslint src/**/*.jsx --fix"
   },
   "browserslist": {
     "production": [

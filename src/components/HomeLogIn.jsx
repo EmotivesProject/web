@@ -4,6 +4,8 @@ import {
   Button, Form, Header, Segment,
 } from 'semantic-ui-react';
 
+require('dotenv').config();
+
 class HomeLogIn extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,12 @@ class HomeLogIn extends Component {
 
     const data = this.state;
 
-    axios.post('http://uacl.localhost/uacl/login',
+    const host = process.env.REACT_APP_API_HOST;
+    const base = process.env.REACT_APP_API_BASE_URL;
+    const url = `${host}://${base}/uacl/login`;
+    console.log(url);
+
+    axios.post(url,
       JSON.stringify({
         email: data.Email,
         password: data.Password,
