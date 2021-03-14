@@ -1,18 +1,21 @@
-import { Component, React } from 'react';
 import axios from 'axios';
+import React, { Component } from 'react';
 import {
   Button, Form, Header, Segment,
 } from 'semantic-ui-react';
 
-require('dotenv').config();
-
-class HomeLogIn extends Component {
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      Name: '',
       Email: '',
       Password: '',
     };
+  }
+
+  handleChangeName = (event) => {
+    this.setState({ Name: event.target.value });
   }
 
   handleChangeEmail = (event) => {
@@ -30,10 +33,11 @@ class HomeLogIn extends Component {
 
     const host = process.env.REACT_APP_API_HOST;
     const base = process.env.REACT_APP_API_BASE_URL;
-    const url = `${host}://${base}/uacl/login`;
+    const url = `${host}://${base}/uacl/create_user`;
 
     axios.post(url,
       JSON.stringify({
+        name: data.Name,
         email: data.Email,
         password: data.Password,
       }),
@@ -47,15 +51,20 @@ class HomeLogIn extends Component {
   }
 
   render() {
-    const { Email, Password } = this.state;
+    const { Name, Email, Password } = this.state;
 
     return (
       <div>
-        <Header as="h2" textAlign="center">
-          Log in
+        <Header as="h1" textAlign="center">
+          Create an account
         </Header>
-        <Segment>
-          <Form onSubmit={this.handleSubmit}>
+        <Form size="large" onSubmit={this.handleSubmit}>
+          <Segment>
+            <label htmlFor="name">
+              Full name
+              <Form.Input id="name" type="input" icon="user" iconPosition="left" size="large" placeholder="Your full name" required value={Name} onChange={this.handleChangeName} />
+            </label>
+            <br />
             <label htmlFor="email">
               Email
               <Form.Input id="email" type="email" icon="mail" iconPosition="left" size="large" placeholder="E-mail address" required value={Email} onChange={this.handleChangeEmail} />
@@ -66,12 +75,14 @@ class HomeLogIn extends Component {
               <Form.Input id="password" value={Password} onChange={this.handleChangePassword} icon="lock" iconPosition="left" size="large" placeholder="Password" type="password" required />
             </label>
             <br />
-            <Button primary> Login </Button>
-          </Form>
-        </Segment>
+            <Button primary size="large">
+              Register now
+            </Button>
+          </Segment>
+        </Form>
       </div>
     );
   }
 }
 
-export default HomeLogIn;
+export default RegisterForm;
