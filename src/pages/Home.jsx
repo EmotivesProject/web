@@ -1,29 +1,34 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
-import HomeTag from '../components/HomeTag';
-import HomeLogIn from '../components/HomeLogIn';
-import HomeRegister from '../components/HomeRegister';
-import Footer from '../components/Footer';
+import React, { Component } from 'react';
+import Dashboard from '../components/Dashboard';
+import NotLoggedInHome from '../components/NotLoggedInHome';
 
-function Home() {
-  return (
-    <div>
-      <Grid textAlign="center" style={{ height: '75vh' }} divided="vertically" verticalAlign="middle">
-        <Grid.Row columns={3}>
-          <Grid.Column width={5}>
-            <HomeTag />
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <HomeLogIn />
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <HomeRegister />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-      <Footer />
-    </div>
-  );
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    const token = this.getToken();
+    this.state = {
+      LoggedIn: Boolean(token),
+    };
+  }
+
+  getToken = () => {
+    const tokenString = localStorage.getItem('auth');
+    const userToken = JSON.parse(tokenString);
+    return userToken?.token;
+  };
+
+  render() {
+    const { LoggedIn } = this.state;
+    return (
+      <div>
+        {LoggedIn ? (
+          <Dashboard />
+        ) : (
+          <NotLoggedInHome />
+        )}
+      </div>
+    );
+  }
 }
 
 export default Home;

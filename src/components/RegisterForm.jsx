@@ -4,6 +4,11 @@ import {
   Button, Form, Header, Segment,
 } from 'semantic-ui-react';
 
+const HttpCodes = {
+  success: 201,
+  notFound: 404,
+};
+
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +48,11 @@ class RegisterForm extends Component {
       }),
       { 'Content-Type': 'application/json' })
       .then((result) => {
-        console.log(result);
+        if (result.status === HttpCodes.success) {
+          window.location.href = '/login';
+        } else {
+          console.log('Failed to register');
+        }
       })
       .catch((error) => {
         console.log(`NOT GOOD ${error}`);

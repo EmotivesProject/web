@@ -6,6 +6,11 @@ import {
 
 require('dotenv').config();
 
+const HttpCodes = {
+  success: 201,
+  notFound: 404,
+};
+
 class HomeLogIn extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +18,16 @@ class HomeLogIn extends Component {
       Email: '',
       Password: '',
     };
+  }
+
+  setToken = (userToken) => {
+    // 1 month expiration
+    const d = new Date();
+    d.setTime(d.getTime() + (43800 * 60 * 1000));
+
+    const token = `Bearer ${userToken}`;
+    const fullAuth = JSON.stringify({ expiry: d, token });
+    localStorage.setItem('auth', fullAuth);
   }
 
   handleChangeEmail = (event) => {
@@ -39,10 +54,21 @@ class HomeLogIn extends Component {
       }),
       { 'Content-Type': 'application/json' })
       .then((result) => {
-        console.log(result);
+        if (result.status === HttpCodes.success) {
+          this.setToken(result.data.result.token);
+          const { refreshCurrent } = this.props;
+          if (refreshCurrent) {
+            window.location.reload(false);
+          } else {
+            window.location.href = '/';
+          }
+        } else {
+          console.log('Failed to sign in');
+        }
       })
       .catch((error) => {
-        console.log(`NOT GOOD ${error}`);
+        // Show can't sign in at the moment message
+        console.log(error);
       });
   }
 
