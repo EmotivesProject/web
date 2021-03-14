@@ -58,6 +58,7 @@ class HomeLogIn extends Component {
               Password
               <Form.Input id="password" value={Password} onChange={this.handleChangePassword} icon="lock" iconPosition="left" size="large" placeholder="Password" type="password" required />
             </label>
+            <br />
             <Button primary> Login </Button>
           </Form>
         </Segment>
