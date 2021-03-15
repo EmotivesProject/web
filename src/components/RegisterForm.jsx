@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   Button, Form, Header, Segment,
 } from 'semantic-ui-react';
+import setToken from '../utils/auth';
 
 const HttpCodes = {
   success: 201,
@@ -31,6 +32,10 @@ class RegisterForm extends Component {
     this.setState({ Password: event.target.value });
   }
 
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
 
@@ -38,7 +43,7 @@ class RegisterForm extends Component {
 
     const host = process.env.REACT_APP_API_HOST;
     const base = process.env.REACT_APP_API_BASE_URL;
-    const url = `${host}://${base}/uacl/create_user`;
+    const url = `${host}://${base}/uacl/user`;
 
     axios.post(url,
       JSON.stringify({
@@ -49,7 +54,8 @@ class RegisterForm extends Component {
       { 'Content-Type': 'application/json' })
       .then((result) => {
         if (result.status === HttpCodes.success) {
-          window.location.href = '/login';
+          setToken(result.data.result.token);
+          window.location.href = '/';
         } else {
           console.log('Failed to register');
         }
@@ -71,17 +77,17 @@ class RegisterForm extends Component {
           <Segment>
             <label htmlFor="name">
               Full name
-              <Form.Input id="name" type="input" icon="user" iconPosition="left" size="large" placeholder="Your full name" required value={Name} onChange={this.handleChangeName} />
+              <Form.Input id="name" name="Name" type="input" icon="user" iconPosition="left" size="large" placeholder="Your full name" required value={Name} onChange={this.handleChange} />
             </label>
             <br />
             <label htmlFor="email">
               Email
-              <Form.Input id="email" type="email" icon="mail" iconPosition="left" size="large" placeholder="E-mail address" required value={Email} onChange={this.handleChangeEmail} />
+              <Form.Input id="email" name="Email" type="email" icon="mail" iconPosition="left" size="large" placeholder="E-mail address" required value={Email} onChange={this.handleChangeEmail} />
             </label>
             <br />
             <label htmlFor="password">
               Password
-              <Form.Input id="password" value={Password} onChange={this.handleChangePassword} icon="lock" iconPosition="left" size="large" placeholder="Password" type="password" required />
+              <Form.Input id="password" name="Password" value={Password} onChange={this.handleChangePassword} icon="lock" iconPosition="left" size="large" placeholder="Password" type="password" required />
             </label>
             <br />
             <Button primary size="large">
