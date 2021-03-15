@@ -7,9 +7,6 @@ function HomeTag() {
       <Header as="h1">
         emotives
       </Header>
-      <h2>
-        The world&apos;s first accessible first social media.
-      </h2>
     </div>
   );
 }
