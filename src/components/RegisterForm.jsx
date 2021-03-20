@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import {
-  Button, Form, Header, Segment,
+  Button, Form, Header, Segment, Message,
 } from 'semantic-ui-react';
 import setToken from '../utils/auth';
 
@@ -15,21 +15,13 @@ class RegisterForm extends Component {
     super(props);
     this.state = {
       Name: '',
+      NameError: '',
       Email: '',
+      EmailError: '',
       Password: '',
+      PasswordError: '',
+      GeneralError: '',
     };
-  }
-
-  handleChangeName = (event) => {
-    this.setState({ Name: event.target.value });
-  }
-
-  handleChangeEmail = (event) => {
-    this.setState({ Email: event.target.value });
-  }
-
-  handleChangePassword = (event) => {
-    this.setState({ Password: event.target.value });
   }
 
   handleChange = (event) => {
@@ -57,16 +49,35 @@ class RegisterForm extends Component {
           setToken(result.data.result.token);
           window.location.href = '/';
         } else {
-          console.log('Failed to register');
+          this.setState({ GeneralError: 'Can\'t seem to register at the moment' });
         }
       })
-      .catch((error) => {
-        console.log(`NOT GOOD ${error}`);
+      .catch((err) => {
+        const responseMessages = err.response.data.message;
+        if (responseMessages) {
+          responseMessages.forEach((mess) => {
+            if (mess.target) {
+              this.setState({ [`${mess.target}Error`]: mess.message });
+            } else {
+              this.setState({ GeneralError: mess.message });
+            }
+          });
+        } else {
+          this.setState({ GeneralError: 'Can\'t seem to register at the moment' });
+        }
       });
   }
 
   render() {
-    const { Name, Email, Password } = this.state;
+    const {
+      Name,
+      NameError,
+      Email,
+      EmailError,
+      Password,
+      PasswordError,
+      GeneralError,
+    } = this.state;
 
     return (
       <div>
@@ -77,19 +88,68 @@ class RegisterForm extends Component {
           <Segment>
             <label htmlFor="name">
               Full name
-              <Form.Input id="name" name="Name" type="input" icon="user" iconPosition="left" size="large" placeholder="Your full name" required value={Name} onChange={this.handleChange} />
+              <span style={{ color: 'red' }}>
+                <Form.Input
+                  id="name"
+                  name="Name"
+                  type="input"
+                  icon="user"
+                  iconPosition="left"
+                  size="large"
+                  placeholder="Your full name"
+                  required
+                  value={Name}
+                  onChange={this.handleChange}
+                  min="3"
+                  max="100"
+                />
+                {NameError}
+              </span>
             </label>
             <br />
             <label htmlFor="email">
               Email
-              <Form.Input id="email" name="Email" type="email" icon="mail" iconPosition="left" size="large" placeholder="E-mail address" required value={Email} onChange={this.handleChangeEmail} />
+              <span style={{ color: 'red' }}>
+                <Form.Input
+                  id="email"
+                  name="Email"
+                  type="email"
+                  icon="mail"
+                  iconPosition="left"
+                  size="large"
+                  placeholder="E-mail address"
+                  required
+                  value={Email}
+                  onChange={this.handleChange}
+                  min="3"
+                  max="100"
+                />
+                {EmailError}
+              </span>
             </label>
             <br />
             <label htmlFor="password">
               Password
-              <Form.Input id="password" name="Password" value={Password} onChange={this.handleChangePassword} icon="lock" iconPosition="left" size="large" placeholder="Password" type="password" required />
+              <span style={{ color: 'red' }}>
+                <Form.Input
+                  id="password"
+                  name="Password"
+                  value={Password}
+                  onChange={this.handleChange}
+                  icon="lock"
+                  iconPosition="left"
+                  size="large"
+                  placeholder="Password"
+                  type="password"
+                  required
+                  min="6"
+                  max="100"
+                />
+                {PasswordError}
+              </span>
             </label>
             <br />
+            {GeneralError ? <Message color="red">{GeneralError}</Message> : <div />}
             <Button primary size="large">
               Register now
             </Button>
