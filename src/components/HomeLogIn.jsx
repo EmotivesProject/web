@@ -1,7 +1,7 @@
 import { Component, React } from 'react';
 import axios from 'axios';
 import {
-  Button, Form, Header, Segment,
+  Button, Form, Header, Segment, Message,
 } from 'semantic-ui-react';
 import setToken from '../utils/auth';
 
@@ -10,6 +10,7 @@ require('dotenv').config();
 const HttpCodes = {
   success: 201,
   notFound: 404,
+  unprocessable: 422,
 };
 
 class HomeLogIn extends Component {
@@ -17,16 +18,15 @@ class HomeLogIn extends Component {
     super(props);
     this.state = {
       Email: '',
+      EmailError: '',
       Password: '',
+      PasswordError: '',
+      LogInError: '',
     };
   }
 
-  handleChangeEmail = (event) => {
-    this.setState({ Email: event.target.value });
-  }
-
-  handleChangePassword = (event) => {
-    this.setState({ Password: event.target.value });
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit = (event) => {
@@ -54,18 +54,32 @@ class HomeLogIn extends Component {
           } else {
             window.location.href = '/';
           }
-        } else {
-          console.log('Failed to sign in');
         }
       })
-      .catch((error) => {
-        // Show can't sign in at the moment message
-        console.log(error);
+      .catch((err) => {
+        const responseMessages = err.response.data.message;
+        if (responseMessages) {
+          responseMessages.forEach((mess) => {
+            if (mess.target) {
+              this.setState({ [`${mess.target}Error`]: mess.message });
+            } else {
+              this.setState({ LogInError: mess.message });
+            }
+          });
+        } else {
+          this.setState({ LogInError: 'Can\'t seem to sign in the moment' });
+        }
       });
   }
 
   render() {
-    const { Email, Password } = this.state;
+    const {
+      Email,
+      EmailError,
+      Password,
+      PasswordError,
+      LogInError,
+    } = this.state;
 
     return (
       <div>
@@ -76,14 +90,47 @@ class HomeLogIn extends Component {
           <Form onSubmit={this.handleSubmit}>
             <label htmlFor="email">
               Email
-              <Form.Input id="email" type="email" icon="mail" iconPosition="left" size="large" placeholder="E-mail address" required value={Email} onChange={this.handleChangeEmail} />
+              <span style={{ color: 'red' }}>
+                <Form.Input
+                  id="email"
+                  name="Email"
+                  type="email"
+                  icon="mail"
+                  iconPosition="left"
+                  size="large"
+                  placeholder="E-mail address"
+                  required
+                  value={Email}
+                  onChange={this.handleChange}
+                  min="3"
+                  max="100"
+                />
+                {EmailError}
+              </span>
             </label>
             <br />
             <label htmlFor="password">
               Password
-              <Form.Input id="password" value={Password} onChange={this.handleChangePassword} icon="lock" iconPosition="left" size="large" placeholder="Password" type="password" required />
+              <span style={{ color: 'red' }}>
+                <Form.Input
+                  id="password"
+                  name="Password"
+                  value={Password}
+                  onChange={this.handleChange}
+                  icon="lock"
+                  iconPosition="left"
+                  size="large"
+                  placeholder="Password"
+                  type="password"
+                  required
+                  min="6"
+                  max="100"
+                />
+                {PasswordError}
+              </span>
             </label>
             <br />
+            {LogInError ? <Message color="red">{LogInError}</Message> : <div />}
             <Button primary> Login </Button>
           </Form>
         </Segment>
