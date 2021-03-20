@@ -31,6 +31,13 @@ class RegisterForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
+    this.setState({
+      NameError: '',
+      EmailError: '',
+      PasswordError: '',
+      GeneralError: '',
+    });
+
     const data = this.state;
 
     const host = process.env.REACT_APP_API_HOST;
