@@ -32,6 +32,12 @@ class HomeLogIn extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
+    this.setState({
+      EmailError: '',
+      PasswordError: '',
+      LogInError: '',
+    });
+
     const data = this.state;
 
     const host = process.env.REACT_APP_API_HOST;
