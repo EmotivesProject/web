@@ -41,7 +41,7 @@ class HomeLogIn extends Component {
     const data = this.state;
 
     const host = process.env.REACT_APP_API_HOST;
-    const base = process.env.REACT_APP_API_BASE_URL;
+    const base = process.env.REACT_APP_UACL_BASE_URL;
     const url = `${host}://${base}/uacl/login`;
 
     axios.post(url,

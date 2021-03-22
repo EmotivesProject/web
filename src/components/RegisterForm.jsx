@@ -41,7 +41,7 @@ class RegisterForm extends Component {
     const data = this.state;
 
     const host = process.env.REACT_APP_API_HOST;
-    const base = process.env.REACT_APP_API_BASE_URL;
+    const base = process.env.REACT_APP_UACL_BASE_URL;
     const url = `${host}://${base}/uacl/user`;
 
     axios.post(url,
