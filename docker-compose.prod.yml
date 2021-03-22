@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile.prod
     environment:
       - PORT=80
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.web.rule=Host(`www.emotives.net`)"

@@ -11,6 +11,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - PORT=80
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.web.rule=Host(`localhost`)"
