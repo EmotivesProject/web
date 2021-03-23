@@ -5,7 +5,7 @@ import HomeLogIn from './HomeLogIn';
 import HomeRegister from './HomeRegister';
 import Footer from './Footer';
 
-function NootLoggedInHome() {
+function NotLoggedInHome() {
   return (
     <div>
       <Grid textAlign="center" style={{ height: '75vh' }} divided="vertically" verticalAlign="middle">
@@ -26,4 +26,4 @@ function NootLoggedInHome() {
   );
 }
 
-export default NootLoggedInHome;
+export default NotLoggedInHome;
