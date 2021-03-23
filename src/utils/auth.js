@@ -1,4 +1,4 @@
-function setToken(userToken) {
+export function setToken(userToken) {
   // 1 month expiration
   const d = new Date();
   d.setTime(d.getTime() + (43800 * 60 * 1000));
@@ -8,4 +8,6 @@ function setToken(userToken) {
   localStorage.setItem('auth', fullAuth);
 }
 
-export default setToken;
+export function RemoveToken() {
+  localStorage.removeItem('auth');
+}

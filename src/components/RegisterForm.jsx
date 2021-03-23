@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { Component } from 'react';
+import { React, Component } from 'react';
 import {
   Button, Form, Header, Segment, Message,
 } from 'semantic-ui-react';
-import setToken from '../utils/auth';
+import { setToken } from '../utils/auth';
 
 const HttpCodes = {
   success: 201,
