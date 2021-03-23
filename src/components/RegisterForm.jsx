@@ -16,10 +16,11 @@ class RegisterForm extends Component {
     this.state = {
       Name: '',
       NameError: '',
-      Email: '',
-      EmailError: '',
+      Username: '',
+      UsernameError: '',
       Password: '',
       PasswordError: '',
+      Secret: '',
       GeneralError: '',
     };
   }
@@ -33,7 +34,7 @@ class RegisterForm extends Component {
 
     this.setState({
       NameError: '',
-      EmailError: '',
+      UsernameError: '',
       PasswordError: '',
       GeneralError: '',
     });
@@ -42,13 +43,14 @@ class RegisterForm extends Component {
 
     const host = process.env.REACT_APP_API_HOST;
     const base = process.env.REACT_APP_UACL_BASE_URL;
-    const url = `${host}://${base}/uacl/user`;
+    const url = `${host}://${base}/user`;
 
     axios.post(url,
       JSON.stringify({
         name: data.Name,
-        email: data.Email,
+        username: data.Username,
         password: data.Password,
+        secret: data.Secret,
       }),
       { 'Content-Type': 'application/json' })
       .then((result) => {
@@ -79,10 +81,11 @@ class RegisterForm extends Component {
     const {
       Name,
       NameError,
-      Email,
-      EmailError,
+      Username,
+      UsernameError,
       Password,
       PasswordError,
+      Secret,
       GeneralError,
     } = this.state;
 
@@ -114,24 +117,24 @@ class RegisterForm extends Component {
               </span>
             </label>
             <br />
-            <label htmlFor="email">
-              Email
+            <label htmlFor="username">
+              Username
               <span style={{ color: 'red' }}>
                 <Form.Input
-                  id="email"
-                  name="Email"
-                  type="email"
-                  icon="mail"
+                  id="username"
+                  name="Username"
+                  type="username"
+                  icon="user"
                   iconPosition="left"
                   size="large"
-                  placeholder="E-mail address"
+                  placeholder="Username"
                   required
-                  value={Email}
+                  value={Username}
                   onChange={this.handleChange}
                   min="3"
                   max="100"
                 />
-                {EmailError}
+                {UsernameError}
               </span>
             </label>
             <br />
@@ -154,6 +157,24 @@ class RegisterForm extends Component {
                 />
                 {PasswordError}
               </span>
+            </label>
+            <br />
+            <label htmlFor="secret">
+              Secret
+              <Form.Input
+                id="secret"
+                name="Secret"
+                value={Secret}
+                onChange={this.handleChange}
+                icon="lock"
+                iconPosition="left"
+                size="large"
+                placeholder="Secret"
+                type="password"
+                required
+                min="6"
+                max="100"
+              />
             </label>
             <br />
             {GeneralError ? <Message color="red">{GeneralError}</Message> : <div />}

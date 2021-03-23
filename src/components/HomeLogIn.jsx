@@ -17,8 +17,8 @@ class HomeLogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Email: '',
-      EmailError: '',
+      Username: '',
+      UsernameError: '',
       Password: '',
       PasswordError: '',
       LogInError: '',
@@ -33,7 +33,7 @@ class HomeLogIn extends Component {
     event.preventDefault();
 
     this.setState({
-      EmailError: '',
+      UsernameError: '',
       PasswordError: '',
       LogInError: '',
     });
@@ -42,11 +42,11 @@ class HomeLogIn extends Component {
 
     const host = process.env.REACT_APP_API_HOST;
     const base = process.env.REACT_APP_UACL_BASE_URL;
-    const url = `${host}://${base}/uacl/login`;
+    const url = `${host}://${base}/login`;
 
     axios.post(url,
       JSON.stringify({
-        email: data.Email,
+        username: data.Username,
         password: data.Password,
       }),
       { 'Content-Type': 'application/json' })
@@ -80,8 +80,8 @@ class HomeLogIn extends Component {
 
   render() {
     const {
-      Email,
-      EmailError,
+      Username,
+      UsernameError,
       Password,
       PasswordError,
       LogInError,
@@ -94,24 +94,24 @@ class HomeLogIn extends Component {
         </Header>
         <Segment>
           <Form onSubmit={this.handleSubmit}>
-            <label htmlFor="email">
-              Email
+            <label htmlFor="username">
+              Username
               <span style={{ color: 'red' }}>
                 <Form.Input
-                  id="email"
-                  name="Email"
-                  type="email"
-                  icon="mail"
+                  id="username"
+                  name="Username"
+                  type="input"
+                  icon="user"
                   iconPosition="left"
                   size="large"
-                  placeholder="E-mail address"
+                  placeholder="Username"
                   required
-                  value={Email}
+                  value={Username}
                   onChange={this.handleChange}
                   min="3"
                   max="100"
                 />
-                {EmailError}
+                {UsernameError}
               </span>
             </label>
             <br />
