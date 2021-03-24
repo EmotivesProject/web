@@ -1,20 +1,26 @@
 import axios from 'axios';
 import { React, Component } from 'react';
 import { TextArea, Form, Button } from 'semantic-ui-react';
+import PostFeed from './PostFeed';
 
 class Feed extends Component {
   constructor(props) {
     super(props);
     this.state = {
       Message: '',
+      PostPage: 0,
       Posts: [],
     };
   }
 
   componentDidMount() {
+    let {
+      PostPage,
+    } = this.state;
+
     const host = process.env.REACT_APP_API_HOST;
     const base = process.env.REACT_APP_POSTIT_BASE_URL;
-    const url = `${host}://${base}/post`;
+    const url = `${host}://${base}/post?page=${PostPage}`;
 
     const token = this.getToken();
 
@@ -26,7 +32,8 @@ class Feed extends Component {
       })
         .then((result) => {
           const fetchedPosts = result.data.result;
-          console.log(fetchedPosts);
+          PostPage += 1;
+          this.setState({ PostPage });
           this.setState({ Posts: fetchedPosts });
         });
     }
@@ -76,7 +83,15 @@ class Feed extends Component {
       Posts,
     } = this.state;
 
-    console.log(Posts);
+    const feedItems = Posts.map((post) => (
+      <PostFeed
+        key={post.id}
+        id={post.id}
+        created={post.created}
+        user={post.user}
+        message={post.message}
+      />
+    ));
 
     return (
       <div>
@@ -91,7 +106,7 @@ class Feed extends Component {
             Update Now
           </Button>
         </Form>
-        {Message}
+        {feedItems}
       </div>
     );
   }
