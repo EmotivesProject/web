@@ -55,7 +55,8 @@ class RegisterForm extends Component {
       { 'Content-Type': 'application/json' })
       .then((result) => {
         if (result.status === HttpCodes.success) {
-          setToken(result.data.result.token);
+          const jwt = `Bearer ${result.data.result.token}`;
+          setToken('auth', jwt);
           window.location.href = '/';
         } else {
           this.setState({ GeneralError: 'Can\'t seem to register at the moment' });

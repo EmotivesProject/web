@@ -1,13 +1,14 @@
-export function setToken(userToken) {
-  // 1 month expiration
-  const d = new Date();
-  d.setTime(d.getTime() + (43800 * 60 * 1000));
+import Cookies from 'js-cookie';
 
-  const token = `Bearer ${userToken}`;
-  const fullAuth = JSON.stringify({ expiry: d, token });
-  localStorage.setItem('auth', fullAuth);
+export function getToken(key) {
+  return Cookies.get(key);
 }
 
-export function RemoveToken() {
-  localStorage.removeItem('auth');
+export function setToken(key, token) {
+  Cookies.set(key, token);
+}
+
+export function removeToken() {
+  Cookies.remove('auth');
+  Cookies.remove('user');
 }

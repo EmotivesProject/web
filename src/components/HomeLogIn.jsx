@@ -52,7 +52,8 @@ class HomeLogIn extends Component {
       { 'Content-Type': 'application/json' })
       .then((result) => {
         if (result.status === HttpCodes.success) {
-          setToken(result.data.result.token);
+          const jwt = `Bearer ${result.data.result.token}`;
+          setToken('auth', jwt);
 
           const { refreshCurrent } = this.props;
           if (refreshCurrent) {

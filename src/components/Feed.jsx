@@ -1,7 +1,9 @@
+/* eslint no-underscore-dangle: 0 */
 import axios from 'axios';
 import { React, Component } from 'react';
 import { TextArea, Form, Button } from 'semantic-ui-react';
 import PostFeed from './PostFeed';
+import { setToken, getToken } from '../utils/auth';
 
 class Feed extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class Feed extends Component {
       Message: '',
       PostPage: 0,
       Posts: [],
+      UserID: '',
     };
   }
 
@@ -20,34 +23,43 @@ class Feed extends Component {
 
     const host = process.env.REACT_APP_API_HOST;
     const base = process.env.REACT_APP_POSTIT_BASE_URL;
-    const url = `${host}://${base}/post?page=${PostPage}`;
 
-    const token = this.getToken();
+    const token = getToken('auth');
+    const userToken = getToken('user');
 
-    if (token) {
-      axios.get(url, {
+    if (userToken === undefined) {
+      const userUrl = `${host}://${base}/user`;
+      axios.get(userUrl, {
         headers: {
           Authorization: token,
         },
       })
         .then((result) => {
-          const fetchedPosts = result.data.result;
-          PostPage += 1;
-          this.setState({ PostPage });
-          this.setState({ Posts: fetchedPosts });
+          const fetchedID = result.data.result.id;
+          setToken('user', fetchedID);
+          this.setState({ UserID: fetchedID });
         });
     }
+
+    const url = `${host}://${base}/post?page=${PostPage}`;
+
+    axios.get(url, {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((result) => {
+        console.log(result);
+        const fetchedPosts = result.data.result;
+        PostPage += 1;
+        this.setState({ PostPage });
+        this.setState({ Posts: fetchedPosts });
+      });
   }
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
-
-  getToken = () => {
-    const tokenString = localStorage.getItem('auth');
-    const userToken = JSON.parse(tokenString);
-    return userToken?.token;
-  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -62,7 +74,7 @@ class Feed extends Component {
       message: data.Message,
     });
 
-    const token = this.getToken();
+    const token = getToken('auth');
 
     axios.post(url, body, {
       headers: {
@@ -81,15 +93,20 @@ class Feed extends Component {
     const {
       Message,
       Posts,
+      UserID,
     } = this.state;
 
     const feedItems = Posts.map((post) => (
       <PostFeed
-        key={post.id}
-        id={post.id}
+        key={Math.random().toString(36).substr(2, 9)}
+        id={post._id}
         created={post.created}
-        user={post.user}
+        likes={post.likes}
         message={post.message}
+        user={post.user[0]}
+        userComments={post.user_comments}
+        userLikes={post.user_likes}
+        loggedIn={UserID}
       />
     ));
 

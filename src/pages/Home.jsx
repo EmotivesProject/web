@@ -3,12 +3,12 @@ import axios from 'axios';
 
 import Dashboard from '../components/Dashboard';
 import NotLoggedInHome from '../components/NotLoggedInHome';
-import { RemoveToken } from '../utils/auth';
+import { getToken, removeToken } from '../utils/auth';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    const token = this.getToken();
+    const token = getToken('auth');
     this.state = {
       LoggedIn: Boolean(token),
     };
@@ -19,7 +19,7 @@ class Home extends Component {
     const base = process.env.REACT_APP_UACL_BASE_URL;
     const url = `${host}://${base}/authorize`;
 
-    const token = this.getToken();
+    const token = getToken('auth');
 
     if (token) {
       axios.get(url, {
@@ -28,17 +28,11 @@ class Home extends Component {
         },
       })
         .catch(() => {
-          RemoveToken();
+          removeToken();
           window.location.reload(false);
         });
     }
   }
-
-  getToken = () => {
-    const tokenString = localStorage.getItem('auth');
-    const userToken = JSON.parse(tokenString);
-    return userToken?.token;
-  };
 
   render() {
     const { LoggedIn } = this.state;
