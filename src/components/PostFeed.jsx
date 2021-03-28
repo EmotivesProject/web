@@ -18,7 +18,26 @@ class PostFeed extends Component {
     super(props);
     this.state = {
       NewComment: '',
+      AlreadyLiked: false,
+      LikedId: '',
     };
+  }
+
+  componentDidMount() {
+    const {
+      userLikes,
+    } = this.props;
+    const userID = getToken('user');
+
+    for (let i = 0; i < userLikes.length; i += 1) {
+      if (userLikes[i].user[0]._id === userID) {
+        this.setState({
+          LikedId: userLikes[i]._id,
+          AlreadyLiked: true,
+        });
+        return;
+      }
+    }
   }
 
   handleChange = (event) => {
@@ -52,9 +71,6 @@ class PostFeed extends Component {
         this.setState({
           NewComment: '',
         });
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
 
@@ -63,18 +79,30 @@ class PostFeed extends Component {
 
     const { id } = this.props;
 
+    const { AlreadyLiked, LikedId } = this.state;
+
     const host = process.env.REACT_APP_API_HOST;
     const base = process.env.REACT_APP_POSTIT_BASE_URL;
-    const url = `${host}://${base}/post/${id}/like`;
-
+    let url;
     const token = getToken('auth');
 
-    axios.post(url, {}, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
-    });
+    if (AlreadyLiked) {
+      url = `${host}://${base}/post/${id}/like/${LikedId}/`;
+      axios.delete(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      });
+    } else {
+      url = `${host}://${base}/post/${id}/like`;
+      axios.post(url, {}, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      });
+    }
   }
 
   render() {
@@ -88,7 +116,15 @@ class PostFeed extends Component {
 
     const {
       NewComment,
+      AlreadyLiked,
     } = this.state;
+
+    let button;
+    if (AlreadyLiked) {
+      button = <Button primary size="large">Unlike</Button>;
+    } else {
+      button = <Button primary size="large">like</Button>;
+    }
 
     const comments = userComments.map((comment) => (
       <Comment key={Math.random().toString(36).substr(2, 9)}>
@@ -110,9 +146,7 @@ class PostFeed extends Component {
               Likes:
               {likes}
               <Form onSubmit={this.attemptLike}>
-                <Button primary size="large">
-                  Like
-                </Button>
+                {button}
               </Form>
             </Card.Header>
             <Card.Meta>
