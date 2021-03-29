@@ -101,7 +101,7 @@ class Feed extends Component {
         key={Math.random().toString(36).substr(2, 9)}
         id={post._id}
         created={post.created}
-        likes={post.likes}
+        likes={post.user_likes.length}
         message={post.message}
         user={post.user[0]}
         userComments={post.user_comments}
