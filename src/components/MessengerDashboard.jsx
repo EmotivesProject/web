@@ -3,6 +3,11 @@ import {
   Header, Grid,
 } from 'semantic-ui-react';
 
+const host = process.env.REACT_APP_API_HOST;
+const base = process.env.REACT_APP_CHATTER_BASE_URL;
+
+ws = new WebSocket("")
+
 function MessengerDashboard() {
   return (
     <div>
