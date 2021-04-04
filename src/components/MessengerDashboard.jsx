@@ -13,6 +13,9 @@ class MessengerDashboard extends Component {
     this.state = {
       client: null,
       Message: '',
+      connections: null,
+      username: '',
+      to: '',
     };
   }
 
@@ -38,6 +41,7 @@ class MessengerDashboard extends Component {
       .then((result) => {
         const authToken = result.data.result.token;
         setToken('username', result.data.result.username);
+        this.setState({ username: result.data.result.username });
         const wsURL = `${wsBase}://${urlBase}/ws?token=${authToken}`;
 
         client = new W3cwebsocket(wsURL);
@@ -46,7 +50,7 @@ class MessengerDashboard extends Component {
           console.log('WebSocket Client Connected');
           axios.get(usersURL)
             .then((connectionResult) => {
-              console.log(connectionResult);
+              this.setState({ connections: connectionResult.data.result });
             });
         };
         client.onmessage = (message) => {
@@ -70,22 +74,43 @@ class MessengerDashboard extends Component {
     const {
       client,
       Message,
+      username,
+      to,
     } = this.state;
 
     console.log('SENDING MESSAGE');
     client.send(JSON.stringify({
-      username_from: 'ey',
-      username_to: 'newtest',
+      username_from: username,
+      username_to: to,
       message: Message,
     }));
 
     this.setState({ Message: '' });
   }
 
+  changeTalkingTo = (event) => {
+    this.setState({ to: event.target.name });
+  }
+
   render() {
     const {
       Message,
+      connections,
     } = this.state;
+
+    let selectionButtons = null;
+
+    if (connections != null) {
+      selectionButtons = connections.map((connection) => (
+        <Button
+          key={Math.random().toString(36).substr(2, 9)}
+          onClick={this.changeTalkingTo}
+          name={connection.username}
+        >
+          {connection.username}
+        </Button>
+      ));
+    }
 
     return (
       <div>
@@ -96,7 +121,7 @@ class MessengerDashboard extends Component {
           <Grid textAlign="center" divided="vertically" verticalAlign="middle">
             <Grid.Row columns={3}>
               <Grid.Column width={3}>
-                Hey
+                {selectionButtons}
               </Grid.Column>
               <Grid.Column width={6}>
                 <Form onSubmit={this.handleSubmit}>
