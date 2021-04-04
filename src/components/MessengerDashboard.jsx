@@ -74,8 +74,9 @@ class MessengerDashboard extends Component {
 
     console.log('SENDING MESSAGE');
     client.send(JSON.stringify({
-      username: 'ey',
-      content: Message,
+      username_from: 'ey',
+      username_to: 'newtest',
+      message: Message,
     }));
 
     this.setState({ Message: '' });
