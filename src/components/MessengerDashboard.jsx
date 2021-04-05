@@ -83,9 +83,6 @@ class MessengerDashboard extends Component {
           }
         };
         this.setState({ client });
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
 
@@ -103,7 +100,6 @@ class MessengerDashboard extends Component {
       to,
     } = this.state;
 
-    console.log('SENDING MESSAGE');
     client.send(JSON.stringify({
       username_from: username,
       username_to: to,
@@ -134,7 +130,6 @@ class MessengerDashboard extends Component {
       },
     })
       .then((result) => {
-        console.log(result);
         this.setState({ previousMessages: result.data.result });
       });
   }

@@ -49,7 +49,6 @@ class Feed extends Component {
       },
     })
       .then((result) => {
-        console.log(result);
         const fetchedPosts = result.data.result;
         PostPage += 1;
         this.setState({ PostPage });
