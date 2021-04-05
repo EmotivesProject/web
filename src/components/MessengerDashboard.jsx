@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import {
-  Header, Grid, TextArea, Form, Button,
+  Header, Grid, TextArea, Form, Button, Card,
 } from 'semantic-ui-react';
 import { w3cwebsocket as W3cwebsocket } from 'websocket';
 import { getToken, setToken } from '../utils/auth';
@@ -16,6 +16,7 @@ class MessengerDashboard extends Component {
       connections: null,
       username: '',
       to: '',
+      previousMessages: [],
     };
   }
 
@@ -50,12 +51,36 @@ class MessengerDashboard extends Component {
           console.log('WebSocket Client Connected');
           axios.get(usersURL)
             .then((connectionResult) => {
+              this.setState({ to: connectionResult.data.result[0].username });
               this.setState({ connections: connectionResult.data.result });
+              this.getPreviousMessages();
             });
         };
         client.onmessage = (message) => {
-          console.log('MESSAGE RECEIVED');
-          console.log(message);
+          const messageObject = JSON.parse(message.data);
+          const {
+            username,
+            to,
+            previousMessages,
+          } = this.state;
+
+          if ((messageObject.username_from === username
+            || messageObject.username_to === username)
+            && (messageObject.username_from === to
+            || messageObject.username_to === to)) {
+            let tempArray = [];
+            if (previousMessages != null) {
+              tempArray = [
+                ...previousMessages,
+                messageObject,
+              ];
+            } else {
+              tempArray = [
+                messageObject,
+              ];
+            }
+            this.setState({ previousMessages: tempArray });
+          }
         };
         this.setState({ client });
       })
@@ -90,15 +115,39 @@ class MessengerDashboard extends Component {
 
   changeTalkingTo = (event) => {
     this.setState({ to: event.target.name });
+    this.getPreviousMessages();
+  }
+
+  getPreviousMessages = () => {
+    const apiHost = process.env.REACT_APP_API_HOST;
+    const urlBase = process.env.REACT_APP_CHATTER_BASE_URL;
+    const {
+      username,
+      to,
+    } = this.state;
+    const messagesURL = `${apiHost}://${urlBase}/messages?from=${username}&to=${to}`;
+    const token = getToken('auth');
+
+    axios.get(messagesURL, {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((result) => {
+        console.log(result);
+        this.setState({ previousMessages: result.data.result });
+      });
   }
 
   render() {
     const {
       Message,
       connections,
+      previousMessages,
     } = this.state;
 
     let selectionButtons = null;
+    let segmentMessages = null;
 
     if (connections != null) {
       selectionButtons = connections.map((connection) => (
@@ -106,9 +155,27 @@ class MessengerDashboard extends Component {
           key={Math.random().toString(36).substr(2, 9)}
           onClick={this.changeTalkingTo}
           name={connection.username}
+          primary={connection.active}
+          size="large"
         >
           {connection.username}
         </Button>
+      ));
+    }
+
+    if (previousMessages != null) {
+      segmentMessages = previousMessages.map((previousMessage) => (
+        <Card fluid>
+          <Card.Header>
+            {previousMessage.username_from}
+          </Card.Header>
+          <Card.Meta>
+            {previousMessage.created}
+          </Card.Meta>
+          <Card.Content>
+            {previousMessage.message}
+          </Card.Content>
+        </Card>
       ));
     }
 
@@ -124,6 +191,7 @@ class MessengerDashboard extends Component {
                 {selectionButtons}
               </Grid.Column>
               <Grid.Column width={6}>
+                {segmentMessages}
                 <Form onSubmit={this.handleSubmit}>
                   <TextArea
                     placeholder="Update your status"
