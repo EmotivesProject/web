@@ -95,19 +95,23 @@ class Feed extends Component {
       UserID,
     } = this.state;
 
-    const feedItems = Posts.map((post) => (
-      <PostFeed
-        key={Math.random().toString(36).substr(2, 9)}
-        id={post._id}
-        created={post.created}
-        likes={post.user_likes.length}
-        message={post.message}
-        user={post.user[0]}
-        userComments={post.user_comments}
-        userLikes={post.user_likes}
-        loggedIn={UserID}
-      />
-    ));
+    let feedItems;
+
+    if (Posts != null) {
+      feedItems = Posts.map((post) => (
+        <PostFeed
+          key={Math.random().toString(36).substr(2, 9)}
+          id={post._id}
+          created={post.created}
+          likes={post.user_likes.length}
+          message={post.message}
+          user={post.user[0]}
+          userComments={post.user_comments}
+          userLikes={post.user_likes}
+          loggedIn={UserID}
+        />
+      ));
+    }
 
     return (
       <div>
