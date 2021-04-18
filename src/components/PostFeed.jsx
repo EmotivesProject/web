@@ -30,7 +30,7 @@ class PostFeed extends Component {
     const userID = getToken('user');
 
     for (let i = 0; i < userLikes.length; i += 1) {
-      if (userLikes[i].user[0]._id === userID) {
+      if (userLikes[i].username.id === userID) {
         this.setState({
           LikedId: userLikes[i]._id,
           AlreadyLiked: true,
@@ -129,8 +129,8 @@ class PostFeed extends Component {
     const comments = userComments.map((comment) => (
       <Comment key={Math.random().toString(36).substr(2, 9)}>
         <Comment.Content>
-          <Comment.Author>{comment.user[0].username}</Comment.Author>
-          <Comment.Metadata>{comment.created}</Comment.Metadata>
+          <Comment.Author>{comment.username}</Comment.Author>
+          <Comment.Metadata>{comment.created_at}</Comment.Metadata>
           <Comment.Text>{comment.message}</Comment.Text>
         </Comment.Content>
       </Comment>
