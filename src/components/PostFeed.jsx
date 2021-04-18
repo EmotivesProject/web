@@ -32,7 +32,7 @@ class PostFeed extends Component {
     for (let i = 0; i < userLikes.length; i += 1) {
       if (userLikes[i].username.id === userID) {
         this.setState({
-          LikedId: userLikes[i]._id,
+          LikedId: userLikes[i].id,
           AlreadyLiked: true,
         });
         return;
@@ -107,11 +107,13 @@ class PostFeed extends Component {
 
   render() {
     const {
-      message,
+      id,
       user,
       created,
       likes,
       userComments,
+      latitude,
+      longitude,
     } = this.props;
 
     const {
@@ -119,11 +121,31 @@ class PostFeed extends Component {
       AlreadyLiked,
     } = this.state;
 
+    let { message } = this.props;
+
     let button;
     if (AlreadyLiked) {
       button = <Button primary size="large">Unlike</Button>;
     } else {
       button = <Button primary size="large">like</Button>;
+    }
+
+    let mapImage;
+    if (latitude && longitude) {
+      if (message === undefined) {
+        message = 'QUT';
+      }
+      const imageSrc = `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_KEY}&q=${message}&center=${latitude},${longitude}`;
+      mapImage = (
+        <iframe
+          title={id}
+          width="500"
+          height="400"
+          loading="lazy"
+          src={imageSrc}
+        />
+      );
+      message = undefined;
     }
 
     const comments = userComments.map((comment) => (
@@ -154,6 +176,7 @@ class PostFeed extends Component {
             </Card.Meta>
             <Card.Content>
               {message}
+              {mapImage}
             </Card.Content>
           </Card>
           <Comment.Group>

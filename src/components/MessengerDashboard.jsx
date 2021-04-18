@@ -48,7 +48,6 @@ class MessengerDashboard extends Component {
         client = new W3cwebsocket(wsURL);
 
         client.onopen = () => {
-          console.log('WebSocket Client Connected');
           axios.get(usersURL)
             .then((connectionResult) => {
               this.setState({ to: connectionResult.data.result[0].username });

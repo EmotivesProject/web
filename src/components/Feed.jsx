@@ -98,7 +98,6 @@ class Feed extends Component {
     let feedItems;
 
     if (Posts != null) {
-      console.log(Posts);
       feedItems = Posts.map((post) => (
         <PostFeed
           key={Math.random().toString(36).substr(2, 9)}
@@ -106,6 +105,9 @@ class Feed extends Component {
           created={post.post.created_at}
           likes={post.likes.length}
           message={post.post.message}
+          imagePath={post.post.image_path}
+          latitude={post.post.latitude}
+          longitude={post.post.longitude}
           user={post.post.username}
           userComments={post.comments}
           userLikes={post.likes}
