@@ -109,8 +109,9 @@ class MessengerDashboard extends Component {
   }
 
   changeTalkingTo = (event) => {
-    this.setState({ to: event.target.name });
-    this.getPreviousMessages();
+    this.setState({ to: event.target.name }, () => {
+      this.getPreviousMessages();
+    });
   }
 
   getPreviousMessages = () => {
@@ -120,6 +121,7 @@ class MessengerDashboard extends Component {
       username,
       to,
     } = this.state;
+    console.log(`Mess to ${to}`);
     const messagesURL = `${apiHost}://${urlBase}/messages?from=${username}&to=${to}`;
     const token = getToken('auth');
 
@@ -159,7 +161,10 @@ class MessengerDashboard extends Component {
 
     if (previousMessages != null) {
       segmentMessages = previousMessages.map((previousMessage) => (
-        <Card fluid>
+        <Card
+          key={Math.random().toString(36).substr(2, 9)}
+          fluid
+        >
           <Card.Header>
             {previousMessage.username_from}
           </Card.Header>

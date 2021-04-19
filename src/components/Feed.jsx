@@ -104,11 +104,8 @@ class Feed extends Component {
           id={post.post.id}
           created={post.post.created_at}
           likes={post.likes.length}
-          message={post.post.message}
-          imagePath={post.post.image_path}
-          latitude={post.post.latitude}
-          longitude={post.post.longitude}
-          user={post.post.username}
+          content={post.post.content}
+          username={post.post.username}
           userComments={post.comments}
           userLikes={post.likes}
           loggedIn={UserID}

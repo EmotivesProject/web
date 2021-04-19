@@ -108,20 +108,17 @@ class PostFeed extends Component {
   render() {
     const {
       id,
-      user,
+      username,
       created,
       likes,
       userComments,
-      latitude,
-      longitude,
+      content,
     } = this.props;
 
     const {
       NewComment,
       AlreadyLiked,
     } = this.state;
-
-    let { message } = this.props;
 
     let button;
     if (AlreadyLiked) {
@@ -131,11 +128,8 @@ class PostFeed extends Component {
     }
 
     let mapImage;
-    if (latitude && longitude) {
-      if (message === undefined) {
-        message = 'QUT';
-      }
-      const imageSrc = `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_KEY}&q=${message}&center=${latitude},${longitude}`;
+    if (content.latitude && content.longitude) {
+      const imageSrc = `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_KEY}&q=${content.location}&center=${content.latitude},${content.longitude}`;
       mapImage = (
         <iframe
           title={id}
@@ -145,7 +139,20 @@ class PostFeed extends Component {
           src={imageSrc}
         />
       );
-      message = undefined;
+    }
+
+    let image;
+    if (content.image_path) {
+      const imagSrc = `${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_MEDIA_BASE_URL}${content.image_path}`;
+      image = (
+        <img
+          width="500"
+          height="400"
+          loading="lazy"
+          src={imagSrc}
+          alt={content.message}
+        />
+      );
     }
 
     const comments = userComments.map((comment) => (
@@ -163,7 +170,7 @@ class PostFeed extends Component {
         <Segment>
           <Card fluid>
             <Card.Header>
-              {user.username}
+              {username}
               <br />
               Likes:
               {likes}
@@ -175,8 +182,10 @@ class PostFeed extends Component {
               {created}
             </Card.Meta>
             <Card.Content>
-              {message}
+              {content.message}
+              <br />
               {mapImage}
+              {image}
             </Card.Content>
           </Card>
           <Comment.Group>
@@ -185,7 +194,7 @@ class PostFeed extends Component {
             </Header>
             {comments}
             <Form reply onSubmit={this.addComment}>
-              <Form.TextArea
+              <Form.Input
                 name="NewComment"
                 value={NewComment}
                 onChange={this.handleChange}
