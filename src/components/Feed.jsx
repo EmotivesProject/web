@@ -70,7 +70,9 @@ class Feed extends Component {
     const url = `${host}://${base}/post`;
 
     const body = JSON.stringify({
-      message: data.Message,
+      content: {
+        message: data.Message,
+      },
     });
 
     const token = getToken('auth');
