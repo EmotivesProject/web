@@ -121,7 +121,7 @@ class MessengerDashboard extends Component {
       username,
       to,
     } = this.state;
-    console.log(`Mess to ${to}`);
+    // console.log(`Mess to ${to}`);
     const messagesURL = `${apiHost}://${urlBase}/messages?from=${username}&to=${to}`;
     const token = getToken('auth');
 
