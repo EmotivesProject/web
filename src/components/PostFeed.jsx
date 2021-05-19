@@ -129,6 +129,10 @@ class PostFeed extends Component {
       button = <Button primary size="large">like</Button>;
     }
 
+    if (content === null) {
+      return <div />;
+    }
+
     let mapImage;
     if (content.latitude && content.longitude) {
       const imageSrc = `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_KEY}&q=${content.location}&center=${content.latitude},${content.longitude}`;
