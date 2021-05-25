@@ -4,7 +4,7 @@ import React from 'react';
 
 function HomeRegister() {
   return (
-    <div>
+    <>
       <Header as="h2" textAlign="center">
         New to the site?
       </Header>
@@ -13,7 +13,7 @@ function HomeRegister() {
           Register now
         </Button>
       </Link>
-    </div>
+    </>
   );
 }
 

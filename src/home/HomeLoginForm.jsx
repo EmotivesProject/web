@@ -1,23 +1,63 @@
 import React, { useState } from 'react';
 import {
-  Button, Form, Header, Segment,
+  Button, Form, Header, Segment, Message,
 } from 'semantic-ui-react';
+import axios from 'axios';
 
 const HomeLoginForm = () => {
+  const defaultErrorMessage = 'Default';
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [loadingVar, setLoading] = useState(false);
+  const [errorObject, setErrorObject] = useState(null);
 
   const handleSubmit = (e) => {
+    setErrorObject(null);
     e.preventDefault();
+    setLoading(true);
+
+    const host = process.env.REACT_APP_API_HOST;
+    const base = process.env.REACT_APP_UACL_BASE_URL;
+    const url = `${host}://${base}/login`;
+
+    axios.post(url,
+      JSON.stringify({
+        username: usernameValue,
+        password: passwordValue,
+      }),
+      { 'Content-Type': 'application/json' })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        const { data } = err.response;
+        const message = data ? data.message : null;
+        const messageObject = message ? message[0] : null;
+        const messageString = messageObject ? messageObject.message : defaultErrorMessage;
+        const targetString = messageObject ? messageObject.target : null;
+        setErrorObject({
+          message: messageString,
+          target: targetString,
+        });
+      });
+    setLoading(false);
   };
 
+  const message = errorObject ? (
+    <Message
+      error
+      header={errorObject.target}
+      content={errorObject.message}
+    />
+  ) : null;
+
   return (
-    <>
+    <Segment>
       <Header as="h2" textAlign="center">
         Log in
       </Header>
       <Segment>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} loading={loadingVar}>
           <label htmlFor="username">
             Username
             <Form.Input
@@ -56,8 +96,9 @@ const HomeLoginForm = () => {
           <br />
           <Button primary> Login </Button>
         </Form>
+        {message}
       </Segment>
-    </>
+    </Segment>
   );
 };
 
