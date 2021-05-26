@@ -1,8 +1,8 @@
 import { React, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import {
   Button, Form, Header, Segment, Message,
 } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { extractErrorObject, extractToken } from '../utils/extractObjects';

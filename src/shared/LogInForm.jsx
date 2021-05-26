@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import {
   Button, Form, Header, Segment, Message,
 } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { extractErrorObject, extractToken } from '../utils/extractObjects';
@@ -31,13 +31,15 @@ const LogInForm = ({ onCreateAuth }) => {
       }),
       { 'Content-Type': 'application/json' })
       .then((result) => {
+        console.log('errored after create token');
         onCreateAuth(extractToken(result));
+        console.log('errored after nav');
         history.push('/feed');
       })
       .catch((err) => {
         setErrorObject(extractErrorObject(err));
+        setLoading(false);
       });
-    setLoading(false);
   };
 
   const message = errorObject ? (

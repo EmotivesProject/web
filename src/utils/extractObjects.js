@@ -12,7 +12,7 @@ export function extractErrorObject(error, defaultMessage = 'Sorry action failed,
 }
 
 export function extractToken(result) {
-  const { data } = result.data;
+  const { data } = result;
   const uaclResult = data ? data.result : null;
   const username = uaclResult ? uaclResult.username : null;
   const token = uaclResult ? uaclResult.token : null;
