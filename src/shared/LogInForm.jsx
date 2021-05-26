@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Button, Form, Header, Segment, Message,
 } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import { extractErrorObject, extractToken } from '../utils/extractObjects';
+import { createAuth } from '../auth/actions';
 
-const HomeLoginForm = () => {
-  const defaultErrorMessage = 'Default';
+const LogInForm = ({ onCreateAuth }) => {
+  const history = useHistory();
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [loadingVar, setLoading] = useState(false);
@@ -27,18 +31,11 @@ const HomeLoginForm = () => {
       }),
       { 'Content-Type': 'application/json' })
       .then((result) => {
-        console.log(result);
+        onCreateAuth(extractToken(result));
+        history.push('/feed');
       })
       .catch((err) => {
-        const { data } = err.response;
-        const message = data ? data.message : null;
-        const messageObject = message ? message[0] : null;
-        const messageString = messageObject ? messageObject.message : defaultErrorMessage;
-        const targetString = messageObject ? messageObject.target : null;
-        setErrorObject({
-          message: messageString,
-          target: targetString,
-        });
+        setErrorObject(extractErrorObject(err));
       });
     setLoading(false);
   };
@@ -102,4 +99,8 @@ const HomeLoginForm = () => {
   );
 };
 
-export default HomeLoginForm;
+const mapDispatchToProps = (dispatch) => ({
+  onCreateAuth: (auth) => dispatch(createAuth(auth)),
+});
+
+export default connect(null, mapDispatchToProps)(LogInForm);

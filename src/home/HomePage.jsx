@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
 import HomeRegister from './HomeRegister';
-import HomeLoginForm from './HomeLoginForm';
+import LogInForm from '../shared/LogInForm';
 
 const HomePage = () => (
   <Grid textAlign="center" style={{ height: '75vh' }} divided="vertically" verticalAlign="middle">
@@ -12,7 +12,7 @@ const HomePage = () => (
         </Header>
       </Grid.Column>
       <Grid.Column width={5}>
-        <HomeLoginForm />
+        <LogInForm />
       </Grid.Column>
       <Grid.Column width={5}>
         <HomeRegister />
