@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import getAuth from '../auth/selector';
+import TopBar from '../shared/TopBar';
 
 const MessengerPage = ({ auth }) => {
   if (auth === null) {
@@ -10,6 +11,7 @@ const MessengerPage = ({ auth }) => {
 
   return (
     <>
+      <TopBar />
       Messenger
     </>
   );

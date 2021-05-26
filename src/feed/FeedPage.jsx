@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import getAuth from '../auth/selector';
+import TopBar from '../shared/TopBar';
 
 const FeedPage = ({ auth }) => {
   if (auth === null) {
@@ -10,7 +11,8 @@ const FeedPage = ({ auth }) => {
 
   return (
     <>
-      Messenger
+      <TopBar />
+      Feed
     </>
   );
 };
