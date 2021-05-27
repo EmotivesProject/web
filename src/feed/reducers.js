@@ -6,6 +6,7 @@ import {
 } from './actions';
 
 const initialState = {
+  page: 1,
   loading: false,
   error: null,
   posts: [],
@@ -17,7 +18,7 @@ const postState = (state = initialState, action) => {
   switch (type) {
     case CREATE_POST: {
       const { post } = payload;
-      const newPosts = state.posts.concat(post);
+      const newPosts = [post, state.posts];
       return {
         ...state,
         posts: newPosts,
@@ -33,10 +34,14 @@ const postState = (state = initialState, action) => {
     }
     case FETCH_POSTS: {
       const { posts } = payload;
-      const newPosts = state.posts.concat(posts);
+      const newStatePosts = posts.map(
+        (fetchedPosts) => state.posts.find(
+          (existingPost) => existingPost.post.id === fetchedPosts.post.id,
+        ) || fetchedPosts,
+      );
       return {
         ...state,
-        posts: newPosts,
+        posts: newStatePosts,
       };
     }
     case LOADING_POSTS: {

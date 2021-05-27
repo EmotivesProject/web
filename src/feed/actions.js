@@ -16,6 +16,12 @@ export const fetchPosts = (posts) => ({
   payload: { posts },
 });
 
+export const FETCH_MORE_POSTS = 'FETCH_MORE_POSTS';
+export const fetchMorePosts = (posts) => ({
+  type: FETCH_MORE_POSTS,
+  payload: { posts },
+});
+
 export const LOADING_POSTS = 'LOADING_POSTS';
 export const loadingPosts = () => ({
   type: FETCH_POSTS,
