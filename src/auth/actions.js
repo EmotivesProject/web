@@ -12,5 +12,5 @@ export const updateAuth = (auth) => ({
 
 export const REMOVE_AUTH = 'REMOVE_AUTH';
 export const removeAuth = () => ({
-  type: CREATE_AUTH,
+  type: REMOVE_AUTH,
 });

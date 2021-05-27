@@ -31,9 +31,7 @@ const LogInForm = ({ onCreateAuth }) => {
       }),
       { 'Content-Type': 'application/json' })
       .then((result) => {
-        console.log('errored after create token');
         onCreateAuth(extractToken(result));
-        console.log('errored after nav');
         history.push('/feed');
       })
       .catch((err) => {

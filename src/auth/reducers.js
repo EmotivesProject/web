@@ -5,16 +5,16 @@ import {
   REMOVE_AUTH,
 } from './actions';
 
-function setAuthToken(auth) {
-  Cookies.set('user', auth.username, { SameSite: 'None', Secure: true });
-  Cookies.set('token', auth.token, { SameSite: 'None', Secure: true });
-  Cookies.set('refresh_token', auth.refreshToken, { SameSite: 'None', Secure: true });
+function setAuthToken(username, token, refreshToken) {
+  Cookies.set('user', username, { SameSite: 'Lax', Secure: true });
+  Cookies.set('token', token, { SameSite: 'Lax', Secure: true });
+  Cookies.set('refresh_token', refreshToken, { SameSite: 'Lax', Secure: true });
 }
 
 function removeAuthToken() {
-  Cookies.remove('user');
-  Cookies.remove('token');
-  Cookies.remove('refresh_token');
+  Cookies.remove('user', { SameSite: 'Lax', Secure: true });
+  Cookies.remove('token', { SameSite: 'Lax', Secure: true });
+  Cookies.remove('refresh_token', { SameSite: 'Lax', Secure: true });
 }
 
 function getAuthToken() {
@@ -39,21 +39,27 @@ const authState = (state = getAuthToken(), action) => {
   switch (type) {
     case CREATE_AUTH: {
       const { auth } = payload;
-      setAuthToken(auth);
+      const { username, token, refreshToken } = auth;
+      setAuthToken(username, token, refreshToken);
       return {
-        auth,
+        username,
+        token,
+        refreshToken,
       };
     }
     case UPDATE_AUTH: {
       const { auth } = payload;
-      setAuthToken(auth);
+      const { username, token, refreshToken } = auth;
+      setAuthToken(username, token, refreshToken);
       return {
-        auth,
+        username,
+        token,
+        refreshToken,
       };
     }
     case REMOVE_AUTH: {
       removeAuthToken();
-      return {};
+      return null;
     }
     default:
       return state;
