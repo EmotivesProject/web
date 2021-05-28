@@ -6,9 +6,11 @@ import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 import Post from './Post';
 import getPosts from './selector';
-import fetchPostsRequest from './thunks';
+import { fetchPostsRequest, likePostRequest } from './thunks';
 
-const FeedPage = ({ auth, posts, loadPosts }) => {
+const FeedPage = ({
+  auth, posts, loadPosts, likePost,
+}) => {
   if (auth === null) {
     return <Redirect to="/" />;
   }
@@ -24,7 +26,9 @@ const FeedPage = ({ auth, posts, loadPosts }) => {
         <Grid.Row columns={3}>
           <Grid.Column width={5} />
           <Grid.Column width={5}>
-            {posts.map((post) => <Post key={post.post.id} data={post} />)}
+            {posts.map((post) => (
+              <Post key={post.post.id} data={post} auth={auth} likePost={likePost} />
+            ))}
           </Grid.Column>
           <Grid.Column width={5} />
         </Grid.Row>
@@ -40,6 +44,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loadPosts: (token) => dispatch(fetchPostsRequest(token)),
+  likePost: (token, postID) => dispatch(likePostRequest(token, postID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedPage);

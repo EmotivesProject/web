@@ -2,6 +2,7 @@ import {
   CREATE_POST,
   REMOVE_POST,
   FETCH_POSTS,
+  LIKE_POST,
   LOADING_POSTS,
 } from './actions';
 
@@ -42,6 +43,20 @@ const postState = (state = initialState, action) => {
       return {
         ...state,
         posts: newStatePosts,
+      };
+    }
+    case LIKE_POST: {
+      const { like } = payload;
+      const currentPosts = state.posts;
+      const likedPost = currentPosts.findIndex((post) => post.post.id === like.post_id);
+      if (likedPost !== -1) {
+        currentPosts[likedPost].likes = state.posts[likedPost].likes
+          ? state.posts[likedPost].likes : [];
+        currentPosts[likedPost].likes.push(like);
+      }
+      return {
+        ...state,
+        posts: [...currentPosts],
       };
     }
     case LOADING_POSTS: {

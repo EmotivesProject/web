@@ -10,6 +10,18 @@ export const removePost = (post) => ({
   payload: { post },
 });
 
+export const LIKE_POST = 'LIKE_POST';
+export const likePost = (like) => ({
+  type: LIKE_POST,
+  payload: { like },
+});
+
+export const COMMENT_POST = 'COMMENT_POST';
+export const commentPost = (post) => ({
+  type: COMMENT_POST,
+  payload: { post },
+});
+
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const fetchPosts = (posts) => ({
   type: FETCH_POSTS,
