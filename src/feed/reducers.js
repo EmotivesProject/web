@@ -4,6 +4,7 @@ import {
   FETCH_POSTS,
   LIKE_POST,
   LOADING_POSTS,
+  COMMENT_POST,
 } from './actions';
 
 const initialState = {
@@ -19,10 +20,11 @@ const postState = (state = initialState, action) => {
   switch (type) {
     case CREATE_POST: {
       const { post } = payload;
-      const newPosts = [post, state.posts];
+      const currentPosts = state.posts;
+      currentPosts.unshift(post);
       return {
         ...state,
-        posts: newPosts,
+        posts: [...currentPosts],
       };
     }
     case REMOVE_POST: {
@@ -53,6 +55,20 @@ const postState = (state = initialState, action) => {
         currentPosts[likedPost].likes = state.posts[likedPost].likes
           ? state.posts[likedPost].likes : [];
         currentPosts[likedPost].likes.push(like);
+      }
+      return {
+        ...state,
+        posts: [...currentPosts],
+      };
+    }
+    case COMMENT_POST: {
+      const { comment } = payload;
+      const currentPosts = state.posts;
+      const commentedPost = currentPosts.findIndex((post) => post.post.id === comment.post_id);
+      if (commentedPost !== -1) {
+        currentPosts[commentedPost].comments = state.posts[commentedPost].comments
+          ? state.posts[commentedPost].comments : [];
+        currentPosts[commentedPost].comments.push(comment);
       }
       return {
         ...state,

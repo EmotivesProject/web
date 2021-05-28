@@ -17,9 +17,9 @@ export const likePost = (like) => ({
 });
 
 export const COMMENT_POST = 'COMMENT_POST';
-export const commentPost = (post) => ({
+export const commentPost = (comment) => ({
   type: COMMENT_POST,
-  payload: { post },
+  payload: { comment },
 });
 
 export const FETCH_POSTS = 'FETCH_POSTS';
