@@ -1,6 +1,22 @@
-export const NEW_MESSAGE = 'NEW_MESSAGE';
-export const newMessage = (message) => ({
-  type: NEW_MESSAGE,
+export const WEBSOCKET_OPEN = 'WEBSOCKET_OPEN';
+export const webSocketOpen = () => ({
+  type: WEBSOCKET_OPEN,
+});
+
+export const WEBSOCKET_CLOSED = 'WEBSOCKET_CLOSED';
+export const webSocketClosed = () => ({
+  type: WEBSOCKET_CLOSED,
+});
+
+export const WEBSOCKET_MESSAGE = 'WEBSOCKET_MESSAGE';
+export const webSocketMessage = (content) => ({
+  type: WEBSOCKET_MESSAGE,
+  payload: content,
+});
+
+export const WEBSOCKET_SEND = 'WEBSOCKET_SEND';
+export const sendMessage = (message) => ({
+  type: WEBSOCKET_SEND,
   payload: { message },
 });
 
