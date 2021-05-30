@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
+import EmojiInputModal from '../shared/EmojiInputModal';
 import Post from './Post';
 import getPosts from './selector';
 import {
@@ -31,7 +32,6 @@ const FeedPage = ({
         <Grid.Row columns={3}>
           <Grid.Column width={5} />
           <Grid.Column width={5}>
-            <Button onClick={() => createPost(auth.token, 'yos')}>Submit Post</Button>
             {posts.map((post) => (
               <Post
                 key={post.post.id}
@@ -42,7 +42,9 @@ const FeedPage = ({
               />
             ))}
           </Grid.Column>
-          <Grid.Column width={5} />
+          <Grid.Column width={5}>
+            <EmojiInputModal header="Create a post" action={createPost} token={auth.token} />
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     </>
@@ -57,7 +59,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadPosts: (token) => dispatch(fetchPostsRequest(token)),
   likePost: (token, postID) => dispatch(likePostRequest(token, postID)),
-  commentPost: (token, postID, message) => dispatch(commentPostRequest(token, postID, message)),
+  commentPost: (token, message, postID) => dispatch(commentPostRequest(token, message, postID)),
   createPost: (token, postID, message) => dispatch(postRequest(token, postID, message)),
 });
 

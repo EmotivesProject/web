@@ -17,6 +17,10 @@ const apiHost = process.env.REACT_APP_API_HOST;
 const urlBase = process.env.REACT_APP_CHATTER_BASE_URL;
 const wsBase = process.env.REACT_APP_WS_HOST;
 
+const dispatchPersonSwitch = (newPerson, oldPerson) => async (dispatch) => {
+  dispatch(switchPerson(newPerson, oldPerson));
+};
+
 const getUsersRequest = () => async (dispatch) => {
   const usersURL = `${apiHost}://${urlBase}/connections`;
   axios.get(usersURL)
@@ -31,7 +35,6 @@ const getUsersRequest = () => async (dispatch) => {
 };
 
 const receivedNewMessage = (message) => async (dispatch) => {
-  console.log(message);
   const messageObject = JSON.parse(message.data);
   if (messageObject.username !== null) {
     dispatch(webSocketMessage(messageObject));
@@ -58,8 +61,7 @@ const setupClient = (token) => async (dispatch) => {
       client.onmessage = (message) => dispatch(receivedNewMessage(message));
       dispatch(getUsersRequest());
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       dispatch(removeAuth());
     });
 };
@@ -84,8 +86,7 @@ const requestPreviousMessages = (token, from, to) => async (dispatch) => {
     .then((result) => {
       dispatch(fetchedMessages(result.data.result));
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       dispatch(removeAuth());
       dispatch(webSocketClosed());
     });
@@ -96,4 +97,5 @@ export {
   getUsersRequest,
   sendMessageToSocket,
   requestPreviousMessages,
+  dispatchPersonSwitch,
 };

@@ -61,10 +61,18 @@ const messengerState = (state = initialState, action) => {
       };
     }
     case SWITCH_PERSON: {
-      const { person } = payload;
+      const { newPerson, oldPerson } = payload;
+      const currentMessages = state.messages;
+      if (oldPerson === null) {
+        currentMessages.filter(
+          (message) => (
+            message.username_from !== oldPerson || message.username_to !== oldPerson),
+        );
+      }
       return {
         ...state,
-        talkingTo: person,
+        talkingTo: newPerson,
+        messages: [...currentMessages],
       };
     }
     case SET_CLIENT: {

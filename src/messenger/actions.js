@@ -27,9 +27,9 @@ export const fetchedMessages = (messages) => ({
 });
 
 export const SWITCH_PERSON = 'SWITCH_PERSON';
-export const switchPerson = (person) => ({
+export const switchPerson = (newPerson, oldPerson = null) => ({
   type: SWITCH_PERSON,
-  payload: { person },
+  payload: { newPerson, oldPerson },
 });
 
 export const SET_CLIENT = 'SET_CLIENT';

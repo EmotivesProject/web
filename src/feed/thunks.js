@@ -89,7 +89,7 @@ const likePostRequest = (token, postID) => async (dispatch) => {
   requestPostLike(path, dispatch, token);
 };
 
-const commentPostRequest = (token, postID, message) => async (dispatch) => {
+const commentPostRequest = (token, message, postID) => async (dispatch) => {
   const path = `post/${postID}/comment`;
   const body = JSON.stringify({
     message,
