@@ -2,7 +2,13 @@ import React from 'react';
 import { Button, Input, Modal } from 'semantic-ui-react';
 
 const EmojiInputModal = ({
-  action, token, header, postID,
+  header,
+  type,
+  action,
+  token,
+  postID,
+  from,
+  to,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
@@ -46,7 +52,18 @@ const EmojiInputModal = ({
           labelPosition="right"
           icon="checkmark"
           onClick={() => {
-            action(token, currentInput, postID);
+            switch (type) {
+              case 'post':
+                action(token, currentInput);
+                break;
+              case 'comment':
+                action(token, currentInput, postID);
+                break;
+              case 'message':
+                action(currentInput, from, to);
+                break;
+              default:
+            }
             setOpen(false);
           }}
           positive

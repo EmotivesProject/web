@@ -35,7 +35,7 @@ const messengerState = (state = initialState, action) => {
     }
     case WEBSOCKET_MESSAGE: {
       const currentMessages = state.messages;
-      currentMessages.unshift(payload);
+      currentMessages.push(payload);
       return {
         ...state,
         messages: [...currentMessages],

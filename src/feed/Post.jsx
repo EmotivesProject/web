@@ -33,7 +33,13 @@ const Post = ({
       <PostComment key={comment.id} data={comment} />
     )) : null }
     <Header as="h4">New Comment?</Header>
-    <EmojiInputModal header="Comment on post" action={commentPost} token={auth.token} postID={data.post.id} />
+    <EmojiInputModal
+      header="Comment on post"
+      type="comment"
+      action={commentPost}
+      token={auth.token}
+      postID={data.post.id}
+    />
   </Segment>
 );
 

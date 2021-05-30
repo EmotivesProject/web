@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
+import EmojiInputModal from '../shared/EmojiInputModal';
 import TopBar from '../shared/TopBar';
 import {
   getClient,
@@ -55,7 +56,13 @@ const MessengerPage = ({
             ))}
           </Grid.Column>
           <Grid.Column width={5}>
-            <Button onClick={() => sendNewMessage('yos', auth.username, talkingTo)}>Submit Post</Button>
+            <EmojiInputModal
+              header="send a message"
+              type="message"
+              action={sendNewMessage}
+              from={auth.username}
+              to={talkingTo}
+            />
             {messages.map((message) => (
               <div key={message.id}>
                 {message.message}

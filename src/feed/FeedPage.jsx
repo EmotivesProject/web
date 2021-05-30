@@ -43,7 +43,12 @@ const FeedPage = ({
             ))}
           </Grid.Column>
           <Grid.Column width={5}>
-            <EmojiInputModal header="Create a post" action={createPost} token={auth.token} />
+            <EmojiInputModal
+              header="Create a post"
+              type="post"
+              action={createPost}
+              token={auth.token}
+            />
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -60,7 +65,7 @@ const mapDispatchToProps = (dispatch) => ({
   loadPosts: (token) => dispatch(fetchPostsRequest(token)),
   likePost: (token, postID) => dispatch(likePostRequest(token, postID)),
   commentPost: (token, message, postID) => dispatch(commentPostRequest(token, message, postID)),
-  createPost: (token, postID, message) => dispatch(postRequest(token, postID, message)),
+  createPost: (token, message) => dispatch(postRequest(token, message)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedPage);
