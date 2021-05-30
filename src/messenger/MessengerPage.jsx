@@ -57,6 +57,7 @@ const MessengerPage = ({
           </Grid.Column>
           <Grid.Column width={5}>
             <UniversalInput
+              buttonText="New Message"
               header="send a message"
               type="message"
               action={sendNewMessage}

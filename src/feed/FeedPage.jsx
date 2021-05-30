@@ -44,12 +44,14 @@ const FeedPage = ({
           </Grid.Column>
           <Grid.Column width={5}>
             <UniversalInput
+              buttonText="Create a Post"
               header="Create a post"
               type="post"
               action={createPost}
               token={auth.token}
             />
             <UniversalInput
+              buttonText="Create a Map Post"
               header="Create a Map Post"
               type="map"
               action={createPost}
@@ -71,7 +73,15 @@ const mapDispatchToProps = (dispatch) => ({
   loadPosts: (token) => dispatch(fetchPostsRequest(token)),
   likePost: (token, postID) => dispatch(likePostRequest(token, postID)),
   commentPost: (token, message, postID) => dispatch(commentPostRequest(token, message, postID)),
-  createPost: (token, message) => dispatch(postRequest(token, message)),
+  createPost: (
+    token,
+    type,
+    message,
+    latitude,
+    longitude,
+    zoom,
+    imagePath,
+  ) => dispatch(postRequest(token, type, message, latitude, longitude, zoom, imagePath)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedPage);

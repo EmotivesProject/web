@@ -103,6 +103,7 @@ const postRequest = (
   message,
   latitude = null,
   longitude = null,
+  zoom = null,
   imagePath = null,
 ) => async (dispatch) => {
   const path = 'post';
@@ -112,6 +113,7 @@ const postRequest = (
       message,
       latitude,
       longitude,
+      zoom,
       image_path: imagePath,
     },
   });
