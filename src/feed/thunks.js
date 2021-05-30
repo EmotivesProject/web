@@ -97,11 +97,22 @@ const commentPostRequest = (token, message, postID) => async (dispatch) => {
   requestPostComment(path, dispatch, token, body);
 };
 
-const postRequest = (token, message) => async (dispatch) => {
+const postRequest = (
+  token,
+  type,
+  message,
+  latitude = null,
+  longitude = null,
+  imagePath = null,
+) => async (dispatch) => {
   const path = 'post';
   const body = JSON.stringify({
     content: {
+      type,
       message,
+      latitude,
+      longitude,
+      image_path: imagePath,
     },
   });
   createNewPostRequest(path, dispatch, token, body);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Input, Modal } from 'semantic-ui-react';
 
-const EmojiInputModal = ({
+const UniversalInput = ({
   header,
   type,
   action,
@@ -13,6 +13,31 @@ const EmojiInputModal = ({
   const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
 
+  const input = type !== 'map' ? (
+    <>
+      <Input
+        placeholder="Waiting for input..."
+        value={currentInput}
+      />
+      <Button
+        content="Post it!"
+        labelPosition="right"
+        icon="checkmark"
+        onClick={() => setCurrentInput(currentInput.concat('👍'))}
+        positive
+      />
+      <Button
+        content="Remove Last Emoji"
+        onClick={() => setCurrentInput(currentInput.slice(0, -2))}
+        positive
+      />
+    </>
+  ) : (
+    <>
+      hey
+    </>
+  );
+
   return (
     <Modal
       onClose={() => setOpen(false)}
@@ -22,22 +47,7 @@ const EmojiInputModal = ({
     >
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content>
-        <Input
-          placeholder="Waiting for input..."
-          value={currentInput}
-        />
-        <Button
-          content="Post it!"
-          labelPosition="right"
-          icon="checkmark"
-          onClick={() => setCurrentInput(currentInput.concat('👍'))}
-          positive
-        />
-        <Button
-          content="Remove Last Emoji"
-          onClick={() => setCurrentInput(currentInput.slice(0, -2))}
-          positive
-        />
+        {input}
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={() => {
@@ -54,7 +64,7 @@ const EmojiInputModal = ({
           onClick={() => {
             switch (type) {
               case 'post':
-                action(token, currentInput);
+                action(token, 'emoji', currentInput);
                 break;
               case 'comment':
                 action(token, currentInput, postID);
@@ -73,4 +83,4 @@ const EmojiInputModal = ({
   );
 };
 
-export default EmojiInputModal;
+export default UniversalInput;

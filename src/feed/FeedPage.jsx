@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import { Grid } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
-import EmojiInputModal from '../shared/EmojiInputModal';
+import UniversalInput from '../shared/UniversalInput';
 import Post from './Post';
 import getPosts from './selector';
 import {
@@ -43,9 +43,15 @@ const FeedPage = ({
             ))}
           </Grid.Column>
           <Grid.Column width={5}>
-            <EmojiInputModal
+            <UniversalInput
               header="Create a post"
               type="post"
+              action={createPost}
+              token={auth.token}
+            />
+            <UniversalInput
+              header="Create a Map Post"
+              type="map"
               action={createPost}
               token={auth.token}
             />

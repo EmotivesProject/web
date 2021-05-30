@@ -6,7 +6,7 @@ import {
   Divider,
   Button,
 } from 'semantic-ui-react';
-import EmojiInputModal from '../shared/EmojiInputModal';
+import UniversalInput from '../shared/UniversalInput';
 import getTimeAgoFromObject from '../utils/date';
 import PostComment from './PostComment';
 
@@ -33,7 +33,7 @@ const Post = ({
       <PostComment key={comment.id} data={comment} />
     )) : null }
     <Header as="h4">New Comment?</Header>
-    <EmojiInputModal
+    <UniversalInput
       header="Comment on post"
       type="comment"
       action={commentPost}

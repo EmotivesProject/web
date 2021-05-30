@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Grid } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
-import EmojiInputModal from '../shared/EmojiInputModal';
+import UniversalInput from '../shared/UniversalInput';
 import TopBar from '../shared/TopBar';
 import {
   getClient,
@@ -56,7 +56,7 @@ const MessengerPage = ({
             ))}
           </Grid.Column>
           <Grid.Column width={5}>
-            <EmojiInputModal
+            <UniversalInput
               header="send a message"
               type="message"
               action={sendNewMessage}
