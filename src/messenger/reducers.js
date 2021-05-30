@@ -7,6 +7,7 @@ import {
   SET_CLIENT,
   SET_USERS,
   WEBSOCKET_SEND,
+  NEW_CONNECTION,
 } from './actions';
 
 const initialState = {
@@ -27,14 +28,18 @@ const messengerState = (state = initialState, action) => {
       if (state.client !== null) {
         state.client.close();
       }
-      console.log('client closing');
       return {
         ...state,
         client: null,
       };
     }
     case WEBSOCKET_MESSAGE: {
-      return state;
+      const currentMessages = state.messages;
+      currentMessages.unshift(payload);
+      return {
+        ...state,
+        messages: [...currentMessages],
+      };
     }
     case WEBSOCKET_SEND: {
       const { message } = payload;
@@ -42,7 +47,18 @@ const messengerState = (state = initialState, action) => {
       return state;
     }
     case FETCHED_MESSAGES: {
-      return state;
+      let { messages } = payload;
+      messages = messages !== null ? messages : [];
+      const newStateMessages = messages.map(
+        (fetchedMessage) => state.messages.find(
+          (existingMessage) => existingMessage.id === fetchedMessage.id,
+        ) || fetchedMessage,
+      );
+
+      return {
+        ...state,
+        messages: newStateMessages,
+      };
     }
     case SWITCH_PERSON: {
       const { person } = payload;
@@ -63,6 +79,20 @@ const messengerState = (state = initialState, action) => {
       return {
         ...state,
         users: [...users],
+      };
+    }
+    case NEW_CONNECTION: {
+      const { user } = payload;
+      const currentUsers = state.users;
+      const foundUser = currentUsers.find((u) => u.username === user.username);
+      if (foundUser) {
+        foundUser.Active = user.active;
+      } else {
+        currentUsers.push(user);
+      }
+      return {
+        ...state,
+        users: [...currentUsers],
       };
     }
     default:

@@ -43,3 +43,9 @@ export const setUsers = (users) => ({
   type: SET_USERS,
   payload: { users },
 });
+
+export const NEW_CONNECTION = 'NEW_CONNECTION';
+export const newConnection = (user) => ({
+  type: NEW_CONNECTION,
+  payload: { user },
+});

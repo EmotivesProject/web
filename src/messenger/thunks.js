@@ -10,6 +10,7 @@ import {
   sendMessage,
   switchPerson,
   fetchedMessages,
+  newConnection,
 } from './actions';
 
 const apiHost = process.env.REACT_APP_API_HOST;
@@ -29,6 +30,16 @@ const getUsersRequest = () => async (dispatch) => {
     });
 };
 
+const receivedNewMessage = (message) => async (dispatch) => {
+  console.log(message);
+  const messageObject = JSON.parse(message.data);
+  if (messageObject.username !== null) {
+    dispatch(webSocketMessage(messageObject));
+  } else {
+    dispatch(newConnection(messageObject));
+  }
+};
+
 const setupClient = (token) => async (dispatch) => {
   const tokenURL = `${apiHost}://${urlBase}/ws_token`;
 
@@ -44,12 +55,12 @@ const setupClient = (token) => async (dispatch) => {
       dispatch(setClient(client));
       client.onopen = () => dispatch(webSocketOpen());
       client.onclose = () => dispatch(webSocketClosed());
-      client.onmessage = (event) => dispatch(webSocketMessage(event));
+      client.onmessage = (message) => dispatch(receivedNewMessage(message));
       dispatch(getUsersRequest());
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       dispatch(removeAuth());
-      dispatch(webSocketClosed());
     });
 };
 
@@ -73,7 +84,8 @@ const requestPreviousMessages = (token, from, to) => async (dispatch) => {
     .then((result) => {
       dispatch(fetchedMessages(result.data.result));
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       dispatch(removeAuth());
       dispatch(webSocketClosed());
     });

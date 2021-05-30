@@ -6,28 +6,28 @@ import {
 } from './actions';
 
 function setAuthToken(username, token, refreshToken) {
-  Cookies.set('user', username, { SameSite: 'Lax', Secure: true });
+  Cookies.set('username', username, { SameSite: 'Lax', Secure: true });
   Cookies.set('token', token, { SameSite: 'Lax', Secure: true });
   Cookies.set('refresh_token', refreshToken, { SameSite: 'Lax', Secure: true });
 }
 
 function removeAuthToken() {
-  Cookies.remove('user', { SameSite: 'Lax', Secure: true });
+  Cookies.remove('username', { SameSite: 'Lax', Secure: true });
   Cookies.remove('token', { SameSite: 'Lax', Secure: true });
   Cookies.remove('refresh_token', { SameSite: 'Lax', Secure: true });
 }
 
 function getAuthToken() {
-  const user = Cookies.get('user');
+  const username = Cookies.get('username');
   const token = Cookies.get('token');
   const refreshToken = Cookies.get('refresh_token');
 
-  if (user === undefined || token === undefined || refreshToken === undefined) {
+  if (username === undefined || token === undefined || refreshToken === undefined) {
     return null;
   }
 
   return {
-    user,
+    username,
     token,
     refreshToken,
   };

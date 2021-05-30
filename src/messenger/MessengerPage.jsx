@@ -35,8 +35,6 @@ const MessengerPage = ({
     setupClientDispatch(auth.token);
   }
 
-  console.log(messages);
-
   useEffect(() => {
     if (talkingTo !== '' && auth.username !== undefined) {
       getPreviousMessages(auth.token, auth.username, talkingTo);
@@ -58,9 +56,9 @@ const MessengerPage = ({
           </Grid.Column>
           <Grid.Column width={5}>
             <Button onClick={() => sendNewMessage('yos', auth.username, talkingTo)}>Submit Post</Button>
-            {users.map((user) => (
-              <div key={user.username}>
-                {user.username}
+            {messages.map((message) => (
+              <div key={message.id}>
+                {message.message}
               </div>
             ))}
           </Grid.Column>
