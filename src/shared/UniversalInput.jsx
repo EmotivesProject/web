@@ -1,6 +1,10 @@
 import React from 'react';
-import { Button, Input, Modal } from 'semantic-ui-react';
+import {
+  Button, Input, Modal, Pagination,
+} from 'semantic-ui-react';
 import GoogleMapReact from 'google-map-react';
+import EmojiSelection from './EmojiSelection';
+import emojis from '../constants/emojis';
 
 const UniversalInput = ({
   buttonText,
@@ -22,11 +26,25 @@ const UniversalInput = ({
   const [currentInput, setCurrentInput] = React.useState('');
   const [currentZoom, setCurrentZoom] = React.useState(defaultZoom);
   const [currentPosition, setCurrentCenter] = React.useState(initialCentre);
+  const [page, setPage] = React.useState(1);
+
+  const totalPages = Math.ceil(emojis.length / 6);
 
   const boundsChange = (obj) => {
     const { center, zoom } = obj;
     setCurrentZoom(zoom);
     setCurrentCenter(center);
+  };
+
+  const updateCurrentInput = (str) => {
+    setCurrentInput(currentInput.concat(str));
+  };
+
+  const handlePageUpdate = (unused, obj) => {
+    console.log(obj);
+    const { activePage } = obj;
+    console.log(activePage);
+    setPage(activePage);
   };
 
   const input = type !== 'map' ? (
@@ -35,17 +53,14 @@ const UniversalInput = ({
         placeholder="Waiting for input..."
         value={currentInput}
       />
-      <Button
-        content="👍"
-        labelPosition="right"
-        icon="checkmark"
-        onClick={() => setCurrentInput(currentInput.concat('👍'))}
-        positive
-      />
-      <Button
-        content="Remove Last Emoji"
-        onClick={() => setCurrentInput(currentInput.slice(0, -2))}
-        positive
+      <br />
+      <EmojiSelection page={page} action={updateCurrentInput} />
+      <Pagination
+        activePage={page}
+        onPageChange={handlePageUpdate}
+        totalPages={totalPages}
+        firstItem={null}
+        lastItem={null}
       />
     </>
   ) : (
@@ -73,6 +88,15 @@ const UniversalInput = ({
         {input}
       </Modal.Content>
       <Modal.Actions>
+        {type !== 'map'
+          ? (
+            <Button
+              content="Remove Last Emoji"
+              onClick={() => setCurrentInput(currentInput.slice(0, -2))}
+              positive
+            />
+          )
+          : null }
         <Button onClick={() => {
           setOpen(false);
           setCurrentInput('');
