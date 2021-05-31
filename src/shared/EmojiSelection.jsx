@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Grid } from 'semantic-ui-react';
-import emojis from '../constants/emojis';
+import Emojis from '../constants/Emojis';
 
 const EmojiSelection = ({ page, action }) => {
   const actualPage = page - 1;
@@ -11,8 +11,8 @@ const EmojiSelection = ({ page, action }) => {
 
   const firstArrayEnd = actualPage * (limit * numberRows) + limit;
   const secondArrayEnd = actualPage * (limit * numberRows) + limit + limit;
-  const firstArray = emojis.slice(firstArrayStart, firstArrayEnd);
-  const secondArray = emojis.slice(secondArrayStart, secondArrayEnd);
+  const firstArray = Emojis.slice(firstArrayStart, firstArrayEnd);
+  const secondArray = Emojis.slice(secondArrayStart, secondArrayEnd);
 
   let firstRow = null;
   let secondRow = null;

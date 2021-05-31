@@ -4,7 +4,7 @@ import {
 } from 'semantic-ui-react';
 import GoogleMapReact from 'google-map-react';
 import EmojiSelection from './EmojiSelection';
-import emojis from '../constants/emojis';
+import Emojis from '../constants/Emojis';
 
 const UniversalInput = ({
   buttonText,
@@ -28,7 +28,7 @@ const UniversalInput = ({
   const [currentPosition, setCurrentCenter] = React.useState(initialCentre);
   const [page, setPage] = React.useState(1);
 
-  const totalPages = Math.ceil(emojis.length / 6);
+  const totalPages = Math.ceil(Emojis.length / 6);
 
   const boundsChange = (obj) => {
     const { center, zoom } = obj;
@@ -41,9 +41,7 @@ const UniversalInput = ({
   };
 
   const handlePageUpdate = (unused, obj) => {
-    console.log(obj);
     const { activePage } = obj;
-    console.log(activePage);
     setPage(activePage);
   };
 
