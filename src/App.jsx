@@ -1,20 +1,20 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import SignUp from './pages/Register';
-import Error from './pages/Error';
-import LogIn from './pages/LogIn';
-import Messenger from './pages/Messenger';
-import './site.css';
+import HomePage from './home/HomePage';
+import FeedPage from './feed/FeedPage';
+import MessengerPage from './messenger/MessengerPage';
+import LogInPage from './logIn/LogInPage';
+import RegisterPage from './register/RegisterPage';
 
 function App() {
   return (
     <main>
       <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/register" component={SignUp} />
-        <Route path="/login" component={LogIn} />
-        <Route path="/messenger" component={Messenger} />
+        <Route path="/" component={HomePage} exact />
+        <Route path="/register" component={RegisterPage} />
+        <Route path="/login" component={LogInPage} />
+        <Route path="/messenger" component={MessengerPage} />
+        <Route path="/feed" component={FeedPage} />
         <Route component={Error} />
       </Switch>
     </main>
