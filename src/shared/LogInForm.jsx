@@ -91,7 +91,7 @@ const LogInForm = ({ onCreateAuth }) => {
             />
           </label>
           <br />
-          <Button primary> Login </Button>
+          <Button primary> Log in </Button>
         </Form>
         {message}
       </Segment>
