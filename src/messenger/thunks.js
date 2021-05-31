@@ -26,7 +26,6 @@ const getUsersRequest = () => async (dispatch) => {
   axios.get(usersURL)
     .then((result) => {
       dispatch(setUsers(result.data.result));
-      dispatch(switchPerson(result.data.result[0].username));
     })
     .catch(() => {
       dispatch(removeAuth());
@@ -36,7 +35,8 @@ const getUsersRequest = () => async (dispatch) => {
 
 const receivedNewMessage = (message) => async (dispatch) => {
   const messageObject = JSON.parse(message.data);
-  if (messageObject.username !== null) {
+  console.log(messageObject);
+  if (messageObject.username === null) {
     dispatch(webSocketMessage(messageObject));
   } else {
     dispatch(newConnection(messageObject));

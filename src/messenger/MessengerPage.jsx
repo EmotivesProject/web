@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Grid } from 'semantic-ui-react';
+import { Button, Grid, Header } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import EmojiInput from '../shared/EmojiInput';
 import TopBar from '../shared/TopBar';
+import MessengerMessage from './MessengerMessage';
 import {
   getClient,
   getTalkingTo,
@@ -16,6 +17,7 @@ import {
   getUsersRequest,
   sendMessageToSocket,
   requestPreviousMessages,
+  dispatchPersonSwitch,
 } from './thunks';
 
 const MessengerPage = ({
@@ -27,6 +29,7 @@ const MessengerPage = ({
   talkingTo,
   getPreviousMessages,
   messages,
+  switchPersonTalking,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
@@ -42,17 +45,43 @@ const MessengerPage = ({
     }
   }, [talkingTo]);
 
+  const defaultMessage = talkingTo === ''
+    ? (
+      <>
+        select someone to talk to
+      </>
+    )
+    : (
+      <Header>
+        Talking to&nbsp;
+        {talkingTo}
+      </Header>
+    );
+
   return (
     <>
       <TopBar />
-      Messenger
       <Grid>
         <Grid.Row columns={3}>
           <Grid.Column width={5}>
-            {users.map((user) => (
-              <div key={user.username}>
-                {user.username}
-              </div>
+            {users.map((user) => {
+              if (user.username !== auth.username) {
+                return (
+                  <Button
+                    content={user.username}
+                    key={user.username}
+                    onClick={() => switchPersonTalking(user.username, talkingTo)}
+                    positive={user.active}
+                  />
+                );
+              }
+              return null;
+            })}
+          </Grid.Column>
+          <Grid.Column width={5}>
+            {defaultMessage}
+            {messages.map((message) => (
+              <MessengerMessage key={message.id} message={message} user={auth.username} />
             ))}
           </Grid.Column>
           <Grid.Column width={5}>
@@ -64,13 +93,7 @@ const MessengerPage = ({
               from={auth.username}
               to={talkingTo}
             />
-            {messages.map((message) => (
-              <div key={message.id}>
-                {message.message}
-              </div>
-            ))}
           </Grid.Column>
-          <Grid.Column width={5} />
         </Grid.Row>
       </Grid>
     </>
@@ -90,6 +113,9 @@ const mapDispatchToProps = (dispatch) => ({
   getListOfUsers: (token) => dispatch(getUsersRequest(token)),
   sendNewMessage: (message, from, to) => dispatch(sendMessageToSocket(message, from, to)),
   getPreviousMessages: (token, from, to) => dispatch(requestPreviousMessages(token, from, to)),
+  switchPersonTalking: (
+    newPerson, oldPerson,
+  ) => dispatch(dispatchPersonSwitch(newPerson, oldPerson)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessengerPage);

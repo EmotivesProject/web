@@ -94,10 +94,11 @@ const messengerState = (state = initialState, action) => {
       const currentUsers = state.users;
       const foundUser = currentUsers.find((u) => u.username === user.username);
       if (foundUser) {
-        foundUser.Active = user.active;
+        foundUser.active = user.active;
       } else {
         currentUsers.push(user);
       }
+      console.log(currentUsers);
       return {
         ...state,
         users: [...currentUsers],
