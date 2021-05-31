@@ -11,7 +11,7 @@ import getTimeAgoFromObject from '../utils/date';
 import PostComment from './PostComment';
 
 const Post = ({
-  auth, data, likePost, commentPost,
+  auth, data, likePost, unlikePost, commentPost,
 }) => {
   let mainInformation = <>Default message</>;
   const { content } = data.post;
@@ -30,6 +30,19 @@ const Post = ({
     );
   }
 
+  let button = <Button onClick={() => likePost(auth.token, data.post.id)}>Submit Like</Button>;
+  const likeArray = data.likes ? data.likes : [];
+  const likeIndex = likeArray.findIndex((like) => like.username === auth.username);
+  if (likeIndex !== -1) {
+    button = (
+      <Button
+        onClick={() => unlikePost(auth.token, data.post.id, likeArray[likeIndex].id)}
+      >
+        Unlike Like
+      </Button>
+    );
+  }
+
   return (
     <Segment>
       <Container>
@@ -37,7 +50,7 @@ const Post = ({
         <Header as="h2">
           {data.likes ? data.likes.length : 0}
           &nbsp;Likes
-          <Button onClick={() => likePost(auth.token, data.post.id)}>Submit Like</Button>
+          {button}
         </Header>
         <Header as="h4">{getTimeAgoFromObject(data.post.updated_at)}</Header>
         <Divider />

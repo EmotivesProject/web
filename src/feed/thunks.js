@@ -5,6 +5,7 @@ import {
   fetchPosts,
   likePost,
   createPost,
+  unlikePost,
 } from './actions';
 
 const host = process.env.REACT_APP_API_HOST;
@@ -79,6 +80,23 @@ const createNewPostRequest = (path, dispatch, token, body) => {
     });
 };
 
+const requestPostUnlike = (path, dispatch, token) => {
+  const url = `${host}://${base}/${path}`;
+  axios.delete(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((result) => {
+      const post = result.data.result;
+      dispatch(unlikePost(post));
+    })
+    .catch(() => {
+      dispatch(removeAuth());
+      dispatch(fetchPosts([]));
+    });
+};
+
 const fetchPostsRequest = (token) => async (dispatch) => {
   const path = 'post';
   requestGetPosts(path, dispatch, token);
@@ -87,6 +105,11 @@ const fetchPostsRequest = (token) => async (dispatch) => {
 const likePostRequest = (token, postID) => async (dispatch) => {
   const path = `post/${postID}/like`;
   requestPostLike(path, dispatch, token);
+};
+
+const unlikePostRequest = (token, postID, likeID) => async (dispatch) => {
+  const path = `post/${postID}/like/${likeID}`;
+  requestPostUnlike(path, dispatch, token);
 };
 
 const commentPostRequest = (token, message, postID) => async (dispatch) => {
@@ -125,4 +148,5 @@ export {
   likePostRequest,
   commentPostRequest,
   postRequest,
+  unlikePostRequest,
 };

@@ -16,6 +16,12 @@ export const likePost = (like) => ({
   payload: { like },
 });
 
+export const UNLIKE_POST = 'UNLIKE_POST';
+export const unlikePost = (like) => ({
+  type: UNLIKE_POST,
+  payload: { like },
+});
+
 export const COMMENT_POST = 'COMMENT_POST';
 export const commentPost = (comment) => ({
   type: COMMENT_POST,

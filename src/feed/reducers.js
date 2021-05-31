@@ -5,6 +5,7 @@ import {
   LIKE_POST,
   LOADING_POSTS,
   COMMENT_POST,
+  UNLIKE_POST,
 } from './actions';
 
 const initialState = {
@@ -55,6 +56,21 @@ const postState = (state = initialState, action) => {
         currentPosts[likedPost].likes = state.posts[likedPost].likes
           ? state.posts[likedPost].likes : [];
         currentPosts[likedPost].likes.push(like);
+      }
+      return {
+        ...state,
+        posts: [...currentPosts],
+      };
+    }
+    case UNLIKE_POST: {
+      const { like } = payload;
+      const currentPosts = state.posts;
+      const likedPost = currentPosts.findIndex((post) => post.post.id === like.post_id);
+      if (likedPost !== -1) {
+        let currentLikes = state.posts[likedPost].likes
+          ? state.posts[likedPost].likes : [];
+        currentLikes = currentLikes.filter((lik) => lik.id !== like.id);
+        currentPosts[likedPost].likes = currentLikes;
       }
       return {
         ...state,

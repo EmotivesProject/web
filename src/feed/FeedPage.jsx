@@ -12,10 +12,11 @@ import {
   likePostRequest,
   commentPostRequest,
   postRequest,
+  unlikePostRequest,
 } from './thunks';
 
 const FeedPage = ({
-  auth, posts, loadPosts, likePost, commentPost, createPost,
+  auth, posts, loadPosts, likePost, commentPost, createPost, unlikePost,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
@@ -38,6 +39,7 @@ const FeedPage = ({
                 data={post}
                 auth={auth}
                 likePost={likePost}
+                unlikePost={unlikePost}
                 commentPost={commentPost}
               />
             ))}
@@ -72,6 +74,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadPosts: (token) => dispatch(fetchPostsRequest(token)),
   likePost: (token, postID) => dispatch(likePostRequest(token, postID)),
+  unlikePost: (token, postID, likeID) => dispatch(unlikePostRequest(token, postID, likeID)),
   commentPost: (token, message, postID) => dispatch(commentPostRequest(token, message, postID)),
   createPost: (
     token,
