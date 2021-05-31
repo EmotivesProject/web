@@ -98,7 +98,6 @@ const messengerState = (state = initialState, action) => {
       } else {
         currentUsers.push(user);
       }
-      console.log(currentUsers);
       return {
         ...state,
         users: [...currentUsers],
