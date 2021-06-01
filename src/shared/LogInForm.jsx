@@ -49,7 +49,7 @@ const LogInForm = ({ onCreateAuth }) => {
   ) : null;
 
   return (
-    <Segment>
+    <Segment className="segment">
       <Header as="h2" textAlign="center">
         Log in
       </Header>
