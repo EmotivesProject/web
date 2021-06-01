@@ -14,10 +14,13 @@ const RegisterForm = ({ onCreateAuth }) => {
   const [passwordValue, setPasswordValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [secretValue, setSecretValue] = useState('');
+  const [loadingVar, setLoading] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
+    setErrorObject(null);
 
     const host = process.env.REACT_APP_API_HOST;
     const base = process.env.REACT_APP_UACL_BASE_URL;
@@ -38,6 +41,7 @@ const RegisterForm = ({ onCreateAuth }) => {
       .catch((err) => {
         setErrorObject(extractErrorObject(err));
       });
+    setLoading(false);
   };
 
   const message = errorObject ? (
@@ -53,7 +57,7 @@ const RegisterForm = ({ onCreateAuth }) => {
       <Header as="h1" textAlign="center">
         Create an account
       </Header>
-      <Form size="large" onSubmit={handleSubmit}>
+      <Form size="large" onSubmit={handleSubmit} loading={loadingVar}>
         <Segment>
           <label htmlFor="name">
             Full name

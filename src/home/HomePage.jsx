@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Header } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import HomeRegister from './HomeRegister';
 import LogInForm from '../shared/LogInForm';
 import getAuth from '../auth/selector';
+import logo from '../assets/EmotivesLogo.svg';
 
 const HomePage = ({ auth }) => {
   if (auth !== null) {
@@ -15,9 +16,7 @@ const HomePage = ({ auth }) => {
     <Grid textAlign="center" style={{ height: '75vh' }} divided="vertically" verticalAlign="middle">
       <Grid.Row columns={3}>
         <Grid.Column width={5}>
-          <Header as="h1">
-            emotives
-          </Header>
+          <img src={logo} alt="emotives" />
         </Grid.Column>
         <Grid.Column width={5}>
           <LogInForm />
