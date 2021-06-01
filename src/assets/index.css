@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: local('Roboto-Regular'), url(./Roboto-Regular.ttf) format('opentype');
+}
+
+body {
+    font-family: 'Roboto-Regular';
+    background-color: #F1F1F1;
+}
