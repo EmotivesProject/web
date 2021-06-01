@@ -5,11 +5,52 @@
 
 body {
   font-family: 'Roboto-Regular';
-  background-color: #F1F1F1;
+  background-color: #E8E8E8;
 }
 
 .ui.header {
   font-family: 'Roboto-Regular';
+}
+
+.ui.form {
+  font-family: 'Roboto-Regular';
+}
+
+.ui.button {
+  font-family: 'Roboto-Regular';
+}
+
+#register-segment {
+  width: 50%;
+  left: 25%;
+}
+
+#typical-button {
+  background-color: #2196F3;
+  color: #E8E8E8;
+}
+
+#typical-button:hover {
+  background-color: #1565C0;
+}
+
+#register-button {
+  background-color: #00ad20;
+  color: #E8E8E8;
+}
+
+#register-button:hover {
+  background-color: darkgreen;
+}
+
+#emoji-post-input-button {
+  background-color: #2196F3;
+  color: #E8E8E8;
+}
+
+#emoji-map-input-button {
+  background-color: #00ad20;
+  color: #E8E8E8;
 }
 
 /*

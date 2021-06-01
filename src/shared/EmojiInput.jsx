@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Button, Input, Modal, Pagination,
+  Button, Input, Modal, Pagination, Icon,
 } from 'semantic-ui-react';
 import EmojiSelection from './EmojiSelection';
 import Emojis from '../constants/Emojis';
@@ -14,6 +14,7 @@ const EmojiInput = ({
   postID,
   from,
   to,
+  subComponentID,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
@@ -35,7 +36,13 @@ const EmojiInput = ({
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>{buttonText}</Button>}
+      trigger={(
+        <Button icon id={subComponentID.concat('-button')}>
+          <Icon name="smile outline" />
+          &nbsp;
+          {buttonText}
+        </Button>
+      )}
     >
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content>
