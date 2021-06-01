@@ -18,8 +18,8 @@ const RegisterForm = ({ onCreateAuth }) => {
   const [errorObject, setErrorObject] = useState(null);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     setLoading(true);
+    e.preventDefault();
     setErrorObject(null);
 
     const host = process.env.REACT_APP_API_HOST;
@@ -40,8 +40,8 @@ const RegisterForm = ({ onCreateAuth }) => {
       })
       .catch((err) => {
         setErrorObject(extractErrorObject(err));
+        setLoading(false);
       });
-    setLoading(false);
   };
 
   const message = errorObject ? (
@@ -53,12 +53,12 @@ const RegisterForm = ({ onCreateAuth }) => {
   ) : null;
 
   return (
-    <Segment>
+    <Segment padded="very">
       <Header as="h1" textAlign="center">
         Create an account
       </Header>
       <Form size="large" onSubmit={handleSubmit} loading={loadingVar}>
-        <Segment>
+        <Segment padded="very">
           <label htmlFor="name">
             Full name
             <Form.Input
@@ -131,7 +131,7 @@ const RegisterForm = ({ onCreateAuth }) => {
             />
           </label>
           <br />
-          <Button primary size="large">
+          <Button size="large" id="register-button">
             Register now
           </Button>
         </Segment>

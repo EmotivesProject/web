@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Button, Modal,
+  Button, Modal, Icon,
 } from 'semantic-ui-react';
 import GoogleMapReact from 'google-map-react';
 
@@ -10,6 +10,7 @@ const MapInput = ({
   type,
   action,
   token,
+  subComponentID,
 }) => {
   const initialCentre = {
     lat: -27.47,
@@ -32,7 +33,13 @@ const MapInput = ({
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>{buttonText}</Button>}
+      trigger={(
+        <Button icon id={subComponentID.concat('-button')}>
+          <Icon name="map" />
+          &nbsp;
+          {buttonText}
+        </Button>
+      )}
     >
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content>

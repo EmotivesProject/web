@@ -71,6 +71,7 @@ const Post = ({
         action={commentPost}
         token={auth.token}
         postID={data.post.id}
+        subComponentID="emoji-comment-input"
       />
     </Segment>
   );

@@ -92,6 +92,7 @@ const MessengerPage = ({
               action={sendNewMessage}
               from={auth.username}
               to={talkingTo}
+              subComponentID="emoji-messenger-input"
             />
           </Grid.Column>
         </Grid.Row>

@@ -4,12 +4,12 @@ import React from 'react';
 
 function HomeRegister() {
   return (
-    <Segment>
+    <Segment id="register-segment" padded="very">
       <Header as="h2" textAlign="center">
         New to the site?
       </Header>
       <Link to="/register">
-        <Button positive>
+        <Button id="typical-button">
           Register now
         </Button>
       </Link>

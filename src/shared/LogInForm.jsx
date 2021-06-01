@@ -49,11 +49,11 @@ const LogInForm = ({ onCreateAuth }) => {
   ) : null;
 
   return (
-    <Segment className="segment">
+    <Segment className="segment" padded="very">
       <Header as="h2" textAlign="center">
-        Log in
+        Login
       </Header>
-      <Segment>
+      <Segment padded="very">
         <Form onSubmit={handleSubmit} loading={loadingVar}>
           <label htmlFor="username">
             Username
@@ -91,7 +91,7 @@ const LogInForm = ({ onCreateAuth }) => {
             />
           </label>
           <br />
-          <Button primary> Log in </Button>
+          <Button id="typical-button">Login</Button>
         </Form>
         {message}
       </Segment>

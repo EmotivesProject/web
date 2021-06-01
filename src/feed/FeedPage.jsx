@@ -52,13 +52,16 @@ const FeedPage = ({
               type="post"
               action={createPost}
               token={auth.token}
+              subComponentID="emoji-post-input"
             />
+            <br />
             <MapInput
               buttonText="Create a Map Post"
               header="Create a Map Post"
               type="map"
               action={createPost}
               token={auth.token}
+              subComponentID="emoji-map-input"
             />
           </Grid.Column>
         </Grid.Row>
