@@ -46,11 +46,32 @@ body {
 #emoji-post-input-button {
   background-color: #2196F3;
   color: #E8E8E8;
+  width: 66%;
+  height: 5%;
+  text-align: center;
+  line-height: 1em;
+  font-size: 2.5em;
+  margin: 1em;
+}
+
+#emoji-post-input-button:hover {
+  background-color: #1565C0;
+  color: #E8E8E8;
 }
 
 #emoji-map-input-button {
   background-color: #00ad20;
   color: #E8E8E8;
+  width: 66%;
+  height: 5%;
+  text-align: center;
+  line-height: 1em;
+  font-size: 2.5em;
+  margin: 1em;
+}
+
+#emoji-map-input-button:hover {
+  background-color: darkgreen;
 }
 
 /*
