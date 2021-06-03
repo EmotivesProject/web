@@ -46,11 +46,11 @@ body {
 #emoji-post-input-button {
   background-color: #2196F3;
   color: #E8E8E8;
-  width: 66%;
-  height: 5%;
+  width: 40%;
+  height: 3.5%;
   text-align: center;
   line-height: 1em;
-  font-size: 2.5em;
+  font-size: 2em;
   margin: 1em;
 }
 
@@ -62,16 +62,49 @@ body {
 #emoji-map-input-button {
   background-color: #00ad20;
   color: #E8E8E8;
-  width: 66%;
-  height: 5%;
+  width: 40%;
+  height: 3.5%;
   text-align: center;
   line-height: 1em;
-  font-size: 2.5em;
+  font-size: 2em;
   margin: 1em;
 }
 
 #emoji-map-input-button:hover {
   background-color: darkgreen;
+}
+
+#like-button {
+  background-color: darkgray;
+  color: #E8E8E8;
+  width: 5em;
+  font-size: 1.25em;
+}
+
+#like-button:hover {
+  background-color: gray;
+}
+
+#unlike-button {
+  background-color: red;
+  color: #E8E8E8;
+  width: 5em;
+  font-size: 1.25em;
+}
+
+#unlike-button:hover {
+  background-color: darkred;
+}
+
+#emoji-comment-input-button {
+  background-color: #2196F3;
+  color: #E8E8E8;
+  width: 5em;
+  font-size: 1.25em;
+}
+
+#emoji-comment-input-button:hover {
+  background-color: #1565C0;
 }
 
 /*

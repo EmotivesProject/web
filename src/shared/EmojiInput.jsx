@@ -15,6 +15,7 @@ const EmojiInput = ({
   from,
   to,
   subComponentID,
+  iconName,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
@@ -31,6 +32,8 @@ const EmojiInput = ({
     setPage(activePage);
   };
 
+  const iconButton = iconName ? <Icon name={iconName} /> : null;
+
   return (
     <Modal
       onClose={() => setOpen(false)}
@@ -38,7 +41,7 @@ const EmojiInput = ({
       open={open}
       trigger={(
         <Button icon id={subComponentID.concat('-button')}>
-          <Icon name="smile outline" />
+          {iconButton}
           &nbsp;
           {buttonText}
         </Button>
