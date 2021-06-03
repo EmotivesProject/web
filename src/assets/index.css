@@ -107,6 +107,14 @@ body {
   background-color: #1565C0;
 }
 
+#comment {
+  font-size: large;
+}
+
+#main-post {
+  font-size: xx-large;
+  margin: 1.5em;
+}
 /*
 .ui.form {
   margin-left: 300px;

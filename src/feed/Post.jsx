@@ -60,7 +60,7 @@ const Post = ({
             {getTimeAgoFromObject(data.post.updated_at)}
           </Header.Subheader>
         </Header>
-        <Container textAlign="center">
+        <Container textAlign="center" id="main-post">
           {mainInformation}
         </Container>
       </Container>
@@ -84,7 +84,7 @@ const Post = ({
         </Grid>
       </Container>
       <Divider />
-      <Header as="h4">Comments</Header>
+      <Header as="h2">Comments</Header>
       {data.comments ? data.comments.map((comment) => (
         <PostComment key={comment.id} data={comment} />
       )) : null }
