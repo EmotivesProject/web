@@ -52,7 +52,7 @@ const EmojiSelection = ({ page, action }) => {
   }
 
   return (
-    <Grid columns={limit} divided>
+    <Grid columns={limit}>
       {firstRow}
       {secondRow}
     </Grid>

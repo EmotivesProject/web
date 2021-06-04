@@ -58,15 +58,17 @@ const EmojiInput = ({
         <br />
         <EmojiSelection page={page} action={updateCurrentInput} />
         <br />
-        <Pagination
-          id="pagination"
-          class="center"
-          activePage={page}
-          onPageChange={handlePageUpdate}
-          totalPages={totalPages}
-          firstItem={null}
-          lastItem={null}
-        />
+        <div className="ui center aligned container">
+          <Pagination
+            id="pagination"
+            class="center"
+            activePage={page}
+            onPageChange={handlePageUpdate}
+            totalPages={totalPages}
+            firstItem={null}
+            lastItem={null}
+          />
+        </div>
       </Modal.Content>
       <Modal.Actions>
         <Button
