@@ -50,12 +50,17 @@ const EmojiInput = ({
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content>
         <Input
+          id="emoji-input"
           placeholder="Waiting for input..."
           value={currentInput}
+          fluid
         />
         <br />
         <EmojiSelection page={page} action={updateCurrentInput} />
+        <br />
         <Pagination
+          id="pagination"
+          class="center"
           activePage={page}
           onPageChange={handlePageUpdate}
           totalPages={totalPages}
@@ -65,19 +70,27 @@ const EmojiInput = ({
       </Modal.Content>
       <Modal.Actions>
         <Button
-          content="Remove Last Emoji"
+          id="emoji-selection-button"
+          icon
+          labelPosition="left"
           onClick={() => setCurrentInput(currentInput.slice(0, -2))}
-          positive
-        />
-        <Button onClick={() => {
-          setOpen(false);
-          setCurrentInput('');
-        }}
+          negative
         >
-          Nope
+          <Icon name="cancel" />
+          Delete Last Emoji
         </Button>
         <Button
-          content="Submit"
+          id="emoji-selection-button"
+          onClick={() => {
+            setOpen(false);
+            setCurrentInput('');
+          }}
+        >
+          Cancel Create
+        </Button>
+        <Button
+          id="emoji-selection-button"
+          content="Create it!"
           labelPosition="right"
           icon="checkmark"
           onClick={() => {

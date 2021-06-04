@@ -1,24 +1,18 @@
 import React from 'react';
 import {
-  Card,
+  Message,
 } from 'semantic-ui-react';
-import getTimeAgoFromObject from '../utils/date';
 
-const MessengerMessage = ({ message }) => (
-  <Card
+const MessengerMessage = ({ message, user }) => (
+  <Message
     key={Math.random().toString(36).substr(2, 9)}
-    fluid
+    id={user === message.username_from ? 'messenger-message' : 'messenger-message-non-self'}
   >
-    <Card.Header>
+    <Message.Header>
       {message.username_from}
-    </Card.Header>
-    <Card.Meta>
-      {getTimeAgoFromObject(message.created)}
-    </Card.Meta>
-    <Card.Content>
-      {message.message}
-    </Card.Content>
-  </Card>
+    </Message.Header>
+    <p>{message.message}</p>
+  </Message>
 );
 
 export default MessengerMessage;

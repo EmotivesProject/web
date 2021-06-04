@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Button, Grid, Header } from 'semantic-ui-react';
+import {
+  Button, Divider, Grid, Header, Segment,
+} from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import EmojiInput from '../shared/EmojiInput';
 import TopBar from '../shared/TopBar';
@@ -9,8 +11,9 @@ import MessengerMessage from './MessengerMessage';
 import {
   getClient,
   getTalkingTo,
-  getUsers,
   getMessages,
+  getActiveUsers,
+  getInactiveUsers,
 } from './selector';
 import {
   setupClient,
@@ -25,7 +28,8 @@ const MessengerPage = ({
   setupClientDispatch,
   client,
   sendNewMessage,
-  users,
+  activeUsers,
+  inactiveUsers,
   talkingTo,
   getPreviousMessages,
   messages,
@@ -45,14 +49,24 @@ const MessengerPage = ({
     }
   }, [talkingTo]);
 
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const defaultMessage = talkingTo === ''
     ? (
-      <>
+      <Header id="default-message">
         select someone to talk to
-      </>
+      </Header>
     )
     : (
-      <Header>
+      <Header id="default-message">
         Talking to&nbsp;
         {talkingTo}
       </Header>
@@ -61,40 +75,76 @@ const MessengerPage = ({
   return (
     <>
       <TopBar />
-      <Grid>
+      <Grid id="grid-page">
         <Grid.Row columns={3}>
           <Grid.Column width={5}>
-            {users.map((user) => {
-              if (user.username !== auth.username) {
-                return (
-                  <Button
-                    content={user.username}
-                    key={user.username}
-                    onClick={() => switchPersonTalking(user.username, talkingTo)}
-                    positive={user.active}
-                  />
-                );
-              }
-              return null;
-            })}
+            <Segment raised id="messenger-list">
+              <Header content="Active Users" />
+              {activeUsers.map((user) => {
+                if (user.username !== auth.username) {
+                  return (
+                    <>
+                      <Button
+                        id={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
+                        content={user.username}
+                        key={Math.random().toString(36).substr(2, 9)}
+                        onClick={() => {
+                          switchPersonTalking(user.username, talkingTo);
+                        }}
+                        positive={user.active}
+                      />
+                      <br />
+                    </>
+                  );
+                }
+                return null;
+              })}
+              <Header content="Offline Users" />
+              {inactiveUsers.map((user) => {
+                if (user.username !== auth.username) {
+                  return (
+                    <>
+                      <Button
+                        id={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
+                        content={user.username}
+                        key={Math.random().toString(36).substr(2, 9)}
+                        onClick={() => switchPersonTalking(user.username, talkingTo)}
+                        positive={user.active}
+                      />
+                      <br />
+                    </>
+                  );
+                }
+                return null;
+              })}
+            </Segment>
           </Grid.Column>
           <Grid.Column width={5}>
-            {defaultMessage}
-            {messages.map((message) => (
-              <MessengerMessage key={message.id} message={message} user={auth.username} />
-            ))}
+            <Segment id="messenger-feed">
+              <Grid.Row id="messenger-title">
+                {defaultMessage}
+              </Grid.Row>
+              <Divider />
+              <Grid.Row id="messenger-items" ref={messagesEndRef}>
+                {messages.map((message) => (
+                  <MessengerMessage key={message.id} message={message} user={auth.username} />
+                ))}
+              </Grid.Row>
+              <Divider />
+              <Grid.Row id="messenger-new-message">
+                <EmojiInput
+                  buttonText="New Message"
+                  header="send a message"
+                  type="message"
+                  action={sendNewMessage}
+                  from={auth.username}
+                  to={talkingTo}
+                  subComponentID="emoji-messenger-input"
+                />
+              </Grid.Row>
+            </Segment>
           </Grid.Column>
-          <Grid.Column width={5}>
-            <EmojiInput
-              buttonText="New Message"
-              header="send a message"
-              type="message"
-              action={sendNewMessage}
-              from={auth.username}
-              to={talkingTo}
-              subComponentID="emoji-messenger-input"
-            />
-          </Grid.Column>
+          <Grid.Column width={5} />
         </Grid.Row>
       </Grid>
     </>
@@ -104,7 +154,8 @@ const MessengerPage = ({
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
   client: getClient(state),
-  users: getUsers(state),
+  activeUsers: getActiveUsers(state),
+  inactiveUsers: getInactiveUsers(state),
   talkingTo: getTalkingTo(state),
   messages: getMessages(state),
 });

@@ -47,7 +47,6 @@ body {
   background-color: #2196F3;
   color: #E8E8E8;
   width: 40%;
-  height: 3.5%;
   text-align: center;
   line-height: 1em;
   font-size: 2em;
@@ -63,7 +62,6 @@ body {
   background-color: #00ad20;
   color: #E8E8E8;
   width: 40%;
-  height: 3.5%;
   text-align: center;
   line-height: 1em;
   font-size: 2em;
@@ -115,6 +113,104 @@ body {
   font-size: xx-large;
   margin: 1.5em;
 }
+
+#user-messenger {
+  width: 10em;
+  margin: 0.225em;
+}
+
+#user-messenger-talking {
+  width: 10em;
+  margin: 0.225em;
+  background-color: red;
+  color: white;
+}
+
+#messenger-list {
+  width: 50%;
+  left: 25%;
+  text-align: center;
+  max-height: 100%;
+  overflow: auto;
+}
+
+#messenger-feed {
+  height: 102%;
+}
+
+#grid-page {
+  overflow: hidden;
+}
+
+#messenger-title {
+  height: 5vh;
+}
+
+#messenger-items {
+  height: 75vh;
+  overflow: auto;
+}
+
+#messenger-new-message {
+  height: 5vh;
+}
+
+#emoji-messenger-input-button {
+  width: 50%;
+  text-align: center;
+  height: 5vh;
+  background-color: #2196F3;
+  color: #E8E8E8;
+  font-size: 1.25em;
+}
+
+#messenger-new-message {
+  text-align: center;
+}
+
+#default-message {
+  text-align: center;
+}
+
+#messenger-message {
+  background-color: lightblue;
+  font-size: large;
+  width: 40%;
+  max-width: 60%;
+  float: right;
+}
+
+#messenger-message-non-self {
+  background-color: lightcyan;
+  font-size: large;
+  width: 40%;
+  max-width: 60%;
+  float: left;
+}
+
+#emoji-input {
+  font-size: xx-large;
+  width: 100%;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+#emoji-selection {
+  min-width: 100%;
+  font-size: xx-large;
+}
+
+#emoji-selection-button {
+  font-size: large;
+}
+
+#pagination {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: large;
+}
+
 /*
 .ui.form {
   margin-left: 300px;
