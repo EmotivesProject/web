@@ -23,9 +23,8 @@ const EmojiSelection = ({ page, action }) => {
         {firstArray.map((emoji) => (
           <Grid.Column key={emoji}>
             <Button
+              id="emoji-selection"
               content={emoji}
-              labelPosition="right"
-              icon="checkmark"
               onClick={() => action(emoji)}
               positive
             />
@@ -41,9 +40,8 @@ const EmojiSelection = ({ page, action }) => {
         {secondArray.map((emoji) => (
           <Grid.Column key={emoji}>
             <Button
+              id="emoji-selection"
               content={emoji}
-              labelPosition="right"
-              icon="checkmark"
               onClick={() => action(emoji)}
               positive
             />
@@ -54,7 +52,7 @@ const EmojiSelection = ({ page, action }) => {
   }
 
   return (
-    <Grid columns={limit} divided>
+    <Grid columns={limit}>
       {firstRow}
       {secondRow}
     </Grid>

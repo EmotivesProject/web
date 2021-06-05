@@ -5,6 +5,8 @@ import {
   Segment,
   Divider,
   Button,
+  Icon,
+  Grid,
 } from 'semantic-ui-react';
 import EmojiInput from '../shared/EmojiInput';
 import getTimeAgoFromObject from '../utils/date';
@@ -30,49 +32,62 @@ const Post = ({
     );
   }
 
-  let button = <Button onClick={() => likePost(auth.token, data.post.id)}>Submit Like</Button>;
+  let button = <Button onClick={() => likePost(auth.token, data.post.id)} icon id="like-button"><Icon name="like" /></Button>;
   const likeArray = data.likes ? data.likes : [];
   const likeIndex = likeArray.findIndex((like) => like.username === auth.username);
   if (likeIndex !== -1) {
     button = (
       <Button
         onClick={() => unlikePost(auth.token, data.post.id, likeArray[likeIndex].id)}
+        id="unlike-button"
+        icon
       >
-        Unlike Like
+        <Icon name="like" />
       </Button>
     );
   }
 
   return (
-    <Segment>
+    <Segment id="main-post-segment">
       <Container>
-        <Header as="h2">{data.post.username}</Header>
-        <Header as="h2">
-          {data.likes ? data.likes.length : 0}
-          &nbsp;Likes
-          {button}
+        <Header as="h2" dividing>
+          {data.post.username}
+          <Header.Subheader id="post-subheader">
+            <Icon name="like" />
+            {data.likes ? data.likes.length : 0}
+            &nbsp;
+            <Icon name="clock" />
+            {getTimeAgoFromObject(data.post.updated_at)}
+          </Header.Subheader>
         </Header>
-        <Header as="h4">{getTimeAgoFromObject(data.post.updated_at)}</Header>
-        <Divider />
-        <Container textAlign="center">
+        <Container textAlign="center" id="main-post">
           {mainInformation}
         </Container>
       </Container>
       <Divider />
-      <Header as="h4">Comments</Header>
+      <Container>
+        <Grid columns={2} textAlign="center">
+          <Grid.Column>
+            {button}
+          </Grid.Column>
+          <Grid.Column>
+            <EmojiInput
+              header="Comment on post"
+              type="comment"
+              action={commentPost}
+              token={auth.token}
+              postID={data.post.id}
+              subComponentID="emoji-comment-input"
+              iconName="comment"
+            />
+          </Grid.Column>
+        </Grid>
+      </Container>
+      <Divider />
+      <Header as="h2">Comments</Header>
       {data.comments ? data.comments.map((comment) => (
         <PostComment key={comment.id} data={comment} />
       )) : null }
-      <Header as="h4">New Comment?</Header>
-      <EmojiInput
-        buttonText="Submit Comment"
-        header="Comment on post"
-        type="comment"
-        action={commentPost}
-        token={auth.token}
-        postID={data.post.id}
-        subComponentID="emoji-comment-input"
-      />
     </Segment>
   );
 };

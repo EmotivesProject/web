@@ -15,6 +15,7 @@ const EmojiInput = ({
   from,
   to,
   subComponentID,
+  iconName,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
@@ -31,6 +32,8 @@ const EmojiInput = ({
     setPage(activePage);
   };
 
+  const iconButton = iconName ? <Icon name={iconName} /> : null;
+
   return (
     <Modal
       onClose={() => setOpen(false)}
@@ -38,7 +41,7 @@ const EmojiInput = ({
       open={open}
       trigger={(
         <Button icon id={subComponentID.concat('-button')}>
-          <Icon name="smile outline" />
+          {iconButton}
           &nbsp;
           {buttonText}
         </Button>
@@ -47,34 +50,49 @@ const EmojiInput = ({
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content>
         <Input
+          id="emoji-input"
           placeholder="Waiting for input..."
           value={currentInput}
+          fluid
         />
         <br />
         <EmojiSelection page={page} action={updateCurrentInput} />
-        <Pagination
-          activePage={page}
-          onPageChange={handlePageUpdate}
-          totalPages={totalPages}
-          firstItem={null}
-          lastItem={null}
-        />
+        <br />
+        <div className="ui center aligned container">
+          <Pagination
+            id="pagination"
+            class="center"
+            activePage={page}
+            onPageChange={handlePageUpdate}
+            totalPages={totalPages}
+            firstItem={null}
+            lastItem={null}
+          />
+        </div>
       </Modal.Content>
       <Modal.Actions>
         <Button
-          content="Remove Last Emoji"
+          id="emoji-selection-button"
+          icon
+          labelPosition="left"
           onClick={() => setCurrentInput(currentInput.slice(0, -2))}
-          positive
-        />
-        <Button onClick={() => {
-          setOpen(false);
-          setCurrentInput('');
-        }}
+          negative
         >
-          Nope
+          <Icon name="cancel" />
+          Delete Last Emoji
         </Button>
         <Button
-          content="Submit"
+          id="emoji-selection-button"
+          onClick={() => {
+            setOpen(false);
+            setCurrentInput('');
+          }}
+        >
+          Cancel Create
+        </Button>
+        <Button
+          id="emoji-selection-button"
+          content="Create it!"
           labelPosition="right"
           icon="checkmark"
           onClick={() => {

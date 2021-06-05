@@ -44,13 +44,182 @@ body {
 }
 
 #emoji-post-input-button {
-  background-color: #2196F3;
-  color: #E8E8E8;
+  background-color: #f9cb63;
+  color: black;
+  width: 40%;
+  text-align: center;
+  line-height: 1em;
+  font-size: 2em;
+  margin: 1em;
+}
+
+#emoji-post-input-button:hover {
+  background-color: #ebc05d;
+  color: black;
 }
 
 #emoji-map-input-button {
-  background-color: #00ad20;
+  background-color: #388181;
+  color: black;
+  width: 40%;
+  text-align: center;
+  line-height: 1em;
+  font-size: 2em;
+  margin: 1em;
+}
+
+#emoji-map-input-button:hover {
+  background-color: #2d6666;
+}
+
+#like-button {
+  background-color: darkgray;
   color: #E8E8E8;
+  width: 5em;
+  font-size: 1.25em;
+}
+
+#like-button:hover {
+  background-color: gray;
+}
+
+#unlike-button {
+  background-color: red;
+  color: #E8E8E8;
+  width: 5em;
+  font-size: 1.25em;
+}
+
+#unlike-button:hover {
+  background-color: darkred;
+}
+
+#emoji-comment-input-button {
+  background-color: #2196F3;
+  color: #E8E8E8;
+  width: 5em;
+  font-size: 1.25em;
+}
+
+#emoji-comment-input-button:hover {
+  background-color: #1565C0;
+}
+
+#comment {
+  font-size: large;
+}
+
+#main-post {
+  font-size: xx-large;
+  margin: 1.5em;
+}
+
+#user-messenger {
+  width: 10em;
+  margin: 0.225em;
+}
+
+#user-messenger-talking {
+  width: 10em;
+  margin: 0.225em;
+  background-color: red;
+  color: white;
+}
+
+#messenger-list {
+  width: 50%;
+  left: 25%;
+  text-align: center;
+  max-height: 100%;
+  overflow: auto;
+}
+
+#messenger-feed {
+  height: 102%;
+}
+
+#grid-page {
+  overflow: hidden;
+}
+
+#messenger-title {
+  height: 5vh;
+}
+
+#messenger-items {
+  height: 75vh;
+  overflow: auto;
+}
+
+#messenger-new-message {
+  height: 5vh;
+}
+
+#emoji-messenger-input-button {
+  width: 50%;
+  text-align: center;
+  height: 5vh;
+  background-color: #2196F3;
+  color: #E8E8E8;
+  font-size: 1.25em;
+}
+
+#messenger-new-message {
+  text-align: center;
+}
+
+#default-message {
+  text-align: center;
+}
+
+#messenger-message {
+  background-color: lightblue;
+  font-size: large;
+  width: 40%;
+  max-width: 60%;
+  float: right;
+}
+
+#messenger-message-non-self {
+  background-color: lightcyan;
+  font-size: large;
+  width: 40%;
+  max-width: 60%;
+  float: left;
+}
+
+#emoji-input {
+  font-size: xx-large;
+  width: 100%;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+#emoji-selection {
+  min-width: 100%;
+  font-size: xx-large;
+}
+
+#emoji-selection-button {
+  font-size: large;
+}
+
+#pagination {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: large;
+}
+
+#top-bar {
+  background-color: #a0bdbd;
+  color: black;
+  text-align: center;
+  font-size: x-large;
+}
+
+a {
+  color: black;
 }
 
 /*
