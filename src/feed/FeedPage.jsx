@@ -31,9 +31,9 @@ const FeedPage = ({
     <>
       <TopBar />
       <Grid>
-        <Grid.Row columns={3}>
-          <Grid.Column width={5} />
-          <Grid.Column width={5}>
+        <Grid.Row columns="three">
+          <Grid.Column />
+          <Grid.Column>
             {posts.map((post) => (
               <Post
                 key={post.post.id}
@@ -45,7 +45,7 @@ const FeedPage = ({
               />
             ))}
           </Grid.Column>
-          <Grid.Column width={5}>
+          <Grid.Column>
             <EmojiInput
               buttonText="Emoji Post"
               header="Create a post"

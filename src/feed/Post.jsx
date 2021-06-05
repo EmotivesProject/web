@@ -48,7 +48,7 @@ const Post = ({
   }
 
   return (
-    <Segment>
+    <Segment id="main-post-segment">
       <Container>
         <Header as="h2" dividing>
           {data.post.username}
