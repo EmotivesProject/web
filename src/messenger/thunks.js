@@ -35,7 +35,7 @@ const getUsersRequest = () => async (dispatch) => {
 
 const receivedNewMessage = (message) => async (dispatch) => {
   const messageObject = JSON.parse(message.data);
-  if (messageObject.username === null) {
+  if (messageObject.username === undefined) {
     dispatch(webSocketMessage(messageObject));
   } else {
     dispatch(newConnection(messageObject));

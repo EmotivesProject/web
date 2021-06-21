@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import {
@@ -49,16 +49,6 @@ const MessengerPage = ({
     }
   }, [talkingTo]);
 
-  const messagesEndRef = useRef(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   const defaultMessage = talkingTo === ''
     ? (
       <Header id="default-message">
@@ -70,6 +60,20 @@ const MessengerPage = ({
         Talking to&nbsp;
         {talkingTo}
       </Header>
+    );
+
+  const newMessageButton = talkingTo === ''
+    ? null
+    : (
+      <EmojiInput
+        buttonText="New Message"
+        header="send a message"
+        type="message"
+        action={sendNewMessage}
+        from={auth.username}
+        to={talkingTo}
+        subComponentID="emoji-messenger-input"
+      />
     );
 
   return (
@@ -125,22 +129,18 @@ const MessengerPage = ({
                 {defaultMessage}
               </Grid.Row>
               <Divider />
-              <Grid.Row id="messenger-items" ref={messagesEndRef}>
+              <Grid.Row id="messenger-items">
                 {messages.map((message) => (
-                  <MessengerMessage key={message.id} message={message} user={auth.username} />
+                  <MessengerMessage
+                    key={Math.random().toString(36).substr(2, 9)}
+                    message={message}
+                    user={auth.username}
+                  />
                 ))}
               </Grid.Row>
               <Divider />
               <Grid.Row id="messenger-new-message">
-                <EmojiInput
-                  buttonText="New Message"
-                  header="send a message"
-                  type="message"
-                  action={sendNewMessage}
-                  from={auth.username}
-                  to={talkingTo}
-                  subComponentID="emoji-messenger-input"
-                />
+                {newMessageButton}
               </Grid.Row>
             </Segment>
           </Grid.Column>
