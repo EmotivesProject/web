@@ -78,7 +78,7 @@ const MessengerPage = ({
 
   return (
     <>
-      <TopBar />
+      <TopBar key={Math.random().toString(36).substr(2, 9)} />
       <Grid id="grid-page">
         <Grid.Row columns={3}>
           <Grid.Column width={5}>
@@ -87,7 +87,7 @@ const MessengerPage = ({
               {activeUsers.map((user) => {
                 if (user.username !== auth.username) {
                   return (
-                    <>
+                    <div key={Math.random().toString(36).substr(2, 9)}>
                       <Button
                         id={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
                         content={user.username}
@@ -98,7 +98,7 @@ const MessengerPage = ({
                         positive={user.active}
                       />
                       <br />
-                    </>
+                    </div>
                   );
                 }
                 return null;
@@ -107,7 +107,7 @@ const MessengerPage = ({
               {inactiveUsers.map((user) => {
                 if (user.username !== auth.username) {
                   return (
-                    <>
+                    <div key={Math.random().toString(36).substr(2, 9)}>
                       <Button
                         id={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
                         content={user.username}
@@ -116,7 +116,7 @@ const MessengerPage = ({
                         positive={user.active}
                       />
                       <br />
-                    </>
+                    </div>
                   );
                 }
                 return null;
@@ -139,7 +139,7 @@ const MessengerPage = ({
                 ))}
               </Grid.Row>
               <Divider />
-              <Grid.Row id="messenger-new-message">
+              <Grid.Row id="messenger-new-message" key={Math.random().toString(36).substr(2, 9)}>
                 {newMessageButton}
               </Grid.Row>
             </Segment>
