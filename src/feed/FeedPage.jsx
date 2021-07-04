@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Message } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 import EmojiInput from '../shared/EmojiInput';
 import MapInput from '../shared/MapInput';
 import Post from './Post';
-import getPosts from './selector';
+import { getError, getPosts } from './selector';
 import {
   fetchPostsRequest,
   likePostRequest,
@@ -17,15 +17,26 @@ import {
 } from './thunks';
 
 const FeedPage = ({
-  auth, posts, loadPosts, likePost, commentPost, createPost, unlikePost,
+  auth, posts, loadPosts, likePost, commentPost, createPost, unlikePost, errors,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
   }
 
   useEffect(() => {
-    loadPosts(auth.token);
+    loadPosts(auth);
   }, []);
+
+  const errorMessage = errors !== null ? (
+    <Message negative>
+      <Message.Header>Error occurred</Message.Header>
+      <p>
+        An error occurred around&nbsp;
+        {errors}
+        &nbsp;try again or refresh
+      </p>
+    </Message>
+  ) : null;
 
   return (
     <>
@@ -34,6 +45,7 @@ const FeedPage = ({
         <Grid.Row columns="three">
           <Grid.Column />
           <Grid.Column>
+            {errorMessage}
             {posts.map((post) => (
               <Post
                 key={post.post.id}
@@ -51,7 +63,7 @@ const FeedPage = ({
               header="Create a post"
               type="post"
               action={createPost}
-              token={auth.token}
+              auth={auth}
               subComponentID="emoji-post-input"
               iconName="smile"
             />
@@ -61,7 +73,7 @@ const FeedPage = ({
               header="Create a Map Post"
               type="map"
               action={createPost}
-              token={auth.token}
+              auth={auth}
               subComponentID="emoji-map-input"
             />
           </Grid.Column>
@@ -74,22 +86,23 @@ const FeedPage = ({
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
   posts: getPosts(state),
+  errors: getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadPosts: (token) => dispatch(fetchPostsRequest(token)),
-  likePost: (token, postID) => dispatch(likePostRequest(token, postID)),
-  unlikePost: (token, postID, likeID) => dispatch(unlikePostRequest(token, postID, likeID)),
-  commentPost: (token, message, postID) => dispatch(commentPostRequest(token, message, postID)),
+  loadPosts: (auth) => dispatch(fetchPostsRequest(auth)),
+  likePost: (auth, postID) => dispatch(likePostRequest(auth, postID)),
+  unlikePost: (auth, postID, likeID) => dispatch(unlikePostRequest(auth, postID, likeID)),
+  commentPost: (auth, message, postID) => dispatch(commentPostRequest(auth, message, postID)),
   createPost: (
-    token,
+    auth,
     type,
     message,
     latitude,
     longitude,
     zoom,
     imagePath,
-  ) => dispatch(postRequest(token, type, message, latitude, longitude, zoom, imagePath)),
+  ) => dispatch(postRequest(auth, type, message, latitude, longitude, zoom, imagePath)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedPage);

@@ -32,13 +32,13 @@ const Post = ({
     );
   }
 
-  let button = <Button onClick={() => likePost(auth.token, data.post.id)} icon id="like-button"><Icon name="like" /></Button>;
+  let button = <Button onClick={() => likePost(auth, data.post.id)} icon id="like-button"><Icon name="like" /></Button>;
   const likeArray = data.likes ? data.likes : [];
   const likeIndex = likeArray.findIndex((like) => like.username === auth.username);
   if (likeIndex !== -1) {
     button = (
       <Button
-        onClick={() => unlikePost(auth.token, data.post.id, likeArray[likeIndex].id)}
+        onClick={() => unlikePost(auth, data.post.id, likeArray[likeIndex].id)}
         id="unlike-button"
         icon
       >
@@ -75,7 +75,7 @@ const Post = ({
               header="Comment on post"
               type="comment"
               action={commentPost}
-              token={auth.token}
+              auth={auth}
               postID={data.post.id}
               subComponentID="emoji-comment-input"
               iconName="comment"

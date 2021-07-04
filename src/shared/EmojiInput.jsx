@@ -10,7 +10,7 @@ const EmojiInput = ({
   header,
   type,
   action,
-  token,
+  auth,
   postID,
   from,
   to,
@@ -61,7 +61,7 @@ const EmojiInput = ({
         <div className="ui center aligned container">
           <Pagination
             id="pagination"
-            class="center"
+            className="center"
             activePage={page}
             onPageChange={handlePageUpdate}
             totalPages={totalPages}
@@ -98,10 +98,10 @@ const EmojiInput = ({
           onClick={() => {
             switch (type) {
               case 'post':
-                action(token, 'emoji', currentInput);
+                action(auth, 'emoji', currentInput);
                 break;
               case 'comment':
-                action(token, currentInput, postID);
+                action(auth, currentInput, postID);
                 break;
               case 'message':
                 action(currentInput, from, to);
