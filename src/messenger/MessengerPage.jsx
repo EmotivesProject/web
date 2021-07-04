@@ -39,6 +39,8 @@ const MessengerPage = ({
     return <Redirect to="/" />;
   }
 
+  const chatContainer = React.createRef();
+
   if (client === null) {
     setupClientDispatch(auth.token);
   }
@@ -48,6 +50,16 @@ const MessengerPage = ({
       getPreviousMessages(auth.token, auth.username, talkingTo);
     }
   }, [talkingTo]);
+
+  const scrollToMyRef = () => {
+    const scroll = chatContainer.current.scrollHeight
+    - chatContainer.current.clientHeight;
+    chatContainer.current.scrollTo(0, scroll);
+  };
+
+  useEffect(() => {
+    scrollToMyRef();
+  }, [messages]);
 
   const defaultMessage = talkingTo === ''
     ? (
@@ -61,6 +73,14 @@ const MessengerPage = ({
         {talkingTo}
       </Header>
     );
+
+  const availableMessages = messages.map((message) => (
+    <MessengerMessage
+      key={Math.random().toString(36).substr(2, 9)}
+      message={message}
+      user={auth.username}
+    />
+  ));
 
   const newMessageButton = talkingTo === ''
     ? null
@@ -129,15 +149,11 @@ const MessengerPage = ({
                 {defaultMessage}
               </Grid.Row>
               <Divider />
-              <Grid.Row id="messenger-items">
-                {messages.map((message) => (
-                  <MessengerMessage
-                    key={Math.random().toString(36).substr(2, 9)}
-                    message={message}
-                    user={auth.username}
-                  />
-                ))}
-              </Grid.Row>
+              <div ref={chatContainer} id="messenger-items">
+                <Grid.Row>
+                  {availableMessages}
+                </Grid.Row>
+              </div>
               <Divider />
               <Grid.Row id="messenger-new-message" key={Math.random().toString(36).substr(2, 9)}>
                 {newMessageButton}

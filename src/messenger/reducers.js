@@ -55,6 +55,8 @@ const messengerState = (state = initialState, action) => {
         ) || fetchedMessage,
       );
 
+      console.log('UpdatedMessages');
+
       return {
         ...state,
         messages: newStateMessages,
