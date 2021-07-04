@@ -44,3 +44,15 @@ export const LOADING_POSTS = 'LOADING_POSTS';
 export const loadingPosts = () => ({
   type: FETCH_POSTS,
 });
+
+export const API_ERROR = 'API_ERROR';
+export const apiError = (name) => ({
+  type: API_ERROR,
+  payload: { name },
+});
+
+export const API_SUCCESS = 'API_SUCCESS';
+export const apiSuccess = (name) => ({
+  type: API_SUCCESS,
+  payload: { name },
+});

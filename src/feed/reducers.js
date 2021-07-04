@@ -6,6 +6,8 @@ import {
   LOADING_POSTS,
   COMMENT_POST,
   UNLIKE_POST,
+  API_ERROR,
+  API_SUCCESS,
 } from './actions';
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   loading: false,
   error: null,
   posts: [],
+  errors: null,
 };
 
 const postState = (state = initialState, action) => {
@@ -95,6 +98,19 @@ const postState = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+      };
+    }
+    case API_ERROR: {
+      const { name } = payload;
+      return {
+        ...state,
+        errors: name,
+      };
+    }
+    case API_SUCCESS: {
+      return {
+        ...state,
+        errors: null,
       };
     }
     default:

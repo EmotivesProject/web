@@ -9,7 +9,7 @@ const MapInput = ({
   header,
   type,
   action,
-  token,
+  auth,
   subComponentID,
 }) => {
   const initialCentre = {
@@ -69,7 +69,7 @@ const MapInput = ({
             switch (type) {
               case 'map':
                 action(
-                  token,
+                  auth,
                   'map',
                   'map post',
                   currentPosition.lat,

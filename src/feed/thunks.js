@@ -6,122 +6,149 @@ import {
   likePost,
   createPost,
   unlikePost,
+  apiError,
+  apiSuccess,
 } from './actions';
 
 const host = process.env.REACT_APP_API_HOST;
 const base = process.env.REACT_APP_POSTIT_BASE_URL;
 
-const requestGetPosts = (path, dispatch, token) => {
+const requestGetPosts = (path, dispatch, auth) => {
   const url = `${host}://${base}/${path}`;
 
   axios.get(url, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${auth.token}`,
     },
   })
     .then((result) => {
       const fetchedPosts = result.data.result;
+      dispatch(apiSuccess('posts'));
       dispatch(fetchPosts(fetchedPosts));
     })
-    .catch(() => {
-      dispatch(removeAuth());
-      dispatch(fetchPosts([]));
+    .catch((err) => {
+      if (err.response.status === 401) {
+        dispatch(removeAuth());
+        dispatch(fetchPosts([]));
+      } else {
+        dispatch(apiError('posts'));
+      }
     });
 };
 
-const requestPostLike = (path, dispatch, token) => {
+const requestPostLike = (path, dispatch, auth) => {
   const url = `${host}://${base}/${path}`;
   axios.post(url, {}, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${auth.token}`,
     },
   })
     .then((result) => {
       const likedPost = result.data.result;
       dispatch(likePost(likedPost));
+      dispatch(apiSuccess('like'));
     })
-    .catch(() => {
-      dispatch(removeAuth());
-      dispatch(fetchPosts([]));
+    .catch((err) => {
+      if (err.response.status === 401) {
+        dispatch(removeAuth());
+        dispatch(fetchPosts([]));
+      } else {
+        dispatch(apiError('like'));
+      }
     });
 };
 
-const requestPostComment = (path, dispatch, token, body) => {
+const requestPostComment = (path, dispatch, auth, body) => {
   const url = `${host}://${base}/${path}`;
   axios.post(url, body, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${auth.token}`,
     },
   })
     .then((result) => {
       const comment = result.data.result;
       dispatch(commentPost(comment));
+      dispatch(apiSuccess('comment'));
     })
-    .catch(() => {
-      dispatch(removeAuth());
-      dispatch(fetchPosts([]));
+    .catch((err) => {
+      if (err.response.status === 401) {
+        dispatch(removeAuth());
+        dispatch(fetchPosts([]));
+      } else {
+        dispatch(apiError('comment'));
+      }
     });
 };
 
-const createNewPostRequest = (path, dispatch, token, body) => {
+const createNewPostRequest = (path, dispatch, auth, body) => {
   const url = `${host}://${base}/${path}`;
   axios.post(url, body, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${auth.token}`,
     },
   })
     .then((result) => {
       const post = result.data.result;
       dispatch(createPost(post));
+      dispatch(apiSuccess('post'));
     })
-    .catch(() => {
-      dispatch(removeAuth());
-      dispatch(fetchPosts([]));
+    .catch((err) => {
+      if (err.response.status === 401) {
+        dispatch(removeAuth());
+        dispatch(fetchPosts([]));
+      } else {
+        dispatch(apiError('post'));
+      }
     });
 };
 
-const requestPostUnlike = (path, dispatch, token) => {
+const requestPostUnlike = (path, dispatch, auth) => {
   const url = `${host}://${base}/${path}`;
   axios.delete(url, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${auth.token}`,
     },
   })
     .then((result) => {
       const post = result.data.result;
       dispatch(unlikePost(post));
+      dispatch(apiSuccess('like'));
     })
-    .catch(() => {
-      dispatch(removeAuth());
-      dispatch(fetchPosts([]));
+    .catch((err) => {
+      if (err.response.status === 401) {
+        dispatch(removeAuth());
+        dispatch(fetchPosts([]));
+      } else {
+        dispatch(apiError('like'));
+      }
     });
 };
 
-const fetchPostsRequest = (token) => async (dispatch) => {
+const fetchPostsRequest = (auth) => async (dispatch) => {
   const path = 'post';
-  requestGetPosts(path, dispatch, token);
+  requestGetPosts(path, dispatch, auth);
 };
 
-const likePostRequest = (token, postID) => async (dispatch) => {
+const likePostRequest = (auth, postID) => async (dispatch) => {
   const path = `post/${postID}/like`;
-  requestPostLike(path, dispatch, token);
+  requestPostLike(path, dispatch, auth);
 };
 
-const unlikePostRequest = (token, postID, likeID) => async (dispatch) => {
+const unlikePostRequest = (auth, postID, likeID) => async (dispatch) => {
   const path = `post/${postID}/like/${likeID}`;
-  requestPostUnlike(path, dispatch, token);
+  requestPostUnlike(path, dispatch, auth);
 };
 
-const commentPostRequest = (token, message, postID) => async (dispatch) => {
+const commentPostRequest = (auth, message, postID) => async (dispatch) => {
   const path = `post/${postID}/comment`;
   const body = JSON.stringify({
     message,
   });
-  requestPostComment(path, dispatch, token, body);
+  requestPostComment(path, dispatch, auth, body);
 };
 
 const postRequest = (
-  token,
+  auth,
   type,
   message,
   latitude = null,
@@ -140,7 +167,7 @@ const postRequest = (
       image_path: imagePath,
     },
   });
-  createNewPostRequest(path, dispatch, token, body);
+  createNewPostRequest(path, dispatch, auth, body);
 };
 
 export {
