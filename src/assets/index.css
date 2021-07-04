@@ -135,7 +135,7 @@ body {
 }
 
 #messenger-feed {
-  height: 102%;
+  height: 90vh;
 }
 
 #grid-page {
@@ -143,22 +143,23 @@ body {
 }
 
 #messenger-title {
-  height: 5vh;
+  height: 5%;
 }
 
 #messenger-items {
-  height: 75vh;
+  height: 84%;
   overflow: auto;
+  display: inline-block;
 }
 
 #messenger-new-message {
-  height: 5vh;
+  height: 10%;
 }
 
 #emoji-messenger-input-button {
   width: 50%;
   text-align: center;
-  height: 5vh;
+  height: 50%;
   background-color: #2196F3;
   color: #E8E8E8;
   font-size: 1.25em;
@@ -175,7 +176,7 @@ body {
 #messenger-message {
   background-color: lightblue;
   font-size: large;
-  width: 40%;
+  width: 100%;
   max-width: 60%;
   float: right;
 }
@@ -183,7 +184,7 @@ body {
 #messenger-message-non-self {
   background-color: lightcyan;
   font-size: large;
-  width: 40%;
+  width: 100%;
   max-width: 60%;
   float: left;
 }
