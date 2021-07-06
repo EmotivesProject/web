@@ -8,6 +8,7 @@ import {
   unlikePost,
   apiError,
   apiSuccess,
+  fetchComments,
 } from './actions';
 
 const host = process.env.REACT_APP_API_HOST;
@@ -32,6 +33,29 @@ const requestGetPosts = (path, dispatch, auth, page) => {
         dispatch(fetchPosts([]));
       } else {
         dispatch(apiError('posts'));
+      }
+    });
+};
+
+const requestGetComments = (path, dispatch, auth) => {
+  const url = `${host}://${base}/${path}`;
+
+  axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  })
+    .then((result) => {
+      const fetchedResult = result.data.result;
+      dispatch(apiSuccess('comments'));
+      dispatch(fetchComments(fetchedResult));
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        dispatch(removeAuth());
+        dispatch(fetchPosts([]));
+      } else {
+        dispatch(apiError('comments'));
       }
     });
 };
@@ -129,6 +153,11 @@ const fetchPostsRequest = (auth, page) => async (dispatch) => {
   requestGetPosts(path, dispatch, auth, page);
 };
 
+const fetchPostCommentsRequest = (auth, postID) => async (dispatch) => {
+  const path = `post/${postID}/comment`;
+  requestGetComments(path, dispatch, auth);
+};
+
 const likePostRequest = (auth, postID) => async (dispatch) => {
   const path = `post/${postID}/like`;
   requestPostLike(path, dispatch, auth);
@@ -172,6 +201,7 @@ const postRequest = (
 
 export {
   fetchPostsRequest,
+  fetchPostCommentsRequest,
   likePostRequest,
   commentPostRequest,
   postRequest,
