@@ -219,6 +219,11 @@ body {
   font-size: x-large;
 }
 
+#load-more-posts {
+  width: 100%;
+  font-size: large;
+}
+
 a {
   color: black;
 }
