@@ -11,7 +11,7 @@ import {
 } from './actions';
 
 const initialState = {
-  page: 1,
+  page: 0,
   loading: false,
   error: null,
   posts: [],
@@ -40,15 +40,12 @@ const postState = (state = initialState, action) => {
       };
     }
     case FETCH_POSTS: {
-      const { posts } = payload;
-      const newStatePosts = posts.map(
-        (fetchedPosts) => state.posts.find(
-          (existingPost) => existingPost.post.id === fetchedPosts.post.id,
-        ) || fetchedPosts,
-      );
+      const { posts, page } = payload;
+      const actualNewPosts = state.posts.concat(posts);
       return {
         ...state,
-        posts: newStatePosts,
+        posts: actualNewPosts,
+        page: page + 1,
       };
     }
     case LIKE_POST: {

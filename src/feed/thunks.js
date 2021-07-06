@@ -13,8 +13,8 @@ import {
 const host = process.env.REACT_APP_API_HOST;
 const base = process.env.REACT_APP_POSTIT_BASE_URL;
 
-const requestGetPosts = (path, dispatch, auth) => {
-  const url = `${host}://${base}/${path}`;
+const requestGetPosts = (path, dispatch, auth, page) => {
+  const url = `${host}://${base}/${path}?page=${page}`;
 
   axios.get(url, {
     headers: {
@@ -24,7 +24,7 @@ const requestGetPosts = (path, dispatch, auth) => {
     .then((result) => {
       const fetchedPosts = result.data.result;
       dispatch(apiSuccess('posts'));
-      dispatch(fetchPosts(fetchedPosts));
+      dispatch(fetchPosts(fetchedPosts, page));
     })
     .catch((err) => {
       if (err.response.status === 401) {
@@ -124,9 +124,9 @@ const requestPostUnlike = (path, dispatch, auth) => {
     });
 };
 
-const fetchPostsRequest = (auth) => async (dispatch) => {
+const fetchPostsRequest = (auth, page) => async (dispatch) => {
   const path = 'post';
-  requestGetPosts(path, dispatch, auth);
+  requestGetPosts(path, dispatch, auth, page);
 };
 
 const likePostRequest = (auth, postID) => async (dispatch) => {

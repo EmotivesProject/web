@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Grid, Message } from 'semantic-ui-react';
+import { Grid, Message, Button } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 import EmojiInput from '../shared/EmojiInput';
 import MapInput from '../shared/MapInput';
 import Post from './Post';
-import { getError, getPosts } from './selector';
+import { getError, getPosts, getPage } from './selector';
 import {
   fetchPostsRequest,
   likePostRequest,
@@ -16,16 +16,19 @@ import {
   unlikePostRequest,
 } from './thunks';
 
+let initialized = false;
+
 const FeedPage = ({
-  auth, posts, loadPosts, likePost, commentPost, createPost, unlikePost, errors,
+  auth, posts, page, loadPosts, likePost, commentPost, createPost, unlikePost, errors,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
   }
 
-  useEffect(() => {
-    loadPosts(auth);
-  }, []);
+  if (!initialized) {
+    loadPosts(auth, page);
+    initialized = true;
+  }
 
   const errorMessage = errors !== null ? (
     <Message negative>
@@ -39,7 +42,7 @@ const FeedPage = ({
   ) : null;
 
   return (
-    <>
+    <div>
       <TopBar />
       <Grid>
         <Grid.Row columns="three">
@@ -56,6 +59,13 @@ const FeedPage = ({
                 commentPost={commentPost}
               />
             ))}
+            <Button
+              id="load-more-posts"
+              onClick={() => loadPosts(auth, page)}
+              positive
+            >
+              Load More!
+            </Button>
           </Grid.Column>
           <Grid.Column>
             <EmojiInput
@@ -79,18 +89,19 @@ const FeedPage = ({
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </>
+    </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
   posts: getPosts(state),
+  page: getPage(state),
   errors: getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadPosts: (auth) => dispatch(fetchPostsRequest(auth)),
+  loadPosts: (auth, page) => dispatch(fetchPostsRequest(auth, page)),
   likePost: (auth, postID) => dispatch(likePostRequest(auth, postID)),
   unlikePost: (auth, postID, likeID) => dispatch(unlikePostRequest(auth, postID, likeID)),
   commentPost: (auth, message, postID) => dispatch(commentPostRequest(auth, message, postID)),
