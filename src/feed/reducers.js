@@ -8,6 +8,7 @@ import {
   UNLIKE_POST,
   API_ERROR,
   API_SUCCESS,
+  FETCH_COMMENTS,
 } from './actions';
 
 const initialState = {
@@ -89,6 +90,27 @@ const postState = (state = initialState, action) => {
       return {
         ...state,
         posts: [...currentPosts],
+      };
+    }
+    case FETCH_COMMENTS: {
+      const { data } = payload;
+      const postID = data.post_id;
+      const currentPosts = state.posts;
+      const fetchedPost = currentPosts.findIndex((post) => post.post.id === postID);
+      const mergedArray = [...currentPosts[fetchedPost].comments, ...data.comments];
+      const set = new Set();
+      const unionArray = mergedArray.filter((item) => {
+        if (!set.has(item.id)) {
+          set.add(item.id);
+          return true;
+        }
+        return false;
+      }, set);
+      currentPosts[fetchedPost].comments = unionArray;
+      return {
+        ...state,
+        posts: [...currentPosts],
+        errors: null,
       };
     }
     case LOADING_POSTS: {

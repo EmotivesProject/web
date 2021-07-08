@@ -56,3 +56,9 @@ export const apiSuccess = (name) => ({
   type: API_SUCCESS,
   payload: { name },
 });
+
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
+export const fetchComments = (data) => ({
+  type: FETCH_COMMENTS,
+  payload: { data },
+});
