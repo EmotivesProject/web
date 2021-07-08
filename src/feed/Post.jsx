@@ -39,8 +39,6 @@ const Post = ({
     );
   }
 
-  console.log(data);
-
   const loadComments = () => {
     loadedMore = true;
     loadMoreComments(auth, data.post.id);
