@@ -5,6 +5,7 @@ import FeedPage from './feed/FeedPage';
 import MessengerPage from './messenger/MessengerPage';
 import LogInPage from './logIn/LogInPage';
 import RegisterPage from './register/RegisterPage';
+import IndividualPostPage from './feed/IndividualPostPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" component={LogInPage} />
         <Route path="/messenger" component={MessengerPage} />
         <Route path="/feed" component={FeedPage} />
+        <Route path="/post/:id" component={IndividualPostPage} />
         <Route component={Error} />
       </Switch>
     </main>
