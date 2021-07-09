@@ -8,6 +8,7 @@ import {
   UNLIKE_POST,
   API_ERROR,
   API_SUCCESS,
+  FETCH_POST,
   FETCH_COMMENTS,
 } from './actions';
 
@@ -47,6 +48,14 @@ const postState = (state = initialState, action) => {
         ...state,
         posts: actualNewPosts,
         page: page + 1,
+      };
+    }
+    case FETCH_POST: {
+      const { post } = payload;
+      return {
+        ...state,
+        posts: [post],
+        page: 0,
       };
     }
     case LIKE_POST: {
