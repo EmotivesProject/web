@@ -108,6 +108,7 @@ const EmojiInput = ({
                 break;
               default:
             }
+            setCurrentInput('');
             setOpen(false);
           }}
           positive
