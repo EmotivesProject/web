@@ -30,8 +30,7 @@ const requestGetPosts = (path, dispatch, auth, page) => {
     })
     .catch((err) => {
       if (err.response.status === 401) {
-        dispatch(removeAuth());
-        dispatch(fetchPosts([]));
+        dispatch(apiError('posts'));
       } else {
         dispatch(apiError('posts'));
       }
