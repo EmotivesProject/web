@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import {
+  useLocation,
+} from 'react-router-dom';
+import {
   Button, Divider, Grid, Header, Segment,
 } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
@@ -22,6 +25,12 @@ import {
   requestPreviousMessages,
   dispatchPersonSwitch,
 } from './thunks';
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+let initialised = false;
 
 const MessengerPage = ({
   auth,
@@ -60,6 +69,15 @@ const MessengerPage = ({
   useEffect(() => {
     scrollToMyRef();
   }, [messages]);
+
+  if (!initialised) {
+    const query = useQuery();
+    const paramTalkingTo = query.get('talking-to');
+    if (paramTalkingTo !== null) {
+      switchPersonTalking(paramTalkingTo, null);
+    }
+    initialised = true;
+  }
 
   const defaultMessage = talkingTo === ''
     ? (
