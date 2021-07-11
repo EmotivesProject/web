@@ -6,6 +6,9 @@ import App from './App';
 import store from './store';
 import 'semantic-ui-css/semantic.min.css';
 import './assets/index.css';
+import interceptor from './utils/interceptors';
+
+interceptor(store);
 
 ReactDOM.render(
   <Provider store={store}>

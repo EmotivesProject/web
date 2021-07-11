@@ -29,11 +29,7 @@ const requestGetPosts = (path, dispatch, auth, page) => {
       dispatch(fetchPosts(fetchedPosts, page));
     })
     .catch((err) => {
-      if (err.response.status === 401) {
-        dispatch(apiError('posts'));
-      } else {
-        dispatch(apiError('posts'));
-      }
+      Promise.reject(err);
     });
 };
 
