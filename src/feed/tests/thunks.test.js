@@ -11,8 +11,8 @@ const fakeAuth = {
   username: 'FakeUser',
 };
 
-process.env.REACT_APP_API_HOST = 'http://';
-process.env.REACT_APP_POSTIT_BASE_URL = 'localhost';
+process.env.REACT_APP_API_HOST = 'http';
+process.env.REACT_APP_POSTIT_BASE_URL = 'postit.localhost';
 
 describe('The Post thunk', () => {
   it('Successful fetch post request dispatches correct actions', async () => {
