@@ -125,7 +125,7 @@ const postState = (state = initialState, action) => {
     case LOADING_POSTS: {
       return {
         ...state,
-        loading: false,
+        loading: true,
       };
     }
     case API_ERROR: {
