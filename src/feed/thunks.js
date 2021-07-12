@@ -18,6 +18,9 @@ const base = process.env.REACT_APP_POSTIT_BASE_URL;
 const requestGetPosts = (path, dispatch, auth, page) => {
   const url = `${host}://${base}/${path}?page=${page}`;
 
+  // eslint-disable-next-line no-console
+  console.log(url);
+
   axios.get(url, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
