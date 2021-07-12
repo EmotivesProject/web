@@ -169,27 +169,27 @@ const requestPostUnlike = (path, dispatch, auth) => {
 
 const fetchPostsRequest = (auth, page) => async (dispatch) => {
   const path = 'post';
-  requestGetPosts(path, dispatch, auth, page);
+  await requestGetPosts(path, dispatch, auth, page);
 };
 
 const fetchIndividualPostRequest = (auth, postID) => async (dispatch) => {
   const path = `post/${postID}`;
-  requestGetPost(path, dispatch, auth);
+  await requestGetPost(path, dispatch, auth);
 };
 
 const fetchPostCommentsRequest = (auth, postID) => async (dispatch) => {
   const path = `post/${postID}/comment`;
-  requestGetComments(path, dispatch, auth);
+  await requestGetComments(path, dispatch, auth);
 };
 
 const likePostRequest = (auth, postID) => async (dispatch) => {
   const path = `post/${postID}/like`;
-  requestPostLike(path, dispatch, auth);
+  await requestPostLike(path, dispatch, auth);
 };
 
 const unlikePostRequest = (auth, postID, likeID) => async (dispatch) => {
   const path = `post/${postID}/like/${likeID}`;
-  requestPostUnlike(path, dispatch, auth);
+  await requestPostUnlike(path, dispatch, auth);
 };
 
 const commentPostRequest = (auth, message, postID) => async (dispatch) => {
@@ -197,7 +197,7 @@ const commentPostRequest = (auth, message, postID) => async (dispatch) => {
   const body = JSON.stringify({
     message,
   });
-  requestPostComment(path, dispatch, auth, body);
+  await requestPostComment(path, dispatch, auth, body);
 };
 
 const postRequest = (
@@ -220,7 +220,7 @@ const postRequest = (
       image_path: imagePath,
     },
   });
-  createNewPostRequest(path, dispatch, auth, body);
+  await createNewPostRequest(path, dispatch, auth, body);
 };
 
 export {
