@@ -81,9 +81,6 @@ describe('The Post thunk', () => {
 
     await fetchPostsRequest(fakeAuth, 1)(fakeDispatch);
 
-    // eslint-disable-next-line no-console
-    console.log('happy now?');
-
     expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedFirstAction);
     expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
 

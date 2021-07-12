@@ -15,13 +15,10 @@ import {
 const host = process.env.REACT_APP_API_HOST;
 const base = process.env.REACT_APP_POSTIT_BASE_URL;
 
-const requestGetPosts = (path, dispatch, auth, page) => {
+async function requestGetPosts(path, dispatch, auth, page) {
   const url = `${host}://${base}/${path}?page=${page}`;
 
-  // eslint-disable-next-line no-console
-  console.log(url);
-
-  axios.get(url, {
+  await axios.get(url, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
@@ -34,12 +31,12 @@ const requestGetPosts = (path, dispatch, auth, page) => {
     .catch((err) => {
       Promise.reject(err);
     });
-};
+}
 
-const requestGetPost = (path, dispatch, auth) => {
+async function requestGetPost(path, dispatch, auth) {
   const url = `${host}://${base}/${path}`;
 
-  axios.get(url, {
+  await axios.get(url, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
@@ -57,12 +54,12 @@ const requestGetPost = (path, dispatch, auth) => {
         dispatch(apiError('post'));
       }
     });
-};
+}
 
-const requestGetComments = (path, dispatch, auth) => {
+async function requestGetComments(path, dispatch, auth) {
   const url = `${host}://${base}/${path}`;
 
-  axios.get(url, {
+  await axios.get(url, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
@@ -80,11 +77,11 @@ const requestGetComments = (path, dispatch, auth) => {
         dispatch(apiError('comments'));
       }
     });
-};
+}
 
-const requestPostLike = (path, dispatch, auth) => {
+async function requestPostLike(path, dispatch, auth) {
   const url = `${host}://${base}/${path}`;
-  axios.post(url, {}, {
+  await axios.post(url, {}, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
@@ -102,11 +99,11 @@ const requestPostLike = (path, dispatch, auth) => {
         dispatch(apiError('like'));
       }
     });
-};
+}
 
-const requestPostComment = (path, dispatch, auth, body) => {
+async function requestPostComment(path, dispatch, auth, body) {
   const url = `${host}://${base}/${path}`;
-  axios.post(url, body, {
+  await axios.post(url, body, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
@@ -124,11 +121,11 @@ const requestPostComment = (path, dispatch, auth, body) => {
         dispatch(apiError('comment'));
       }
     });
-};
+}
 
-const createNewPostRequest = (path, dispatch, auth, body) => {
+async function createNewPostRequest(path, dispatch, auth, body) {
   const url = `${host}://${base}/${path}`;
-  axios.post(url, body, {
+  await axios.post(url, body, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
@@ -146,11 +143,11 @@ const createNewPostRequest = (path, dispatch, auth, body) => {
         dispatch(apiError('post'));
       }
     });
-};
+}
 
-const requestPostUnlike = (path, dispatch, auth) => {
+async function requestPostUnlike(path, dispatch, auth) {
   const url = `${host}://${base}/${path}`;
-  axios.delete(url, {
+  await axios.delete(url, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },
@@ -168,7 +165,7 @@ const requestPostUnlike = (path, dispatch, auth) => {
         dispatch(apiError('like'));
       }
     });
-};
+}
 
 const fetchPostsRequest = (auth, page) => async (dispatch) => {
   const path = 'post';
