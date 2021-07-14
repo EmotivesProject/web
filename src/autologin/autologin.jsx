@@ -34,9 +34,6 @@ const autologin = ({ auth }) => {
         const responseResult = data ? data.result : null;
         const autologinURL = `${responseResult.site}${responseResult.autologin_token}`;
         setCreatedToken(autologinURL);
-      })
-      .catch((err) => {
-        console.log(err);
       });
   };
 
