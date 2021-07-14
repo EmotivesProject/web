@@ -25,7 +25,7 @@ const LogInForm = ({ onCreateAuth }) => {
   if (!initialised) {
     const query = useQuery();
     const token = query.get('token');
-    if (token !== undefined) {
+    if (token !== null) {
       const host = process.env.REACT_APP_API_HOST;
       const base = process.env.REACT_APP_UACL_BASE_URL;
       const url = `${host}://${base}/autologin/${token}`;
