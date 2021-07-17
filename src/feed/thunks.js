@@ -88,8 +88,8 @@ async function requestPostLike(path, dispatch, auth) {
   })
     .then((result) => {
       const likedPost = result.data.result;
-      dispatch(likePost(likedPost));
       dispatch(apiSuccess('like'));
+      dispatch(likePost(likedPost));
     })
     .catch((err) => {
       if (err.response.status === 401) {
@@ -110,8 +110,8 @@ async function requestPostComment(path, dispatch, auth, body) {
   })
     .then((result) => {
       const comment = result.data.result;
-      dispatch(commentPost(comment));
       dispatch(apiSuccess('comment'));
+      dispatch(commentPost(comment));
     })
     .catch((err) => {
       if (err.response.status === 401) {
@@ -154,8 +154,8 @@ async function requestPostUnlike(path, dispatch, auth) {
   })
     .then((result) => {
       const post = result.data.result;
-      dispatch(unlikePost(post));
       dispatch(apiSuccess('like'));
+      dispatch(unlikePost(post));
     })
     .catch((err) => {
       if (err.response.status === 401) {
