@@ -23,7 +23,7 @@ const dispatchPersonSwitch = (newPerson, oldPerson) => async (dispatch) => {
 
 const getUsersRequest = () => async (dispatch) => {
   const usersURL = `${apiHost}://${urlBase}/connections`;
-  axios.get(usersURL)
+  await axios.get(usersURL)
     .then((result) => {
       dispatch(setUsers(result.data.result));
     })
@@ -45,7 +45,7 @@ const receivedNewMessage = (message) => async (dispatch) => {
 const setupClient = (token) => async (dispatch) => {
   const tokenURL = `${apiHost}://${urlBase}/ws_token`;
 
-  axios.get(tokenURL, {
+  await axios.get(tokenURL, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -77,7 +77,7 @@ const sendMessageToSocket = (message, from, to) => async (dispatch) => {
 const requestPreviousMessages = (token, from, to) => async (dispatch) => {
   const messagesURL = `${apiHost}://${urlBase}/messages?from=${from}&to=${to}`;
 
-  axios.get(messagesURL, {
+  await axios.get(messagesURL, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
