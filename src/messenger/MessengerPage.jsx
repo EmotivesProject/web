@@ -5,7 +5,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import {
-  Button, Divider, Grid, Header, Segment,
+  Button, Divider, Grid, Header, Segment, Message,
 } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import EmojiInput from '../shared/EmojiInput';
@@ -17,6 +17,7 @@ import {
   getMessages,
   getActiveUsers,
   getInactiveUsers,
+  getError,
 } from './selector';
 import {
   setupClient,
@@ -43,10 +44,22 @@ const MessengerPage = ({
   getPreviousMessages,
   messages,
   switchPersonTalking,
+  errors,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
   }
+
+  const errorMessage = errors !== null ? (
+    <Message negative>
+      <Message.Header>Error occurred</Message.Header>
+      <p>
+        An error occurred around&nbsp;
+        {errors}
+        &nbsp;try again or refresh
+      </p>
+    </Message>
+  ) : null;
 
   const chatContainer = React.createRef();
 
@@ -163,6 +176,7 @@ const MessengerPage = ({
           </Grid.Column>
           <Grid.Column width={5}>
             <Segment id="messenger-feed">
+              {errorMessage}
               <Grid.Row id="messenger-title">
                 {defaultMessage}
               </Grid.Row>
@@ -192,6 +206,7 @@ const mapStateToProps = (state) => ({
   inactiveUsers: getInactiveUsers(state),
   talkingTo: getTalkingTo(state),
   messages: getMessages(state),
+  errors: getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
