@@ -105,17 +105,20 @@ const postState = (state = initialState, action) => {
       const { data } = payload;
       const postID = data.post_id;
       const currentPosts = state.posts;
-      const fetchedPost = currentPosts.findIndex((post) => post.post.id === postID);
-      const mergedArray = [...currentPosts[fetchedPost].comments, ...data.comments];
-      const set = new Set();
-      const unionArray = mergedArray.filter((item) => {
-        if (!set.has(item.id)) {
-          set.add(item.id);
-          return true;
-        }
-        return false;
-      }, set);
-      currentPosts[fetchedPost].comments = unionArray;
+      const fetchedComments = data.comments;
+      if (fetchedComments !== null) {
+        const fetchedPost = currentPosts.findIndex((post) => post.post.id === postID);
+        const mergedArray = [...currentPosts[fetchedPost].comments, ...fetchedComments];
+        const set = new Set();
+        const unionArray = mergedArray.filter((item) => {
+          if (!set.has(item.id)) {
+            set.add(item.id);
+            return true;
+          }
+          return false;
+        }, set);
+        currentPosts[fetchedPost].comments = unionArray;
+      }
       return {
         ...state,
         posts: [...currentPosts],
