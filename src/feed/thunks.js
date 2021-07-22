@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { removeAuth } from '../auth/actions';
 import {
   commentPost,
   fetchPosts,
@@ -28,8 +27,8 @@ async function requestGetPosts(path, dispatch, auth, page) {
       dispatch(apiSuccess('posts'));
       dispatch(fetchPosts(fetchedPosts, page));
     })
-    .catch((err) => {
-      Promise.reject(err);
+    .catch(() => {
+      dispatch(apiError('post'));
     });
 }
 
@@ -46,13 +45,8 @@ async function requestGetPost(path, dispatch, auth) {
       dispatch(apiSuccess('post'));
       dispatch(fetchPost(fetchedPost));
     })
-    .catch((err) => {
-      if (err.response.status === 401) {
-        dispatch(removeAuth());
-        dispatch(fetchPosts([]));
-      } else {
-        dispatch(apiError('post'));
-      }
+    .catch(() => {
+      dispatch(apiError('post'));
     });
 }
 
@@ -69,13 +63,8 @@ async function requestGetComments(path, dispatch, auth) {
       dispatch(apiSuccess('comments'));
       dispatch(fetchComments(fetchedResult));
     })
-    .catch((err) => {
-      if (err.response.status === 401) {
-        dispatch(removeAuth());
-        dispatch(fetchPosts([]));
-      } else {
-        dispatch(apiError('comments'));
-      }
+    .catch(() => {
+      dispatch(apiError('comments'));
     });
 }
 
@@ -91,13 +80,8 @@ async function requestPostLike(path, dispatch, auth) {
       dispatch(apiSuccess('like'));
       dispatch(likePost(likedPost));
     })
-    .catch((err) => {
-      if (err.response.status === 401) {
-        dispatch(removeAuth());
-        dispatch(fetchPosts([]));
-      } else {
-        dispatch(apiError('like'));
-      }
+    .catch(() => {
+      dispatch(apiError('like'));
     });
 }
 
@@ -113,13 +97,8 @@ async function requestPostComment(path, dispatch, auth, body) {
       dispatch(apiSuccess('comment'));
       dispatch(commentPost(comment));
     })
-    .catch((err) => {
-      if (err.response.status === 401) {
-        dispatch(removeAuth());
-        dispatch(fetchPosts([]));
-      } else {
-        dispatch(apiError('comment'));
-      }
+    .catch(() => {
+      dispatch(apiError('comment'));
     });
 }
 
@@ -135,13 +114,8 @@ async function createNewPostRequest(path, dispatch, auth, body) {
       dispatch(createPost(post));
       dispatch(apiSuccess('post'));
     })
-    .catch((err) => {
-      if (err.response.status === 401) {
-        dispatch(removeAuth());
-        dispatch(fetchPosts([]));
-      } else {
-        dispatch(apiError('post'));
-      }
+    .catch(() => {
+      dispatch(apiError('post'));
     });
 }
 
@@ -157,13 +131,8 @@ async function requestPostUnlike(path, dispatch, auth) {
       dispatch(apiSuccess('like'));
       dispatch(unlikePost(post));
     })
-    .catch((err) => {
-      if (err.response.status === 401) {
-        dispatch(removeAuth());
-        dispatch(fetchPosts([]));
-      } else {
-        dispatch(apiError('like'));
-      }
+    .catch(() => {
+      dispatch(apiError('like'));
     });
 }
 

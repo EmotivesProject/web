@@ -29,9 +29,8 @@ const getUsersRequest = () => async (dispatch) => {
       dispatch(apiSuccess('users'));
       dispatch(setUsers(result.data.result));
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch(apiError('users'));
-      Promise.reject(err);
     });
 };
 
@@ -63,9 +62,8 @@ const setupClient = (token) => async (dispatch) => {
       client.onmessage = (message) => dispatch(receivedNewMessage(message));
       dispatch(getUsersRequest());
     })
-    .catch((err) => {
-      dispatch(apiError('messages'));
-      Promise.reject(err);
+    .catch(() => {
+      dispatch(apiError('message'));
     });
 };
 
@@ -90,9 +88,8 @@ const requestPreviousMessages = (token, from, to) => async (dispatch) => {
       dispatch(apiSuccess('Previous Messages'));
       dispatch(fetchedMessages(result.data.result));
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch(apiError('Previous Messages'));
-      Promise.reject(err);
     });
 };
 
