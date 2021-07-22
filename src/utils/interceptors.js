@@ -12,7 +12,6 @@ const interceptor = (store) => {
     (error) => {
       // Reject promise if usual error
       if (error.response.status !== 401) {
-        console.log('weqweqwe');
         return Promise.reject(error);
       }
 
