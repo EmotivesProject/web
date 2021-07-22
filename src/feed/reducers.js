@@ -105,8 +105,8 @@ const postState = (state = initialState, action) => {
       const { data } = payload;
       const postID = data.post_id;
       const currentPosts = state.posts;
-      const fetchedComments = data.Comments;
-      if (fetchedComments !== undefined) {
+      const fetchedComments = data.comments;
+      if (fetchedComments !== null) {
         const fetchedPost = currentPosts.findIndex((post) => post.post.id === postID);
         const mergedArray = [...currentPosts[fetchedPost].comments, ...fetchedComments];
         const set = new Set();
