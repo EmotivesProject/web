@@ -4,6 +4,7 @@ const getMessages = (state) => state.messengerState.messages;
 const getTalkingTo = (state) => state.messengerState.talkingTo;
 const getClient = (state) => state.messengerState.client;
 const getUsers = (state) => state.messengerState.users;
+export const getError = (state) => state.messengerState.errors;
 
 const getActiveUsers = createSelector(
   getUsers,

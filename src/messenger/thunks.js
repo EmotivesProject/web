@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { w3cwebsocket as W3cwebsocket } from 'websocket';
-import { removeAuth } from '../auth/actions';
 import {
   webSocketOpen,
   setClient,
@@ -11,6 +10,8 @@ import {
   switchPerson,
   fetchedMessages,
   newConnection,
+  apiError,
+  apiSuccess,
 } from './actions';
 
 const apiHost = process.env.REACT_APP_API_HOST;
@@ -25,11 +26,12 @@ const getUsersRequest = () => async (dispatch) => {
   const usersURL = `${apiHost}://${urlBase}/connections`;
   await axios.get(usersURL)
     .then((result) => {
+      dispatch(apiSuccess('users'));
       dispatch(setUsers(result.data.result));
     })
-    .catch(() => {
-      dispatch(removeAuth());
-      dispatch(webSocketClosed());
+    .catch((err) => {
+      dispatch(apiError('users'));
+      Promise.reject(err);
     });
 };
 
@@ -54,14 +56,16 @@ const setupClient = (token) => async (dispatch) => {
       const authToken = result.data.result.token;
       const wsURL = `${wsBase}://${urlBase}/ws?token=${authToken}`;
       const client = new W3cwebsocket(wsURL);
+      dispatch(apiSuccess('messages'));
       dispatch(setClient(client));
       client.onopen = () => dispatch(webSocketOpen());
       client.onclose = () => dispatch(webSocketClosed());
       client.onmessage = (message) => dispatch(receivedNewMessage(message));
       dispatch(getUsersRequest());
     })
-    .catch(() => {
-      dispatch(removeAuth());
+    .catch((err) => {
+      dispatch(apiError('messages'));
+      Promise.reject(err);
     });
 };
 
@@ -83,11 +87,12 @@ const requestPreviousMessages = (token, from, to) => async (dispatch) => {
     },
   })
     .then((result) => {
+      dispatch(apiSuccess('Previous Messages'));
       dispatch(fetchedMessages(result.data.result));
     })
-    .catch(() => {
-      dispatch(removeAuth());
-      dispatch(webSocketClosed());
+    .catch((err) => {
+      dispatch(apiError('Previous Messages'));
+      Promise.reject(err);
     });
 };
 

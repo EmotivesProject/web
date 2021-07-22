@@ -8,6 +8,8 @@ import {
   SET_USERS,
   WEBSOCKET_SEND,
   NEW_CONNECTION,
+  API_ERROR,
+  API_SUCCESS,
 } from './actions';
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
   users: [],
   talkingTo: '',
   client: null,
+  errors: null,
 };
 
 const messengerState = (state = initialState, action) => {
@@ -101,6 +104,19 @@ const messengerState = (state = initialState, action) => {
       return {
         ...state,
         users: [...currentUsers],
+      };
+    }
+    case API_ERROR: {
+      const { name } = payload;
+      return {
+        ...state,
+        errors: name,
+      };
+    }
+    case API_SUCCESS: {
+      return {
+        ...state,
+        errors: null,
       };
     }
     default:

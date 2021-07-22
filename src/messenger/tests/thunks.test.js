@@ -33,6 +33,13 @@ describe('The messenger thunk', () => {
     mock.onGet('http://chatter.localhost/connections').reply(200, fakeResult);
 
     const expectedFirstAction = {
+      type: 'API_SUCCESS',
+      payload: {
+        name: 'users',
+      },
+    };
+
+    const expectedSecondAction = {
       type: 'SET_USERS',
       payload: {
         users: [{
@@ -49,6 +56,7 @@ describe('The messenger thunk', () => {
     await getUsersRequest()(fakeDispatch);
 
     expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedFirstAction);
+    expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
 
     mock.reset();
   });
@@ -80,6 +88,13 @@ describe('The messenger thunk', () => {
     mock.onGet('http://chatter.localhost/messages?from=imtom&to=second').reply(200, fakeResult);
 
     const expectedFirstAction = {
+      type: 'API_SUCCESS',
+      payload: {
+        name: 'Previous Messages',
+      },
+    };
+
+    const expectedSecondAction = {
       type: 'FETCHED_MESSAGES',
       payload: {
         messages: [
@@ -104,6 +119,7 @@ describe('The messenger thunk', () => {
     await requestPreviousMessages('something', 'imtom', 'second')(fakeDispatch);
 
     expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedFirstAction);
+    expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
 
     mock.reset();
   });
