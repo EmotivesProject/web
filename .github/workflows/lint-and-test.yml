@@ -2,7 +2,8 @@ on: [push]
 name: Lint and Test
 jobs:
   full-run:
-    runs-on: self-hosted
+    # runs-on: self-hosted (Temp to run on github server while my server is down)
+    runs on: ubuntu-latest
     strategy:
       matrix:
         node-version: [13.x]
