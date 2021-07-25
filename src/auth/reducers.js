@@ -6,9 +6,9 @@ import {
 } from './actions';
 
 function setAuthToken(username, token, refreshToken) {
-  Cookies.set('username', username, { SameSite: 'Lax', Secure: true });
-  Cookies.set('token', token, { SameSite: 'Lax', Secure: true });
-  Cookies.set('refresh_token', refreshToken, { SameSite: 'Lax', Secure: true });
+  Cookies.set('username', username, { SameSite: 'Lax', Secure: true, expires: 7 });
+  Cookies.set('token', token, { SameSite: 'Lax', Secure: true, expires: 7 });
+  Cookies.set('refresh_token', refreshToken, { SameSite: 'Lax', Secure: true, expires: 7 });
 }
 
 function removeAuthToken() {
