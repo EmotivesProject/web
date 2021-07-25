@@ -150,6 +150,7 @@ body {
   height: 84%;
   overflow: auto;
   display: inline-block;
+  width: 100%;
 }
 
 #messenger-new-message {
