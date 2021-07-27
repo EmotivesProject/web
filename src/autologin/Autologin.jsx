@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 
-const autologin = ({ auth }) => {
+const Autologin = ({ auth }) => {
   if (auth === null) {
     return <Redirect to="/" />;
   }
@@ -90,4 +90,4 @@ const mapStateToProps = (state) => ({
   auth: getAuth(state),
 });
 
-export default connect(mapStateToProps, null)(autologin);
+export default connect(mapStateToProps, null)(Autologin);

@@ -6,7 +6,8 @@ import MessengerPage from './messenger/MessengerPage';
 import LogInPage from './logIn/LogInPage';
 import RegisterPage from './register/RegisterPage';
 import IndividualPostPage from './feed/IndividualPostPage';
-import autologin from './autologin/autologin';
+import Autologin from './autologin/Autologin';
+import NotificationPage from './notifications/NotificationPage';
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
         <Route path="/login" component={LogInPage} />
         <Route path="/messenger" component={MessengerPage} />
         <Route path="/feed" component={FeedPage} />
+        <Route path="/notifications" component={NotificationPage} />
         <Route path="/post/:id" component={IndividualPostPage} />
-        <Route path="/createautologin/" component={autologin} />
+        <Route path="/createautologin/" component={Autologin} />
         <Route component={Error} />
       </Switch>
     </main>
