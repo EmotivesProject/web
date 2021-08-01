@@ -12,7 +12,6 @@ const apiHost = process.env.REACT_APP_API_HOST;
 const urlBase = process.env.REACT_APP_NOTIF_BASE_URL;
 
 const getNotificationsRequest = (auth, page) => async (dispatch) => {
-  console.log(page);
   dispatch(setLoading(true));
   const usersURL = `${apiHost}://${urlBase}/notification?page=${page}`;
   await axios.get(usersURL, {
