@@ -35,7 +35,7 @@ const notificationState = (state = initialState, action) => {
     }
     case SEEN_NOTIFICATION: {
       const { id } = payload;
-      const currentNotifs = notificationState.notifications;
+      const currentNotifs = state.notifications;
       currentNotifs.filter((x) => x.id !== id);
       return {
         ...state,
