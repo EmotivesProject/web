@@ -26,6 +26,7 @@ const getNotificationsRequest = (auth, page) => async (dispatch) => {
     .catch(() => {
       dispatch(apiError('notifications'));
     });
+  dispatch(setLoading(false));
 };
 
 const seenNotificationsRequest = (auth, id) => async (dispatch) => {
