@@ -7,7 +7,7 @@ import {
 
 const TopBar = () => (
   <Segment fixed="top" id="top-bar">
-    <Grid columns={4}>
+    <Grid columns={5}>
       <Grid.Column>
         <Link to="/feed">
           Emotives
@@ -16,6 +16,11 @@ const TopBar = () => (
       <Grid.Column>
         <Link to="/feed">
           Home
+        </Link>
+      </Grid.Column>
+      <Grid.Column>
+        <Link to="/explore">
+          Explore
         </Link>
       </Grid.Column>
       <Grid.Column>
