@@ -23,6 +23,7 @@ const NotificationPage = ({
   if (auth === null) {
     return <Redirect to="/" />;
   }
+  console.log(notifications);
 
   if (!initialized) {
     loadNotifications(auth, page);

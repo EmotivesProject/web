@@ -2,11 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import GoogleMapReact from 'google-map-react';
+import { Button } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import { getError, getPosts, getPage } from '../feed/selector';
 import TopBar from '../shared/TopBar';
 import {
+  commentPostRequest,
+  fetchIndividualPostRequest,
   fetchPostsRequest,
+  likePostRequest,
+  postRequest,
+  unlikePostRequest,
 } from '../feed/thunks';
 import Marker from './Marker';
 
@@ -24,33 +30,64 @@ const ExplorePage = ({
   posts,
   loadPosts,
   page,
+  fetchPost,
+  likePost,
+  unlikePost,
+  commentPost,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
   }
+
+  const [explore, setExplore] = React.useState(true);
 
   if (!initialized) {
     loadPosts(auth, page);
     initialized = true;
   }
 
+  let markers = null;
+
+  const toggleExplore = () => {
+    setExplore(!explore);
+  };
+
+  if (explore) {
+    markers = posts.map((post) => (
+      <Marker
+        key={post.post.id}
+        data={post}
+        lat={post.post.content.latitude}
+        lng={post.post.content.longitude}
+        fetchPost={fetchPost}
+        auth={auth}
+        likePost={likePost}
+        unlikePost={unlikePost}
+        commentPost={commentPost}
+      />
+    ));
+  }
+
+  const mapClicked = (e) => {
+    console.log(e);
+  };
+
   return (
     <>
       <TopBar key={Math.random().toString(36).substr(2, 9)} />
+      <Button
+        onClick={toggleExplore}
+      >
+        Toggle Explore
+      </Button>
       <div style={{ height: '90vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
           defaultCenter={initialCentre}
           defaultZoom={defaultZoom}
+          onClick={(e) => mapClicked(e)}
         >
-          {posts.map((post) => (
-            <Marker
-              key={post.post.id}
-              data={post}
-              lat={post.post.content.latitude}
-              lng={post.post.content.longitude}
-            />
-          ))}
+          {markers}
         </GoogleMapReact>
       </div>
     </>
@@ -66,6 +103,19 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loadPosts: (auth, page) => dispatch(fetchPostsRequest(auth, page)),
+  fetchPost: (auth, postID) => dispatch(fetchIndividualPostRequest(auth, postID)),
+  likePost: (auth, postID) => dispatch(likePostRequest(auth, postID)),
+  unlikePost: (auth, postID, likeID) => dispatch(unlikePostRequest(auth, postID, likeID)),
+  commentPost: (auth, message, postID) => dispatch(commentPostRequest(auth, message, postID)),
+  createPost: (
+    auth,
+    type,
+    message,
+    latitude,
+    longitude,
+    zoom,
+    imagePath,
+  ) => dispatch(postRequest(auth, type, message, latitude, longitude, zoom, imagePath)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExplorePage);
