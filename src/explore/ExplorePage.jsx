@@ -34,10 +34,6 @@ const ExplorePage = ({
     initialized = true;
   }
 
-  const onChildClickCallback = (key) => {
-    console.log(key);
-  };
-
   return (
     <>
       <TopBar key={Math.random().toString(36).substr(2, 9)} />
@@ -46,7 +42,6 @@ const ExplorePage = ({
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
           defaultCenter={initialCentre}
           defaultZoom={defaultZoom}
-          onChildClick={onChildClickCallback}
         >
           {posts.map((post) => (
             <Marker
