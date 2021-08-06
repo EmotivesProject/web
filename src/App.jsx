@@ -8,6 +8,7 @@ import RegisterPage from './register/RegisterPage';
 import IndividualPostPage from './feed/IndividualPostPage';
 import Autologin from './autologin/Autologin';
 import NotificationPage from './notifications/NotificationPage';
+import ExplorePage from './explore/ExplorePage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/notifications" component={NotificationPage} />
         <Route path="/post/:id" component={IndividualPostPage} />
         <Route path="/createautologin/" component={Autologin} />
+        <Route path="/explore" component={ExplorePage} />
         <Route component={Error} />
       </Switch>
     </main>

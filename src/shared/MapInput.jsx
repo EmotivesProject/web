@@ -71,7 +71,7 @@ const MapInput = ({
                 action(
                   auth,
                   'map',
-                  'map post',
+                  '⚽',
                   currentPosition.lat,
                   currentPosition.lng,
                   currentZoom,
