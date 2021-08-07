@@ -25,8 +25,12 @@ const notificationState = (state = initialState, action) => {
     }
     case NOTIFICATIONS_LOADED: {
       const { notifications, page } = payload;
-      const notifs = state.notifications.concat(notifications);
-      const newPage = page + 1;
+      let notifs = [];
+      let newPage = 0;
+      if (notifications != null) {
+        notifs = state.notifications.concat(notifications);
+        newPage = page + 1;
+      }
       return {
         ...state,
         notifications: notifs,

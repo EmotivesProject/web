@@ -79,7 +79,17 @@ body {
   font-size: 1.25em;
 }
 
+#like-button-marker {
+  background-color: darkgray;
+  color: #E8E8E8;
+  display: inline;
+}
+
 #like-button:hover {
+  background-color: gray;
+}
+
+#like-button-marker:hover {
   background-color: gray;
 }
 
@@ -90,8 +100,22 @@ body {
   font-size: 1.25em;
 }
 
+#unlike-button-marker {
+  background-color: red;
+  color: #E8E8E8;
+  display: inline;
+}
+
 #unlike-button:hover {
   background-color: darkred;
+}
+
+#unlike-button-marker:hover {
+  background-color: darkred;
+}
+
+#marker-like-container {
+  float: right;
 }
 
 #emoji-comment-input-button {
