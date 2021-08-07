@@ -15,6 +15,7 @@ import {
   unlikePostRequest,
 } from '../feed/thunks';
 import Marker from './Marker';
+import TempMarker from './TempMarker';
 
 let initialized = false;
 
@@ -34,12 +35,14 @@ const ExplorePage = ({
   likePost,
   unlikePost,
   commentPost,
+  createPost,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
   }
 
   const [explore, setExplore] = React.useState(true);
+  const [newPost, setNewPost] = React.useState(null);
 
   if (!initialized) {
     loadPosts(auth, page);
@@ -50,6 +53,7 @@ const ExplorePage = ({
 
   const toggleExplore = () => {
     setExplore(!explore);
+    setNewPost(null);
   };
 
   if (explore) {
@@ -66,10 +70,24 @@ const ExplorePage = ({
         commentPost={commentPost}
       />
     ));
+  } else if (newPost != null) {
+    markers = (
+      <TempMarker
+        key="newPostData"
+        lat={newPost.lat}
+        lng={newPost.lng}
+        createPost={createPost}
+        info={newPost}
+        auth={auth}
+        setExplore={setExplore}
+      />
+    );
   }
 
   const mapClicked = (e) => {
-    console.log(e);
+    if (!explore) {
+      setNewPost(e);
+    }
   };
 
   return (
