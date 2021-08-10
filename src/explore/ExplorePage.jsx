@@ -59,14 +59,14 @@ const ExplorePage = ({
 
     const query = useQuery();
     queryID = parseInt(query.get('id'), 10);
-    const queryLat = query.get('lat');
-    const queryLng = query.get('lng');
+    const queryLat = parseInt(query.get('lat'), 10);
+    const queryLng = parseInt(query.get('lng'), 10);
 
-    if (queryID !== null && queryLat !== null && queryLng !== null) {
+    if (!Number.isNaN(queryID) && !Number.isNaN(queryLat) && !Number.isNaN(queryLng)) {
       fetchPost(auth, queryID);
       initialCentre = {
-        lat: parseInt(queryLat, 10),
-        lng: parseInt(queryLng, 10),
+        lat: queryLat,
+        lng: queryLng,
       };
       defaultZoom = 19;
     }
