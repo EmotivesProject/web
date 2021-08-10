@@ -27,7 +27,7 @@ let initialCentre = {
   lng: 153.03,
 };
 
-let defaultZoom = 15;
+const defaultZoom = 15;
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -59,8 +59,8 @@ const ExplorePage = ({
 
     const query = useQuery();
     queryID = parseInt(query.get('id'), 10);
-    const queryLat = parseInt(query.get('lat'), 10);
-    const queryLng = parseInt(query.get('lng'), 10);
+    const queryLat = parseFloat(query.get('lat'));
+    const queryLng = parseFloat(query.get('lng'));
 
     if (!Number.isNaN(queryID) && !Number.isNaN(queryLat) && !Number.isNaN(queryLng)) {
       fetchPost(auth, queryID);
@@ -68,7 +68,6 @@ const ExplorePage = ({
         lat: queryLat,
         lng: queryLng,
       };
-      defaultZoom = 19;
     }
   }
 

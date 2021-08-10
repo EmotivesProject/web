@@ -5,7 +5,6 @@ import { Grid, Message, Button } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 import EmojiInput from '../shared/EmojiInput';
-import MapInput from '../shared/MapInput';
 import Post from './Post';
 import { getError, getPosts, getPage } from './selector';
 import {
@@ -78,14 +77,6 @@ const FeedPage = ({
               iconName="smile"
             />
             <br />
-            <MapInput
-              buttonText="Map Post"
-              header="Create a Map Post"
-              type="map"
-              action={createPost}
-              auth={auth}
-              subComponentID="emoji-map-input"
-            />
           </Grid.Column>
         </Grid.Row>
       </Grid>
