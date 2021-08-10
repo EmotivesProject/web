@@ -25,6 +25,7 @@ const currentState = {
     seen: false,
   }],
   page: 0,
+  finished: false,
   loading: false,
   errors: null,
 };
@@ -64,6 +65,7 @@ describe('The notification reducer can interact with notification state', () => 
         seen: false,
       }],
       page: 0,
+      finished: false,
       loading: true,
       errors: null,
     };
@@ -107,6 +109,7 @@ describe('The notification reducer can interact with notification state', () => 
         seen: false,
       }],
       page: 0,
+      finished: false,
       loading: false,
       errors: 'notification',
     };
@@ -141,6 +144,7 @@ describe('The notification reducer can interact with notification state', () => 
         seen: false,
       }],
       page: 0,
+      finished: false,
       loading: false,
       errors: null,
     };
@@ -200,6 +204,7 @@ describe('The notification reducer can interact with notification state', () => 
         seen: false,
       }],
       page: 1,
+      finished: false,
       loading: false,
       errors: null,
     };
