@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import {
+  useLocation,
+} from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
 import { Button } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
@@ -19,12 +22,18 @@ import TempMarker from './TempMarker';
 
 let initialized = false;
 
-const initialCentre = {
+let initialCentre = {
   lat: -27.47,
   lng: 153.03,
 };
 
-const defaultZoom = 15;
+let defaultZoom = 15;
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+let queryID = -1;
 
 const ExplorePage = ({
   auth,
@@ -47,6 +56,20 @@ const ExplorePage = ({
   if (!initialized) {
     loadPosts(auth, page);
     initialized = true;
+
+    const query = useQuery();
+    queryID = parseInt(query.get('id'), 10);
+    const queryLat = query.get('lat');
+    const queryLng = query.get('lng');
+
+    if (queryID !== null && queryLat !== null && queryLng !== null) {
+      fetchPost(auth, queryID);
+      initialCentre = {
+        lat: parseInt(queryLat, 10),
+        lng: parseInt(queryLng, 10),
+      };
+      defaultZoom = 19;
+    }
   }
 
   let markers = null;
