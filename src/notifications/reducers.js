@@ -9,6 +9,7 @@ import {
 const initialState = {
   notifications: [],
   page: 0,
+  finished: false,
   loading: false,
   errors: null,
 };
@@ -27,14 +28,18 @@ const notificationState = (state = initialState, action) => {
       const { notifications, page } = payload;
       let notifs = [];
       let newPage = 0;
+      let finished = false;
       if (notifications != null) {
         notifs = state.notifications.concat(notifications);
         newPage = page + 1;
+      } else {
+        finished = true;
       }
       return {
         ...state,
         notifications: notifs,
         page: newPage,
+        finished,
       };
     }
     case SEEN_NOTIFICATION: {

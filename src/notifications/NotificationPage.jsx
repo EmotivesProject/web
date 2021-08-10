@@ -5,7 +5,7 @@ import { Button, Grid, Message } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 import {
-  getError, getLoading, getNotifications, getPage,
+  getError, getFinished, getLoading, getNotifications, getPage,
 } from './selector';
 import { getNotificationsRequest, seenNotificationsRequest } from './thunks';
 import Notification from './Notification';
@@ -16,6 +16,7 @@ const NotificationPage = ({
   auth,
   notifications,
   error,
+  finished,
   loadNotifications,
   seenNotification,
   page,
@@ -44,6 +45,16 @@ const NotificationPage = ({
     </Message>
   ) : null;
 
+  const button = !finished ? (
+    <Button
+      id="load-more-posts"
+      onClick={loadMoreNotifications}
+      positive
+    >
+      Load More
+    </Button>
+  ) : null;
+
   return (
     <div>
       <TopBar />
@@ -60,13 +71,7 @@ const NotificationPage = ({
                 action={seenNotification}
               />
             ))}
-            <Button
-              id="load-more-posts"
-              onClick={loadMoreNotifications}
-              positive
-            >
-              Load More
-            </Button>
+            {button}
           </Grid.Column>
           <Grid.Column />
         </Grid.Row>
@@ -78,6 +83,7 @@ const NotificationPage = ({
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
   notifications: getNotifications(state),
+  finished: getFinished(state),
   page: getPage(state),
   loading: getLoading(state),
   error: getError(state),
