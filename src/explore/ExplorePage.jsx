@@ -27,7 +27,7 @@ let initialCentre = {
   lng: 153.03,
 };
 
-let defaultZoom = 15;
+const defaultZoom = 15;
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -59,16 +59,15 @@ const ExplorePage = ({
 
     const query = useQuery();
     queryID = parseInt(query.get('id'), 10);
-    const queryLat = query.get('lat');
-    const queryLng = query.get('lng');
+    const queryLat = parseFloat(query.get('lat'));
+    const queryLng = parseFloat(query.get('lng'));
 
-    if (queryID !== null && queryLat !== null && queryLng !== null) {
+    if (!Number.isNaN(queryID) && !Number.isNaN(queryLat) && !Number.isNaN(queryLng)) {
       fetchPost(auth, queryID);
       initialCentre = {
-        lat: parseInt(queryLat, 10),
-        lng: parseInt(queryLng, 10),
+        lat: queryLat,
+        lng: queryLng,
       };
-      defaultZoom = 19;
     }
   }
 

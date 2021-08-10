@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -23,6 +24,7 @@ const Post = ({
   auth, data, likePost, unlikePost, commentPost, loadMoreComments,
 }) => {
   let mainInformation = <>Default message</>;
+  let visitButton = null;
   const { content } = data.post;
   if (data.post.content.type === 'emoji') {
     mainInformation = content.message;
@@ -36,6 +38,17 @@ const Post = ({
         loading="lazy"
         src={imageSrc}
       />
+    );
+    const visitLink = `/explore?id=${data.post.id}&lat=${content.latitude}&lng=${content.longitude}`;
+    visitButton = (
+      <Link to={visitLink}>
+        <Button
+          id="marker-like-container"
+          positive
+        >
+          Visit
+        </Button>
+      </Link>
     );
   }
 
@@ -75,6 +88,7 @@ const Post = ({
       <Container>
         <Header as="h2" dividing>
           {data.post.username}
+          {visitButton}
           <Header.Subheader id="post-subheader">
             <Icon name="like" />
             {data.likes ? data.likes.length : 0}
