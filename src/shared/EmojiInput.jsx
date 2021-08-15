@@ -16,6 +16,11 @@ const EmojiInput = ({
   to,
   subComponentID,
   iconName,
+  title,
+  info,
+  openState,
+  setTitle,
+  setExplore,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
@@ -105,6 +110,12 @@ const EmojiInput = ({
                 break;
               case 'message':
                 action(currentInput, from, to);
+                break;
+              case 'map':
+                action(auth, 'map', currentInput, info.lat, info.lng, title);
+                openState(false);
+                setTitle('');
+                setExplore(true);
                 break;
               default:
             }

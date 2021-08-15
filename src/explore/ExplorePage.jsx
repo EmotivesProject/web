@@ -150,12 +150,11 @@ const mapDispatchToProps = (dispatch) => ({
   createPost: (
     auth,
     type,
-    message,
+    reaction,
     latitude,
     longitude,
-    zoom,
-    imagePath,
-  ) => dispatch(postRequest(auth, type, message, latitude, longitude, zoom, imagePath)),
+    title,
+  ) => dispatch(postRequest(auth, type, reaction, latitude, longitude, title)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExplorePage);

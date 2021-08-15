@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Button,
-  Form,
   Grid,
+  Input,
   Modal,
 } from 'semantic-ui-react';
+import EmojiInput from '../shared/EmojiInput';
 
 const markerStyle = {
   height: 10,
@@ -24,22 +24,6 @@ const TempMarker = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createPost(
-      auth,
-      'map',
-      currentInput,
-      info.lat,
-      info.lng,
-      18,
-      null,
-    );
-    setCurrentInput('');
-    setOpen(false);
-    setExplore(true);
-  };
 
   const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${info.lat},${info.lng}&zoom=18`;
   const mainInformation = (
@@ -70,20 +54,41 @@ const TempMarker = ({
               {mainInformation}
             </Grid.Column>
             <Grid.Column>
-              <Form onSubmit={handleSubmit}>
-                <Form.Input
+              <label htmlFor="new-map-explore-post">
+                What is it?
+                <br />
+                <Input
                   id="new-map-explore-post"
                   name="ExplorePost"
                   type="input"
                   size="large"
-                  placeholder="New Post"
+                  placeholder="Place"
                   required
                   value={currentInput}
                   onChange={(e) => setCurrentInput(e.target.value)}
                   max="1"
                 />
-                <Button id="typical-button">Initial Reaction</Button>
-              </Form>
+              </label>
+              <br />
+              <br />
+              <label htmlFor="typical-button">
+                What is your reaction?
+                <br />
+                <EmojiInput
+                  key="brand-new-temp-marker-create"
+                  header="Initial Reaction?"
+                  type="map"
+                  action={createPost}
+                  auth={auth}
+                  subComponentID="emoji-comment-input"
+                  iconName="comment"
+                  title={currentInput}
+                  info={info}
+                  openState={setOpen}
+                  setTitle={setCurrentInput}
+                  setExplore={setExplore}
+                />
+              </label>
             </Grid.Column>
           </Grid>
         </Modal.Content>

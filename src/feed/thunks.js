@@ -172,21 +172,19 @@ const commentPostRequest = (auth, message, postID) => async (dispatch) => {
 const postRequest = (
   auth,
   type,
-  message,
-  latitude = null,
-  longitude = null,
-  zoom = null,
-  imagePath = null,
+  reaction,
+  latitude,
+  longitude,
+  title,
 ) => async (dispatch) => {
   const path = 'post';
   const body = JSON.stringify({
     content: {
       type,
-      message,
+      reaction,
       latitude,
       longitude,
-      zoom,
-      image_path: imagePath,
+      title,
     },
   });
   await createNewPostRequest(path, dispatch, auth, body);

@@ -4,7 +4,6 @@ import { Redirect } from 'react-router';
 import { Grid, Message, Button } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
-import EmojiInput from '../shared/EmojiInput';
 import Post from './Post';
 import {
   getError,
@@ -16,14 +15,13 @@ import {
   fetchPostsRequest,
   likePostRequest,
   commentPostRequest,
-  postRequest,
   unlikePostRequest,
 } from './thunks';
 
 let initialized = false;
 
 const FeedPage = ({
-  auth, posts, page, loadPosts, likePost, commentPost, createPost, unlikePost, errors, finished,
+  auth, posts, page, loadPosts, likePost, commentPost, unlikePost, errors, finished,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
@@ -75,18 +73,7 @@ const FeedPage = ({
             ))}
             {loadMoreButton}
           </Grid.Column>
-          <Grid.Column>
-            <EmojiInput
-              buttonText="Emoji Post"
-              header="Create a post"
-              type="post"
-              action={createPost}
-              auth={auth}
-              subComponentID="emoji-post-input"
-              iconName="smile"
-            />
-            <br />
-          </Grid.Column>
+          <Grid.Column />
         </Grid.Row>
       </Grid>
     </div>
@@ -106,15 +93,6 @@ const mapDispatchToProps = (dispatch) => ({
   likePost: (auth, postID) => dispatch(likePostRequest(auth, postID)),
   unlikePost: (auth, postID, likeID) => dispatch(unlikePostRequest(auth, postID, likeID)),
   commentPost: (auth, message, postID) => dispatch(commentPostRequest(auth, message, postID)),
-  createPost: (
-    auth,
-    type,
-    message,
-    latitude,
-    longitude,
-    zoom,
-    imagePath,
-  ) => dispatch(postRequest(auth, type, message, latitude, longitude, zoom, imagePath)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedPage);
