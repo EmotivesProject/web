@@ -1,10 +1,13 @@
 import React from 'react';
 import {
   Button,
+  Divider,
   Grid,
+  Header,
   Icon,
   Modal,
 } from 'semantic-ui-react';
+import PostEmojis from '../feed/PostEmojis';
 import EmojiInput from '../shared/EmojiInput';
 import getTimeAgoFromObject from '../utils/date';
 
@@ -63,17 +66,26 @@ const Marker = ({
     );
   }
 
-  let emojiString = '';
-  if (data.comments !== null) {
-    for (let i = 0; i < data.comments.length; i += 1) {
-      emojiString += data.comments[i].message;
-    }
-  }
-
   const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : null;
-  const reactionString = data.post.content.reaction ? `${data.post.content.reaction}` : null;
+  const reactionString = data.post.content.reaction ? ` - ${data.post.content.reaction}` : null;
 
   const title = `${data.post.username} ${visitedString} ${reactionString} ${time}`;
+
+  const topReactions = data.emoji_count.length !== 0 ? (
+    <div>
+      <Divider />
+      <Header as="h2">Top Reactions</Header>
+      <PostEmojis key={data.post.id} data={data.emoji_count} />
+    </div>
+  ) : null;
+
+  const yourReactions = data.self_emoji_count.length !== 0 ? (
+    <div>
+      <Divider />
+      <Header as="h2">Your Reactions</Header>
+      <PostEmojis key={data.post.id} data={data.self_emoji_count} />
+    </div>
+  ) : null;
 
   return (
     <div style={markerStyle}>
@@ -99,7 +111,7 @@ const Marker = ({
             </Grid.Column>
             <Grid.Column>
               <Grid.Row>
-                <Grid columns={2}>
+                <Grid columns={2} textAlign="center">
                   <Grid.Column>
                     {button}
                   </Grid.Column>
@@ -116,8 +128,10 @@ const Marker = ({
                   </Grid.Column>
                 </Grid>
               </Grid.Row>
+              <br />
               <Grid.Row>
-                {emojiString}
+                {topReactions}
+                {yourReactions}
               </Grid.Row>
             </Grid.Column>
           </Grid>

@@ -112,8 +112,6 @@ const ExplorePage = ({
     }
   };
 
-  console.log(posts);
-
   return (
     <>
       <TopBar key={Math.random().toString(36).substr(2, 9)} />

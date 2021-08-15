@@ -68,6 +68,22 @@ const Post = ({
   const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : null;
   const reactionString = data.post.content.reaction ? `${data.post.content.reaction}` : null;
 
+  const topReactions = data.emoji_count.length !== 0 ? (
+    <div>
+      <Divider />
+      <Header as="h2">Top Reactions</Header>
+      <PostEmojis key={data.post.id} data={data.emoji_count} />
+    </div>
+  ) : null;
+
+  const yourReactions = data.self_emoji_count.length !== 0 ? (
+    <div>
+      <Divider />
+      <Header as="h2">Your Reactions</Header>
+      <PostEmojis key={data.post.id} data={data.self_emoji_count} />
+    </div>
+  ) : null;
+
   return (
     <Segment id="main-post-segment">
       <Container>
@@ -109,9 +125,8 @@ const Post = ({
           </Grid.Column>
         </Grid>
       </Container>
-      <Divider />
-      <Header as="h2">Top Reactions</Header>
-      <PostEmojis key={data.post.id} data={data.emoji_count} />
+      {topReactions}
+      {yourReactions}
     </Segment>
   );
 };

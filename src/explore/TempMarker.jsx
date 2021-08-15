@@ -59,7 +59,7 @@ const TempMarker = ({
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
-        trigger={<button type="button" id="invis-button">NewPost</button>}
+        trigger={<button type="button" id="invis-button">🚩</button>}
       >
         <Modal.Header>
           Create new post
@@ -82,7 +82,7 @@ const TempMarker = ({
                   onChange={(e) => setCurrentInput(e.target.value)}
                   max="1"
                 />
-                <Button id="typical-button">Comment</Button>
+                <Button id="typical-button">Initial Reaction</Button>
               </Form>
             </Grid.Column>
           </Grid>
