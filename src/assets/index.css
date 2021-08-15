@@ -130,12 +130,11 @@ body {
 }
 
 #comment {
-  font-size: large;
+  font-size: xx-large;
 }
 
 #main-post {
   font-size: xx-large;
-  margin: 1.5em;
 }
 
 #user-messenger {

@@ -6,7 +6,12 @@ import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 import EmojiInput from '../shared/EmojiInput';
 import Post from './Post';
-import { getError, getPosts, getPage } from './selector';
+import {
+  getError,
+  getPosts,
+  getPage,
+  getFinished,
+} from './selector';
 import {
   fetchPostsRequest,
   likePostRequest,
@@ -18,7 +23,7 @@ import {
 let initialized = false;
 
 const FeedPage = ({
-  auth, posts, page, loadPosts, likePost, commentPost, createPost, unlikePost, errors,
+  auth, posts, page, loadPosts, likePost, commentPost, createPost, unlikePost, errors, finished,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
@@ -40,6 +45,16 @@ const FeedPage = ({
     </Message>
   ) : null;
 
+  const loadMoreButton = !finished ? (
+    <Button
+      id="load-more-posts"
+      onClick={() => loadPosts(auth, page)}
+      positive
+    >
+      Load More!
+    </Button>
+  ) : null;
+
   return (
     <div>
       <TopBar />
@@ -58,13 +73,7 @@ const FeedPage = ({
                 commentPost={commentPost}
               />
             ))}
-            <Button
-              id="load-more-posts"
-              onClick={() => loadPosts(auth, page)}
-              positive
-            >
-              Load More!
-            </Button>
+            {loadMoreButton}
           </Grid.Column>
           <Grid.Column>
             <EmojiInput
@@ -88,6 +97,7 @@ const mapStateToProps = (state) => ({
   auth: getAuth(state),
   posts: getPosts(state),
   page: getPage(state),
+  finished: getFinished(state),
   errors: getError(state),
 });
 

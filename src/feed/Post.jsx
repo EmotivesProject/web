@@ -12,16 +12,14 @@ import {
 } from 'semantic-ui-react';
 import EmojiInput from '../shared/EmojiInput';
 import getTimeAgoFromObject from '../utils/date';
-import PostComment from './PostComment';
+import PostEmojis from './PostEmojis';
 import { getPosts } from './selector';
 import {
   fetchPostCommentsRequest,
 } from './thunks';
 
-let loadedMore = false;
-
 const Post = ({
-  auth, data, likePost, unlikePost, commentPost, loadMoreComments,
+  auth, data, likePost, unlikePost, commentPost,
 }) => {
   let mainInformation = <>Default message</>;
   let visitButton = null;
@@ -29,7 +27,7 @@ const Post = ({
   if (data.post.content.type === 'emoji') {
     mainInformation = content.message;
   } else {
-    const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${content.latitude},${content.longitude}&zoom=${content.zoom}&maptype=satellite`;
+    const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${content.latitude},${content.longitude}&zoom=15&maptype=satellite`;
     mainInformation = (
       <iframe
         title={data.post.id}
@@ -52,22 +50,6 @@ const Post = ({
     );
   }
 
-  const loadComments = () => {
-    loadedMore = true;
-    loadMoreComments(auth, data.post.id);
-  };
-
-  const LoadMoreButton = loadedMore ? null
-    : (
-      <Button
-        id="load-more-posts"
-        onClick={() => loadComments()}
-        positive
-      >
-        Load More
-      </Button>
-    );
-
   let button = <Button onClick={() => likePost(auth, data.post.id)} icon id="like-button"><Icon name="like" /></Button>;
   const likeArray = data.likes ? data.likes : [];
   const likeIndex = likeArray.findIndex((like) => like.username === auth.username);
@@ -83,11 +65,34 @@ const Post = ({
     );
   }
 
+  const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : null;
+  const reactionString = data.post.content.reaction ? `${data.post.content.reaction}` : null;
+
+  const topReactions = data.emoji_count.length !== 0 ? (
+    <div>
+      <Divider />
+      <Header as="h2">Top Reactions</Header>
+      <PostEmojis key={data.post.id} data={data.emoji_count} />
+    </div>
+  ) : null;
+
+  const yourReactions = data.self_emoji_count.length !== 0 ? (
+    <div>
+      <Divider />
+      <Header as="h2">Your Reactions</Header>
+      <PostEmojis key={data.post.id} data={data.self_emoji_count} />
+    </div>
+  ) : null;
+
   return (
     <Segment id="main-post-segment">
       <Container>
         <Header as="h2" dividing>
           {data.post.username}
+          &nbsp;
+          {visitedString}
+          &nbsp;
+          {reactionString}
           {visitButton}
           <Header.Subheader id="post-subheader">
             <Icon name="like" />
@@ -120,12 +125,8 @@ const Post = ({
           </Grid.Column>
         </Grid>
       </Container>
-      <Divider />
-      <Header as="h2">Comments</Header>
-      {LoadMoreButton}
-      {data.comments ? data.comments.map((comment) => (
-        <PostComment key={comment.id} data={comment} />
-      )) : null }
+      {topReactions}
+      {yourReactions}
     </Segment>
   );
 };

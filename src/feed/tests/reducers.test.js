@@ -7,6 +7,7 @@ describe('The post reducer can interact with posts', () => {
       page: 0,
       loading: false,
       error: null,
+      finished: false,
       posts: [{
         id: 1,
         content: {
@@ -42,6 +43,7 @@ describe('The post reducer can interact with posts', () => {
       page: 0,
       loading: false,
       error: null,
+      finished: false,
       posts: [
         {
           id: 2,
@@ -78,6 +80,7 @@ describe('The post reducer can interact with posts', () => {
       page: 0,
       loading: false,
       error: null,
+      finished: false,
       posts: [{
         id: 1,
         content: {
@@ -107,6 +110,7 @@ describe('The post reducer can interact with posts', () => {
     const expected = {
       page: 0,
       loading: false,
+      finished: false,
       error: null,
       posts: [],
       errors: null,
@@ -121,6 +125,7 @@ describe('The post reducer can interact with posts', () => {
       page: 0,
       loading: false,
       error: null,
+      finished: false,
       posts: [],
       errors: null,
     };
@@ -139,6 +144,7 @@ describe('The post reducer can interact with posts', () => {
       page: 1,
       loading: false,
       error: null,
+      finished: false,
       posts: [{
         id: 1,
       }],
@@ -154,6 +160,7 @@ describe('The post reducer can interact with posts', () => {
       page: 5,
       loading: false,
       error: null,
+      finished: false,
       posts: [{
         id: 1,
         content: {
@@ -184,6 +191,7 @@ describe('The post reducer can interact with posts', () => {
     const expected = {
       page: 0,
       loading: false,
+      finished: false,
       error: null,
       posts: [{
         id: 2,
@@ -505,6 +513,7 @@ describe('The post reducer can interact with api erroring', () => {
     const initialState = {
       page: 0,
       loading: false,
+      finished: false,
       error: null,
       posts: [],
       errors: null,
@@ -520,6 +529,7 @@ describe('The post reducer can interact with api erroring', () => {
     const expected = {
       page: 0,
       loading: false,
+      finished: false,
       error: null,
       posts: [],
       errors: 'posts',

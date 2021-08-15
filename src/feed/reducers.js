@@ -15,6 +15,7 @@ import {
 const initialState = {
   page: 0,
   loading: false,
+  finished: false,
   error: null,
   posts: [],
   errors: null,
@@ -44,10 +45,15 @@ const postState = (state = initialState, action) => {
     case FETCH_POSTS: {
       const { posts, page } = payload;
       const actualNewPosts = state.posts.concat(posts);
+      let finished = false;
+      if (posts.length < 5) {
+        finished = true;
+      }
       return {
         ...state,
         posts: actualNewPosts,
         page: page + 1,
+        finished,
       };
     }
     case FETCH_POST: {

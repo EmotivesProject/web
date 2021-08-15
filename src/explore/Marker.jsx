@@ -1,11 +1,14 @@
 import React from 'react';
 import {
   Button,
-  Form,
+  Divider,
   Grid,
+  Header,
   Icon,
   Modal,
 } from 'semantic-ui-react';
+import PostEmojis from '../feed/PostEmojis';
+import EmojiInput from '../shared/EmojiInput';
 import getTimeAgoFromObject from '../utils/date';
 
 const markerStyle = {
@@ -26,28 +29,19 @@ const Marker = ({
   commentPost,
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [currentInput, setCurrentInput] = React.useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    commentPost(auth, currentInput, data.post.id);
-    setCurrentInput('');
-  };
 
   const time = getTimeAgoFromObject(data.post.updated_at);
 
-  const title = `${data.post.username} posted ${data.post.content.message} ${time}`;
-
   const likeString = `${data.likes ? data.likes.length : 0} likes `;
 
-  let button = <Button onClick={() => likePost(auth, data.post.id)} icon id="like-button-marker"><Icon name="like" /></Button>;
+  let button = <Button onClick={() => likePost(auth, data.post.id)} icon id="like-button"><Icon name="like" /></Button>;
   const likeArray = data.likes ? data.likes : [];
   const likeIndex = likeArray.findIndex((like) => like.username === auth.username);
   if (likeIndex !== -1) {
     button = (
       <Button
         onClick={() => unlikePost(auth, data.post.id, likeArray[likeIndex].id)}
-        id="unlike-button-marker"
+        id="unlike-button"
         icon
       >
         <Icon name="like" />
@@ -72,12 +66,26 @@ const Marker = ({
     );
   }
 
-  let emojiString = '';
-  if (data.comments !== null) {
-    for (let i = 0; i < data.comments.length; i += 1) {
-      emojiString += data.comments[i].message;
-    }
-  }
+  const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : null;
+  const reactionString = data.post.content.reaction ? ` - ${data.post.content.reaction}` : null;
+
+  const title = `${data.post.username} ${visitedString} ${reactionString} ${time}`;
+
+  const topReactions = data.emoji_count.length !== 0 ? (
+    <div>
+      <Divider />
+      <Header as="h2">Top Reactions</Header>
+      <PostEmojis key={data.post.id} data={data.emoji_count} />
+    </div>
+  ) : null;
+
+  const yourReactions = data.self_emoji_count.length !== 0 ? (
+    <div>
+      <Divider />
+      <Header as="h2">Your Reactions</Header>
+      <PostEmojis key={data.post.id} data={data.self_emoji_count} />
+    </div>
+  ) : null;
 
   return (
     <div style={markerStyle}>
@@ -86,7 +94,7 @@ const Marker = ({
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
-        trigger={<button type="button" id="invis-button">{data.post.content.message}</button>}
+        trigger={<button type="button" id="invis-button">{data.post.content.reaction}</button>}
       >
         <Modal.Header>
           <div style={{ display: 'inline' }}>
@@ -94,7 +102,6 @@ const Marker = ({
           </div>
           <div id="marker-like-container">
             {likeString}
-            {button}
           </div>
         </Modal.Header>
         <Modal.Content>
@@ -103,21 +110,29 @@ const Marker = ({
               {mainInformation}
             </Grid.Column>
             <Grid.Column>
-              {emojiString}
-              <Form onSubmit={handleSubmit}>
-                <Form.Input
-                  id="marker-comment"
-                  name="React"
-                  type="input"
-                  size="large"
-                  placeholder="New Reaction!"
-                  required
-                  value={currentInput}
-                  onChange={(e) => setCurrentInput(e.target.value)}
-                  max="4"
-                />
-                <Button id="typical-button">Comment</Button>
-              </Form>
+              <Grid.Row>
+                <Grid columns={2} textAlign="center">
+                  <Grid.Column>
+                    {button}
+                  </Grid.Column>
+                  <Grid.Column>
+                    <EmojiInput
+                      header="Add your reaction"
+                      type="comment"
+                      action={commentPost}
+                      auth={auth}
+                      postID={data.post.id}
+                      subComponentID="emoji-comment-input"
+                      iconName="comment"
+                    />
+                  </Grid.Column>
+                </Grid>
+              </Grid.Row>
+              <br />
+              <Grid.Row>
+                {topReactions}
+                {yourReactions}
+              </Grid.Row>
             </Grid.Column>
           </Grid>
         </Modal.Content>
