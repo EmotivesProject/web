@@ -4,8 +4,12 @@ import { Grid } from 'semantic-ui-react';
 const PostEmojis = ({
   data,
 }) => {
-  const max = data.length > 6 ? 6 : 1;
+  let max = data.length > 6 ? 6 : data.length;
   const top = data.slice(0, max);
+
+  if (max === 0) {
+    max = 1;
+  }
 
   return (
     <Grid columns={max} id="comment">

@@ -45,8 +45,6 @@ const FeedPage = ({
     </Message>
   ) : null;
 
-  console.log(posts);
-
   const loadMoreButton = !finished ? (
     <Button
       id="load-more-posts"
