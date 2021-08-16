@@ -17,8 +17,9 @@ const markerStyle = {
   cursor: 'pointer',
   zIndex: 10,
   fontSize: '2.5vh',
-  left: '5%',
-  bottom: '5%',
+  position: 'absolute',
+  left: '-10px',
+  top: '-20px',
 };
 
 const Marker = ({

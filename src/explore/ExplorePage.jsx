@@ -5,7 +5,11 @@ import {
   useLocation,
 } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
-import { Button } from 'semantic-ui-react';
+import {
+  Button,
+  Grid,
+  Input,
+} from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import { getError, getPosts, getPage } from '../feed/selector';
 import TopBar from '../shared/TopBar';
@@ -52,6 +56,7 @@ const ExplorePage = ({
 
   const [explore, setExplore] = React.useState(true);
   const [newPost, setNewPost] = React.useState(null);
+  const [currentInput, setCurrentInput] = React.useState('');
 
   if (!initialized) {
     loadPosts(auth, page);
@@ -112,15 +117,49 @@ const ExplorePage = ({
     }
   };
 
+  const handleClick = (e) => {
+    e.preventDefault();
+  };
+
+  const ToggleExploreButton = explore ? (
+    <Button
+      onClick={toggleExplore}
+      primary
+    >
+      Set New Flag?
+    </Button>
+  ) : (
+    <Button
+      onClick={toggleExplore}
+      primary
+    >
+      Just Explore
+    </Button>
+  );
+
   return (
     <>
       <TopBar key={Math.random().toString(36).substr(2, 9)} />
-      <Button
-        onClick={toggleExplore}
-      >
-        Toggle Explore
-      </Button>
-      <div style={{ height: '90vh', width: '100%' }}>
+      <Grid columns={5} textAlign="center">
+        <Grid.Column>
+          {ToggleExploreButton}
+        </Grid.Column>
+        <Grid.Column>
+          <Button
+            onClick={handleClick}
+            positive
+          >
+            Search
+          </Button>
+          <Input
+            onChange={(e) => setCurrentInput(e.target.value)}
+            value={currentInput}
+            placeholder="Search..."
+          />
+        </Grid.Column>
+      </Grid>
+      <br />
+      <div style={{ height: '85vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
           defaultCenter={initialCentre}
