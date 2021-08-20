@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import {
@@ -11,7 +11,12 @@ import {
   Input,
 } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
-import { getError, getPosts, getPage } from '../feed/selector';
+import {
+  getError,
+  getPosts,
+  getPage,
+  getFinished,
+} from '../feed/selector';
 import TopBar from '../shared/TopBar';
 import {
   commentPostRequest,
@@ -23,6 +28,8 @@ import {
 } from '../feed/thunks';
 import Marker from './Marker';
 import TempMarker from './TempMarker';
+
+const fetchMorePostRate = 1000 * 5; // 10 seconds
 
 let initialized = false;
 
@@ -49,6 +56,7 @@ const ExplorePage = ({
   unlikePost,
   commentPost,
   createPost,
+  finished,
 }) => {
   if (auth === null) {
     return <Redirect to="/" />;
@@ -57,6 +65,15 @@ const ExplorePage = ({
   const [explore, setExplore] = React.useState(true);
   const [newPost, setNewPost] = React.useState(null);
   const [currentInput, setCurrentInput] = React.useState('');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!finished) {
+        loadPosts(auth, page);
+      }
+    }, fetchMorePostRate);
+    return () => clearInterval(interval);
+  }, [page, finished]);
 
   if (!initialized) {
     loadPosts(auth, page);
@@ -165,6 +182,7 @@ const ExplorePage = ({
           defaultCenter={initialCentre}
           defaultZoom={defaultZoom}
           onClick={(e) => mapClicked(e)}
+          yesIWantToUseGoogleMapApiInternals
         >
           {markers}
         </GoogleMapReact>
@@ -177,6 +195,7 @@ const mapStateToProps = (state) => ({
   auth: getAuth(state),
   posts: getPosts(state),
   page: getPage(state),
+  finished: getFinished(state),
   errors: getError(state),
 });
 

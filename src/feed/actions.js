@@ -68,3 +68,8 @@ export const fetchComments = (data) => ({
   type: FETCH_COMMENTS,
   payload: { data },
 });
+
+export const RESET_PAGE = 'RESET_PAGE';
+export const resetPage = () => ({
+  type: RESET_PAGE,
+});

@@ -25,6 +25,8 @@ const Notification = ({
       icon = 'circle notched';
   }
 
+  const id = data.seen ? 'notification-has-seen' : 'notification-has-not-seen';
+
   return (
     <>
       <a href={data.link}>
@@ -32,6 +34,7 @@ const Notification = ({
           icon={icon}
           header={data.title}
           content={info}
+          id={id}
         />
       </a>
       <br />
