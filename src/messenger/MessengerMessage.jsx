@@ -4,7 +4,6 @@ import {
 } from 'semantic-ui-react';
 
 const MessengerMessage = ({ message, user, talkingTo }) => {
-  console.log(user);
   if (message.username_from !== talkingTo && message.username_from !== user) {
     return (null);
   }
