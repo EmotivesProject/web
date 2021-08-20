@@ -147,7 +147,6 @@ const MessengerPage = ({
                         onClick={() => {
                           switchPersonTalking(user.username, talkingTo);
                         }}
-                        positive={user.active}
                       />
                       <br />
                     </div>
