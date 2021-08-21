@@ -145,10 +145,6 @@ const ExplorePage = ({
     }
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
-  };
-
   const ToggleExploreButton = explore ? (
     <Button
       onClick={toggleExplore}
@@ -184,12 +180,6 @@ const ExplorePage = ({
           {ToggleExploreButton}
         </Grid.Column>
         <Grid.Column>
-          <Button
-            onClick={handleClick}
-            positive
-          >
-            Search
-          </Button>
           {SearchBox}
         </Grid.Column>
       </Grid>
