@@ -152,6 +152,11 @@ body {
   background-color: rgb(255, 230, 0);
 }
 
+#search {
+  font-size: large;
+  margin: 1%;
+}
+
 #messenger-list {
   width: 50%;
   left: 25%;

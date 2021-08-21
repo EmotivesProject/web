@@ -43,7 +43,7 @@ const Search = ({ panTo, currentPos }) => {
   };
 
   return (
-    <div className="search">
+    <div id="search">
       <Combobox onSelect={handleSelect}>
         <ComboboxInput
           value={value}
