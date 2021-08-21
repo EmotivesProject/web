@@ -34,6 +34,7 @@ const notificationState = (state = initialState, action) => {
         newPage = page + 1;
       } else {
         finished = true;
+        notifs = state.notifications;
       }
       return {
         ...state,

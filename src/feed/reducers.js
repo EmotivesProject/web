@@ -10,6 +10,7 @@ import {
   API_SUCCESS,
   FETCH_POST,
   FETCH_COMMENTS,
+  RESET_PAGE,
 } from './actions';
 
 const initialState = {
@@ -49,10 +50,11 @@ const postState = (state = initialState, action) => {
       if (posts.length < 5) {
         finished = true;
       }
+      const pageCount = page + 1;
       return {
         ...state,
         posts: actualNewPosts,
-        page: page + 1,
+        page: pageCount,
         finished,
       };
     }
@@ -148,6 +150,12 @@ const postState = (state = initialState, action) => {
       return {
         ...state,
         errors: null,
+      };
+    }
+    case RESET_PAGE: {
+      return {
+        ...state,
+        page: 0,
       };
     }
     default:

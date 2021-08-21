@@ -27,7 +27,7 @@ const Post = ({
   if (data.post.content.type === 'emoji') {
     mainInformation = content.message;
   } else {
-    const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${content.latitude},${content.longitude}&zoom=15&maptype=satellite`;
+    const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${content.latitude},${content.longitude}&zoom=15`;
     mainInformation = (
       <iframe
         title={data.post.id}

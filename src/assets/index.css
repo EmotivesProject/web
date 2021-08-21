@@ -133,6 +133,10 @@ body {
   font-size: xx-large;
 }
 
+#notification-has-seen {
+  background-color: #a0bdbd;
+}
+
 #main-post {
   font-size: xx-large;
 }
@@ -145,8 +149,7 @@ body {
 #user-messenger-talking {
   width: 10em;
   margin: 0.225em;
-  background-color: red;
-  color: white;
+  background-color: rgb(255, 230, 0);
 }
 
 #messenger-list {
