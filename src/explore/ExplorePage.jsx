@@ -8,7 +8,6 @@ import GoogleMapReact from 'google-map-react';
 import {
   Button,
   Grid,
-  Input,
 } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import {
@@ -28,6 +27,9 @@ import {
 } from '../feed/thunks';
 import Marker from './Marker';
 import TempMarker from './TempMarker';
+import Search from './autocomplete';
+
+// See https://developers.google.com/maps/documentation/javascript/reference/map
 
 const fetchMorePostRate = 1000 * 5; // 10 seconds
 
@@ -64,7 +66,6 @@ const ExplorePage = ({
 
   const [explore, setExplore] = React.useState(true);
   const [newPost, setNewPost] = React.useState(null);
-  const [currentInput, setCurrentInput] = React.useState('');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -74,6 +75,16 @@ const ExplorePage = ({
     }, fetchMorePostRate);
     return () => clearInterval(interval);
   }, [page, finished]);
+
+  const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.map.panTo({ lat, lng });
+    mapRef.current.map.setZoom(defaultZoom);
+  }, []);
 
   if (!initialized) {
     loadPosts(auth, page);
@@ -154,6 +165,17 @@ const ExplorePage = ({
     </Button>
   );
 
+  const SearchBox = (
+    <Search panTo={panTo} currentPos={initialCentre} />
+  );
+
+  const mapDragged = (e) => {
+    initialCentre = {
+      lat: e.center.lat(),
+      lng: e.center.lng(),
+    };
+  };
+
   return (
     <>
       <TopBar key={Math.random().toString(36).substr(2, 9)} />
@@ -168,11 +190,7 @@ const ExplorePage = ({
           >
             Search
           </Button>
-          <Input
-            onChange={(e) => setCurrentInput(e.target.value)}
-            value={currentInput}
-            placeholder="Search..."
-          />
+          {SearchBox}
         </Grid.Column>
       </Grid>
       <br />
@@ -183,6 +201,8 @@ const ExplorePage = ({
           defaultZoom={defaultZoom}
           onClick={(e) => mapClicked(e)}
           yesIWantToUseGoogleMapApiInternals
+          onGoogleApiLoaded={onMapLoad}
+          onDrag={(e) => mapDragged(e)}
         >
           {markers}
         </GoogleMapReact>
