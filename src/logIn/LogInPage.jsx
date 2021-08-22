@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import LogInForm from '../shared/LogInForm';
 import getAuth from '../auth/selector';
 
+// Basic login page uses the LogInForm
 const LogInPage = ({ auth }) => {
+  // If the user is authenticated do not show this page
   if (auth !== null) {
     return <Redirect to="/feed" />;
   }
@@ -23,6 +25,7 @@ const LogInPage = ({ auth }) => {
   );
 };
 
+// Connect up only the auth state and no dispatch
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
 });

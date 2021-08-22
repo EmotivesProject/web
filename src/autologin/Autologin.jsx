@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 
+// Page that is used to create autologin tokens
 const Autologin = ({ auth }) => {
+  // Make sure the user is authenticated
   if (auth === null) {
     return <Redirect to="/" />;
   }
@@ -14,6 +16,9 @@ const Autologin = ({ auth }) => {
   const [usernameForValue, setUsernameForValue] = useState('');
   const [createdToken, setCreatedToken] = useState(null);
 
+  // Prevent default submission and attempt to create an autologin token
+  // using the input. Not handling any errors since it should only be used
+  // rarely
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -37,6 +42,7 @@ const Autologin = ({ auth }) => {
       });
   };
 
+  // If the createdToken is set then display it.
   const resultDiv = createdToken !== null ? (
     <div>
       <h2>
@@ -86,6 +92,7 @@ const Autologin = ({ auth }) => {
   );
 };
 
+// Only requires the auth information and doesn't need any dispatch
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
 });

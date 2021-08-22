@@ -3,7 +3,6 @@ import {
   Button, Form, Header, Segment, Message,
 } from 'semantic-ui-react';
 import { useHistory, useLocation } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { extractErrorObject, extractToken } from '../utils/extractObjects';
@@ -17,19 +16,23 @@ let initialised = false;
 
 const LogInForm = ({ onCreateAuth }) => {
   const history = useHistory();
+
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [loadingVar, setLoading] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
 
+  // If it's not initialized yet, check if an autologin token was passed
   if (!initialised) {
     const query = useQuery();
     const token = query.get('token');
+    // Check was the token is set
     if (token !== null) {
       const host = process.env.REACT_APP_API_HOST;
       const base = process.env.REACT_APP_UACL_BASE_URL;
       const url = `${host}://${base}/autologin/${token}`;
 
+      // Attempt to login from the token
       axios.post(url,
         JSON.stringify({
           username: usernameValue,
@@ -48,6 +51,7 @@ const LogInForm = ({ onCreateAuth }) => {
     initialised = true;
   }
 
+  // Basic submit to log in accounts from form
   const handleSubmit = (e) => {
     setErrorObject(null);
     e.preventDefault();
@@ -132,6 +136,7 @@ const LogInForm = ({ onCreateAuth }) => {
   );
 };
 
+// Create up auth dispatch to be able to set the auth
 const mapDispatchToProps = (dispatch) => ({
   onCreateAuth: (auth) => dispatch(createAuth(auth)),
 });

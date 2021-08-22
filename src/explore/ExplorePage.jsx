@@ -11,7 +11,6 @@ import {
 } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import {
-  getError,
   getPosts,
   getPage,
   getFinished,
@@ -27,26 +26,27 @@ import {
 } from '../feed/thunks';
 import Marker from './Marker';
 import TempMarker from './TempMarker';
-import Search from './autocomplete';
+import AutoComplete from './AutoComplete';
 
 // See https://developers.google.com/maps/documentation/javascript/reference/map
 
 const fetchMorePostRate = 1000 * 5; // 10 seconds
 
+const defaultZoom = 15;
+
 let initialized = false;
 
+// Brisbane centre
 let initialCentre = {
   lat: -27.47,
   lng: 153.03,
 };
 
-const defaultZoom = 15;
+let queryID = -1;
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
-
-let queryID = -1;
 
 const ExplorePage = ({
   auth,
@@ -60,6 +60,7 @@ const ExplorePage = ({
   createPost,
   finished,
 }) => {
+  // Ensure user is logged in
   if (auth === null) {
     return <Redirect to="/" />;
   }
@@ -67,6 +68,7 @@ const ExplorePage = ({
   const [explore, setExplore] = React.useState(true);
   const [newPost, setNewPost] = React.useState(null);
 
+  // Used to constantly load new posts
   useEffect(() => {
     const interval = setInterval(() => {
       if (!finished) {
@@ -76,6 +78,7 @@ const ExplorePage = ({
     return () => clearInterval(interval);
   }, [page, finished]);
 
+  // Used for autocomplete searching
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
@@ -86,6 +89,7 @@ const ExplorePage = ({
     mapRef.current.map.setZoom(defaultZoom);
   }, []);
 
+  // Basic first initialized commands
   if (!initialized) {
     loadPosts(auth, page);
     initialized = true;
@@ -95,6 +99,7 @@ const ExplorePage = ({
     const queryLat = parseFloat(query.get('lat'));
     const queryLng = parseFloat(query.get('lng'));
 
+    // If the query params is fully set then setup to look at a single post
     if (!Number.isNaN(queryID) && !Number.isNaN(queryLat) && !Number.isNaN(queryLng)) {
       fetchPost(auth, queryID);
       initialCentre = {
@@ -104,13 +109,27 @@ const ExplorePage = ({
     }
   }
 
-  let markers = null;
-
+  // General helper functions
   const toggleExplore = () => {
     setExplore(!explore);
     setNewPost(null);
   };
 
+  const mapDragged = (e) => {
+    initialCentre = {
+      lat: e.center.lat(),
+      lng: e.center.lng(),
+    };
+  };
+
+  const mapClicked = (e) => {
+    if (!explore) {
+      setNewPost(e);
+    }
+  };
+
+  // Display post markers if exploring, otherwise display a creating post view
+  let markers = null;
   if (explore) {
     markers = posts.map((post) => (
       <Marker
@@ -139,48 +158,20 @@ const ExplorePage = ({
     );
   }
 
-  const mapClicked = (e) => {
-    if (!explore) {
-      setNewPost(e);
-    }
-  };
-
-  const ToggleExploreButton = explore ? (
-    <Button
-      onClick={toggleExplore}
-      primary
-    >
-      Set New Flag?
-    </Button>
-  ) : (
-    <Button
-      onClick={toggleExplore}
-      primary
-    >
-      Just Explore
-    </Button>
-  );
-
-  const SearchBox = (
-    <Search panTo={panTo} currentPos={initialCentre} />
-  );
-
-  const mapDragged = (e) => {
-    initialCentre = {
-      lat: e.center.lat(),
-      lng: e.center.lng(),
-    };
-  };
-
   return (
     <>
-      <TopBar key={Math.random().toString(36).substr(2, 9)} />
+      <TopBar />
       <Grid columns={5} textAlign="center">
         <Grid.Column>
-          {ToggleExploreButton}
+          <Button
+            onClick={toggleExplore}
+            primary
+          >
+            {explore ? 'Set New Flag?' : 'Just Explore'}
+          </Button>
         </Grid.Column>
         <Grid.Column>
-          {SearchBox}
+          <AutoComplete panTo={panTo} currentPos={initialCentre} />
         </Grid.Column>
       </Grid>
       <br />
@@ -201,12 +192,12 @@ const ExplorePage = ({
   );
 };
 
+// Connect up state and dispatch events required
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
   posts: getPosts(state),
   page: getPage(state),
   finished: getFinished(state),
-  errors: getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

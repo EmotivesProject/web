@@ -10,10 +10,9 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox';
-
 import '@reach/combobox/styles.css';
 
-const Search = ({ panTo, currentPos }) => {
+const AutoComplete = ({ panTo, currentPos }) => {
   const {
     ready,
     value,
@@ -23,7 +22,7 @@ const Search = ({ panTo, currentPos }) => {
   } = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => currentPos.lat, lng: () => currentPos.lng },
-      radius: 100 * 1000, /// 100m * 1000 = 100km
+      radius: 100 * 1000, // 100m * 1000 = 100km
     },
   });
 
@@ -43,13 +42,13 @@ const Search = ({ panTo, currentPos }) => {
   };
 
   return (
-    <div id="search">
+    <div id="autocomplete-search">
       <Combobox onSelect={handleSelect}>
         <ComboboxInput
           value={value}
           onChange={handleInput}
           disabled={!ready}
-          placeholder="Search your location"
+          placeholder="Explore a place"
         />
         <ComboboxPopover>
           <ComboboxList>
@@ -64,4 +63,4 @@ const Search = ({ panTo, currentPos }) => {
   );
 };
 
-export default Search;
+export default AutoComplete;

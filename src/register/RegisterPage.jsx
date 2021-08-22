@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import RegisterForm from './RegisterForm';
 import getAuth from '../auth/selector';
 
+// Basic housing component for the RegisterForm component
 const RegisterPage = ({ auth }) => {
+  // Don't show this page if auth is set
   if (auth !== null) {
     return <Redirect to="/feed" />;
   }
@@ -21,6 +23,7 @@ const RegisterPage = ({ auth }) => {
   );
 };
 
+// Connect up the auth
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
 });

@@ -8,6 +8,7 @@ import getAuth from '../auth/selector';
 import logo from '../assets/EmotivesLogo.svg';
 
 const HomePage = ({ auth }) => {
+  // If user is authenticated then redirect them to the feed
   if (auth !== null) {
     return <Redirect to="/feed" />;
   }
@@ -29,6 +30,7 @@ const HomePage = ({ auth }) => {
   );
 };
 
+// Connect up only the auth state and no dispatch
 const mapStateToProps = (state) => ({
   auth: getAuth(state),
 });
