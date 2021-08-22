@@ -2,11 +2,10 @@ on: [push]
 name: Lint and Test
 jobs:
   full-run:
-    # runs-on: self-hosted (Temp to run on github server while my server is down)
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [13.x]
+        node-version: [16.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
