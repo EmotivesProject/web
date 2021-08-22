@@ -8,8 +8,11 @@ import axios from 'axios';
 import { extractErrorObject, extractToken } from '../utils/extractObjects';
 import { createAuth } from '../auth/actions';
 
+// Basic component register form
 const RegisterForm = ({ onCreateAuth }) => {
   const history = useHistory();
+
+  // Setup the states and setters
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [nameValue, setNameValue] = useState('');
@@ -17,6 +20,8 @@ const RegisterForm = ({ onCreateAuth }) => {
   const [loadingVar, setLoading] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
 
+  // handle the submit here instead of a reducer since it's not that complex
+  // Handle errors since error strings here might be useful.
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
@@ -44,6 +49,7 @@ const RegisterForm = ({ onCreateAuth }) => {
       });
   };
 
+  // Create an error component if the error is set
   const message = errorObject ? (
     <Message
       error
@@ -141,6 +147,7 @@ const RegisterForm = ({ onCreateAuth }) => {
   );
 };
 
+// Only requires aa dispatch to create authentication
 const mapDispatchToProps = (dispatch) => ({
   onCreateAuth: (auth) => dispatch(createAuth(auth)),
 });

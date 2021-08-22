@@ -5,6 +5,7 @@ import {
 import EmojiSelection from './EmojiSelection';
 import Emojis from '../constants/Emojis';
 
+// Overly complex emoji Input that can action a lot of different things
 const EmojiInput = ({
   buttonText,
   header,
@@ -26,8 +27,10 @@ const EmojiInput = ({
   const [currentInput, setCurrentInput] = React.useState('');
   const [page, setPage] = React.useState(1);
 
+  // Number of emoji panels
   const totalPages = Math.ceil(Emojis.length / 6);
 
+  // Basic functions that help the modal
   const updateCurrentInput = (str) => {
     setCurrentInput(currentInput.concat(str));
   };

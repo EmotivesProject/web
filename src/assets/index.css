@@ -152,7 +152,7 @@ body {
   background-color: rgb(255, 230, 0);
 }
 
-#search {
+#autocomplete-search {
   font-size: large;
   margin: 1%;
 }

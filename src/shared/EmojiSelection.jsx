@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import Emojis from '../constants/Emojis';
 
+// Display an emoji selection panels
+// Bit complex please help
 const EmojiSelection = ({ page, action }) => {
   const actualPage = page - 1;
   const limit = 3;
