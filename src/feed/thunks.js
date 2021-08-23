@@ -7,7 +7,6 @@ import {
   unlikePost,
   apiError,
   apiSuccess,
-  fetchComments,
   fetchPost,
 } from './actions';
 
@@ -47,24 +46,6 @@ async function requestGetPost(path, dispatch, auth) {
     })
     .catch(() => {
       dispatch(apiError('post'));
-    });
-}
-
-async function requestGetComments(path, dispatch, auth) {
-  const url = `${host}://${base}/${path}`;
-
-  await axios.get(url, {
-    headers: {
-      Authorization: `Bearer ${auth.token}`,
-    },
-  })
-    .then((result) => {
-      const fetchedResult = result.data.result;
-      dispatch(apiSuccess('comments'));
-      dispatch(fetchComments(fetchedResult));
-    })
-    .catch(() => {
-      dispatch(apiError('comments'));
     });
 }
 
@@ -146,11 +127,6 @@ const fetchIndividualPostRequest = (auth, postID) => async (dispatch) => {
   await requestGetPost(path, dispatch, auth);
 };
 
-const fetchPostCommentsRequest = (auth, postID) => async (dispatch) => {
-  const path = `post/${postID}/comment`;
-  await requestGetComments(path, dispatch, auth);
-};
-
 const likePostRequest = (auth, postID) => async (dispatch) => {
   const path = `post/${postID}/like`;
   await requestPostLike(path, dispatch, auth);
@@ -192,7 +168,6 @@ const postRequest = (
 
 export {
   fetchPostsRequest,
-  fetchPostCommentsRequest,
   likePostRequest,
   commentPostRequest,
   postRequest,

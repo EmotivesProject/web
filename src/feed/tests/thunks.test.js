@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import {
   fetchPostsRequest,
   fetchIndividualPostRequest,
-  fetchPostCommentsRequest,
   commentPostRequest,
   likePostRequest,
   unlikePostRequest,
@@ -165,65 +164,6 @@ describe('The Post thunk', () => {
 });
 
 describe('The Comment thunk', () => {
-  it('Successful comment fetches', async () => {
-    const fakeDispatch = sinon.spy();
-    const mock = new MockAdapter(axios);
-
-    const fakeResult = {
-      result: {
-        post_id: 2,
-        comments: [
-          {
-            id: 1,
-            post_id: 2,
-            username: 'imtom',
-            message: '👍',
-            created_at: '2021-07-17T13:09:14.767273+10:00',
-            updated_at: '2021-07-17T13:09:14.767273+10:00',
-            active: true,
-          },
-        ],
-      },
-      message: null,
-    };
-
-    mock.onGet('http://postit.localhost/post/1/comment').reply(200, fakeResult);
-
-    const expectedFirstAction = {
-      type: 'API_SUCCESS',
-      payload: {
-        name: 'comments',
-      },
-    };
-
-    const expectedSecondAction = {
-      type: 'FETCH_COMMENTS',
-      payload: {
-        data: {
-          post_id: 2,
-          comments: [
-            {
-              id: 1,
-              post_id: 2,
-              username: 'imtom',
-              message: '👍',
-              created_at: '2021-07-17T13:09:14.767273+10:00',
-              updated_at: '2021-07-17T13:09:14.767273+10:00',
-              active: true,
-            },
-          ],
-        },
-      },
-    };
-
-    await fetchPostCommentsRequest(fakeAuth, 1)(fakeDispatch);
-
-    expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedFirstAction);
-    expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
-
-    mock.reset();
-  });
-
   it('Successful comment create', async () => {
     const fakeDispatch = sinon.spy();
     const mock = new MockAdapter(axios);
