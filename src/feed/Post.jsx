@@ -14,9 +14,6 @@ import EmojiInput from '../shared/EmojiInput';
 import getTimeAgoFromObject from '../utils/date';
 import PostEmojis from './PostEmojis';
 import { getPosts } from './selector';
-import {
-  fetchPostCommentsRequest,
-} from './thunks';
 
 const Post = ({
   auth, data, likePost, unlikePost, commentPost,
@@ -135,8 +132,4 @@ const mapStateToProps = (state) => ({
   posts: getPosts(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadMoreComments: (auth, postID) => dispatch(fetchPostCommentsRequest(auth, postID)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, null)(Post);
