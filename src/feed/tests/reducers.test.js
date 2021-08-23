@@ -390,10 +390,26 @@ describe('The post reducer can interact with comments', () => {
       type: 'COMMENT_POST',
       payload: {
         comment: {
-          post_id: 1,
-          id: 3,
-          message: 'hey',
-          username: 'test_user',
+          post: {
+            id: 1,
+            content: {
+              message: 'previous post',
+            },
+          },
+          comments: [
+            {
+              id: 2,
+              username: 'john',
+              message: 'I like it',
+            },
+            {
+              post_id: 1,
+              id: 3,
+              message: 'hey',
+              username: 'test_user',
+            },
+          ],
+          likes: [],
         },
       },
     };
