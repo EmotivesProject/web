@@ -39,7 +39,6 @@ const Post = ({
       <Link to={visitLink}>
         <Button
           id="marker-like-container"
-          positive
         >
           Visit
         </Button>

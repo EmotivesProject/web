@@ -26,21 +26,21 @@ body {
 }
 
 #typical-button {
-  background-color: #2196F3;
-  color: #E8E8E8;
+  background-color: #006ac0;
+  color: #ffffff;
 }
 
 #typical-button:hover {
-  background-color: #1565C0;
+  background-color: #003e85;
 }
 
 #register-button {
-  background-color: #00ad20;
-  color: #E8E8E8;
+  background-color: #006ac0;
+  color: #ffffff;
 }
 
 #register-button:hover {
-  background-color: darkgreen;
+  background-color: #003e85;
 }
 
 #emoji-post-input-button {
@@ -72,16 +72,25 @@ body {
   background-color: #2d6666;
 }
 
+#new-flag {
+  background-color: #006ac0;
+  color: #ffffff;
+}
+
+#new-flag:hover {
+  background-color: #003e85;
+}
+
 #like-button {
   background-color: darkgray;
-  color: #E8E8E8;
+  color: #ffffff;
   width: 5em;
   font-size: 1.25em;
 }
 
 #like-button-marker {
   background-color: darkgray;
-  color: #E8E8E8;
+  color: #ffffff;
   display: inline;
 }
 
@@ -95,14 +104,14 @@ body {
 
 #unlike-button {
   background-color: red;
-  color: #E8E8E8;
+  color: #ffffff;
   width: 5em;
   font-size: 1.25em;
 }
 
 #unlike-button-marker {
   background-color: red;
-  color: #E8E8E8;
+  color: #ffffff;
   display: inline;
 }
 
@@ -116,17 +125,23 @@ body {
 
 #marker-like-container {
   float: right;
+  background-color: #006ac0;
+  color: #ffffff;
+}
+
+#marker-like-container:hover {
+  background-color: #003e85;
 }
 
 #emoji-comment-input-button {
-  background-color: #2196F3;
-  color: #E8E8E8;
+  background-color: #006ac0;
+  color: #ffffff;
   width: 5em;
   font-size: 1.25em;
 }
 
 #emoji-comment-input-button:hover {
-  background-color: #1565C0;
+  background-color: #003e85;
 }
 
 #comment {
@@ -192,8 +207,8 @@ body {
   width: 50%;
   text-align: center;
   height: 50%;
-  background-color: #2196F3;
-  color: #E8E8E8;
+  background-color: #006ac0;
+  color: #ffffff;
   font-size: 1.25em;
 }
 
@@ -254,10 +269,20 @@ body {
 #load-more-posts {
   width: 100%;
   font-size: large;
+  color: #ffffff;
+  background-color: #00851D;
+}
+
+#load-more-posts:hover {
+  background-color: #00470f;
 }
 
 a {
   color: black;
+}
+
+a:hover {
+  color: #17404A;
 }
 
 #invis-button {

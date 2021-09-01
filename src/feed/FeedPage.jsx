@@ -47,7 +47,6 @@ const FeedPage = ({
     <Button
       id="load-more-posts"
       onClick={() => loadPosts(auth, page)}
-      positive
     >
       Load More!
     </Button>
