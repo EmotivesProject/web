@@ -29,7 +29,7 @@ const Notification = ({
 
   return (
     <>
-      <a href={data.link}>
+      <a href={data.link} aria-label={`visit notification for notification ${data.id}`}>
         <Message
           icon={icon}
           header={data.title}

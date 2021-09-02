@@ -34,6 +34,15 @@ body {
   background-color: #003e85;
 }
 
+#typical-button-register {
+  background-color: #006ac0;
+  color: #ffffff;
+}
+
+#typical-button-register:hover {
+  background-color: #003e85;
+}
+
 #register-button {
   background-color: #006ac0;
   color: #ffffff;
@@ -41,35 +50,6 @@ body {
 
 #register-button:hover {
   background-color: #003e85;
-}
-
-#emoji-post-input-button {
-  background-color: #f9cb63;
-  color: black;
-  width: 40%;
-  text-align: center;
-  line-height: 1em;
-  font-size: 2em;
-  margin: 1em;
-}
-
-#emoji-post-input-button:hover {
-  background-color: #ebc05d;
-  color: black;
-}
-
-#emoji-map-input-button {
-  background-color: #388181;
-  color: black;
-  width: 40%;
-  text-align: center;
-  line-height: 1em;
-  font-size: 2em;
-  margin: 1em;
-}
-
-#emoji-map-input-button:hover {
-  background-color: #2d6666;
 }
 
 #new-flag {
@@ -81,7 +61,7 @@ body {
   background-color: #003e85;
 }
 
-#like-button {
+.ui.button.like-button {
   background-color: darkgray;
   color: #ffffff;
   width: 5em;
@@ -94,7 +74,7 @@ body {
   display: inline;
 }
 
-#like-button:hover {
+.ui.button.like-button:hover {
   background-color: gray;
 }
 
@@ -102,10 +82,11 @@ body {
   background-color: gray;
 }
 
-#unlike-button {
+.ui.button.unlike-button {
   background-color: red;
   color: #ffffff;
   width: 5em;
+  text-align: center;
   font-size: 1.25em;
 }
 
@@ -115,7 +96,7 @@ body {
   display: inline;
 }
 
-#unlike-button:hover {
+.ui.button.unlike-button:hover {
   background-color: darkred;
 }
 
@@ -123,24 +104,24 @@ body {
   background-color: darkred;
 }
 
-#marker-like-container {
+.ui.button.marker-like-container {
   float: right;
   background-color: #006ac0;
   color: #ffffff;
 }
 
-#marker-like-container:hover {
+.ui.button.marker-like-container:hover {
   background-color: #003e85;
 }
 
-#emoji-comment-input-button {
+.ui.button.emoji-comment-input-button {
   background-color: #006ac0;
   color: #ffffff;
   width: 5em;
   font-size: 1.25em;
 }
 
-#emoji-comment-input-button:hover {
+.ui.button.emoji-comment-input-button:hover {
   background-color: #003e85;
 }
 
@@ -156,12 +137,12 @@ body {
   font-size: xx-large;
 }
 
-#user-messenger {
+.ui.button.user-messenger {
   width: 10em;
   margin: 0.225em;
 }
 
-#user-messenger-talking {
+.ui.button.user-messenger-talking {
   width: 10em;
   margin: 0.225em;
   background-color: rgb(255, 230, 0);
@@ -203,7 +184,7 @@ body {
   height: 10%;
 }
 
-#emoji-messenger-input-button {
+.ui.button.emoji-messenger-input-button {
   width: 50%;
   text-align: center;
   height: 50%;
@@ -285,7 +266,7 @@ a:hover {
   color: #17404A;
 }
 
-#invis-button {
+.ui.button.invis-button {
   background-color: Transparent;
   background-repeat: no-repeat;
   border: none;

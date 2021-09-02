@@ -134,6 +134,7 @@ const MessengerPage = ({
       <Grid id="grid-page">
         <Grid.Row columns={3}>
           <Grid.Column width={5}>
+            <br />
             <Segment raised id="messenger-list">
               <Header content="Active Users" />
               {activeUsers.map((user) => {
@@ -141,7 +142,7 @@ const MessengerPage = ({
                   return (
                     <div key={Math.random().toString(36).substr(2, 9)}>
                       <Button
-                        id={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
+                        className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
                         content={user.username}
                         key={Math.random().toString(36).substr(2, 9)}
                         onClick={() => {
@@ -160,7 +161,7 @@ const MessengerPage = ({
                   return (
                     <div key={Math.random().toString(36).substr(2, 9)}>
                       <Button
-                        id={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
+                        className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
                         content={user.username}
                         key={Math.random().toString(36).substr(2, 9)}
                         onClick={() => switchPersonTalking(user.username, talkingTo)}
@@ -175,6 +176,10 @@ const MessengerPage = ({
             </Segment>
           </Grid.Column>
           <Grid.Column width={5}>
+            <br />
+            <h1>
+              Instant Message
+            </h1>
             <Segment id="messenger-feed">
               {errorMessage}
               <Grid.Row id="messenger-title">

@@ -95,13 +95,13 @@ const Marker = ({
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
-        trigger={<button type="button" id="invis-button">{data.post.content.reaction}</button>}
+        trigger={<button type="button" className="invis-button">{data.post.content.reaction}</button>}
       >
         <Modal.Header>
           <div style={{ display: 'inline' }}>
             {title}
           </div>
-          <div id="marker-like-container">
+          <div className="marker-like-container">
             {likeString}
           </div>
         </Modal.Header>
