@@ -171,6 +171,11 @@ const ExplorePage = ({
           </Button>
         </Grid.Column>
         <Grid.Column>
+          <h1>
+            Explore
+          </h1>
+        </Grid.Column>
+        <Grid.Column>
           <AutoComplete panTo={panTo} currentPos={initialCentre} />
         </Grid.Column>
       </Grid>

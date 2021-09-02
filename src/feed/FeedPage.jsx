@@ -59,6 +59,9 @@ const FeedPage = ({
         <Grid.Row columns="three">
           <Grid.Column />
           <Grid.Column>
+            <h1>
+              Feed
+            </h1>
             {errorMessage}
             {posts.map((post) => (
               <Post

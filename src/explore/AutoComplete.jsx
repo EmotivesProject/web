@@ -44,12 +44,17 @@ const AutoComplete = ({ panTo, currentPos }) => {
   return (
     <div id="autocomplete-search">
       <Combobox onSelect={handleSelect}>
-        <ComboboxInput
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
-          placeholder="Explore a place"
-        />
+        <label htmlFor="ExploreComboBox">
+          Search:
+          <ComboboxInput
+            id="ExploreComboBox"
+            value={value}
+            onChange={handleInput}
+            disabled={!ready}
+            placeholder="Explore a place"
+            aria-haspopup
+          />
+        </label>
         <ComboboxPopover>
           <ComboboxList>
             {status === 'OK'

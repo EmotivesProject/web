@@ -10,7 +10,7 @@ function HomeRegister() {
         New to the site?
       </Header>
       <Link to="/register">
-        <Button id="typical-button">
+        <Button id="typical-button-register">
           Register now
         </Button>
       </Link>

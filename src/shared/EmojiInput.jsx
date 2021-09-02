@@ -48,7 +48,7 @@ const EmojiInput = ({
       onOpen={() => setOpen(true)}
       open={open}
       trigger={(
-        <Button icon id={subComponentID.concat('-button')}>
+        <Button icon className={subComponentID.concat('-button')} aria-label="create emoji content">
           {iconButton}
           &nbsp;
           {buttonText}
