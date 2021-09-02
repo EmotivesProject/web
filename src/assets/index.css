@@ -61,6 +61,15 @@ body {
   background-color: #003e85;
 }
 
+#pan-button {
+  background-color: #006ac0;
+  color: #ffffff;
+}
+
+#pan-button:hover {
+  background-color: #003e85;
+}
+
 .ui.button.like-button {
   background-color: darkgray;
   color: #ffffff;
@@ -266,7 +275,7 @@ a:hover {
   color: #17404A;
 }
 
-.ui.button.invis-button {
+.invis-button {
   background-color: Transparent;
   background-repeat: no-repeat;
   border: none;
