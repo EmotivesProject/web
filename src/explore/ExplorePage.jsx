@@ -165,7 +165,7 @@ const ExplorePage = ({
         <Grid.Column>
           <Button
             onClick={toggleExplore}
-            primary
+            id="new-flag"
           >
             {explore ? 'Set New Flag?' : 'Just Explore'}
           </Button>

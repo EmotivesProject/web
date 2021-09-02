@@ -9,6 +9,7 @@ import IndividualPostPage from './feed/IndividualPostPage';
 import Autologin from './autologin/Autologin';
 import NotificationPage from './notifications/NotificationPage';
 import ExplorePage from './explore/ExplorePage';
+import LogOutPage from './logout/LogOutPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/post/:id" component={IndividualPostPage} />
         <Route path="/createautologin/" component={Autologin} />
         <Route path="/explore" component={ExplorePage} />
+        <Route path="/log_out" component={LogOutPage} />
         <Route component={Error} />
       </Switch>
     </main>

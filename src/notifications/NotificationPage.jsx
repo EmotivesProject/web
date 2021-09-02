@@ -49,7 +49,6 @@ const NotificationPage = ({
     <Button
       id="load-more-posts"
       onClick={loadMoreNotifications}
-      positive
     >
       Load More
     </Button>
