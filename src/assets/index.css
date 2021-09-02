@@ -233,13 +233,30 @@ body {
   margin-left: 30%;
 }
 
-#emoji-selection {
+#emoji-input-label {
+  font-size: xx-large;
+  width: 100%;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+.ui.button.emoji-selection {
   min-width: 100%;
   font-size: xx-large;
 }
 
-#emoji-selection-button {
+.ui.button.emoji-selection-button {
   font-size: large;
+}
+
+#emoji-selection-creation-button {
+  font-size: large;
+  background-color: #006ac0;
+  color: #ffffff;
+}
+
+#emoji-selection-creation-button:hover {
+  background-color: #003e85;
 }
 
 #pagination {
