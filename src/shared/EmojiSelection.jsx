@@ -25,8 +25,9 @@ const EmojiSelection = ({ page, action }) => {
         {firstArray.map((emoji) => (
           <Grid.Column key={emoji}>
             <Button
-              id="emoji-selection"
+              className="emoji-selection"
               content={emoji}
+              aria-label="Emoji selection button"
               onClick={() => action(emoji)}
               positive
             />
@@ -42,8 +43,9 @@ const EmojiSelection = ({ page, action }) => {
         {secondArray.map((emoji) => (
           <Grid.Column key={emoji}>
             <Button
-              id="emoji-selection"
+              className="emoji-selection"
               content={emoji}
+              aria-label="Emoji selection button"
               onClick={() => action(emoji)}
               positive
             />

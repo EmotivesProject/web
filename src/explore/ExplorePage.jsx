@@ -128,6 +128,17 @@ const ExplorePage = ({
     }
   };
 
+  const panToMe = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        panTo({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+        });
+      });
+    }
+  };
+
   // Display post markers if exploring, otherwise display a creating post view
   let markers = null;
   if (explore) {
@@ -163,6 +174,11 @@ const ExplorePage = ({
       <TopBar />
       <Grid columns={5} textAlign="center">
         <Grid.Column>
+          <h1>
+            Explore
+          </h1>
+        </Grid.Column>
+        <Grid.Column>
           <Button
             onClick={toggleExplore}
             id="new-flag"
@@ -171,9 +187,12 @@ const ExplorePage = ({
           </Button>
         </Grid.Column>
         <Grid.Column>
-          <h1>
-            Explore
-          </h1>
+          <Button
+            onClick={panToMe}
+            id="pan-button"
+          >
+            Centre to me
+          </Button>
         </Grid.Column>
         <Grid.Column>
           <AutoComplete panTo={panTo} currentPos={initialCentre} />

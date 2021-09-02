@@ -44,7 +44,7 @@ const TempMarker = ({
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
-        trigger={<button type="button" id="invis-button">🚩</button>}
+        trigger={<button type="button" className="invis-button">🚩</button>}
       >
         <Modal.Header>
           Create new post
