@@ -39,13 +39,24 @@ const Post = ({
       <Link to={visitLink} aria-label={`explore post ${data.post.id}`}>
         <Button
           className="marker-like-container"
-          content="visit"
+          content="Explore here"
         />
       </Link>
     );
   }
 
-  let button = <Button onClick={() => likePost(auth, data.post.id)} className="like-button" icon aria-label="like post" content={<Icon name="like" />} />;
+  let button = (
+    <Button
+      onClick={() => likePost(auth, data.post.id)}
+      className="like-button"
+      icon
+      aria-label="like post"
+      title="Like the post"
+      tabIndex="0"
+      content={<Icon name="like" />}
+    />
+  );
+
   const likeArray = data.likes ? data.likes : [];
   const likeIndex = likeArray.findIndex((like) => like.username === auth.username);
   if (likeIndex !== -1) {
@@ -54,6 +65,8 @@ const Post = ({
         onClick={() => unlikePost(auth, data.post.id, likeArray[likeIndex].id)}
         className="unlike-button"
         aria-label="unlike post"
+        title="Unlike the post"
+        tabIndex="0"
         icon
         content={<Icon name="like" />}
       />

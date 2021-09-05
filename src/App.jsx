@@ -13,7 +13,12 @@ import LogOutPage from './logout/LogOutPage';
 
 function App() {
   return (
-    <main>
+    <>
+      <div role="navigation">
+        <a className="skip-to-content-link" href="#main">
+          Skip to content
+        </a>
+      </div>
       <Switch>
         <Route path="/" component={HomePage} exact />
         <Route path="/register" component={RegisterPage} />
@@ -27,7 +32,7 @@ function App() {
         <Route path="/log_out" component={LogOutPage} />
         <Route component={Error} />
       </Switch>
-    </main>
+    </>
   );
 }
 

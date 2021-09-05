@@ -47,15 +47,16 @@ const FeedPage = ({
     <Button
       id="load-more-posts"
       onClick={() => loadPosts(auth, page)}
+      tabIndex="0"
     >
-      Load More!
+      Load More Posts!
     </Button>
   ) : null;
 
   return (
-    <div>
+    <>
       <TopBar />
-      <Grid>
+      <Grid role="main" id="main">
         <Grid.Row columns="three">
           <Grid.Column />
           <Grid.Column>
@@ -78,7 +79,7 @@ const FeedPage = ({
           <Grid.Column />
         </Grid.Row>
       </Grid>
-    </div>
+    </>
   );
 };
 

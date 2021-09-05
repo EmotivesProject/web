@@ -131,75 +131,74 @@ const MessengerPage = ({
   return (
     <>
       <TopBar key={Math.random().toString(36).substr(2, 9)} />
-      <Grid id="grid-page">
-        <Grid.Row columns={3}>
-          <Grid.Column width={5}>
-            <br />
-            <Segment raised id="messenger-list">
-              <Header content="Active Users" />
-              {activeUsers.map((user) => {
-                if (user.username !== auth.username) {
-                  return (
-                    <div key={Math.random().toString(36).substr(2, 9)}>
-                      <Button
-                        className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
-                        content={user.username}
-                        key={Math.random().toString(36).substr(2, 9)}
-                        onClick={() => {
-                          switchPersonTalking(user.username, talkingTo);
-                        }}
-                      />
-                      <br />
-                    </div>
-                  );
-                }
-                return null;
-              })}
-              <Header content="Offline Users" />
-              {inactiveUsers.map((user) => {
-                if (user.username !== auth.username) {
-                  return (
-                    <div key={Math.random().toString(36).substr(2, 9)}>
-                      <Button
-                        className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
-                        content={user.username}
-                        key={Math.random().toString(36).substr(2, 9)}
-                        onClick={() => switchPersonTalking(user.username, talkingTo)}
-                        positive={user.active}
-                      />
-                      <br />
-                    </div>
-                  );
-                }
-                return null;
-              })}
-            </Segment>
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <br />
-            <h1>
-              Instant Message
-            </h1>
-            <Segment id="messenger-feed">
-              {errorMessage}
-              <Grid.Row id="messenger-title">
-                {defaultMessage}
-              </Grid.Row>
-              <Divider />
-              <div ref={chatContainer} id="messenger-items">
-                <Grid.Row>
-                  {availableMessages}
+      <div role="main" id="main">
+        <Grid id="grid-page">
+          <Grid.Row columns={3}>
+            <Grid.Column width={5}>
+              <Segment raised id="messenger-list">
+                <Header content="Active Users" />
+                {activeUsers.map((user) => {
+                  if (user.username !== auth.username) {
+                    return (
+                      <div key={Math.random().toString(36).substr(2, 9)}>
+                        <Button
+                          className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
+                          content={user.username}
+                          key={Math.random().toString(36).substr(2, 9)}
+                          onClick={() => {
+                            switchPersonTalking(user.username, talkingTo);
+                          }}
+                        />
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
+                <Header content="Offline Users" />
+                {inactiveUsers.map((user) => {
+                  if (user.username !== auth.username) {
+                    return (
+                      <div key={Math.random().toString(36).substr(2, 9)}>
+                        <Button
+                          className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
+                          content={user.username}
+                          key={Math.random().toString(36).substr(2, 9)}
+                          onClick={() => switchPersonTalking(user.username, talkingTo)}
+                          positive={user.active}
+                        />
+                        <br />
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <h1>
+                Instant Message
+              </h1>
+              <Segment id="messenger-feed">
+                {errorMessage}
+                <Grid.Row id="messenger-title">
+                  {defaultMessage}
                 </Grid.Row>
-              </div>
-              <Divider />
-              <Grid.Row id="messenger-new-message" key={Math.random().toString(36).substr(2, 9)}>
-                {newMessageButton}
-              </Grid.Row>
-            </Segment>
-          </Grid.Column>
-          <Grid.Column width={5} />
-        </Grid.Row>
-      </Grid>
+                <Divider />
+                <div ref={chatContainer} id="messenger-items">
+                  <Grid.Row>
+                    {availableMessages}
+                  </Grid.Row>
+                </div>
+                <Divider />
+                <Grid.Row id="messenger-new-message" key={Math.random().toString(36).substr(2, 9)}>
+                  {newMessageButton}
+                </Grid.Row>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width={5} />
+          </Grid.Row>
+        </Grid>
+      </div>
     </>
   );
 };
