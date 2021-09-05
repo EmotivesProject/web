@@ -6,35 +6,33 @@ import {
 } from 'semantic-ui-react';
 
 const TopBar = () => (
-  <Segment fixed="top" id="top-bar">
+  <Segment fixed="top" id="top-bar" role="banner">
     <Grid columns={6}>
       <Grid.Column>
-        <Link to="/feed">
-          Emotives
-        </Link>
+        Emotives
       </Grid.Column>
       <Grid.Column>
-        <Link to="/feed">
+        <Link to="/feed" tabIndex="0">
           Home
         </Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/explore">
+        <Link to="/explore" tabIndex="0">
           Explore
         </Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/messenger">
+        <Link to="/messenger" tabIndex="0">
           Messages
         </Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/notifications">
+        <Link to="/notifications" tabIndex="0">
           Notifications
         </Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/log_out">
+        <Link to="/log_out" tabIndex="0">
           Log Out
         </Link>
       </Grid.Column>

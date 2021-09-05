@@ -55,9 +55,9 @@ const NotificationPage = ({
   ) : null;
 
   return (
-    <div>
+    <>
       <TopBar />
-      <Grid>
+      <Grid role="main" id="main">
         <Grid.Row columns="three">
           <Grid.Column />
           <Grid.Column>
@@ -75,7 +75,7 @@ const NotificationPage = ({
           <Grid.Column />
         </Grid.Row>
       </Grid>
-    </div>
+    </>
   );
 };
 

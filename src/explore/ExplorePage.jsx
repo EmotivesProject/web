@@ -30,7 +30,7 @@ import AutoComplete from './AutoComplete';
 
 // See https://developers.google.com/maps/documentation/javascript/reference/map
 
-const fetchMorePostRate = 1000 * 5; // 10 seconds
+const fetchMorePostRate = 1000 * 5; // 10 seconds. Do not reduce to below 5 seconds!
 
 const defaultZoom = 15;
 
@@ -66,12 +66,13 @@ const ExplorePage = ({
   }
 
   const [explore, setExplore] = React.useState(true);
+  const [pauseLoading, setPauseLoading] = React.useState(false);
   const [newPost, setNewPost] = React.useState(null);
 
   // Used to constantly load new posts
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!finished) {
+      if (!finished && !pauseLoading) {
         loadPosts(auth, page);
       }
     }, fetchMorePostRate);
@@ -113,6 +114,10 @@ const ExplorePage = ({
   const toggleExplore = () => {
     setExplore(!explore);
     setNewPost(null);
+  };
+
+  const switchPauseLoading = () => {
+    setPauseLoading(!pauseLoading);
   };
 
   const mapDragged = (e) => {
@@ -169,48 +174,63 @@ const ExplorePage = ({
     );
   }
 
+  const pauseLoadingButtonText = pauseLoading ? 'Unpause Loading' : 'Pause Loading';
+
   return (
     <>
       <TopBar />
-      <Grid columns={5} textAlign="center">
-        <Grid.Column>
-          <h1>
-            Explore
-          </h1>
-        </Grid.Column>
-        <Grid.Column>
-          <Button
-            onClick={toggleExplore}
-            id="new-flag"
+      <div role="main" id="main">
+        <Grid columns={5} textAlign="center">
+          <Grid.Column>
+            <h1>
+              Explore
+            </h1>
+          </Grid.Column>
+          <Grid.Column>
+            <Button
+              onClick={toggleExplore}
+              id="new-flag"
+              tabIndex="0"
+            >
+              {explore ? 'Set New Flag?' : 'Just Explore'}
+            </Button>
+          </Grid.Column>
+          <Grid.Column>
+            <Button
+              tabIndex="0"
+              onClick={panToMe}
+              id="pan-button"
+            >
+              Centre to me
+            </Button>
+          </Grid.Column>
+          <Grid.Column>
+            <AutoComplete panTo={panTo} currentPos={initialCentre} />
+          </Grid.Column>
+          <Grid.Column>
+            <Button
+              tabIndex="0"
+              onClick={switchPauseLoading}
+              id="switch-loading-button"
+            >
+              {pauseLoadingButtonText}
+            </Button>
+          </Grid.Column>
+        </Grid>
+        <br />
+        <div style={{ height: '85vh', width: '100%' }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+            defaultCenter={initialCentre}
+            defaultZoom={defaultZoom}
+            onClick={(e) => mapClicked(e)}
+            yesIWantToUseGoogleMapApiInternals
+            onGoogleApiLoaded={onMapLoad}
+            onDrag={(e) => mapDragged(e)}
           >
-            {explore ? 'Set New Flag?' : 'Just Explore'}
-          </Button>
-        </Grid.Column>
-        <Grid.Column>
-          <Button
-            onClick={panToMe}
-            id="pan-button"
-          >
-            Centre to me
-          </Button>
-        </Grid.Column>
-        <Grid.Column>
-          <AutoComplete panTo={panTo} currentPos={initialCentre} />
-        </Grid.Column>
-      </Grid>
-      <br />
-      <div style={{ height: '85vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
-          defaultCenter={initialCentre}
-          defaultZoom={defaultZoom}
-          onClick={(e) => mapClicked(e)}
-          yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={onMapLoad}
-          onDrag={(e) => mapDragged(e)}
-        >
-          {markers}
-        </GoogleMapReact>
+            {markers}
+          </GoogleMapReact>
+        </div>
       </div>
     </>
   );
