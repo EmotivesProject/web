@@ -1,6 +1,7 @@
 import GraphemeSplitter from 'grapheme-splitter';
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
+import shuffle from '../utils/shuffle';
 
 const splitter = new GraphemeSplitter();
 
@@ -8,7 +9,8 @@ const PostEmojis = ({
   data,
 }) => {
   const emojisArray = splitter.splitGraphemes(data);
-  const emojis = [...new Set(emojisArray)];
+  let emojis = [...new Set(emojisArray)];
+  emojis = shuffle(emojis);
 
   let max = emojis.length > 6 ? 6 : emojis.length;
   const top = emojis.slice(0, max);
