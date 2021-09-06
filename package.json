@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "dotenv": "^8.6.0",
     "google-map-react": "^2.1.10",
+    "grapheme-splitter": "^1.0.4",
     "javascript-time-ago": "^2.3.8",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.2",

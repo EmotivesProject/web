@@ -63,6 +63,7 @@ const EmojiInput = ({
           <Input
             placeholder="Waiting for input..."
             value={currentInput}
+            onChange={(e) => setCurrentInput(e.target.value)}
             id="emoji-input"
             fluid
           />

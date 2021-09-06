@@ -79,7 +79,7 @@ const Post = ({
   const topReactions = data.emoji_count.length !== 0 ? (
     <div>
       <Divider />
-      <Header as="h3">Top Reactions</Header>
+      <Header as="h3">Reactions</Header>
       <PostEmojis key={data.post.id} data={data.emoji_count} />
     </div>
   ) : null;
