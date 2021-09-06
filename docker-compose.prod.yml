@@ -10,7 +10,7 @@ services:
       driver: syslog
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=Host(`www.emotives.net`)"
+      - "traefik.http.routers.web.rule=Host(`www.emotives.net`) || Host(`emotives.net`)"
       - "traefik.http.routers.web.tls=true"
       - "traefik.http.routers.web.tls.certresolver=letsencrypt"
     networks:
