@@ -35,18 +35,31 @@ const Marker = ({
 
   const likeString = `${data.likes ? data.likes.length : 0} likes `;
 
-  let button = <Button onClick={() => likePost(auth, data.post.id)} icon id="like-button"><Icon name="like" /></Button>;
+  let button = (
+    <Button
+      onClick={() => likePost(auth, data.post.id)}
+      className="like-button"
+      icon
+      aria-label="like post"
+      title="Like the post"
+      tabIndex="0"
+      content={<Icon name="like" />}
+    />
+  );
+
   const likeArray = data.likes ? data.likes : [];
   const likeIndex = likeArray.findIndex((like) => like.username === auth.username);
   if (likeIndex !== -1) {
     button = (
       <Button
         onClick={() => unlikePost(auth, data.post.id, likeArray[likeIndex].id)}
-        id="unlike-button"
+        className="unlike-button"
+        aria-label="unlike post"
+        title="Unlike the post"
+        tabIndex="0"
         icon
-      >
-        <Icon name="like" />
-      </Button>
+        content={<Icon name="like" />}
+      />
     );
   }
 
