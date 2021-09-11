@@ -29,9 +29,12 @@ const notificationState = (state = initialState, action) => {
       let notifs = [];
       let newPage = 0;
       let finished = false;
-      if (notifications != null) {
+      if (notifications != null && notifications.length === 5) {
         notifs = state.notifications.concat(notifications);
         newPage = page + 1;
+      } else if (notifications.length !== 5) {
+        notifs = state.notifications.concat(notifications);
+        finished = true;
       } else {
         finished = true;
         notifs = state.notifications;
