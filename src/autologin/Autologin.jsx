@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { Grid, Form, Button } from 'semantic-ui-react';
+import {
+  Grid, Form, Button, Message,
+} from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
+
+const host = process.env.REACT_APP_API_HOST;
+const base = process.env.REACT_APP_UACL_BASE_URL;
+const url = `${host}://${base}/autologin`;
 
 // Page that is used to create autologin tokens
 const Autologin = ({ auth }) => {
@@ -14,17 +20,31 @@ const Autologin = ({ auth }) => {
   }
 
   const [usernameForValue, setUsernameForValue] = useState('');
-  const [createdToken, setCreatedToken] = useState(null);
+  const [initialized, setInitialized] = useState(false);
+  const [autologinTokens, setAutologinTokens] = useState([]);
+
+  if (!initialized) {
+    setInitialized(true);
+    axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    })
+      .then((result) => {
+        const { data } = result;
+        let responseResult = data ? data.result : null;
+        if (responseResult === null) {
+          responseResult = [];
+        }
+        setAutologinTokens(responseResult);
+      });
+  }
 
   // Prevent default submission and attempt to create an autologin token
   // using the input. Not handling any errors since it should only be used
   // rarely
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const host = process.env.REACT_APP_API_HOST;
-    const base = process.env.REACT_APP_UACL_BASE_URL;
-    const url = `${host}://${base}/autologin`;
 
     axios.post(url,
       JSON.stringify({
@@ -37,22 +57,32 @@ const Autologin = ({ auth }) => {
       .then((result) => {
         const { data } = result;
         const responseResult = data ? data.result : null;
-        const autologinURL = `${responseResult.site}${responseResult.autologin_token}`;
-        setCreatedToken(autologinURL);
+        setAutologinTokens([responseResult, ...autologinTokens]);
       });
   };
 
-  // If the createdToken is set then display it.
-  const resultDiv = createdToken !== null ? (
-    <div>
-      <h2>
-        Created token is:
-      </h2>
-      <h4>
-        {createdToken}
-      </h4>
-    </div>
-  ) : null;
+  const handleDelete = (e, token) => {
+    e.preventDefault();
+
+    /* eslint-disable no-alert */
+    if (!window.confirm('Are you sure?')) {
+      return;
+    }
+
+    const deleteURL = `${url}/${token}`;
+
+    axios.delete(deleteURL, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    })
+      .then(() => {
+        const currentTokens = autologinTokens.filter((aToken) => (
+          aToken.autologin_token !== token
+        ));
+        setAutologinTokens(currentTokens);
+      });
+  };
 
   return (
     <div>
@@ -83,7 +113,28 @@ const Autologin = ({ auth }) => {
               <br />
               <Button id="typical-button">Create</Button>
             </Form>
-            {resultDiv}
+            {autologinTokens.map((autologin) => (
+              <Message
+                key={Math.random().toString(36).substr(2, 9)}
+                className="autologin-message"
+              >
+                <Message.Header>{autologin.username}</Message.Header>
+                {`${autologin.site}${autologin.autologin_token}`}
+                <br />
+                <Button
+                  onClick={() => (navigator.clipboard.writeText(`${autologin.site}${autologin.autologin_token}`))}
+                  primary
+                >
+                  Copy
+                </Button>
+                <Button
+                  onClick={(e) => handleDelete(e, autologin.autologin_token)}
+                  negative
+                >
+                  Delete
+                </Button>
+              </Message>
+            ))}
           </Grid.Column>
           <Grid.Column />
         </Grid.Row>
