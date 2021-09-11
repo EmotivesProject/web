@@ -90,6 +90,11 @@ body {
   font-size: 1.25em;
 }
 
+.ui.message.autologin-message {
+  width: 200%;
+  right: 50%;
+}
+
 #like-button-marker {
   background-color: darkgray;
   color: #ffffff;
