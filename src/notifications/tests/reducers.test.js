@@ -204,7 +204,7 @@ describe('The notification reducer can interact with notification state', () => 
         seen: false,
       }],
       page: 1,
-      finished: false,
+      finished: true,
       loading: false,
       errors: null,
     };

@@ -34,6 +34,7 @@ const notificationState = (state = initialState, action) => {
         newPage = page + 1;
       } else if (notifications.length !== 5) {
         notifs = state.notifications.concat(notifications);
+        newPage = page + 1;
         finished = true;
       } else {
         finished = true;
