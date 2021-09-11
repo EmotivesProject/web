@@ -88,11 +88,11 @@ const EmojiInput = ({
           className="emoji-selection-button"
           icon
           labelPosition="left"
-          onClick={() => setCurrentInput(currentInput.slice(0, -2))}
+          onClick={() => setCurrentInput('')}
           negative
         >
           <Icon name="cancel" />
-          Delete Last Emoji
+          Delete Emoji Input
         </Button>
         <Button
           className="emoji-selection-button"

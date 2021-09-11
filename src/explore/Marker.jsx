@@ -80,15 +80,15 @@ const Marker = ({
     );
   }
 
-  const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : null;
-  const reactionString = data.post.content.reaction ? ` - ${data.post.content.reaction}` : null;
+  const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : '';
+  const reactionString = data.post.content.reaction ? ` - ${data.post.content.reaction}` : '';
 
   const title = `${data.post.username} ${visitedString} ${reactionString} ${time}`;
 
   const topReactions = data.emoji_count.length !== 0 ? (
     <div>
       <Divider />
-      <Header as="h2">Top Reactions</Header>
+      <Header as="h2">Reactions</Header>
       <PostEmojis key={data.post.id} data={data.emoji_count} />
     </div>
   ) : null;
