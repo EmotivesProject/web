@@ -34,6 +34,10 @@ body {
   background-color: #003e85;
 }
 
+#notification-has-not-seen:hover {
+  background-color: #CDCDCD;
+}
+
 #typical-button-register {
   background-color: #006ac0;
   color: #ffffff;
