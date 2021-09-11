@@ -10,6 +10,7 @@ import {
 import getAuth from '../auth/selector';
 import EmojiInput from '../shared/EmojiInput';
 import TopBar from '../shared/TopBar';
+import extractPendingMessages from '../utils/extractPendingMessages';
 import MessengerMessage from './MessengerMessage';
 import {
   getClient,
@@ -128,6 +129,8 @@ const MessengerPage = ({
       />
     );
 
+  const pendingMessages = extractPendingMessages(messages, talkingTo);
+
   return (
     <>
       <TopBar key={Math.random().toString(36).substr(2, 9)} />
@@ -139,11 +142,15 @@ const MessengerPage = ({
                 <Header content="Active Users" />
                 {activeUsers.map((user) => {
                   if (user.username !== auth.username) {
+                    const data = pendingMessages.find((pendingMessage) => (
+                      pendingMessage.username_from === user.username
+                    ));
+                    const content = data ? `${user.username} (${data.total})` : `${user.username}`;
                     return (
                       <div key={Math.random().toString(36).substr(2, 9)}>
                         <Button
                           className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
-                          content={user.username}
+                          content={content}
                           key={Math.random().toString(36).substr(2, 9)}
                           onClick={() => {
                             switchPersonTalking(user.username, talkingTo);
