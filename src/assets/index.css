@@ -259,8 +259,9 @@ body {
 }
 
 .ui.button.emoji-selection {
-  min-width: 100%;
   font-size: xx-large;
+  padding: 10px 20px 10px 20px;
+  margin: 5px;
 }
 
 .ui.button.emoji-selection-button {
