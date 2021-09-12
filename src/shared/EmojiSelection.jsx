@@ -15,7 +15,7 @@ const EmojiSelection = ({ page, action }) => {
 
   if (firstArray.length > 0) {
     row = (
-      <div style={{ margin: 'auto' }}>
+      <div style={{ margin: 'auto', textAlign: 'center' }}>
         {firstArray.map((emoji) => (
           <Button
             className="emoji-selection"
