@@ -3,7 +3,7 @@ import {
   Button, Input, Modal, Pagination, Icon,
 } from 'semantic-ui-react';
 import EmojiSelection from './EmojiSelection';
-import Emojis from '../constants/Emojis';
+import Emojis, { NumberPerPage } from '../constants/Emojis';
 
 // Overly complex emoji Input that can action a lot of different things
 const EmojiInput = ({
@@ -28,7 +28,7 @@ const EmojiInput = ({
   const [page, setPage] = React.useState(1);
 
   // Number of emoji panels
-  const totalPages = Math.ceil(Emojis.length / 6);
+  const totalPages = Math.ceil(Emojis.length / NumberPerPage);
 
   // Basic functions that help the modal
   const updateCurrentInput = (str) => {
