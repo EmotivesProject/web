@@ -68,6 +68,7 @@ const ExplorePage = ({
   const [explore, setExplore] = React.useState(true);
   const [pauseLoading, setPauseLoading] = React.useState(false);
   const [newPost, setNewPost] = React.useState(null);
+  const [modelOpen, setModalOpen] = React.useState(false);
 
   // Used to constantly load new posts
   useEffect(() => {
@@ -128,7 +129,7 @@ const ExplorePage = ({
   };
 
   const mapClicked = (e) => {
-    if (!explore) {
+    if (!explore && !modelOpen) {
       setNewPost(e);
     }
   };
@@ -170,6 +171,7 @@ const ExplorePage = ({
         info={newPost}
         auth={auth}
         setExplore={setExplore}
+        setModalOpen={setModalOpen}
       />
     );
   }

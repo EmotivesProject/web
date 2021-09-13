@@ -22,6 +22,7 @@ const TempMarker = ({
   info,
   auth,
   setExplore,
+  setModalOpen,
 }) => {
   const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
@@ -41,8 +42,14 @@ const TempMarker = ({
     <div style={markerStyle}>
       <Modal
         closeIcon
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
+        onClose={() => {
+          setOpen(false);
+          setModalOpen(false);
+        }}
+        onOpen={() => {
+          setOpen(true);
+          setModalOpen(true);
+        }}
         open={open}
         trigger={<button type="button" className="invis-button">🚩</button>}
       >
