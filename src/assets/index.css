@@ -218,7 +218,7 @@ body {
 }
 
 #messenger-new-message {
-  height: 10%;
+  text-align: center;
 }
 
 .ui.button.emoji-messenger-input-button {
@@ -228,10 +228,6 @@ body {
   background-color: #006ac0;
   color: #ffffff;
   font-size: 1.25em;
-}
-
-#messenger-new-message {
-  text-align: center;
 }
 
 #default-message {
@@ -270,18 +266,34 @@ body {
 
 #google-maps-div {
   width: 100%;
-  height: 85vh;
+  height: 82vh;
 }
 
 @media only screen and (max-height: 1024px) {
   #google-maps-div {
     height: 76vh;
   }
+
+  #messenger-items {
+    height: 80%;
+  }
+
+  #messenger-feed {
+    height: 83vh;
+  }
 }
 
 @media only screen and (max-height: 769px) {
   #google-maps-div {
     height: 68vh;
+  }
+
+  #messenger-items {
+    height: 75%;
+  }
+
+  #messenger-feed {
+    height: 78vh;
   }
 }
 
