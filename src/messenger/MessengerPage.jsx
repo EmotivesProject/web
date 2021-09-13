@@ -134,8 +134,9 @@ const MessengerPage = ({
 
   const pendingMessages = extractPendingMessages(messages, talkingTo);
 
-  const middleWidth = width < 1700 ? 11 : null;
-  const sideWidths = middleWidth ? 4 : null;
+  const middleWidth = width < 1700 ? 11 : '8';
+  const sideWidths = middleWidth === 11 ? 4 : '4';
+  const finalWidth = sideWidths === '4' ? '4' : 1;
 
   return (
     <>
@@ -207,7 +208,7 @@ const MessengerPage = ({
               </Grid.Row>
             </Segment>
           </Grid.Column>
-          <Grid.Column width={0} />
+          <Grid.Column width={finalWidth} />
         </Grid>
       </div>
     </>

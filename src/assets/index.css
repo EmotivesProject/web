@@ -199,11 +199,7 @@ body {
 }
 
 #messenger-feed {
-  height: 90vh;
-}
-
-#grid-page {
-  overflow: hidden;
+  height: 86vh;
 }
 
 #messenger-title {
