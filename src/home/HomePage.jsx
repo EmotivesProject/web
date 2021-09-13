@@ -6,6 +6,7 @@ import HomeRegister from './HomeRegister';
 import LogInForm from '../shared/LogInForm';
 import getAuth from '../auth/selector';
 import logo from '../assets/EmotivesLogo.svg';
+import useWindowDimensions from '../shared/useWindowDimensions';
 
 const HomePage = ({ auth }) => {
   // If user is authenticated then redirect them to the feed
@@ -13,20 +14,22 @@ const HomePage = ({ auth }) => {
     return <Redirect to="/feed" />;
   }
 
+  const { width } = useWindowDimensions();
+
+  const middleWidth = width < 1700 ? 12 : 5;
+
   return (
     <div role="main" id="main">
-      <Grid textAlign="center" style={{ height: '75vh' }} divided="vertically" verticalAlign="middle">
-        <Grid.Row columns={3}>
-          <Grid.Column width={5}>
-            <img src={logo} alt="emotives" />
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <LogInForm />
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <HomeRegister />
-          </Grid.Column>
-        </Grid.Row>
+      <Grid textAlign="center" style={{ height: '75vh' }} verticalAlign="middle" stackable>
+        <Grid.Column width={middleWidth}>
+          <img src={logo} alt="emotives" />
+        </Grid.Column>
+        <Grid.Column width={middleWidth}>
+          <LogInForm />
+        </Grid.Column>
+        <Grid.Column width={middleWidth}>
+          <HomeRegister />
+        </Grid.Column>
       </Grid>
     </div>
   );

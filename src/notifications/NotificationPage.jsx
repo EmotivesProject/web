@@ -9,6 +9,7 @@ import {
 } from './selector';
 import { getNotificationsRequest, seenNotificationsRequest } from './thunks';
 import Notification from './Notification';
+import useWindowDimensions from '../shared/useWindowDimensions';
 
 let initialized = false;
 
@@ -21,6 +22,8 @@ const NotificationPage = ({
   seenNotification,
   page,
 }) => {
+  const { width } = useWindowDimensions();
+
   if (auth === null) {
     return <Redirect to="/" />;
   }
@@ -54,13 +57,16 @@ const NotificationPage = ({
     </Button>
   ) : null;
 
+  const middleWidth = width < 1700 ? 12 : null;
+  const sideWidths = middleWidth ? 2 : null;
+
   return (
     <>
       <TopBar />
       <Grid role="main" id="main">
         <Grid.Row columns="three">
-          <Grid.Column />
-          <Grid.Column>
+          <Grid.Column width={sideWidths} />
+          <Grid.Column width={middleWidth}>
             {errorMessage}
             <h1>Notifications</h1>
             {notifications.map((notification) => (
@@ -72,7 +78,7 @@ const NotificationPage = ({
             ))}
             {button}
           </Grid.Column>
-          <Grid.Column />
+          <Grid.Column width={sideWidths} />
         </Grid.Row>
       </Grid>
     </>

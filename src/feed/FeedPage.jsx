@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import { Grid, Message, Button } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
+import useWindowDimensions from '../shared/useWindowDimensions';
 import Post from './Post';
 import {
   getError,
@@ -23,6 +24,8 @@ let initialized = false;
 const FeedPage = ({
   auth, posts, page, loadPosts, likePost, commentPost, unlikePost, errors, finished,
 }) => {
+  const { width } = useWindowDimensions();
+
   if (auth === null) {
     return <Redirect to="/" />;
   }
@@ -53,13 +56,16 @@ const FeedPage = ({
     </Button>
   ) : null;
 
+  const middleWidth = width < 1700 ? 12 : null;
+  const sideWidths = middleWidth ? 2 : null;
+
   return (
     <>
       <TopBar />
       <Grid role="main" id="main">
         <Grid.Row columns="three">
-          <Grid.Column />
-          <Grid.Column>
+          <Grid.Column width={sideWidths} />
+          <Grid.Column width={middleWidth}>
             <h1>
               Feed
             </h1>
@@ -76,7 +82,7 @@ const FeedPage = ({
             ))}
             {loadMoreButton}
           </Grid.Column>
-          <Grid.Column />
+          <Grid.Column width={sideWidths} />
         </Grid.Row>
       </Grid>
     </>

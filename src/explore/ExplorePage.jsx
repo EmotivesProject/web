@@ -180,12 +180,16 @@ const ExplorePage = ({
     <>
       <TopBar />
       <div role="main" id="main">
-        <Grid columns={5} textAlign="center">
+        <Grid columns={3} textAlign="center">
+          <Grid.Column />
           <Grid.Column>
             <h1>
               Explore
             </h1>
           </Grid.Column>
+          <Grid.Column />
+        </Grid>
+        <Grid columns={4} textAlign="center">
           <Grid.Column>
             <Button
               onClick={toggleExplore}

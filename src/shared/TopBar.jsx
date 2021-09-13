@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import {
   Grid,
+  Icon,
   Segment,
 } from 'semantic-ui-react';
 
@@ -13,27 +14,27 @@ const TopBar = () => (
       </Grid.Column>
       <Grid.Column>
         <Link to="/feed" tabIndex="0">
-          Home
+          <Icon name="home" />
         </Link>
       </Grid.Column>
       <Grid.Column>
         <Link to="/explore" tabIndex="0">
-          Explore
+          <Icon name="map" />
         </Link>
       </Grid.Column>
       <Grid.Column>
         <Link to="/messenger" tabIndex="0">
-          Messages
+          <Icon name="comments outline" />
         </Link>
       </Grid.Column>
       <Grid.Column>
         <Link to="/notifications" tabIndex="0">
-          Notifications
+          <Icon name="bell outline" />
         </Link>
       </Grid.Column>
       <Grid.Column>
         <Link to="/log_out" tabIndex="0">
-          Log Out
+          <Icon name="sign-out" />
         </Link>
       </Grid.Column>
     </Grid>
