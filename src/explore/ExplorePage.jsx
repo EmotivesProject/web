@@ -180,12 +180,16 @@ const ExplorePage = ({
     <>
       <TopBar />
       <div role="main" id="main">
-        <Grid columns={5} textAlign="center">
+        <Grid columns={3} textAlign="center">
+          <Grid.Column />
           <Grid.Column>
             <h1>
               Explore
             </h1>
           </Grid.Column>
+          <Grid.Column />
+        </Grid>
+        <Grid columns={4} textAlign="center">
           <Grid.Column>
             <Button
               onClick={toggleExplore}
@@ -218,7 +222,7 @@ const ExplorePage = ({
           </Grid.Column>
         </Grid>
         <br />
-        <div style={{ height: '85vh', width: '100%' }}>
+        <div id="google-maps-div">
           <GoogleMapReact
             bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
             defaultCenter={initialCentre}

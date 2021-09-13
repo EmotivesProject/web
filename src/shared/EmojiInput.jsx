@@ -83,7 +83,7 @@ const EmojiInput = ({
           />
         </div>
       </Modal.Content>
-      <Modal.Actions>
+      <Modal.Actions style={{ display: 'flex', float: 'right' }}>
         <Button
           className="emoji-selection-button"
           icon

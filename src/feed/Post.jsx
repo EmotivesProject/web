@@ -93,7 +93,7 @@ const Post = ({
   ) : null;
 
   return (
-    <Segment id="main-post-segment">
+    <Segment className="main-post-segment">
       <Container>
         <Header as="h2" dividing>
           {data.post.username}

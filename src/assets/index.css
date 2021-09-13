@@ -3,6 +3,10 @@
   src: local('Roboto-Regular'), url(./Roboto-Regular.ttf) format('opentype');
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Roboto-Regular';
   background-color: #E8E8E8;
@@ -50,6 +54,10 @@ body {
 #register-button {
   background-color: #006ac0;
   color: #ffffff;
+}
+
+#ExploreComboBox {
+  width: 175px;
 }
 
 #register-button:hover {
@@ -181,19 +189,17 @@ body {
 }
 
 #messenger-list {
-  width: 50%;
+  width: 87.5%;
   left: 25%;
   text-align: center;
   max-height: 100%;
   overflow: auto;
+  padding: 5px;
+  left: 12.5%;
 }
 
 #messenger-feed {
-  height: 90vh;
-}
-
-#grid-page {
-  overflow: hidden;
+  height: 86vh;
 }
 
 #messenger-title {
@@ -208,7 +214,7 @@ body {
 }
 
 #messenger-new-message {
-  height: 10%;
+  text-align: center;
 }
 
 .ui.button.emoji-messenger-input-button {
@@ -218,10 +224,6 @@ body {
   background-color: #006ac0;
   color: #ffffff;
   font-size: 1.25em;
-}
-
-#messenger-new-message {
-  text-align: center;
 }
 
 #default-message {
@@ -257,6 +259,40 @@ body {
   margin-right: 30%;
   margin-left: 30%;
 }
+
+#google-maps-div {
+  width: 100%;
+  height: 82vh;
+}
+
+@media only screen and (max-height: 1024px) {
+  #google-maps-div {
+    height: 76vh;
+  }
+
+  #messenger-items {
+    height: 80%;
+  }
+
+  #messenger-feed {
+    height: 83vh;
+  }
+}
+
+@media only screen and (max-height: 769px) {
+  #google-maps-div {
+    height: 68vh;
+  }
+
+  #messenger-items {
+    height: 75%;
+  }
+
+  #messenger-feed {
+    height: 78vh;
+  }
+}
+
 
 .ui.button.emoji-selection {
   font-size: xx-large;
