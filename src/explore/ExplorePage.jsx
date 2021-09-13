@@ -222,7 +222,7 @@ const ExplorePage = ({
           </Grid.Column>
         </Grid>
         <br />
-        <div style={{ height: '85vh', width: '100%' }}>
+        <div id="google-maps-div">
           <GoogleMapReact
             bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
             defaultCenter={initialCentre}
