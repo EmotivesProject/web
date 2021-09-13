@@ -24,12 +24,12 @@ const TopBar = () => (
       </Grid.Column>
       <Grid.Column>
         <Link to="/messenger" tabIndex="0">
-          <Icon name="comments outline" />
+          <Icon name="comments" />
         </Link>
       </Grid.Column>
       <Grid.Column>
         <Link to="/notifications" tabIndex="0">
-          <Icon name="bell outline" />
+          <Icon name="bell" />
         </Link>
       </Grid.Column>
       <Grid.Column>
