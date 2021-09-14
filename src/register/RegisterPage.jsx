@@ -16,14 +16,17 @@ const RegisterPage = ({ auth }) => {
   const { width } = useWindowDimensions();
 
   const middleWidth = width < 1700 ? 12 : null;
+  const sideWidths = middleWidth ? 2 : null;
 
   return (
     <div role="main">
       <Grid textAlign="center" style={{ height: '75vh' }} divided="vertically" verticalAlign="middle">
-        <Grid.Row columns={1}>
+        <Grid.Row columns={3}>
+          <Grid.Column width={sideWidths} />
           <Grid.Column width={middleWidth}>
             <RegisterForm />
           </Grid.Column>
+          <Grid.Column width={sideWidths} />
         </Grid.Row>
       </Grid>
     </div>
