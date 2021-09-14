@@ -20,7 +20,7 @@ const RegisterPage = ({ auth }) => {
 
   return (
     <div role="main">
-      <Grid textAlign="center" style={{ height: '75vh' }} divided="vertically" verticalAlign="middle">
+      <Grid textAlign="center" style={{ height: '90vh' }} divided="vertically" verticalAlign="middle">
         <Grid.Row columns={3}>
           <Grid.Column width={sideWidths} />
           <Grid.Column width={middleWidth}>
