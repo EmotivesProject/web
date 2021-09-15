@@ -63,7 +63,7 @@ const RegisterForm = ({ onCreateAuth }) => {
       <Header as="h1" textAlign="center">
         Create an account
       </Header>
-      <Form size="large" onSubmit={handleSubmit} loading={loadingVar} role="form">
+      <Form size="large" onSubmit={handleSubmit} loading={loadingVar}>
         <Segment padded="very">
           <label htmlFor="name">
             Full name

@@ -91,7 +91,7 @@ const LogInForm = ({ onCreateAuth }) => {
         Login
       </Header>
       <Segment padded="very">
-        <Form onSubmit={handleSubmit} loading={loadingVar} role="form">
+        <Form onSubmit={handleSubmit} loading={loadingVar}>
           <label htmlFor="username">
             Username
             <Form.Input
