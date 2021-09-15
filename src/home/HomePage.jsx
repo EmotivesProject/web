@@ -10,7 +10,7 @@ import useWindowDimensions from '../shared/useWindowDimensions';
 
 const HomePage = ({ auth }) => {
   // If user is authenticated then redirect them to the feed
-  if (auth !== null) {
+  if (auth !== null && auth.username !== undefined) {
     return <Redirect to="/feed" />;
   }
 
