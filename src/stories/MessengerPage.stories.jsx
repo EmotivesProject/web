@@ -3,16 +3,16 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import '../assets/index.css';
-import { MessengerPage } from '../messenger/MessengerPage';
+import { NoStoreMessengerPage } from '../messenger/MessengerPage';
 
 export default {
   title: 'Messenger Page',
-  component: MessengerPage,
+  component: NoStoreMessengerPage,
 };
 
 const PageTemplate = (args) => (
   <BrowserRouter>
-    <MessengerPage {...args} />
+    <NoStoreMessengerPage {...args} />
   </BrowserRouter>
 );
 
