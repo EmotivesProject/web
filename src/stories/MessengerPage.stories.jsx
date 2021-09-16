@@ -3,21 +3,21 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import '../assets/index.css';
-import { NoStoreMessengerPage } from '../messenger/MessengerPage';
+import { MessengerPage } from '../messenger/MessengerPage';
 
 export default {
   title: 'Messenger Page',
-  component: NoStoreMessengerPage,
+  component: MessengerPage,
 };
 
 const PageTemplate = (args) => (
   <BrowserRouter>
-    <NoStoreMessengerPage {...args} />
+    <MessengerPage {...args} />
   </BrowserRouter>
 );
 
-export const DefaultMessengerPage = PageTemplate.bind({});
-DefaultMessengerPage.args = {
+export const DefaultNotificationPage = PageTemplate.bind({});
+DefaultNotificationPage.args = {
   auth: {
     username: 'test',
     token: 'fake-token',
