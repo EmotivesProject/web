@@ -3,23 +3,27 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import '../assets/index.css';
-import HomePage from '../home/HomePage';
+import NotificationPage from '../notifications/NotificationPage';
 import store from '../store';
 
 export default {
-  title: 'Home Page',
-  component: HomePage,
+  title: 'Notification Page',
+  component: NotificationPage,
 };
 
 const PageTemplate = (args) => (
   <Provider store={store}>
     <BrowserRouter>
-      <HomePage {...args} />
+      <NotificationPage {...args} />
     </BrowserRouter>
   </Provider>
 );
 
-export const DefaultHomePage = PageTemplate.bind({});
-DefaultHomePage.args = {
-  auth: null,
+export const DefaultNotificationPage = PageTemplate.bind({});
+DefaultNotificationPage.args = {
+  auth: {
+    username: 'test',
+    token: 'fake-token',
+    refresh_token: 'refreshToken',
+  },
 };
