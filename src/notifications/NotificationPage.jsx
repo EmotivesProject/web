@@ -13,7 +13,7 @@ import useWindowDimensions from '../shared/useWindowDimensions';
 
 let initialized = false;
 
-const NotificationPage = ({
+export const NotificationPage = ({
   auth,
   notifications,
   error,

@@ -48,7 +48,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const ExplorePage = ({
+export const ExplorePage = ({
   auth,
   posts,
   loadPosts,

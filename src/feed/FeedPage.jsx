@@ -21,7 +21,7 @@ import {
 
 let initialized = false;
 
-const FeedPage = ({
+export const FeedPage = ({
   auth, posts, page, loadPosts, likePost, commentPost, unlikePost, errors, finished,
 }) => {
   const { width } = useWindowDimensions();
