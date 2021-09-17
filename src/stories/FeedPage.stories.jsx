@@ -17,6 +17,11 @@ const PageTemplate = (args) => (
 );
 
 export const DefaultFeedPage = PageTemplate.bind({});
+DefaultFeedPage.parameters = {
+  axe: {
+    skip: true,
+  },
+};
 DefaultFeedPage.args = {
   auth: {
     username: 'test',

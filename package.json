@@ -39,7 +39,7 @@
     "lint": "npx eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "npx eslint 'src/**/*.{js,jsx}' --fix",
     "storybook:axe": "build-storybook && axe-storybook",
-    "storybook:axe:headless": "build-storybook && axe-storybook -- --headless false --browser firefox",
+    "storybook:axe:headless": "build-storybook -s public && axe-storybook -- --headless false --browser firefox",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },

@@ -22,8 +22,9 @@ const EmojiInput = ({
   openState,
   setTitle,
   setExplore,
+  initialOpen,
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(initialOpen);
   const [currentInput, setCurrentInput] = React.useState('');
   const [page, setPage] = React.useState(1);
 

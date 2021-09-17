@@ -19,10 +19,10 @@ const EmojiSelection = ({ page, action }) => {
         {firstArray.map((emoji) => (
           <Button
             className="emoji-selection"
+            key={Math.random().toString(36).substr(2, 9)}
             content={emoji}
             aria-label="Emoji selection button"
             onClick={() => action(emoji)}
-            positive
           />
         ))}
       </div>
@@ -30,7 +30,7 @@ const EmojiSelection = ({ page, action }) => {
   }
 
   return (
-    <Grid columns={limit}>
+    <Grid>
       {row}
     </Grid>
   );

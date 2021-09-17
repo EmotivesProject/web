@@ -13,27 +13,27 @@ const TopBar = () => (
         Emotives
       </Grid.Column>
       <Grid.Column>
-        <Link to="/feed" tabIndex="0">
+        <Link to="/feed" aria-label="Go Home" tabIndex="0">
           <Icon name="home" />
         </Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/explore" tabIndex="0">
+        <Link to="/explore" aria-label="Explore" tabIndex="0">
           <Icon name="map" />
         </Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/messenger" tabIndex="0">
+        <Link to="/messenger" aria-label="Messenger" tabIndex="0">
           <Icon name="comments" />
         </Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/notifications" tabIndex="0">
+        <Link to="/notifications" aria-label="Notification" tabIndex="0">
           <Icon name="bell" />
         </Link>
       </Grid.Column>
       <Grid.Column>
-        <Link to="/log_out" tabIndex="0">
+        <Link to="/log_out" aria-label="log out" tabIndex="0">
           <Icon name="sign-out" />
         </Link>
       </Grid.Column>
