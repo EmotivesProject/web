@@ -35,7 +35,7 @@ function useQuery() {
 
 let initialised = false;
 
-const MessengerPage = ({
+export const MessengerPage = ({
   auth,
   setupClientDispatch,
   client,

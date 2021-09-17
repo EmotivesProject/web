@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   Container,
@@ -13,7 +12,6 @@ import {
 import EmojiInput from '../shared/EmojiInput';
 import getTimeAgoFromObject from '../utils/date';
 import PostEmojis from './PostEmojis';
-import { getPosts } from './selector';
 
 const Post = ({
   auth, data, likePost, unlikePost, commentPost,
@@ -140,8 +138,4 @@ const Post = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  posts: getPosts(state),
-});
-
-export default connect(mapStateToProps, null)(Post);
+export default Post;

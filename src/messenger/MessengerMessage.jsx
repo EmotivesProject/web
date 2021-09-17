@@ -11,7 +11,7 @@ const MessengerMessage = ({ message, user, talkingTo }) => {
   return (
     <Message
       key={Math.random().toString(36).substr(2, 9)}
-      id={user === message.username_from ? 'messenger-message' : 'messenger-message-non-self'}
+      className={user === message.username_from ? 'messenger-message' : 'messenger-message-non-self'}
     >
       <Message.Header>
         {message.username_from}

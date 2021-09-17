@@ -160,12 +160,12 @@ body {
   background-color: #003e85;
 }
 
-#comment {
-  font-size: xx-large;
+.ui.message.notification-has-seen {
+  background-color: #a0bdbd;
 }
 
-#notification-has-seen {
-  background-color: #a0bdbd;
+#comment {
+  font-size: xx-large;
 }
 
 #main-post {
@@ -230,7 +230,7 @@ body {
   text-align: center;
 }
 
-#messenger-message {
+.ui.message.messenger-message {
   background-color: lightblue;
   font-size: large;
   width: 100%;
@@ -238,7 +238,7 @@ body {
   float: right;
 }
 
-#messenger-message-non-self {
+.ui.message.messenger-message-non-self {
   background-color: lightcyan;
   font-size: large;
   width: 100%;
@@ -298,6 +298,12 @@ body {
   font-size: xx-large;
   padding: 10px 20px 10px 20px;
   margin: 5px;
+  background-color: #40bf40;
+  color: black;
+}
+
+.ui.button.emoji-selection:hover {
+  background-color: #287728;
 }
 
 .ui.button.emoji-selection-button {

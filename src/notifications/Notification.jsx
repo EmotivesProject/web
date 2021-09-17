@@ -34,7 +34,7 @@ const Notification = ({
           icon={icon}
           header={data.title}
           content={info}
-          id={id}
+          className={id}
         />
       </a>
       <br />
