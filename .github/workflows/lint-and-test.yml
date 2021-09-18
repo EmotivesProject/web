@@ -2,7 +2,6 @@ on: [push]
 name: Lint and Test
 jobs:
   full-run:
-    if: github.event.pull_request.merged != true
     runs-on: ubuntu-latest
     strategy:
       matrix:
