@@ -38,8 +38,8 @@
     "eject": "react-scripts eject",
     "lint": "npx eslint 'src/**/*.{js,jsx}'",
     "lint:fix": "npx eslint 'src/**/*.{js,jsx}' --fix",
-    "storybook:axe": "STORYBOOK_RUN=true build-storybook && axe-storybook",
-    "storybook:axe:headless": "STORYBOOK_RUN=true build-storybook -s public && axe-storybook -- --headless false --browser firefox",
+    "storybook:axe": "STORYBOOK_RUN=true build-storybook --quiet && axe-storybook",
+    "storybook:axe:headless": "STORYBOOK_RUN=true build-storybook --quiet -s public && axe-storybook -- --headless false --browser firefox",
     "storybook": "STORYBOOK_RUN=true start-storybook -p 6006 -s public",
     "build-storybook": "STORYBOOK_RUN=true build-storybook -s public"
   },
