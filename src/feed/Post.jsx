@@ -23,7 +23,8 @@ const Post = ({
     mainInformation = content.message;
   } else {
     const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${content.latitude},${content.longitude}&zoom=15`;
-    mainInformation = (
+    // Would prefer not to have this logic...
+    mainInformation = process.env.STORYBOOK_RUN === undefined ? (
       <iframe
         title={data.post.id}
         width="500"
@@ -31,6 +32,14 @@ const Post = ({
         loading="lazy"
         src={imageSrc}
       />
+    ) : (
+      <div style={{
+        width: '500px',
+        height: '400px',
+      }}
+      >
+        Placeholder
+      </div>
     );
     const visitLink = `/explore?id=${data.post.id}&lat=${content.latitude}&lng=${content.longitude}`;
     visitButton = (

@@ -20,7 +20,7 @@ const PostEmojis = ({
   }
 
   return (
-    <Grid columns={max} id="comment">
+    <Grid columns={max} className="comment">
       <Grid.Row textAlign="center">
         {top.map((emoji) => (
           <Grid.Column
