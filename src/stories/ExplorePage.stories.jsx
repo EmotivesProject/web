@@ -3,21 +3,21 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import '../assets/index.css';
-import { FeedPage } from '../feed/FeedPage';
+import { ExplorePage } from '../explore/ExplorePage';
 
 export default {
-  title: 'Feed Page',
-  component: FeedPage,
+  title: 'Explore Page',
+  component: ExplorePage,
 };
 
 const PageTemplate = (args) => (
   <BrowserRouter>
-    <FeedPage {...args} />
+    <ExplorePage {...args} />
   </BrowserRouter>
 );
 
-export const DefaultFeedPage = PageTemplate.bind({});
-DefaultFeedPage.args = {
+export const DefaultExplorePage = PageTemplate.bind({});
+DefaultExplorePage.args = {
   auth: {
     username: 'test',
     token: 'fake-token',
@@ -67,8 +67,10 @@ DefaultFeedPage.args = {
   page: 0,
   loadPosts: () => [],
   likePost: () => [],
+  fetchPost: () => [],
   commentPost: () => [],
   unlikePost: () => [],
+  createPost: () => [],
   finished: false,
   errors: null,
 };

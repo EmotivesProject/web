@@ -176,6 +176,25 @@ export const ExplorePage = ({
     );
   }
 
+  // Would prefer not to have this logic
+  const mapDiv = process.env.STORYBOOK_RUN === undefined ? (
+    <GoogleMapReact
+      bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+      defaultCenter={initialCentre}
+      defaultZoom={defaultZoom}
+      onClick={(e) => mapClicked(e)}
+      yesIWantToUseGoogleMapApiInternals
+      onGoogleApiLoaded={onMapLoad}
+      onDrag={(e) => mapDragged(e)}
+    >
+      {markers}
+    </GoogleMapReact>
+  ) : (
+    <div>
+      Placeholder
+    </div>
+  );
+
   const pauseLoadingButtonText = pauseLoading ? 'Unpause Loading' : 'Pause Loading';
 
   return (
@@ -225,17 +244,7 @@ export const ExplorePage = ({
         </Grid>
         <br />
         <div id="google-maps-div">
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
-            defaultCenter={initialCentre}
-            defaultZoom={defaultZoom}
-            onClick={(e) => mapClicked(e)}
-            yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={onMapLoad}
-            onDrag={(e) => mapDragged(e)}
-          >
-            {markers}
-          </GoogleMapReact>
+          {mapDiv}
         </div>
       </div>
     </>
