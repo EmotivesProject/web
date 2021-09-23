@@ -7,7 +7,9 @@ import TopBar from '../shared/TopBar';
 import { removeAuth } from '../auth/actions';
 
 // Basic log out page
-const LogOutPage = ({ auth, callRemoveAuth }) => {
+const LogOutPage = ({
+  auth, callRemoveAuth,
+}) => {
   // If the user is not authenticated do not show this page
   if (auth === null) {
     return <Redirect to="/" />;
@@ -15,6 +17,7 @@ const LogOutPage = ({ auth, callRemoveAuth }) => {
 
   // Basically just call the log out dispatch
   callRemoveAuth();
+  window.location.reload();
 
   return (
     <>
