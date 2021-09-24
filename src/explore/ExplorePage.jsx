@@ -30,7 +30,7 @@ import AutoComplete from './AutoComplete';
 
 // See https://developers.google.com/maps/documentation/javascript/reference/map
 
-const fetchMorePostRate = 1000 * 5; // 10 seconds. Do not reduce to below 5 seconds!
+const fetchMorePostRate = 1000 * 10; // 10 seconds. Do not reduce to below 5 seconds!
 
 const defaultZoom = 15;
 

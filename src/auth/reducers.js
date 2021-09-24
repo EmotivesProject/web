@@ -1,7 +1,6 @@
 import Cookies from 'js-cookie';
 import {
   CREATE_AUTH,
-  UPDATE_AUTH,
   REMOVE_AUTH,
 } from './actions';
 
@@ -38,16 +37,6 @@ const authState = (state = getAuthToken(), action) => {
 
   switch (type) {
     case CREATE_AUTH: {
-      const { auth } = payload;
-      const { username, token, refreshToken } = auth;
-      setAuthToken(username, token, refreshToken);
-      return {
-        username,
-        token,
-        refreshToken,
-      };
-    }
-    case UPDATE_AUTH: {
       const { auth } = payload;
       const { username, token, refreshToken } = auth;
       setAuthToken(username, token, refreshToken);

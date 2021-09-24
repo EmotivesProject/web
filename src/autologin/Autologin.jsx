@@ -61,6 +61,8 @@ const Autologin = ({ auth }) => {
       });
   };
 
+  // Used to submit a deletion of an autologin token. Disables a linting to
+  // do a generic default alert
   const handleDelete = (e, token) => {
     e.preventDefault();
 

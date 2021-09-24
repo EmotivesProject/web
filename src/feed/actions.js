@@ -40,17 +40,6 @@ export const fetchPost = (post) => ({
   payload: { post },
 });
 
-export const FETCH_MORE_POSTS = 'FETCH_MORE_POSTS';
-export const fetchMorePosts = (posts) => ({
-  type: FETCH_MORE_POSTS,
-  payload: { posts },
-});
-
-export const LOADING_POSTS = 'LOADING_POSTS';
-export const loadingPosts = () => ({
-  type: FETCH_POSTS,
-});
-
 export const API_ERROR = 'API_ERROR';
 export const apiError = (name) => ({
   type: API_ERROR,
@@ -61,9 +50,4 @@ export const API_SUCCESS = 'API_SUCCESS';
 export const apiSuccess = (name) => ({
   type: API_SUCCESS,
   payload: { name },
-});
-
-export const RESET_PAGE = 'RESET_PAGE';
-export const resetPage = () => ({
-  type: RESET_PAGE,
 });
