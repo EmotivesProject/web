@@ -29,33 +29,6 @@ describe('The authState reducer', () => {
     expect(actual).to.deep.equal(expected);
   });
 
-  it('Update auth overrides each part of the state', () => {
-    const fakeAuth = {
-      username: 'newUsername',
-      token: 'newToken',
-      refreshToken: 'newRefresh',
-    };
-
-    const fakeAction = {
-      type: 'UPDATE_AUTH',
-      payload: {
-        auth: fakeAuth,
-      },
-    };
-
-    const originalState = {
-      username: 'tom123',
-      token: 'fakeToken',
-      refreshToken: 'refresh',
-    };
-
-    const expected = fakeAuth;
-
-    const actual = authState(originalState, fakeAction);
-
-    expect(actual).to.deep.equal(expected);
-  });
-
   it('Remove action resets the state', () => {
     const fakeAction = {
       type: 'REMOVE_AUTH',

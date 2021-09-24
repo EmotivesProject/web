@@ -203,31 +203,6 @@ describe('The post reducer can interact with posts', () => {
 
     expect(actual).to.deep.equal(expected);
   });
-  it('Loading post updates the loading value', () => {
-    const initialState = {
-      page: 0,
-      loading: false,
-      error: null,
-      posts: [],
-      errors: null,
-    };
-
-    const fakeAction = {
-      type: 'LOADING_POSTS',
-    };
-
-    const expected = {
-      page: 0,
-      loading: true,
-      error: null,
-      posts: [],
-      errors: null,
-    };
-
-    const actual = postState(initialState, fakeAction);
-
-    expect(actual).to.deep.equal(expected);
-  });
 });
 
 describe('The post reducer can interact with likes', () => {

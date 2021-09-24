@@ -3,18 +3,15 @@ import {
   REMOVE_POST,
   FETCH_POSTS,
   LIKE_POST,
-  LOADING_POSTS,
   COMMENT_POST,
   UNLIKE_POST,
   API_ERROR,
   API_SUCCESS,
   FETCH_POST,
-  RESET_PAGE,
 } from './actions';
 
 const initialState = {
   page: 0,
-  loading: false,
   finished: false,
   error: null,
   posts: [],
@@ -105,12 +102,6 @@ const postState = (state = initialState, action) => {
         posts: actualNewPosts,
       };
     }
-    case LOADING_POSTS: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
     case API_ERROR: {
       const { name } = payload;
       return {
@@ -122,12 +113,6 @@ const postState = (state = initialState, action) => {
       return {
         ...state,
         errors: null,
-      };
-    }
-    case RESET_PAGE: {
-      return {
-        ...state,
-        page: 0,
       };
     }
     default:
