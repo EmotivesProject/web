@@ -46,3 +46,9 @@ OpenEmojiInput.args = {
   subComponentID: 'meesenger',
   initialOpen: true,
 };
+
+OpenEmojiInput.parameters = {
+  axe: {
+    skip: true,
+  },
+};

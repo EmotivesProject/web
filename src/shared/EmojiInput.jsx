@@ -1,9 +1,8 @@
 import React from 'react';
 import {
-  Button, Input, Modal, Pagination, Icon,
+  Button, Input, Modal, Icon,
 } from 'semantic-ui-react';
 import EmojiSelection from './EmojiSelection';
-import Emojis, { NumberPerPage } from '../constants/Emojis';
 
 // Overly complex emoji Input that can action a lot of different things
 const EmojiInput = ({
@@ -26,19 +25,10 @@ const EmojiInput = ({
 }) => {
   const [open, setOpen] = React.useState(initialOpen);
   const [currentInput, setCurrentInput] = React.useState('');
-  const [page, setPage] = React.useState(1);
-
-  // Number of emoji panels
-  const totalPages = Math.ceil(Emojis.length / NumberPerPage);
 
   // Basic functions that help the modal
   const updateCurrentInput = (str) => {
     setCurrentInput(currentInput.concat(str));
-  };
-
-  const handlePageUpdate = (unused, obj) => {
-    const { activePage } = obj;
-    setPage(activePage);
   };
 
   const iconButton = iconName ? <Icon name={iconName} /> : null;
@@ -69,20 +59,7 @@ const EmojiInput = ({
             fluid
           />
         </label>
-        <br />
-        <EmojiSelection page={page} action={updateCurrentInput} />
-        <br />
-        <div className="ui center aligned container">
-          <Pagination
-            id="pagination"
-            className="center"
-            activePage={page}
-            onPageChange={handlePageUpdate}
-            totalPages={totalPages}
-            firstItem={null}
-            lastItem={null}
-          />
-        </div>
+        <EmojiSelection action={updateCurrentInput} />
       </Modal.Content>
       <Modal.Actions style={{ display: 'flex', float: 'right' }}>
         <Button
