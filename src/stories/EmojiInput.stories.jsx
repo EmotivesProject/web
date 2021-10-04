@@ -6,6 +6,9 @@ import EmojiInput from '../shared/EmojiInput';
 export default {
   title: 'Emoji Input',
   component: EmojiInput,
+  axe: {
+    skip: true,
+  },
 };
 
 const ComponentTemplate = (args) => (
@@ -45,4 +48,7 @@ OpenEmojiInput.args = {
   to: 'james',
   subComponentID: 'meesenger',
   initialOpen: true,
+  axe: {
+    skip: true,
+  },
 };
