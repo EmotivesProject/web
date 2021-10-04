@@ -1,6 +1,6 @@
 export const NumberPerPage = 40;
 
-const Emojis = [
+const Faces = [
   '😀',
   '😄',
   '😁',
@@ -67,6 +67,9 @@ const Emojis = [
   '👽',
   '👾',
   '🤖',
+];
+
+const Hands = [
   '👋',
   '✋',
   '🖖',
@@ -96,6 +99,9 @@ const Emojis = [
   '🧠',
   '🦷',
   '👀',
+];
+
+const People = [
   '👶',
   '👦',
   '👩',
@@ -177,6 +183,9 @@ const Emojis = [
   '👩‍❤️‍👩',
   '👨‍❤️‍👨',
   '👩‍❤️‍👨',
+];
+
+const Clothing = [
   '🧳',
   '☂️',
   '🕶',
@@ -200,6 +209,9 @@ const Emojis = [
   '🧢',
   '💍',
   '💼',
+];
+
+const AnimalsAndNature = [
   '🐶',
   '🐱',
   '🐭',
@@ -285,6 +297,9 @@ const Emojis = [
   '❄️',
   '💨',
   '💧',
+];
+
+const Food = [
   '🍏',
   '🍐',
   '🍊',
@@ -344,6 +359,9 @@ const Emojis = [
   '🍴',
   '🍽',
   '🧂',
+];
+
+const Sport = [
   '⚽️',
   '🏀',
   '🏈',
@@ -396,6 +414,9 @@ const Emojis = [
   '🎲',
   '🎳',
   '🎮',
+];
+
+const Travel = [
   '🚗',
   '🚕',
   '🚙',
@@ -448,6 +469,9 @@ const Emojis = [
   '💒',
   '🛤',
   '🛣',
+];
+
+const Objects = [
   '⌚️',
   '📱',
   '💻',
@@ -554,6 +578,9 @@ const Emojis = [
   '📝',
   '✏️',
   '🔎',
+];
+
+const Symbols = [
   '❤️',
   '💔',
   '💕',
@@ -605,4 +632,15 @@ const Emojis = [
   '🕒',
 ];
 
-export default Emojis;
+export {
+  Faces,
+  Hands,
+  People,
+  Clothing,
+  AnimalsAndNature,
+  Food,
+  Sport,
+  Travel,
+  Objects,
+  Symbols,
+};
