@@ -14,7 +14,7 @@ import {
 } from '../constants/Emojis';
 
 // Display an emoji selection panels
-// Bit complex please help
+// Bit complex please might refactor
 const EmojiSelection = ({ action }) => {
   const createRowForEmoji = (emojis) => (
     <div style={{ margin: 'auto', textAlign: 'center' }}>
