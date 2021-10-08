@@ -129,6 +129,7 @@ export const MessengerPage = ({
         from={auth.username}
         to={talkingTo}
         subComponentID="emoji-messenger-input"
+        allowKeyboard
       />
     );
 

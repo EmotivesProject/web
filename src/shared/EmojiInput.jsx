@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Button, Input, Modal, Icon,
+  Button, Input, Modal, Icon, Message,
 } from 'semantic-ui-react';
 import EmojiSelection from './EmojiSelection';
 
@@ -22,16 +22,29 @@ const EmojiInput = ({
   setTitle,
   setExplore,
   initialOpen,
+  allowKeyboard,
 }) => {
   const [open, setOpen] = React.useState(initialOpen);
   const [currentInput, setCurrentInput] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   // Basic functions that help the modal
   const updateCurrentInput = (str) => {
     setCurrentInput(currentInput.concat(str));
   };
 
+  const updateCurrentInputViaKeyboard = (str) => {
+    if (allowKeyboard) {
+      setCurrentInput(currentInput.concat(str));
+      setErrorMessage('');
+    } else {
+      setErrorMessage('Can only use emojis here');
+    }
+  };
+
   const iconButton = iconName ? <Icon name={iconName} /> : null;
+
+  const errorMes = errorMessage !== '' ? <Message color="red" style={{ fontSize: '2.5vh' }}>{errorMessage}</Message> : null;
 
   return (
     <Modal
@@ -54,10 +67,11 @@ const EmojiInput = ({
           <Input
             placeholder="Waiting for input..."
             value={currentInput}
-            onChange={(e) => setCurrentInput(e.target.value)}
+            onChange={(e) => updateCurrentInputViaKeyboard(e.target.value)}
             id="emoji-input"
             fluid
           />
+          {errorMes}
         </label>
         <EmojiSelection action={updateCurrentInput} />
       </Modal.Content>
