@@ -31,7 +31,7 @@ const getNotificationsRequest = (auth, page) => async (dispatch) => {
 
 const seenNotificationsRequest = (auth, id) => async (dispatch) => {
   const usersURL = `${apiHost}://${urlBase}/notification/${id}`;
-  await axios.post(usersURL, {
+  await axios.post(usersURL, {}, {
     headers: {
       Authorization: `Bearer ${auth.token}`,
     },

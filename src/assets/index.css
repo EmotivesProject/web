@@ -38,7 +38,7 @@ body {
   background-color: #003e85;
 }
 
-#notification-has-not-seen:hover {
+#notification-has-not-seen {
   background-color: #CDCDCD;
 }
 
@@ -161,7 +161,7 @@ body {
 }
 
 .ui.message.notification-has-seen {
-  background-color: #a0bdbd;
+  background-color: #9e9e9e;
 }
 
 .comment {

@@ -21,6 +21,7 @@ export const NotificationPage = ({
   loadNotifications,
   seenNotification,
   page,
+  visitNotification,
 }) => {
   const { width } = useWindowDimensions();
 
@@ -74,6 +75,8 @@ export const NotificationPage = ({
                 key={notification.id}
                 data={notification}
                 action={seenNotification}
+                auth={auth}
+                visitAction={visitNotification}
               />
             ))}
             {button}
