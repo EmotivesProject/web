@@ -17,6 +17,7 @@ const RegisterForm = ({ onCreateAuth }) => {
   const [passwordValue, setPasswordValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [secretValue, setSecretValue] = useState('');
+  const [groupValue, setGroupValue] = useState('qut');
   const [loadingVar, setLoading] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
 
@@ -37,6 +38,7 @@ const RegisterForm = ({ onCreateAuth }) => {
         name: nameValue,
         password: passwordValue,
         secret: secretValue,
+        user_group: groupValue,
       }),
       { 'Content-Type': 'application/json' })
       .then((result) => {
@@ -133,6 +135,23 @@ const RegisterForm = ({ onCreateAuth }) => {
               type="password"
               required
               min="6"
+              max="100"
+            />
+          </label>
+          <br />
+          <label htmlFor="group">
+            Group
+            <Form.Input
+              id="group"
+              name="Group"
+              value={groupValue}
+              onChange={(e) => setGroupValue(e.target.value)}
+              icon="group"
+              iconPosition="left"
+              size="large"
+              placeholder="Secret"
+              required
+              min="1"
               max="100"
             />
           </label>
