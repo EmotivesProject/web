@@ -22,9 +22,13 @@ const dispatchPersonSwitch = (newPerson, oldPerson) => async (dispatch) => {
   dispatch(switchPerson(newPerson, oldPerson));
 };
 
-const getUsersRequest = () => async (dispatch) => {
+const getUsersRequest = (token) => async (dispatch) => {
   const usersURL = `${apiHost}://${urlBase}/connections`;
-  await axios.get(usersURL)
+  await axios.get(usersURL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
     .then((result) => {
       dispatch(apiSuccess('users'));
       dispatch(setUsers(result.data.result));
@@ -60,7 +64,7 @@ const setupClient = (token) => async (dispatch) => {
       client.onopen = () => dispatch(webSocketOpen());
       client.onclose = () => dispatch(webSocketClosed());
       client.onmessage = (message) => dispatch(receivedNewMessage(message));
-      dispatch(getUsersRequest());
+      dispatch(getUsersRequest(token));
     })
     .catch(() => {
       dispatch(apiError('message'));
