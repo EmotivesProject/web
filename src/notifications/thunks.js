@@ -37,8 +37,8 @@ const seenNotificationsRequest = (auth, id) => async (dispatch) => {
     },
   })
     .then(() => {
-      dispatch(apiSuccess('notifications'));
       dispatch(seenNotification(id));
+      dispatch(apiSuccess('notifications'));
     })
     .catch(() => {
       dispatch(apiError('notifications'));

@@ -50,10 +50,13 @@ const notificationState = (state = initialState, action) => {
     case SEEN_NOTIFICATION: {
       const { id } = payload;
       const currentNotifs = state.notifications;
-      currentNotifs.filter((x) => x.id !== id);
+      const seenIndex = currentNotifs.findIndex((notif) => notif.id === id);
+      if (seenIndex !== -1) {
+        currentNotifs[seenIndex].seen = true;
+      }
       return {
         ...state,
-        notifications: currentNotifs,
+        notifications: [...currentNotifs],
       };
     }
     case API_ERROR: {
