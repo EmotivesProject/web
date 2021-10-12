@@ -87,9 +87,9 @@ const Autologin = ({ auth }) => {
   };
 
   return (
-    <div>
+    <>
       <TopBar />
-      <Grid>
+      <Grid role="main" id="main">
         <Grid.Row columns="three">
           <Grid.Column />
           <Grid.Column>
@@ -141,7 +141,7 @@ const Autologin = ({ auth }) => {
           <Grid.Column />
         </Grid.Row>
       </Grid>
-    </div>
+    </>
   );
 };
 
