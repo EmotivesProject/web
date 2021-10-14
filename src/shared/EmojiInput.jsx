@@ -35,7 +35,7 @@ const EmojiInput = ({
 
   const updateCurrentInputViaKeyboard = (str) => {
     if (allowKeyboard) {
-      setCurrentInput(currentInput.concat(str));
+      setCurrentInput(str);
       setErrorMessage('');
     } else {
       setErrorMessage('Can only use emojis here');
