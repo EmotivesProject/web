@@ -14,7 +14,7 @@ const PostComments = ({
             <Card.Header>
               {comment.username}
             </Card.Header>
-            <Card.Meta>
+            <Card.Meta style={{ color: 'black' }}>
               {getTimeAgoFromObject(comment.created_at)}
             </Card.Meta>
             <Card.Description style={{ fontSize: 'xx-large', color: 'black' }}>
