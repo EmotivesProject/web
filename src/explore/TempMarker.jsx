@@ -21,10 +21,9 @@ const TempMarker = ({
   createPost,
   info,
   auth,
-  setExplore,
   setModalOpen,
+  modalState,
 }) => {
-  const [open, setOpen] = React.useState(false);
   const [currentInput, setCurrentInput] = React.useState('');
 
   const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${info.lat},${info.lng}&zoom=18`;
@@ -43,14 +42,12 @@ const TempMarker = ({
       <Modal
         closeIcon
         onClose={() => {
-          setOpen(false);
           setModalOpen(false);
         }}
         onOpen={() => {
-          setOpen(true);
           setModalOpen(true);
         }}
-        open={open}
+        open={modalState}
         trigger={<button type="button" className="invis-button">🚩</button>}
       >
         <Modal.Header>
@@ -92,9 +89,7 @@ const TempMarker = ({
                   iconName="comment"
                   title={currentInput}
                   info={info}
-                  openState={setOpen}
                   setTitle={setCurrentInput}
-                  setExplore={setExplore}
                 />
               </label>
             </Grid.Column>
