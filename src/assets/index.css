@@ -302,6 +302,10 @@ body {
   margin-top: -2em;
 }
 
+.ui.avatar.image.small-avatar {
+  font-size: small;
+}
+
 #reaction-previews {
   max-height: 28em;
   overflow-y: scroll;

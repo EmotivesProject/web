@@ -9,6 +9,7 @@ import {
   Grid,
 } from 'semantic-ui-react';
 import EmojiInput from '../shared/EmojiInput';
+import Avatar from '../shared/Avatar';
 import getTimeAgoFromObject from '../utils/date';
 import PostComments from './PostComments';
 
@@ -94,6 +95,7 @@ const Post = ({
     <Segment className="main-post-segment">
       <Container>
         <Header as="h2" dividing>
+          <Avatar username={data.post.username} name="small-avatar" />
           {data.post.username}
           &nbsp;
           {visitedString}
