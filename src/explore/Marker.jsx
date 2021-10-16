@@ -9,6 +9,7 @@ import {
 } from 'semantic-ui-react';
 import PostComments from '../feed/PostComments';
 import EmojiInput from '../shared/EmojiInput';
+import Avatar from '../shared/Avatar';
 import getTimeAgoFromObject from '../utils/date';
 
 const markerStyle = {
@@ -103,6 +104,7 @@ const Marker = ({
         trigger={<button type="button" className="invis-button">{data.post.content.reaction}</button>}
       >
         <Modal.Header>
+          <Avatar username={data.post.username} name="small-avatar" />
           <div style={{ display: 'inline' }}>
             {title}
           </div>
