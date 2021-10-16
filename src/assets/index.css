@@ -302,6 +302,16 @@ body {
   margin-top: -2em;
 }
 
+#reaction-previews {
+  max-height: 28em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.ui.card.comment-right {
+  left: 3%;
+}
+
 .emoji-selection-title {
   margin-left: 1em;
 }

@@ -7,7 +7,7 @@ import {
   Icon,
   Modal,
 } from 'semantic-ui-react';
-import PostEmojis from '../feed/PostEmojis';
+import PostComments from '../feed/PostComments';
 import EmojiInput from '../shared/EmojiInput';
 import getTimeAgoFromObject from '../utils/date';
 
@@ -85,19 +85,11 @@ const Marker = ({
 
   const title = `${data.post.username} ${visitedString} ${reactionString} ${time}`;
 
-  const topReactions = data.emoji_count.length !== 0 ? (
-    <div>
+  const comments = data.comments.length !== 0 ? (
+    <div id="reaction-previews">
       <Divider />
-      <Header as="h2">Reactions</Header>
-      <PostEmojis key={data.post.id} data={data.emoji_count} />
-    </div>
-  ) : null;
-
-  const yourReactions = data.self_emoji_count.length !== 0 ? (
-    <div>
-      <Divider />
-      <Header as="h2">Your Reactions</Header>
-      <PostEmojis key={data.post.id} data={data.self_emoji_count} />
+      <Header as="h3">Reactions</Header>
+      <PostComments key={data.post.id} data={data.comments} goRight />
     </div>
   ) : null;
 
@@ -144,8 +136,7 @@ const Marker = ({
               </Grid.Row>
               <br />
               <Grid.Row>
-                {topReactions}
-                {yourReactions}
+                {comments}
               </Grid.Row>
             </Grid.Column>
           </Grid>

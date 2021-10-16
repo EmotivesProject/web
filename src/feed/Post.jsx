@@ -11,7 +11,7 @@ import {
 } from 'semantic-ui-react';
 import EmojiInput from '../shared/EmojiInput';
 import getTimeAgoFromObject from '../utils/date';
-import PostEmojis from './PostEmojis';
+import PostComments from './PostComments';
 
 const Post = ({
   auth, data, likePost, unlikePost, commentPost,
@@ -83,19 +83,11 @@ const Post = ({
   const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : null;
   const reactionString = data.post.content.reaction ? `${data.post.content.reaction}` : null;
 
-  const topReactions = data.emoji_count.length !== 0 ? (
+  const comments = data.comments.length !== 0 ? (
     <div>
       <Divider />
       <Header as="h3">Reactions</Header>
-      <PostEmojis key={data.post.id} data={data.emoji_count} />
-    </div>
-  ) : null;
-
-  const yourReactions = data.self_emoji_count.length !== 0 ? (
-    <div>
-      <Divider />
-      <Header as="h3">Your Reactions</Header>
-      <PostEmojis key={data.post.id} data={data.self_emoji_count} />
+      <PostComments key={data.post.id} data={data.comments} />
     </div>
   ) : null;
 
@@ -141,8 +133,7 @@ const Post = ({
           </Grid.Column>
         </Grid>
       </Container>
-      {topReactions}
-      {yourReactions}
+      {comments}
     </Segment>
   );
 };
