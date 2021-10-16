@@ -65,7 +65,6 @@ export const ExplorePage = ({
     return <Redirect to="/" />;
   }
 
-  const [explore, setExplore] = React.useState(true);
   const [pauseLoading, setPauseLoading] = React.useState(false);
   const [newPost, setNewPost] = React.useState(null);
   const [modelOpen, setModalOpen] = React.useState(false);
@@ -111,12 +110,6 @@ export const ExplorePage = ({
     }
   }
 
-  // General helper functions
-  const toggleExplore = () => {
-    setExplore(!explore);
-    setNewPost(null);
-  };
-
   const switchPauseLoading = () => {
     setPauseLoading(!pauseLoading);
   };
@@ -129,7 +122,8 @@ export const ExplorePage = ({
   };
 
   const mapClicked = (e) => {
-    if (!explore && !modelOpen) {
+    if (!modelOpen) {
+      setModalOpen(true);
       setNewPost(e);
     }
   };
@@ -146,23 +140,23 @@ export const ExplorePage = ({
   };
 
   // Display post markers if exploring, otherwise display a creating post view
-  let markers = null;
-  if (explore) {
-    markers = posts.map((post) => (
-      <Marker
-        key={post.post.id}
-        data={post}
-        lat={post.post.content.latitude}
-        lng={post.post.content.longitude}
-        fetchPost={fetchPost}
-        auth={auth}
-        likePost={likePost}
-        unlikePost={unlikePost}
-        commentPost={commentPost}
-      />
-    ));
-  } else if (newPost != null) {
-    markers = (
+  const markers = posts.map((post) => (
+    <Marker
+      key={post.post.id}
+      data={post}
+      lat={post.post.content.latitude}
+      lng={post.post.content.longitude}
+      fetchPost={fetchPost}
+      auth={auth}
+      likePost={likePost}
+      unlikePost={unlikePost}
+      commentPost={commentPost}
+    />
+  ));
+
+  let newMarker = null;
+  if (newPost !== null) {
+    newMarker = (
       <TempMarker
         key="newPostData"
         lat={newPost.lat}
@@ -170,8 +164,8 @@ export const ExplorePage = ({
         createPost={createPost}
         info={newPost}
         auth={auth}
-        setExplore={setExplore}
         setModalOpen={setModalOpen}
+        modalState={modelOpen}
       />
     );
   }
@@ -188,6 +182,7 @@ export const ExplorePage = ({
       onDrag={(e) => mapDragged(e)}
     >
       {markers}
+      {newMarker}
     </GoogleMapReact>
   ) : (
     <div>
@@ -210,16 +205,7 @@ export const ExplorePage = ({
           </Grid.Column>
           <Grid.Column />
         </Grid>
-        <Grid columns={4} textAlign="center">
-          <Grid.Column>
-            <Button
-              onClick={toggleExplore}
-              id="new-flag"
-              tabIndex="0"
-            >
-              {explore ? 'Set New Flag?' : 'Just Explore'}
-            </Button>
-          </Grid.Column>
+        <Grid columns={3} textAlign="center">
           <Grid.Column>
             <Button
               tabIndex="0"
