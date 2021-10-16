@@ -312,6 +312,10 @@ body {
   left: 3%;
 }
 
+.ui.card.comment {
+  width: 40%;
+}
+
 .emoji-selection-title {
   margin-left: 1em;
 }
