@@ -306,6 +306,11 @@ body {
   font-size: small;
 }
 
+.ui.medium.image.profile-display {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #reaction-previews {
   max-height: 28em;
   overflow-y: scroll;
