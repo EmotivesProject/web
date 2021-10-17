@@ -24,8 +24,6 @@ const Post = ({
     const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${content.latitude},${content.longitude}&zoom=15`;
     // Would prefer not to have this logic...
     mainInformation = process.env.STORYBOOK_RUN === undefined ? (
-      /* eslint-disable jsx-a11y/anchor-has-content */
-      /* eslint-disable jsx-a11y/control-has-associated-label */
       <div style={{ position: 'relative' }}>
         <iframe
           title={data.post.id}
