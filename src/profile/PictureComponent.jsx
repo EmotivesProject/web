@@ -67,14 +67,14 @@ export const PictureComponent = ({ auth }) => {
         </Grid.Column>
         <Grid.Column>
           <h3>New</h3>
-          <Form onSubmit={onFormSubmit}>
+          <Form onSubmit={onFormSubmit} className="profile-upload-form">
             <Form.Field>
-              <Button as="label" htmlFor="file" type="button">
+              <Button as="label" htmlFor="file" type="button" className="profile-upload-button">
                 Select a new profile picture
               </Button>
               <input type="file" id="file" hidden onChange={fileChange} />
             </Form.Field>
-            <Button type="submit">Confirm</Button>
+            <Button type="submit" positive>Confirm</Button>
           </Form>
         </Grid.Column>
       </Grid>

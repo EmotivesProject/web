@@ -311,6 +311,26 @@ body {
   margin-right: auto;
 }
 
+.ui.form.profile-upload-form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25em;
+}
+
+.ui.button.profile-upload-button {
+  color: #ffffff;
+  background-color: #006ac0;
+  color: #ffffff;
+}
+
+.ui.form .field > label {
+  color: white;
+}
+
+.ui.button.profile-upload-button:hover {
+  background-color: #003e85;
+}
+
 #reaction-previews {
   max-height: 28em;
   overflow-y: scroll;
