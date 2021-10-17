@@ -23,6 +23,7 @@ const TempMarker = ({
   auth,
   setModalOpen,
   modalState,
+  setNewPost,
 }) => {
   const [currentInput, setCurrentInput] = React.useState('');
 
@@ -90,6 +91,8 @@ const TempMarker = ({
                   title={currentInput}
                   info={info}
                   setTitle={setCurrentInput}
+                  openState={setModalOpen}
+                  setNewPost={setNewPost}
                 />
               </label>
             </Grid.Column>
