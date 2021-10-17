@@ -46,6 +46,8 @@ export const PictureComponent = ({ auth }) => {
             src={`/assets/${picture}`}
             width="50px"
             height="50px"
+            aria-label="default emoji profile picture"
+            alt-text={`default emoji profile picture ${picture}`}
           />
         </List.Item>
       ))}
@@ -118,6 +120,8 @@ export const PictureComponent = ({ auth }) => {
             src={createProfileLink(auth.username)}
             size="medium"
             className="profile-display"
+            aria-label="Current profile picture"
+            alt-text="Current profile picture"
           />
         </Grid.Column>
         <Grid.Column>

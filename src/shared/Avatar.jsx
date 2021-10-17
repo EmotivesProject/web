@@ -8,6 +8,8 @@ const Avatar = ({ username, name }) => (
   <Image
     src={createProfileLink(username)}
     className={name}
+    aria-label="Avatar profile picture"
+    alt-text={`Avatar profile picture ${username}`}
     avatar
   />
 );
