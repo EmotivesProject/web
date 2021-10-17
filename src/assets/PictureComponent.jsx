@@ -9,7 +9,6 @@ import {
 import defaultPictures from '../constants/DefaultPictures';
 import createProfileLink from '../utils/createProfileLink';
 import { extractErrorObject } from '../utils/extractObjects';
-import srcToFile from '../utils/SrcToFile';
 
 const host = process.env.REACT_APP_API_HOST;
 const base = process.env.REACT_APP_MEDIA_UPLOAD_BASE_URL;
@@ -39,7 +38,6 @@ export const PictureComponent = ({ auth }) => {
         <List.Item
           onClick={() => setEmojiSelection(picture)}
           className={picture === emojiSelected ? 'selected-emoji' : null}
-          key={Math.random().toString(36).substr(2, 9)}
         >
           <Image
             key={picture}
@@ -80,29 +78,7 @@ export const PictureComponent = ({ auth }) => {
       return;
     }
 
-    const fileLocation = `../assets/${emojiSelected}`;
-
-    srcToFile(fileLocation, emojiSelected, 'image/png')
-      .then((file) => {
-        const url = `${host}://${base}/user_profile`;
-        const formData = new FormData();
-        formData.append('image', file);
-        axios.post(
-          url,
-          formData,
-          {
-            headers: {
-              'content-type': 'multipart/form-data',
-              Authorization: `Bearer ${auth.token}`,
-            },
-          },
-        ).then(() => {
-          setError(null);
-          window.location.reload(false);
-        }).catch((err) => {
-          setError(extractErrorObject(err).message);
-        });
-      });
+    console.log(emojiSelected);
   };
 
   return (

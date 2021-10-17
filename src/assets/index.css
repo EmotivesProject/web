@@ -323,12 +323,22 @@ body {
   color: #ffffff;
 }
 
-.ui.form .field > label {
+.ui.form .field>label {
   color: white;
 }
 
 .ui.button.profile-upload-button:hover {
   background-color: #003e85;
+}
+
+.emoji-profiles {
+  float: left;
+  display: flex;
+  margin: 5%;
+}
+
+.selected-emoji {
+  background-color: greenyellow;
 }
 
 #reaction-previews {

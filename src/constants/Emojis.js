@@ -1,5 +1,3 @@
-export const NumberPerPage = 40;
-
 const Faces = [
   '😀',
   '😄',

@@ -35,7 +35,7 @@ export const ProfilePage = ({
           <Grid.Column>
             {errorMessage}
             <h1>Profile</h1>
-            <PictureComponent auth={auth} />
+            <PictureComponent auth={auth} key={Math.random().toString(36).substr(2, 9)} />
           </Grid.Column>
           <Grid.Column />
         </Grid.Row>
