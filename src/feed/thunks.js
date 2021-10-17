@@ -1,4 +1,5 @@
 import axios from 'axios';
+import extractFirstEmoji from '../utils/extractFirstEmoji';
 import {
   commentPost,
   fetchPosts,
@@ -124,10 +125,14 @@ const postRequest = (
   title,
 ) => async (dispatch) => {
   const path = 'post';
+  let actualReaction = reaction;
+  if (type === 'map') {
+    actualReaction = await extractFirstEmoji(reaction);
+  }
   const body = JSON.stringify({
     content: {
       type,
-      reaction,
+      reaction: actualReaction,
       latitude,
       longitude,
       title,
