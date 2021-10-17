@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
+import Avatar from '../shared/Avatar';
 import getTimeAgoFromObject from '../utils/date';
 
 const PostComments = ({
@@ -12,6 +13,7 @@ const PostComments = ({
         <Card key={Math.random().toString(36).substr(2, 9)} className={goRight ? 'comment-right' : 'comment'}>
           <Card.Content>
             <Card.Header>
+              <Avatar username={comment.username} name="small-avatar" />
               {comment.username}
             </Card.Header>
             <Card.Meta style={{ color: 'black' }}>

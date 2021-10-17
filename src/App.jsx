@@ -11,6 +11,7 @@ import DefaultNotificationPage from './notifications/NotificationPage';
 import DefaultExplorePage from './explore/ExplorePage';
 import LogOutPage from './logout/LogOutPage';
 import NotFoundPage from './NotFound';
+import ConnectedProfilePage from './profile/ProfilePage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/messenger" component={DefaultMessengerPage} />
         <Route path="/feed" component={DefaultFeedPage} />
         <Route path="/notifications" component={DefaultNotificationPage} />
+        <Route path="/profile" component={ConnectedProfilePage} />
         <Route path="/post/:id" component={IndividualPostPage} />
         <Route path="/autologin/" component={Autologin} />
         <Route path="/explore" component={DefaultExplorePage} />

@@ -13,6 +13,7 @@ import TopBar from '../shared/TopBar';
 import useWindowDimensions from '../shared/useWindowDimensions';
 import extractPendingMessages from '../utils/extractPendingMessages';
 import MessengerMessage from './MessengerMessage';
+import Avatar from '../shared/Avatar';
 import {
   getClient,
   getTalkingTo,
@@ -106,6 +107,7 @@ export const MessengerPage = ({
       <Header id="default-message">
         Talking to&nbsp;
         {talkingTo}
+        <Avatar username={talkingTo} name="small-avatar" />
       </Header>
     );
 

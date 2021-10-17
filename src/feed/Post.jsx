@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -10,6 +9,7 @@ import {
   Grid,
 } from 'semantic-ui-react';
 import EmojiInput from '../shared/EmojiInput';
+import Avatar from '../shared/Avatar';
 import getTimeAgoFromObject from '../utils/date';
 import PostComments from './PostComments';
 
@@ -17,7 +17,6 @@ const Post = ({
   auth, data, likePost, unlikePost, commentPost,
 }) => {
   let mainInformation = <>Default message</>;
-  let visitButton = null;
   const { content } = data.post;
   if (data.post.content.type === 'emoji') {
     mainInformation = content.message;
@@ -25,13 +24,23 @@ const Post = ({
     const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${content.latitude},${content.longitude}&zoom=15`;
     // Would prefer not to have this logic...
     mainInformation = process.env.STORYBOOK_RUN === undefined ? (
-      <iframe
-        title={data.post.id}
-        width="500"
-        height="400"
-        loading="lazy"
-        src={imageSrc}
-      />
+      /* eslint-disable jsx-a11y/anchor-has-content */
+      /* eslint-disable jsx-a11y/control-has-associated-label */
+      <div style={{ position: 'relative' }}>
+        <iframe
+          title={data.post.id}
+          width="500"
+          height="400"
+          loading="lazy"
+          src={imageSrc}
+        />
+        <a
+          href={`/explore?id=${data.post.id}&lat=${content.latitude}&lng=${content.longitude}`}
+          style={{
+            position: 'absolute', top: 0, left: '10%', display: 'inline-block', width: '500px', height: '400px',
+          }}
+        />
+      </div>
     ) : (
       <div style={{
         width: '500px',
@@ -40,15 +49,6 @@ const Post = ({
       >
         Placeholder
       </div>
-    );
-    const visitLink = `/explore?id=${data.post.id}&lat=${content.latitude}&lng=${content.longitude}`;
-    visitButton = (
-      <Link to={visitLink} aria-label={`explore post ${data.post.id}`}>
-        <Button
-          className="marker-like-container"
-          content="Explore here"
-        />
-      </Link>
     );
   }
 
@@ -95,12 +95,12 @@ const Post = ({
     <Segment className="main-post-segment">
       <Container>
         <Header as="h2" dividing>
+          <Avatar username={data.post.username} name="small-avatar" />
           {data.post.username}
           &nbsp;
           {visitedString}
           &nbsp;
           {reactionString}
-          {visitButton}
           <Header.Subheader id="post-subheader">
             <Icon name="like" />
             {data.likes ? data.likes.length : 0}
