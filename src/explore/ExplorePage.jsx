@@ -166,6 +166,7 @@ export const ExplorePage = ({
         auth={auth}
         setModalOpen={setModalOpen}
         modalState={modelOpen}
+        setNewPost={setNewPost}
       />
     );
   }
