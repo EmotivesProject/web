@@ -8,10 +8,13 @@ import {
   Icon,
   Grid,
 } from 'semantic-ui-react';
+import GoogleMapReact from 'google-map-react';
 import EmojiInput from '../shared/EmojiInput';
 import Avatar from '../shared/Avatar';
 import getTimeAgoFromObject from '../utils/date';
 import PostComments from './PostComments';
+
+const defaultZoom = 16;
 
 const Post = ({
   auth, data, likePost, unlikePost, commentPost,
@@ -21,21 +24,30 @@ const Post = ({
   if (data.post.content.type === 'emoji') {
     mainInformation = content.message;
   } else {
-    const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${content.latitude},${content.longitude}&zoom=15`;
+    const initialCentre = {
+      lat: content.latitude,
+      lng: content.longitude,
+    };
     // Would prefer not to have this logic...
     mainInformation = process.env.STORYBOOK_RUN === undefined ? (
-      <div style={{ position: 'relative' }}>
-        <iframe
-          title={data.post.id}
-          width="500"
-          height="400"
-          loading="lazy"
-          src={imageSrc}
-        />
+      <div className="post-map" style={{ position: 'relative', width: '500px', height: '400px' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+          defaultCenter={initialCentre}
+          defaultZoom={defaultZoom}
+        >
+          <div
+            lat={content.latitude}
+            lng={content.longitude}
+            style={{ fontSize: 'xx-large' }}
+          >
+            😀
+          </div>
+        </GoogleMapReact>
         <a
           href={`/explore?id=${data.post.id}&lat=${content.latitude}&lng=${content.longitude}`}
           style={{
-            position: 'absolute', top: 0, left: '10%', display: 'inline-block', width: '500px', height: '400px',
+            position: 'absolute', top: 0, left: '0px', display: 'inline-block', width: '500px', height: '400px',
           }}
         />
       </div>

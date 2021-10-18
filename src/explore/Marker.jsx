@@ -82,7 +82,7 @@ const Marker = ({
   }
 
   const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : '';
-  const reactionString = data.post.content.reaction ? ` - ${data.post.content.reaction}` : '';
+  const reactionString = data.post.content.reaction ? ` ${data.post.content.reaction}` : '';
 
   const title = `${data.post.username} ${visitedString} ${reactionString}`;
 
