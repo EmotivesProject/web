@@ -84,7 +84,9 @@ const Marker = ({
   const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : '';
   const reactionString = data.post.content.reaction ? ` - ${data.post.content.reaction}` : '';
 
-  const title = `${data.post.username} ${visitedString} ${reactionString} ${time}`;
+  const title = `${data.post.username} ${visitedString} ${reactionString}`;
+
+  const subTitle = `${likeString} ${time}`;
 
   const comments = data.comments.length !== 0 ? (
     <div id="reaction-previews">
@@ -109,7 +111,7 @@ const Marker = ({
             {title}
           </div>
           <div className="marker-like-container">
-            {likeString}
+            {subTitle}
           </div>
         </Modal.Header>
         <Modal.Content>
