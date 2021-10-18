@@ -164,7 +164,10 @@ export const MessengerPage = ({
                         onClick={() => {
                           switchPersonTalking(user.username, talkingTo);
                         }}
-                      />
+                      >
+                        <Avatar username={user.username} name="small-avatar" />
+                        {user.username}
+                      </Button>
                     </div>
                   );
                 }
@@ -181,7 +184,10 @@ export const MessengerPage = ({
                         key={Math.random().toString(36).substr(2, 9)}
                         onClick={() => switchPersonTalking(user.username, talkingTo)}
                         positive={user.active}
-                      />
+                      >
+                        <Avatar username={user.username} name="small-avatar" />
+                        {user.username}
+                      </Button>
                       <br />
                     </div>
                   );

@@ -19,10 +19,8 @@ const EmojiInput = ({
   title,
   info,
   openState,
-  setTitle,
   initialOpen,
   allowKeyboard,
-  maxLength,
   setNewPost,
 }) => {
   const [open, setOpen] = React.useState(initialOpen);
@@ -70,7 +68,6 @@ const EmojiInput = ({
             value={currentInput}
             onChange={(e) => updateCurrentInputViaKeyboard(e.target.value)}
             id="emoji-input"
-            maxLength={maxLength}
             fluid
           />
           {errorMes}
@@ -117,7 +114,6 @@ const EmojiInput = ({
                 action(auth, 'map', currentInput, info.lat, info.lng, title);
                 openState(false);
                 setNewPost(null);
-                setTitle('');
                 break;
               default:
             }

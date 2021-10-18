@@ -1,7 +1,7 @@
+import GoogleMapReact from 'google-map-react';
 import React from 'react';
 import {
   Grid,
-  Input,
   Modal,
 } from 'semantic-ui-react';
 import EmojiInput from '../shared/EmojiInput';
@@ -17,6 +17,8 @@ const markerStyle = {
   top: '-20px',
 };
 
+const defaultZoom = 16;
+
 const TempMarker = ({
   createPost,
   info,
@@ -25,17 +27,27 @@ const TempMarker = ({
   modalState,
   setNewPost,
 }) => {
-  const [currentInput, setCurrentInput] = React.useState('');
+  const initialCentre = {
+    lat: info.lat,
+    lng: info.lng,
+  };
 
-  const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${info.lat},${info.lng}&zoom=18`;
   const mainInformation = (
-    <iframe
-      title="new-post-window"
-      width="100%"
-      height="400px"
-      loading="lazy"
-      src={imageSrc}
-    />
+    <div className="post-map" style={{ position: 'relative', width: '100%', height: '400px' }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+        defaultCenter={initialCentre}
+        defaultZoom={defaultZoom}
+      >
+        <div
+          lat={info.lat}
+          lng={info.lng}
+          style={{ fontSize: 'xx-large' }}
+        >
+          🚩
+        </div>
+      </GoogleMapReact>
+    </div>
   );
 
   return (
@@ -60,23 +72,6 @@ const TempMarker = ({
               {mainInformation}
             </Grid.Column>
             <Grid.Column>
-              <label htmlFor="new-map-explore-post">
-                What is it?
-                <br />
-                <Input
-                  id="new-map-explore-post"
-                  name="ExplorePost"
-                  type="input"
-                  size="large"
-                  placeholder="Place"
-                  required
-                  value={currentInput}
-                  onChange={(e) => setCurrentInput(e.target.value)}
-                  max="1"
-                />
-              </label>
-              <br />
-              <br />
               <label htmlFor="typical-button">
                 What is your reaction?
                 <br />
@@ -88,9 +83,7 @@ const TempMarker = ({
                   auth={auth}
                   subComponentID="emoji-comment-input"
                   iconName="comment"
-                  title={currentInput}
                   info={info}
-                  setTitle={setCurrentInput}
                   openState={setModalOpen}
                   setNewPost={setNewPost}
                 />
