@@ -41,7 +41,7 @@ const Post = ({
             lng={content.longitude}
             style={{ fontSize: 'xx-large' }}
           >
-            😀
+            {content.reaction}
           </div>
         </GoogleMapReact>
         <a
