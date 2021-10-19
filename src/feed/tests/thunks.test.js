@@ -52,13 +52,27 @@ describe('The Post thunk', () => {
     mock.onGet('http://postit.localhost/post?page=1').reply(200, fakeResult);
 
     const expectedFirstAction = {
+      type: 'UPDATE_LOADING',
+      payload: {
+        loading: true,
+      },
+    };
+
+    const expectedSecondAction = {
       type: 'API_SUCCESS',
       payload: {
         name: 'posts',
       },
     };
 
-    const expectedSecondAction = {
+    const expectedThirdAction = {
+      type: 'UPDATE_LOADING',
+      payload: {
+        loading: false,
+      },
+    };
+
+    const expectedFourthAction = {
       type: 'FETCH_POSTS',
       payload: {
         posts: [{
@@ -89,6 +103,8 @@ describe('The Post thunk', () => {
 
     expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedFirstAction);
     expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
+    expect(fakeDispatch.getCall(2).args[0]).to.deep.equal(expectedThirdAction);
+    expect(fakeDispatch.getCall(3).args[0]).to.deep.equal(expectedFourthAction);
 
     mock.reset();
   });
