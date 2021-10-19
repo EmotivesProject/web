@@ -22,29 +22,17 @@
     "rules": {
         "react/prop-types": "off",
         "jsx-a11y/label-has-associated-control": [
-            "error",
+            2,
             {
-                "required": {
-                    "some": [
-                        "nesting",
-                        "id"
-                    ]
-                }
+                "labelAttributes": [
+                    "label"
+                ],
+                "controlComponents": [
+                    "Form.Input"
+                ],
+                "depth": 3
             }
-        ],
-        "jsx-a11y/label-has-for": [
-            "error",
-            {
-                "required": {
-                    "some": [
-                        "nesting",
-                        "id"
-                    ]
-                }
-            }
-        ],
-        "jsx-a11y/control-has-associated-label": "off",
-        "jsx-a11y/anchor-has-content": "off"
+        ]
     },
     "settings": {
         "react": {

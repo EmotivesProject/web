@@ -327,6 +327,10 @@ body {
   color: white;
 }
 
+.map-explore-link {
+  font-size: 0px;
+}
+
 .ui.button.profile-upload-button:hover {
   background-color: #003e85;
 }
