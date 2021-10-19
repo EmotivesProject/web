@@ -7,7 +7,7 @@ import TopBar from '../shared/TopBar';
 import {
   getError, getFinished, getLoading, getNotifications, getPage,
 } from './selector';
-import { getNotificationsRequest, seenNotificationsRequest } from './thunks';
+import { getNotificationsRequest, seenNotificationsRequest, visitNotificationsRequest } from './thunks';
 import Notification from './Notification';
 import useWindowDimensions from '../shared/useWindowDimensions';
 
@@ -22,6 +22,7 @@ export const NotificationPage = ({
   seenNotification,
   page,
   visitNotification,
+  loading,
 }) => {
   const { width } = useWindowDimensions();
 
@@ -53,6 +54,8 @@ export const NotificationPage = ({
     <Button
       id="load-more-posts"
       onClick={loadMoreNotifications}
+      loading={loading}
+      disabled={loading}
     >
       Load More
     </Button>
@@ -100,6 +103,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadNotifications: (auth, page) => dispatch(getNotificationsRequest(auth, page)),
   seenNotification: (auth, id) => dispatch(seenNotificationsRequest(auth, id)),
+  visitNotification: (auth, url) => dispatch(visitNotificationsRequest(auth, url)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationPage);

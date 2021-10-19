@@ -8,13 +8,14 @@ const Notification = ({
   data,
   action,
   auth,
+  visitAction,
 }) => {
   const handleVisit = (e) => {
     e.preventDefault();
 
-    action(auth, data.id);
+    visitAction(auth, data.link);
 
-    window.location.href = data.link;
+    // window.location.href = data.link;
   };
 
   const notifButtons = (

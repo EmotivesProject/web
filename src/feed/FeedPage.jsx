@@ -11,6 +11,7 @@ import {
   getPosts,
   getPage,
   getFinished,
+  getLoading,
 } from './selector';
 import {
   fetchPostsRequest,
@@ -22,7 +23,7 @@ import {
 let initialized = false;
 
 export const FeedPage = ({
-  auth, posts, page, loadPosts, likePost, commentPost, unlikePost, errors, finished,
+  auth, posts, page, loadPosts, likePost, commentPost, unlikePost, errors, finished, loading,
 }) => {
   const { width } = useWindowDimensions();
 
@@ -51,6 +52,8 @@ export const FeedPage = ({
       id="load-more-posts"
       onClick={() => loadPosts(auth, page)}
       tabIndex="0"
+      loading={loading}
+      disabled={loading}
     >
       Load More Posts!
     </Button>
@@ -95,6 +98,7 @@ const mapStateToProps = (state) => ({
   page: getPage(state),
   finished: getFinished(state),
   errors: getError(state),
+  loading: getLoading(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

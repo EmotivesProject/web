@@ -51,3 +51,9 @@ export const apiSuccess = (name) => ({
   type: API_SUCCESS,
   payload: { name },
 });
+
+export const UPDATE_LOADING = 'UPDATE_LOADING';
+export const updateLoading = (loading) => ({
+  type: UPDATE_LOADING,
+  payload: { loading },
+});

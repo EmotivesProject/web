@@ -22,11 +22,12 @@ const getNotificationsRequest = (auth, page) => async (dispatch) => {
     .then((result) => {
       dispatch(apiSuccess('notifications'));
       dispatch(notificationsLoaded(result.data.result, page));
+      dispatch(setLoading(false));
     })
     .catch(() => {
       dispatch(apiError('notifications'));
+      dispatch(setLoading(false));
     });
-  dispatch(setLoading(false));
 };
 
 const seenNotificationsRequest = (auth, id) => async (dispatch) => {
@@ -45,4 +46,23 @@ const seenNotificationsRequest = (auth, id) => async (dispatch) => {
     });
 };
 
-export { getNotificationsRequest, seenNotificationsRequest };
+const visitNotificationsRequest = (auth, url) => async (dispatch) => {
+  const usersURL = `${apiHost}://${urlBase}/notification/link/username/${auth.username}`;
+
+  const body = JSON.stringify({ url });
+
+  await axios.post(usersURL, body, {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  })
+    .then(() => {
+      dispatch(apiSuccess('notifications'));
+      window.location.href = url;
+    })
+    .catch(() => {
+      dispatch(apiError('notifications'));
+    });
+};
+
+export { getNotificationsRequest, seenNotificationsRequest, visitNotificationsRequest };
