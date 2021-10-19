@@ -32,6 +32,7 @@ const Marker = ({
   likePost,
   unlikePost,
   commentPost,
+  setViewingPost,
 }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -111,9 +112,14 @@ const Marker = ({
   return (
     <div style={markerStyle}>
       <Modal
-        closeIcon
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
+        onClose={() => {
+          setViewingPost(false);
+          setOpen(false);
+        }}
+        onOpen={() => {
+          setViewingPost(true);
+          setOpen(true);
+        }}
         open={open}
         trigger={<button type="button" className="invis-button">{data.post.content.reaction}</button>}
       >

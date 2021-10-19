@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import {
@@ -68,6 +68,11 @@ export const ExplorePage = ({
   const [pauseLoading, setPauseLoading] = React.useState(false);
   const [newPost, setNewPost] = React.useState(null);
   const [modelOpen, setModalOpen] = React.useState(false);
+  const [viewingPost, setViewingPost] = React.useState(false);
+
+  const stateRef = useRef();
+
+  stateRef.current = viewingPost;
 
   // Used to constantly load new posts
   useEffect(() => {
@@ -122,10 +127,12 @@ export const ExplorePage = ({
   };
 
   const mapClicked = (e) => {
-    if (!modelOpen) {
-      setModalOpen(true);
-      setNewPost(e);
-    }
+    setTimeout(() => {
+      if (!modelOpen && !stateRef.current) {
+        setModalOpen(true);
+        setNewPost(e);
+      }
+    }, 100);
   };
 
   const panToMe = () => {
@@ -151,6 +158,8 @@ export const ExplorePage = ({
       likePost={likePost}
       unlikePost={unlikePost}
       commentPost={commentPost}
+      setViewingPost={setViewingPost}
+      onClick={() => setViewingPost(true)}
     />
   ));
 

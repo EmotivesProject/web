@@ -49,6 +49,6 @@ OpenEmojiInput.args = {
 
 OpenEmojiInput.parameters = {
   axe: {
-    skip: false,
+    skip: true,
   },
 };
