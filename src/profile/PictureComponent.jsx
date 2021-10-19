@@ -45,6 +45,8 @@ export const PictureComponent = ({ auth }) => {
         >
           <Image
             src={`/assets/${picture}`}
+            aria-label="default emoji profile picture"
+            alt-text={`default emoji profile picture ${picture}`}
           />
         </Button>
       ))}
