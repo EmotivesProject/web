@@ -128,19 +128,19 @@ export const PictureComponent = ({ auth }) => {
           <h3>New Picture</h3>
           <h4>Select a new one</h4>
           {profileSelections}
-          <Button onClick={(e) => setProfileFromEmoji(e)} positive>Confirm</Button>
-          <Divider horizontal>
+          <Button onClick={(e) => setProfileFromEmoji(e)} className="profile-confirm">Confirm</Button>
+          <Divider>
             Or
           </Divider>
           <h4>Upload a picture instead</h4>
           <Form onSubmit={onFormSubmit} className="profile-upload-form">
             <Form.Field>
-              <Button as="label" htmlFor="file" type="button" className="profile-upload-button">
+              <Button as="label" htmlFor="file" type="button" className="profile-upload-button" aria-label="upload profile picture">
                 Select a new profile picture
               </Button>
               <input type="file" id="file" hidden onChange={fileChange} />
             </Form.Field>
-            <Button type="submit" positive>Confirm</Button>
+            <Button type="submit" className="profile-confirm">Confirm</Button>
           </Form>
         </Grid.Column>
       </Grid>

@@ -57,7 +57,7 @@ body {
 }
 
 #ExploreComboBox {
-  width: 175px;
+  width: 250px;
 }
 
 #register-button:hover {
@@ -147,6 +147,10 @@ body {
 
 .ui.button.marker-like-container:hover {
   background-color: #003e85;
+}
+
+.marker-like-container {
+  font-size: medium;
 }
 
 .ui.button.emoji-comment-input-button {
@@ -359,6 +363,7 @@ body {
   max-height: 28em;
   overflow-y: scroll;
   overflow-x: hidden;
+  min-height: 20em;
 }
 
 .ui.card.comment-right {
@@ -388,6 +393,17 @@ body {
 }
 
 .ui.button.emoji-selection:hover {
+  background-color: #287728;
+}
+
+.ui.button.profile-confirm {
+  font-size: medium;
+  margin: 5px;
+  background-color: #40bf40;
+  color: black;
+}
+
+.ui.button.profile-confirm:hover {
   background-color: #287728;
 }
 

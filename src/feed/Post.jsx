@@ -108,7 +108,7 @@ const Post = ({
   const comments = data.comments.length !== 0 ? (
     <div>
       <Divider />
-      <Header as="h3">Reactions</Header>
+      <Header as="h2">Reactions</Header>
       <PostComments key={data.post.id} data={data.comments} />
     </div>
   ) : null;
