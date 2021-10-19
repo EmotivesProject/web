@@ -41,11 +41,13 @@ const AutoComplete = ({ panTo, currentPos }) => {
     panTo({ lat, lng });
   };
 
+  const searchLabel = 'Search ';
+
   return (
     <div id="autocomplete-search">
       <Combobox onSelect={handleSelect}>
         <label htmlFor="ExploreComboBox">
-          Search:
+          {searchLabel}
           <ComboboxInput
             id="ExploreComboBox"
             value={value}

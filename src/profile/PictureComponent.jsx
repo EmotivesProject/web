@@ -2,9 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import {
   Button,
-  Divider,
   Form,
-  Grid, Image, List, Message, Segment,
+  Grid, Image, Message, Segment,
 } from 'semantic-ui-react';
 import defaultPictures from '../constants/DefaultPictures';
 import createProfileLink from '../utils/createProfileLink';
@@ -18,6 +17,7 @@ export const PictureComponent = ({ auth }) => {
   const [error, setError] = React.useState(null);
   const [newFile, SetNewFile] = React.useState([]);
   const [emojiSelected, setEmojiSelection] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
 
   const errorMessage = error !== null ? (
     <Message negative>
@@ -34,27 +34,27 @@ export const PictureComponent = ({ auth }) => {
   };
 
   const profileSelections = (
-    <List className="emoji-profiles">
+    <div style={{ margin: 'auto', textAlign: 'center' }}>
       {defaultPictures.map((picture) => (
-        <List.Item
-          onClick={() => setEmojiSelection(picture)}
-          className={picture === emojiSelected ? 'selected-emoji' : null}
+        <Button
+          className={picture === emojiSelected ? 'emoji-profile-selected' : 'emoji-profile-selection'}
           key={Math.random().toString(36).substr(2, 9)}
+          aria-label="default emoji profile picture"
+          alt-text={`default emoji profile picture ${picture}`}
+          onClick={() => setEmojiSelection(picture)}
         >
           <Image
-            key={picture}
             src={`/assets/${picture}`}
-            width="50px"
-            height="50px"
             aria-label="default emoji profile picture"
             alt-text={`default emoji profile picture ${picture}`}
           />
-        </List.Item>
+        </Button>
       ))}
-    </List>
+    </div>
   );
 
   const onFormSubmit = () => {
+    setLoading(true);
     const url = `${host}://${base}/user_profile`;
     const formData = new FormData();
     formData.append('image', newFile);
@@ -71,6 +71,7 @@ export const PictureComponent = ({ auth }) => {
       setError(null);
       window.location.reload(false);
     }).catch((err) => {
+      setLoading(false);
       setError(extractErrorObject(err).message);
     });
   };
@@ -81,6 +82,8 @@ export const PictureComponent = ({ auth }) => {
     if (emojiSelected == null) {
       return;
     }
+
+    setLoading(true);
 
     const fileLocation = `../assets/${emojiSelected}`;
 
@@ -102,13 +105,14 @@ export const PictureComponent = ({ auth }) => {
           setError(null);
           window.location.reload(false);
         }).catch((err) => {
+          setLoading(false);
           setError(extractErrorObject(err).message);
         });
       });
   };
 
   return (
-    <Segment>
+    <Segment loading={loading}>
       {errorMessage}
       <h2>
         Profile Picture
@@ -126,22 +130,25 @@ export const PictureComponent = ({ auth }) => {
         </Grid.Column>
         <Grid.Column>
           <h3>New Picture</h3>
-          <h4>Select a new one</h4>
-          {profileSelections}
-          <Button onClick={(e) => setProfileFromEmoji(e)} positive>Confirm</Button>
-          <Divider horizontal>
-            Or
-          </Divider>
-          <h4>Upload a picture instead</h4>
-          <Form onSubmit={onFormSubmit} className="profile-upload-form">
-            <Form.Field>
-              <Button as="label" htmlFor="file" type="button" className="profile-upload-button">
-                Select a new profile picture
-              </Button>
-              <input type="file" id="file" hidden onChange={fileChange} />
-            </Form.Field>
-            <Button type="submit" positive>Confirm</Button>
-          </Form>
+          <Grid divided="vertically">
+            <Grid.Row>
+              <h4>Select a new one</h4>
+              {profileSelections}
+              <Button onClick={(e) => setProfileFromEmoji(e)} className="profile-confirm">Confirm</Button>
+            </Grid.Row>
+            <Grid.Row>
+              <h4>Upload a picture instead</h4>
+              <Form onSubmit={onFormSubmit} className="profile-upload-form">
+                <Form.Field>
+                  <Button as="label" htmlFor="file" type="button" className="profile-upload-button" aria-label="upload profile picture">
+                    Select a new profile picture
+                  </Button>
+                  <input type="file" id="file" hidden onChange={fileChange} />
+                </Form.Field>
+                <Button type="submit" className="profile-confirm">Confirm</Button>
+              </Form>
+            </Grid.Row>
+          </Grid>
         </Grid.Column>
       </Grid>
     </Segment>

@@ -16,6 +16,17 @@ import PostComments from './PostComments';
 
 const defaultZoom = 16;
 
+const markerStyle = {
+  height: 10,
+  width: 10,
+  cursor: 'pointer',
+  zIndex: 10,
+  fontSize: 'xx-large',
+  position: 'absolute',
+  left: '-10px',
+  top: '-20px',
+};
+
 const Post = ({
   auth, data, likePost, unlikePost, commentPost,
 }) => {
@@ -39,7 +50,7 @@ const Post = ({
           <div
             lat={content.latitude}
             lng={content.longitude}
-            style={{ fontSize: 'xx-large' }}
+            style={markerStyle}
           >
             {content.reaction}
           </div>
@@ -94,13 +105,10 @@ const Post = ({
     );
   }
 
-  const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : null;
-  const reactionString = data.post.content.reaction ? `${data.post.content.reaction}` : null;
-
   const comments = data.comments.length !== 0 ? (
     <div>
       <Divider />
-      <Header as="h3">Reactions</Header>
+      <Header as="h2">Reactions</Header>
       <PostComments key={data.post.id} data={data.comments} />
     </div>
   ) : null;
@@ -112,9 +120,6 @@ const Post = ({
           <Avatar username={data.post.username} name="small-avatar" />
           {data.post.username}
           &nbsp;
-          {visitedString}
-          &nbsp;
-          {reactionString}
           <Header.Subheader id="post-subheader">
             <Icon name="like" />
             {data.likes ? data.likes.length : 0}

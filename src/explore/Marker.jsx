@@ -7,6 +7,7 @@ import {
   Icon,
   Modal,
 } from 'semantic-ui-react';
+import GoogleMapReact from 'google-map-react';
 import PostComments from '../feed/PostComments';
 import EmojiInput from '../shared/EmojiInput';
 import Avatar from '../shared/Avatar';
@@ -22,6 +23,8 @@ const markerStyle = {
   left: '-10px',
   top: '-20px',
 };
+
+const defaultZoom = 16;
 
 const Marker = ({
   data,
@@ -69,29 +72,38 @@ const Marker = ({
   if (data.post.content.type === 'emoji') {
     mainInformation = content.message;
   } else {
-    const imageSrc = `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_KEY}&center=${data.post.content.latitude},${data.post.content.longitude}&zoom=18`;
+    const initialCentre = {
+      lat: data.post.content.latitude,
+      lng: data.post.content.longitude,
+    };
+
     mainInformation = (
-      <iframe
-        title={data.post.id}
-        width="100%"
-        height="400px"
-        loading="lazy"
-        src={imageSrc}
-      />
+      <div className="post-map" style={{ position: 'relative', width: '100%', height: '400px' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+          defaultCenter={initialCentre}
+          defaultZoom={defaultZoom}
+        >
+          <div
+            lat={content.latitude}
+            lng={content.longitude}
+            style={markerStyle}
+          >
+            {content.reaction}
+          </div>
+        </GoogleMapReact>
+      </div>
     );
   }
 
-  const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : '';
-  const reactionString = data.post.content.reaction ? ` ${data.post.content.reaction}` : '';
-
-  const title = `${data.post.username} ${visitedString} ${reactionString}`;
+  const title = `${data.post.username}`;
 
   const subTitle = `${likeString} ${time}`;
 
   const comments = data.comments.length !== 0 ? (
     <div id="reaction-previews">
       <Divider />
-      <Header as="h3">Reactions</Header>
+      <Header as="h2">Reactions</Header>
       <PostComments key={data.post.id} data={data.comments} goRight />
     </div>
   ) : null;
