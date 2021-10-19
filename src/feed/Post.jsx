@@ -105,9 +105,6 @@ const Post = ({
     );
   }
 
-  const visitedString = data.post.content.title ? `visited ${data.post.content.title}` : null;
-  const reactionString = data.post.content.reaction ? `${data.post.content.reaction}` : null;
-
   const comments = data.comments.length !== 0 ? (
     <div>
       <Divider />
@@ -123,9 +120,6 @@ const Post = ({
           <Avatar username={data.post.username} name="small-avatar" />
           {data.post.username}
           &nbsp;
-          {visitedString}
-          &nbsp;
-          {reactionString}
           <Header.Subheader id="post-subheader">
             <Icon name="like" />
             {data.likes ? data.likes.length : 0}
