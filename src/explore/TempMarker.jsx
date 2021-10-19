@@ -53,7 +53,6 @@ const TempMarker = ({
   return (
     <div style={markerStyle}>
       <Modal
-        closeIcon
         onClose={() => {
           setModalOpen(false);
         }}

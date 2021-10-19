@@ -64,7 +64,7 @@ const EmojiInput = ({
           Your&nbsp;
           {type}
           <Input
-            placeholder="Waiting for input..."
+            placeholder={`Your ${type}`}
             value={currentInput}
             onChange={(e) => updateCurrentInputViaKeyboard(e.target.value)}
             id="emoji-input"
@@ -83,7 +83,7 @@ const EmojiInput = ({
           negative
         >
           <Icon name="cancel" />
-          Delete Emoji Input
+          Delete Input
         </Button>
         <Button
           className="emoji-selection-button"
@@ -92,7 +92,7 @@ const EmojiInput = ({
             setCurrentInput('');
           }}
         >
-          Cancel Create
+          Cancel
         </Button>
         <Button
           id="emoji-selection-creation-button"
