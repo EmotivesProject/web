@@ -8,11 +8,13 @@ import {
   API_ERROR,
   API_SUCCESS,
   FETCH_POST,
+  UPDATE_LOADING,
 } from './actions';
 
 const initialState = {
   page: 0,
   finished: false,
+  loading: false,
   error: null,
   posts: [],
   errors: null,
@@ -113,6 +115,13 @@ const postState = (state = initialState, action) => {
       return {
         ...state,
         errors: null,
+      };
+    }
+    case UPDATE_LOADING: {
+      const { loading } = payload;
+      return {
+        ...state,
+        loading,
       };
     }
     default:
