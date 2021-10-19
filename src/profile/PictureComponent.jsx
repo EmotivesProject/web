@@ -129,7 +129,9 @@ export const PictureComponent = ({ auth }) => {
           <h4>Select a new one</h4>
           {profileSelections}
           <Button onClick={(e) => setProfileFromEmoji(e)} positive>Confirm</Button>
-          <Divider />
+          <Divider horizontal>
+            Or
+          </Divider>
           <h4>Upload a picture instead</h4>
           <Form onSubmit={onFormSubmit} className="profile-upload-form">
             <Form.Field>
