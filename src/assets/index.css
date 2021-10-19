@@ -325,6 +325,14 @@ body {
   color: #ffffff;
   background-color: #006ac0;
   color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.ui.form .field>label {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ui.form .field>label {
@@ -396,11 +404,33 @@ body {
   background-color: #287728;
 }
 
+.ui.button.emoji-profile-selection {
+  max-width: 30%;
+  padding: 10px 20px 10px 20px;
+  margin: 5px;
+  background-color: #40bf40;
+  color: black;
+}
+
+.ui.button.emoji-profile-selected {
+  max-width: 30%;
+  padding: 10px 20px 10px 20px;
+  margin: 5px;
+  background-color: #287728;
+  color: black;
+}
+
+.ui.button.emoji-profile-selection:hover {
+  background-color: #287728;
+}
+
 .ui.button.profile-confirm {
   font-size: medium;
   margin: 5px;
   background-color: #40bf40;
   color: black;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ui.button.profile-confirm:hover {

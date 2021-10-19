@@ -6,6 +6,7 @@ const defaultPictures = [
   'really_smile.png',
   'smile.png',
   'wink.png',
+  'crazy.png',
 ];
 
 export default defaultPictures;
