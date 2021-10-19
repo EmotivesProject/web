@@ -46,10 +46,14 @@ const Post = ({
         </GoogleMapReact>
         <a
           href={`/explore?id=${data.post.id}&lat=${content.latitude}&lng=${content.longitude}`}
+          aria-label="Explore here"
+          className="map-explore-link"
           style={{
             position: 'absolute', top: 0, left: '0px', display: 'inline-block', width: '500px', height: '400px',
           }}
-        />
+        >
+          Explore here
+        </a>
       </div>
     ) : (
       <div style={{
