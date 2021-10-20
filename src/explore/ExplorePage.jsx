@@ -128,11 +128,12 @@ export const ExplorePage = ({
 
   const mapClicked = (e) => {
     setTimeout(() => {
-      if (!modelOpen && !stateRef.current) {
+      const inStreetView = mapRef.current.map.getStreetView().getVisible();
+      if (!modelOpen && !stateRef.current && !inStreetView) {
         setModalOpen(true);
         setNewPost(e);
       }
-    }, 100);
+    }, 200);
   };
 
   const panToMe = () => {
@@ -190,6 +191,7 @@ export const ExplorePage = ({
       yesIWantToUseGoogleMapApiInternals
       onGoogleApiLoaded={onMapLoad}
       onDrag={(e) => mapDragged(e)}
+      options={{ streetViewControl: true }}
     >
       {markers}
       {newMarker}
