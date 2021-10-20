@@ -26,16 +26,15 @@ jobs:
         uses: appleboy/ssh-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-          REACT_APP_GOOGLE_KEY: ${{ secrets.REACT_APP_GOOGLE_KEY }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          envs: GITHUB_TOKEN,REACT_APP_GOOGLE_KEY
+          envs: GITHUB_TOKEN
           script: |
             echo $GITHUB_TOKEN | docker login ghcr.io -u imthetom --password-stdin
             docker pull ghcr.io/tombowyerresearchproject/web:latest
             rm -R web
             git clone git@github.com:TomBowyerResearchProject/web.git
             cd web
-            ./scripts/start.sh prod no $REACT_APP_GOOGLE_KEY
+            ./scripts/start.sh prod

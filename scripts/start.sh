@@ -3,7 +3,6 @@
 
 stage="$1"
 build="$2"
-export REACT_APP_GOOGLE_KEY="$3"
 
 if [ "$stage" == 'prod' ]; then
 	if [ "$build" == 'yes' ]; then
