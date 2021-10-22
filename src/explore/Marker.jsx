@@ -105,7 +105,7 @@ const Marker = ({
     <div id="reaction-previews">
       <Divider />
       <Header as="h2">Reactions</Header>
-      <PostComments key={data.post.id} data={data.comments} goRight />
+      <PostComments key={data.post.id} comments={data.comments} likes={data.likes} goRight />
     </div>
   ) : null;
 
