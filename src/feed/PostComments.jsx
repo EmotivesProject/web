@@ -4,12 +4,26 @@ import Avatar from '../shared/Avatar';
 import getTimeAgoFromObject from '../utils/date';
 
 const PostComments = ({
-  data,
+  comments,
+  likes,
   goRight,
 }) => {
-  const comments = (
+  const likeMessages = likes.map((like) => {
+    const tmpObj = { ...like };
+    tmpObj.message = '❤️';
+    return tmpObj;
+  });
+
+  const fullComments = (array, array2) => {
+    const full = [...array, ...array2];
+    return full.sort((a, b) => a.created_at < b.created_at);
+  };
+
+  const actualComments = fullComments(comments, likeMessages);
+
+  const postComments = (
     <Card.Group>
-      {data.map((comment) => (
+      {actualComments.map((comment) => (
         <Card key={Math.random().toString(36).substr(2, 9)} className={goRight ? 'comment-right' : 'comment'}>
           <Card.Content>
             <Card.Header>
@@ -30,7 +44,7 @@ const PostComments = ({
 
   return (
     <>
-      {comments}
+      {postComments}
     </>
   );
 };

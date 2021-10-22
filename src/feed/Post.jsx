@@ -109,7 +109,7 @@ const Post = ({
     <div>
       <Divider />
       <Header as="h2">Reactions</Header>
-      <PostComments key={data.post.id} data={data.comments} />
+      <PostComments key={data.post.id} comments={data.comments} likes={data.likes} />
     </div>
   ) : null;
 
