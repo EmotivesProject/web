@@ -24,15 +24,11 @@ jobs:
           docker push ghcr.io/tombowyerresearchproject/web:latest
       - name: Connect and deploy
         uses: appleboy/ssh-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          envs: GITHUB_TOKEN
           script: |
-            echo $GITHUB_TOKEN | docker login ghcr.io -u imthetom --password-stdin
             docker pull ghcr.io/tombowyerresearchproject/web:latest
             rm -R web
             git clone git@github.com:TomBowyerResearchProject/web.git
