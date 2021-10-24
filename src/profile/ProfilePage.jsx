@@ -2,13 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Grid, Message } from 'semantic-ui-react';
+import { removeAuth } from '../auth/actions';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 import useWindowDimensions from '../shared/useWindowDimensions';
+import randomKey from '../utils/randomKey';
+import { LogoutComponent } from './LogoutComponent';
 import { PictureComponent } from './PictureComponent';
 
 export const ProfilePage = ({
   auth,
+  callRemoveAuth,
 }) => {
   const { width } = useWindowDimensions();
 
@@ -41,7 +45,11 @@ export const ProfilePage = ({
           <Grid.Column width={middleWidth}>
             {errorMessage}
             <h1>Profile</h1>
-            <PictureComponent auth={auth} key={Math.random().toString(36).substr(2, 9)} />
+            <PictureComponent auth={auth} key={randomKey()} />
+            <LogoutComponent
+              removeAuth={callRemoveAuth}
+              key={randomKey()}
+            />
           </Grid.Column>
           <Grid.Column width={sideWidths} />
         </Grid.Row>
@@ -54,4 +62,8 @@ const mapStateToProps = (state) => ({
   auth: getAuth(state),
 });
 
-export default connect(mapStateToProps, null)(ProfilePage);
+const mapDispatchToProps = (dispatch) => ({
+  callRemoveAuth: () => dispatch(removeAuth()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

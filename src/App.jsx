@@ -9,7 +9,6 @@ import IndividualPostPage from './feed/IndividualPostPage';
 import Autologin from './autologin/Autologin';
 import DefaultNotificationPage from './notifications/NotificationPage';
 import DefaultExplorePage from './explore/ExplorePage';
-import LogOutPage from './logout/LogOutPage';
 import NotFoundPage from './NotFound';
 import ConnectedProfilePage from './profile/ProfilePage';
 
@@ -32,7 +31,6 @@ function App() {
         <Route path="/post/:id" component={IndividualPostPage} />
         <Route path="/autologin/" component={Autologin} />
         <Route path="/explore" component={DefaultExplorePage} />
-        <Route path="/log_out" component={LogOutPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </>

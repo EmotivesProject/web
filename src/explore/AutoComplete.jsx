@@ -11,6 +11,7 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 import '@reach/combobox/styles.css';
+import randomKey from '../utils/randomKey';
 
 const AutoComplete = ({ panTo, currentPos }) => {
   const {
@@ -61,7 +62,7 @@ const AutoComplete = ({ panTo, currentPos }) => {
           <ComboboxList>
             {status === 'OK'
               && data.map(({ description }) => (
-                <ComboboxOption key={Math.random().toString(36).substr(2, 9)} value={description} />
+                <ComboboxOption key={randomKey()} value={description} />
               ))}
           </ComboboxList>
         </ComboboxPopover>

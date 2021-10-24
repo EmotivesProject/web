@@ -8,7 +8,7 @@ import {
 
 const TopBar = () => (
   <Segment fixed="top" id="top-bar" role="banner">
-    <Grid columns={7}>
+    <Grid columns={6}>
       <Grid.Column>
         Emotives
       </Grid.Column>
@@ -35,11 +35,6 @@ const TopBar = () => (
       <Grid.Column>
         <Link to="/profile" aria-label="user" tabIndex="0">
           <Icon name="user" />
-        </Link>
-      </Grid.Column>
-      <Grid.Column>
-        <Link to="/log_out" aria-label="log out" tabIndex="0">
-          <Icon name="sign-out" />
         </Link>
       </Grid.Column>
     </Grid>

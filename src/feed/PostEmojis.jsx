@@ -1,6 +1,7 @@
 import GraphemeSplitter from 'grapheme-splitter';
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
+import randomKey from '../utils/randomKey';
 import shuffle from '../utils/shuffle';
 
 const splitter = new GraphemeSplitter();
@@ -24,7 +25,7 @@ const PostEmojis = ({
       <Grid.Row textAlign="center">
         {top.map((emoji) => (
           <Grid.Column
-            key={Math.random().toString(36).substr(2, 9)}
+            key={randomKey()}
           >
             {emoji}
           </Grid.Column>
