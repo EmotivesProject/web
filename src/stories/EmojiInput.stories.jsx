@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import '../assets/index.css';
 import EmojiInput from '../shared/EmojiInput';
+import store from '../store';
 
 export default {
   title: 'Emoji Input',
@@ -9,7 +12,11 @@ export default {
 };
 
 const ComponentTemplate = (args) => (
-  <EmojiInput {...args} />
+  <Provider store={store}>
+    <BrowserRouter>
+      <EmojiInput {...args} />
+    </BrowserRouter>
+  </Provider>
 );
 
 export const DefaultEmojiInput = ComponentTemplate.bind({});

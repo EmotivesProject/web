@@ -1,5 +1,7 @@
-import React from 'react';
-import { Button } from 'semantic-ui-react';
+/* eslint-disable arrow-body-style */
+import React, { useState } from 'react';
+import { Button, Input } from 'semantic-ui-react';
+import { getName } from 'emoji-dictionary';
 import {
   Faces,
   Hands,
@@ -15,43 +17,68 @@ import {
 
 // Display an emoji selection panels
 // Bit complex please might refactor
-const EmojiSelection = ({ action }) => {
-  const createRowForEmoji = (emojis) => (
-    <div style={{ margin: 'auto', textAlign: 'center' }}>
-      {emojis.map((emoji) => (
-        <Button
-          className="emoji-selection"
-          key={Math.random().toString(36).substr(2, 9)}
-          content={emoji}
-          aria-label="Emoji selection button"
-          onClick={() => action(emoji)}
-        />
-      ))}
-    </div>
-  );
+const EmojiSelection = ({ action, initialInput }) => {
+  const [emojiFilter, setEmojiFilter] = useState(initialInput);
+
+  const excludeEmoji = (emoji) => {
+    if (emojiFilter === '') {
+      return true;
+    }
+    const name = getName(emoji);
+    return name === undefined
+      ? false
+      : name.includes(emojiFilter);
+  };
+
+  const createRowForEmoji = (emojis, title) => {
+    const filteredEmojis = emojis.filter((emoji) => excludeEmoji(emoji));
+
+    return filteredEmojis.length !== 0 ? (
+      <>
+        <h3 className="emoji-selection-title">{title}</h3>
+        <div style={{ margin: 'auto', textAlign: 'center' }}>
+          {filteredEmojis.map((emoji) => (
+            <Button
+              className="emoji-selection"
+              key={Math.random().toString(36).substr(2, 9)}
+              content={emoji}
+              aria-label="Emoji selection button"
+              onClick={() => action(emoji)}
+            />
+          ))}
+        </div>
+      </>
+    ) : null;
+  };
 
   return (
-    <div id="emoji-selection-previews">
-      <h3 className="emoji-selection-title">Faces</h3>
-      {createRowForEmoji(Faces)}
-      <h3 className="emoji-selection-title">Hands</h3>
-      {createRowForEmoji(Hands)}
-      <h3 className="emoji-selection-title">People</h3>
-      {createRowForEmoji(People)}
-      <h3 className="emoji-selection-title">Clothing</h3>
-      {createRowForEmoji(Clothing)}
-      <h3 className="emoji-selection-title">Animals And Nature</h3>
-      {createRowForEmoji(AnimalsAndNature)}
-      <h3 className="emoji-selection-title">Food And Drink</h3>
-      {createRowForEmoji(Food)}
-      <h3 className="emoji-selection-title">Sport</h3>
-      {createRowForEmoji(Sport)}
-      <h3 className="emoji-selection-title">Travel</h3>
-      {createRowForEmoji(Travel)}
-      <h3 className="emoji-selection-title">Objects</h3>
-      {createRowForEmoji(Objects)}
-      <h3 className="emoji-selection-title">Symbols</h3>
-      {createRowForEmoji(Symbols)}
+    <div id="emoji-selection-container">
+      <Input
+        id="emoji-filter"
+        name="EmojiFilter"
+        type="input"
+        icon="search"
+        iconPosition="right"
+        size="large"
+        placeholder="Search for an emoji"
+        value={emojiFilter}
+        onChange={(e) => setEmojiFilter(e.target.value)}
+        label="Search"
+        labelPosition="left"
+        fluid
+      />
+      <div id="emoji-selection-previews">
+        {createRowForEmoji(Faces, 'Faces')}
+        {createRowForEmoji(Hands, 'Hands')}
+        {createRowForEmoji(People, 'People')}
+        {createRowForEmoji(Clothing, 'Clothing')}
+        {createRowForEmoji(AnimalsAndNature, 'Animals And Nature')}
+        {createRowForEmoji(Food, 'Food And Drink')}
+        {createRowForEmoji(Sport, 'Sport')}
+        {createRowForEmoji(Travel, 'Travel')}
+        {createRowForEmoji(Objects, 'Objects')}
+        {createRowForEmoji(Symbols, 'Symbols')}
+      </div>
     </div>
   );
 };
