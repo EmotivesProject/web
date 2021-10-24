@@ -441,6 +441,20 @@ body {
   background-color: #287728;
 }
 
+.ui.button.profile-logout {
+  font-size: medium;
+  width: 150%;
+  margin: 5px;
+  background-color: #40bf40;
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ui.button.profile-logout:hover {
+  background-color: #287728;
+}
+
 .ui.button.emoji-selection-button {
   font-size: large;
 }
