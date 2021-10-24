@@ -300,10 +300,14 @@ body {
   }
 }
 
+#emoji-selection-container {
+  margin-top: -2em;
+}
+
 #emoji-selection-previews {
+  margin-top: 0.2em;
   max-height: 24em;
   overflow-y: scroll;
-  margin-top: -2em;
 }
 
 .ui.avatar.image.small-avatar {

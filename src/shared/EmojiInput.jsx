@@ -30,6 +30,7 @@ const EmojiInput = ({
   // Basic functions that help the modal
   const updateCurrentInput = (str) => {
     setCurrentInput(currentInput.concat(str));
+    setErrorMessage('');
   };
 
   const updateCurrentInputViaKeyboard = (str) => {
@@ -72,7 +73,7 @@ const EmojiInput = ({
           />
           {errorMes}
         </label>
-        <EmojiSelection action={updateCurrentInput} />
+        <EmojiSelection action={updateCurrentInput} initialInput="" />
       </Modal.Content>
       <Modal.Actions style={{ display: 'flex', float: 'right' }}>
         <Button
