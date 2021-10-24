@@ -3,6 +3,7 @@ import {
   Message,
 } from 'semantic-ui-react';
 import Avatar from '../shared/Avatar';
+import randomKey from '../utils/randomKey';
 
 const MessengerMessage = ({ message, user, talkingTo }) => {
   if (message.username_from !== talkingTo && message.username_from !== user) {
@@ -11,7 +12,7 @@ const MessengerMessage = ({ message, user, talkingTo }) => {
 
   return (
     <Message
-      key={Math.random().toString(36).substr(2, 9)}
+      key={randomKey()}
       className={user === message.username_from ? 'messenger-message' : 'messenger-message-non-self'}
     >
       <Message.Header>

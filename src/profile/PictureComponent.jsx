@@ -8,6 +8,7 @@ import {
 import defaultPictures from '../constants/DefaultPictures';
 import createProfileLink from '../utils/createProfileLink';
 import { extractErrorObject } from '../utils/extractObjects';
+import randomKey from '../utils/randomKey';
 import srcToFile from '../utils/SrcToFile';
 
 const host = process.env.REACT_APP_API_HOST;
@@ -38,7 +39,7 @@ export const PictureComponent = ({ auth }) => {
       {defaultPictures.map((picture) => (
         <Button
           className={picture === emojiSelected ? 'emoji-profile-selected' : 'emoji-profile-selection'}
-          key={Math.random().toString(36).substr(2, 9)}
+          key={randomKey()}
           aria-label="default emoji profile picture"
           alt-text={`default emoji profile picture ${picture}`}
           onClick={() => setEmojiSelection(picture)}

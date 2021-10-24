@@ -101,7 +101,7 @@ const Marker = ({
 
   const subTitle = `${likeString} ${time}`;
 
-  const comments = data.comments.length !== 0 ? (
+  const comments = data.comments.length !== 0 || data.likes.length !== 0 ? (
     <div id="reaction-previews">
       <Divider />
       <Header as="h2">Reactions</Header>

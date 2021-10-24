@@ -7,6 +7,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
+import randomKey from '../utils/randomKey';
 
 const host = process.env.REACT_APP_API_HOST;
 const base = process.env.REACT_APP_UACL_BASE_URL;
@@ -117,7 +118,7 @@ const Autologin = ({ auth }) => {
             </Form>
             {autologinTokens.map((autologin) => (
               <Message
-                key={Math.random().toString(36).substr(2, 9)}
+                key={randomKey()}
                 className="autologin-message"
               >
                 <Message.Header>{autologin.username}</Message.Header>

@@ -29,6 +29,7 @@ import {
   requestPreviousMessages,
   dispatchPersonSwitch,
 } from './thunks';
+import randomKey from '../utils/randomKey';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -113,7 +114,7 @@ export const MessengerPage = ({
 
   const availableMessages = messages.map((message) => (
     <MessengerMessage
-      key={Math.random().toString(36).substr(2, 9)}
+      key={randomKey()}
       message={message}
       user={auth.username}
       talkingTo={talkingTo}
@@ -143,7 +144,7 @@ export const MessengerPage = ({
 
   return (
     <>
-      <TopBar key={Math.random().toString(36).substr(2, 9)} />
+      <TopBar key={randomKey()} />
       <div role="main" id="main">
         <Grid id="grid-page">
           <Grid.Column width={sideWidths} id="possible-talking">
@@ -156,11 +157,11 @@ export const MessengerPage = ({
                   ));
                   const content = data ? `${user.username} (${data.total})` : `${user.username}`;
                   return (
-                    <div key={Math.random().toString(36).substr(2, 9)}>
+                    <div key={randomKey()}>
                       <Button
                         className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
                         content={content}
-                        key={Math.random().toString(36).substr(2, 9)}
+                        key={randomKey()}
                         onClick={() => {
                           switchPersonTalking(user.username, talkingTo);
                         }}
@@ -177,11 +178,11 @@ export const MessengerPage = ({
               {inactiveUsers.map((user) => {
                 if (user.username !== auth.username) {
                   return (
-                    <div key={Math.random().toString(36).substr(2, 9)}>
+                    <div key={randomKey()}>
                       <Button
                         className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
                         content={user.username}
-                        key={Math.random().toString(36).substr(2, 9)}
+                        key={randomKey()}
                         onClick={() => switchPersonTalking(user.username, talkingTo)}
                         positive={user.active}
                       >
@@ -212,7 +213,7 @@ export const MessengerPage = ({
                 </Grid.Row>
               </div>
               <Divider />
-              <Grid.Row id="messenger-new-message" key={Math.random().toString(36).substr(2, 9)}>
+              <Grid.Row id="messenger-new-message" key={randomKey()}>
                 {newMessageButton}
               </Grid.Row>
             </Segment>

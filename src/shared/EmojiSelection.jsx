@@ -14,6 +14,7 @@ import {
   Objects,
   Symbols,
 } from '../constants/Emojis';
+import randomKey from '../utils/randomKey';
 
 // Display an emoji selection panels
 // Bit complex please might refactor
@@ -40,7 +41,7 @@ const EmojiSelection = ({ action, initialInput }) => {
           {filteredEmojis.map((emoji) => (
             <Button
               className="emoji-selection"
-              key={Math.random().toString(36).substr(2, 9)}
+              key={randomKey()}
               content={emoji}
               aria-label="Emoji selection button"
               onClick={() => action(emoji)}

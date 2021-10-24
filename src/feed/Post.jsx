@@ -105,7 +105,7 @@ const Post = ({
     );
   }
 
-  const comments = data.comments.length !== 0 ? (
+  const comments = data.comments.length !== 0 || data.likes.length !== 0 ? (
     <div>
       <Divider />
       <Header as="h2">Reactions</Header>
