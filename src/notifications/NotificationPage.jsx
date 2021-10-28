@@ -56,6 +56,7 @@ export const NotificationPage = ({
       onClick={loadMoreNotifications}
       loading={loading}
       disabled={loading}
+      content="Load more"
       icon="plus"
     />
   ) : null;

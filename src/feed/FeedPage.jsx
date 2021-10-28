@@ -52,6 +52,7 @@ export const FeedPage = ({
       id="load-more-posts"
       onClick={() => loadPosts(auth, page)}
       tabIndex="0"
+      content="Load more"
       loading={loading}
       disabled={loading}
       icon="plus"

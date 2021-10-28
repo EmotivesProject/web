@@ -221,6 +221,7 @@ export const ExplorePage = ({
                   onClick={panToMe}
                   id="pan-button"
                   icon="map marker alternate"
+                  content="To me"
                 />
               )}
             >
