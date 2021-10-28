@@ -85,7 +85,7 @@ const Post = ({
       aria-label="like post"
       title="Like the post"
       tabIndex="0"
-      content={<Icon name="like" />}
+      content={<Icon name="thumbs up" />}
     />
   );
 
@@ -100,7 +100,7 @@ const Post = ({
         title="Unlike the post"
         tabIndex="0"
         icon
-        content={<Icon name="like" />}
+        content={<Icon name="thumbs up" />}
       />
     );
   }
@@ -121,7 +121,7 @@ const Post = ({
           {data.post.username}
           &nbsp;
           <Header.Subheader id="post-subheader">
-            <Icon name="like" />
+            <Icon name="thumbs up" />
             {data.likes ? data.likes.length : 0}
             &nbsp;
             <Icon name="clock" />
