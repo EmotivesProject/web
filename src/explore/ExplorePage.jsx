@@ -65,7 +65,6 @@ export const ExplorePage = ({
     return <Redirect to="/" />;
   }
 
-  const [pauseLoading, setPauseLoading] = React.useState(false);
   const [newPost, setNewPost] = React.useState(null);
   const [modelOpen, setModalOpen] = React.useState(false);
   const [viewingPost, setViewingPost] = React.useState(false);
@@ -77,7 +76,7 @@ export const ExplorePage = ({
   // Used to constantly load new posts
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!finished && !pauseLoading) {
+      if (!finished) {
         loadPosts(auth, page);
       }
     }, fetchMorePostRate);
@@ -114,10 +113,6 @@ export const ExplorePage = ({
       };
     }
   }
-
-  const switchPauseLoading = () => {
-    setPauseLoading(!pauseLoading);
-  };
 
   const mapDragged = (e) => {
     initialCentre = {
@@ -202,8 +197,6 @@ export const ExplorePage = ({
     </div>
   );
 
-  const pauseLoadingButtonText = pauseLoading ? 'Unpause Loading' : 'Pause Loading';
-
   return (
     <>
       <TopBar />
@@ -217,7 +210,7 @@ export const ExplorePage = ({
           </Grid.Column>
           <Grid.Column />
         </Grid>
-        <Grid columns={3} textAlign="center">
+        <Grid columns={2} textAlign="center">
           <Grid.Column>
             <Button
               tabIndex="0"
@@ -229,15 +222,6 @@ export const ExplorePage = ({
           </Grid.Column>
           <Grid.Column>
             <AutoComplete panTo={panTo} currentPos={initialCentre} />
-          </Grid.Column>
-          <Grid.Column>
-            <Button
-              tabIndex="0"
-              onClick={switchPauseLoading}
-              id="switch-loading-button"
-            >
-              {pauseLoadingButtonText}
-            </Button>
           </Grid.Column>
         </Grid>
         <br />
