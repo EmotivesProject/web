@@ -54,9 +54,8 @@ export const FeedPage = ({
       tabIndex="0"
       loading={loading}
       disabled={loading}
-    >
-      Load More Posts!
-    </Button>
+      icon="plus"
+    />
   ) : null;
 
   const middleWidth = width < 1700 ? 12 : null;

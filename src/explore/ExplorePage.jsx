@@ -8,6 +8,7 @@ import GoogleMapReact from 'google-map-react';
 import {
   Button,
   Grid,
+  Popup,
 } from 'semantic-ui-react';
 import getAuth from '../auth/selector';
 import {
@@ -212,13 +213,19 @@ export const ExplorePage = ({
         </Grid>
         <Grid columns={2} textAlign="center">
           <Grid.Column>
-            <Button
-              tabIndex="0"
-              onClick={panToMe}
-              id="pan-button"
+            <Popup
+              position="top center"
+              trigger={(
+                <Button
+                  tabIndex="0"
+                  onClick={panToMe}
+                  id="pan-button"
+                  icon="map marker alternate"
+                />
+              )}
             >
-              Centre to me
-            </Button>
+              My Location
+            </Popup>
           </Grid.Column>
           <Grid.Column>
             <AutoComplete panTo={panTo} currentPos={initialCentre} />
