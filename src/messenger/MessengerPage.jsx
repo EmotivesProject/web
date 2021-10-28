@@ -198,7 +198,7 @@ export const MessengerPage = ({
             </Segment>
           </Grid.Column>
           <Grid.Column width={middleWidth}>
-            <h1>
+            <h1 hidden>
               Instant Message
             </h1>
             <Segment id="messenger-feed">
