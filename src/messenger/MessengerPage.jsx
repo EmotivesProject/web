@@ -149,7 +149,7 @@ export const MessengerPage = ({
         <Grid id="grid-page">
           <Grid.Column width={sideWidths} id="possible-talking">
             <Segment raised id="messenger-list">
-              <Header content="Active Users" />
+              <Header content="People" />
               {activeUsers.map((user) => {
                 if (user.username !== auth.username) {
                   const data = pendingMessages.find((pendingMessage) => (
@@ -174,7 +174,6 @@ export const MessengerPage = ({
                 }
                 return null;
               })}
-              <Header content="Offline Users" />
               {inactiveUsers.map((user) => {
                 if (user.username !== auth.username) {
                   return (
