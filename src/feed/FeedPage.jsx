@@ -52,11 +52,11 @@ export const FeedPage = ({
       id="load-more-posts"
       onClick={() => loadPosts(auth, page)}
       tabIndex="0"
+      content="Load more"
       loading={loading}
       disabled={loading}
-    >
-      Load More Posts!
-    </Button>
+      icon="plus"
+    />
   ) : null;
 
   const middleWidth = width < 1700 ? 12 : null;

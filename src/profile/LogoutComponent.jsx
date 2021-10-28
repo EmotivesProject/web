@@ -23,9 +23,9 @@ export const LogoutComponent = ({ removeAuth }) => {
             key={randomKey()}
             onClick={() => handleLogOutClick()}
             className="profile-logout"
-          >
-            Click Here to log out
-          </Button>
+            content="Log out"
+            icon="sign-out alternate"
+          />
         </Grid.Column>
         <Grid.Column />
       </Grid>

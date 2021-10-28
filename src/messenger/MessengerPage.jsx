@@ -125,7 +125,7 @@ export const MessengerPage = ({
     ? null
     : (
       <EmojiInput
-        buttonText="New Message"
+        iconName="commenting"
         header="send a message"
         type="message"
         action={sendNewMessage}

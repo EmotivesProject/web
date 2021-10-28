@@ -56,9 +56,9 @@ export const NotificationPage = ({
       onClick={loadMoreNotifications}
       loading={loading}
       disabled={loading}
-    >
-      Load More
-    </Button>
+      content="Load more"
+      icon="plus"
+    />
   ) : null;
 
   const middleWidth = width < 1700 ? 12 : null;
