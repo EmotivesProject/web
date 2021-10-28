@@ -46,6 +46,7 @@ const AutoComplete = ({ panTo, currentPos }) => {
     <div id="autocomplete-search">
       <Combobox onSelect={handleSelect}>
         <label htmlFor="ExploreComboBox">
+          Search 🔎
           <ComboboxInput
             id="ExploreComboBox"
             value={value}

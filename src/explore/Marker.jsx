@@ -48,7 +48,7 @@ const Marker = ({
       aria-label="like post"
       title="Like the post"
       tabIndex="0"
-      content={<Icon name="like" />}
+      content={<Icon name="thumbs up" />}
     />
   );
 
@@ -63,7 +63,7 @@ const Marker = ({
         title="Unlike the post"
         tabIndex="0"
         icon
-        content={<Icon name="like" />}
+        content={<Icon name="thumbs up" />}
       />
     );
   }

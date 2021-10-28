@@ -448,7 +448,7 @@ body {
 
 .ui.button.profile-logout {
   font-size: medium;
-  width: 150%;
+  width: 100%;
   margin: 5px;
   background-color: #40bf40;
   color: black;

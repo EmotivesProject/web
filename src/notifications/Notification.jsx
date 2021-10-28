@@ -41,10 +41,10 @@ const Notification = ({
 
   switch (data.type) {
     case 'message':
-      icon = 'chat';
+      icon = 'commenting';
       break;
     case 'comment':
-      icon = 'comment alternate';
+      icon = 'comment';
       break;
     case 'like':
       icon = 'thumbs up';

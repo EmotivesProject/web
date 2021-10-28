@@ -11,7 +11,7 @@ const PostComments = ({
 }) => {
   const likeMessages = likes.map((like) => {
     const tmpObj = { ...like };
-    tmpObj.message = '❤️';
+    tmpObj.message = '👍';
     return tmpObj;
   });
 
