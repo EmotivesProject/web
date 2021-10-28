@@ -17,7 +17,6 @@ const base = process.env.REACT_APP_MEDIA_UPLOAD_BASE_URL;
 export const PictureComponent = ({ auth }) => {
   const [error, setError] = React.useState(null);
   const [newFile, SetNewFile] = React.useState([]);
-  const [emojiSelected, setEmojiSelection] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
 
   const errorMessage = error !== null ? (
@@ -34,15 +33,46 @@ export const PictureComponent = ({ auth }) => {
     SetNewFile(event.target.files[0]);
   };
 
+  const setProfileFromEmoji = (picture) => {
+    setLoading(true);
+
+    const fileLocation = `../assets/${picture}`;
+
+    srcToFile(fileLocation, picture, 'image/png')
+      .then((file) => {
+        const url = `${host}://${base}/user_profile`;
+        const formData = new FormData();
+        formData.append('image', file);
+        axios.post(
+          url,
+          formData,
+          {
+            headers: {
+              'content-type': 'multipart/form-data',
+              Authorization: `Bearer ${auth.token}`,
+            },
+          },
+        ).then(() => {
+          setError(null);
+          window.location.reload(false);
+        }).catch((err) => {
+          setLoading(false);
+          setError(extractErrorObject(err).message);
+        });
+      });
+  };
+
   const profileSelections = (
     <div style={{ margin: 'auto', textAlign: 'center' }}>
       {defaultPictures.map((picture) => (
         <Button
-          className={picture === emojiSelected ? 'emoji-profile-selected' : 'emoji-profile-selection'}
+          className="emoji-profile-selection"
           key={randomKey()}
           aria-label="default emoji profile picture"
           alt-text={`default emoji profile picture ${picture}`}
-          onClick={() => setEmojiSelection(picture)}
+          onClick={() => {
+            setProfileFromEmoji(picture);
+          }}
         >
           <Image
             src={`/assets/${picture}`}
@@ -77,41 +107,6 @@ export const PictureComponent = ({ auth }) => {
     });
   };
 
-  const setProfileFromEmoji = (e) => {
-    e.preventDefault();
-
-    if (emojiSelected == null) {
-      return;
-    }
-
-    setLoading(true);
-
-    const fileLocation = `../assets/${emojiSelected}`;
-
-    srcToFile(fileLocation, emojiSelected, 'image/png')
-      .then((file) => {
-        const url = `${host}://${base}/user_profile`;
-        const formData = new FormData();
-        formData.append('image', file);
-        axios.post(
-          url,
-          formData,
-          {
-            headers: {
-              'content-type': 'multipart/form-data',
-              Authorization: `Bearer ${auth.token}`,
-            },
-          },
-        ).then(() => {
-          setError(null);
-          window.location.reload(false);
-        }).catch((err) => {
-          setLoading(false);
-          setError(extractErrorObject(err).message);
-        });
-      });
-  };
-
   return (
     <Segment loading={loading}>
       {errorMessage}
@@ -135,7 +130,6 @@ export const PictureComponent = ({ auth }) => {
             <Grid.Row>
               <h4>Select a new one</h4>
               {profileSelections}
-              <Button onClick={(e) => setProfileFromEmoji(e)} className="profile-confirm">Confirm</Button>
             </Grid.Row>
             <Grid.Row>
               <h4>Upload a picture instead</h4>
