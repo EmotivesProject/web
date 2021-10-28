@@ -14,8 +14,6 @@ const Notification = ({
     e.preventDefault();
 
     visitAction(auth, data.link);
-
-    // window.location.href = data.link;
   };
 
   const notifButtons = (
@@ -27,11 +25,6 @@ const Notification = ({
           Seen
         </Button>
       ) : null }
-      <Button
-        onClick={(e) => handleVisit(e)}
-      >
-        Visit
-      </Button>
     </div>
   );
 
@@ -69,6 +62,7 @@ const Notification = ({
         header={data.title}
         content={info}
         className={id}
+        onClick={(e) => handleVisit(e)}
       />
     </>
   );
