@@ -114,7 +114,7 @@ const Autologin = ({ auth }) => {
                 />
               </label>
               <br />
-              <Button id="typical-button">Create</Button>
+              <Button className="typical-button">Create</Button>
             </Form>
             {autologinTokens.map((autologin) => (
               <Message

@@ -128,7 +128,7 @@ const Marker = ({
           <div style={{ display: 'inline' }}>
             {title}
           </div>
-          <div className="marker-like-container">
+          <div style={{ fontSize: 'medium' }}>
             {subTitle}
           </div>
         </Modal.Header>

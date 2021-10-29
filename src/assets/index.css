@@ -24,73 +24,36 @@ body {
   font-family: 'Roboto-Regular';
 }
 
-#register-segment {
-  width: 50%;
-  left: 25%;
-}
-
-#typical-button {
+.ui.button.typical-button {
   background-color: #006ac0;
   color: #ffffff;
 }
 
-#typical-button:hover {
+.ui.button.typical-button:hover {
   background-color: #003e85;
 }
 
-#notification-has-not-seen {
+.ui.button.large {
+  font-size: large;
+}
+
+.ui.message.notification-has-not-seen {
   background-color: #CDCDCD;
   cursor: pointer;
 }
 
-#typical-button-register {
-  background-color: #006ac0;
-  color: #ffffff;
-}
-
-#typical-button-register:hover {
-  background-color: #003e85;
-}
-
-#register-button {
-  background-color: #006ac0;
-  color: #ffffff;
+.ui.message.notification-has-seen {
+  background-color: #9e9e9e;
+  cursor: pointer;
 }
 
 #ExploreComboBox {
   width: 250px;
 }
 
-#register-button:hover {
-  background-color: #003e85;
-}
-
-#new-flag {
-  background-color: #006ac0;
-  color: #ffffff;
-}
-
-#new-flag:hover {
-  background-color: #003e85;
-}
-
-#switch-loading-button {
-  background-color: #006ac0;
-  color: #ffffff;
-}
-
-#pan-button {
-  background-color: #006ac0;
-  min-width: 50px;
-  color: #ffffff;
-}
-
-#switch-loading-button:hover {
-  background-color: #003e85;
-}
-
-#pan-button:hover {
-  background-color: #003e85;
+.ui.message.autologin-message {
+  width: 200%;
+  right: 50%;
 }
 
 .ui.button.like-button {
@@ -100,22 +63,7 @@ body {
   font-size: 1.25em;
 }
 
-.ui.message.autologin-message {
-  width: 200%;
-  right: 50%;
-}
-
-#like-button-marker {
-  background-color: darkgray;
-  color: #ffffff;
-  display: inline;
-}
-
 .ui.button.like-button:hover {
-  background-color: gray;
-}
-
-#like-button-marker:hover {
   background-color: gray;
 }
 
@@ -127,32 +75,8 @@ body {
   font-size: 1.25em;
 }
 
-#unlike-button-marker {
-  background-color: red;
-  color: #ffffff;
-  display: inline;
-}
-
 .ui.button.unlike-button:hover {
   background-color: darkred;
-}
-
-#unlike-button-marker:hover {
-  background-color: darkred;
-}
-
-.ui.button.marker-like-container {
-  float: right;
-  background-color: #006ac0;
-  color: #ffffff;
-}
-
-.ui.button.marker-like-container:hover {
-  background-color: #003e85;
-}
-
-.marker-like-container {
-  font-size: medium;
 }
 
 .ui.button.emoji-comment-input-button {
@@ -166,16 +90,11 @@ body {
   background-color: #003e85;
 }
 
-.ui.message.notification-has-seen {
-  background-color: #9e9e9e;
-  cursor: pointer;
-}
-
-.comment {
+.xx-large {
   font-size: xx-large;
 }
 
-#main-post {
+.ui.button.xx-large {
   font-size: xx-large;
 }
 
@@ -184,15 +103,16 @@ body {
   margin: 0.225em;
 }
 
-.ui.button.user-messenger-talking {
-  width: 10em;
-  margin: 0.225em;
+.ui.button.talking {
   background-color: rgb(255, 230, 0);
 }
 
-#autocomplete-search {
+.large {
   font-size: large;
-  margin: 1%;
+}
+
+.centre {
+  text-align: center;
 }
 
 #messenger-list {
@@ -209,19 +129,11 @@ body {
   height: 86vh;
 }
 
-#messenger-title {
-  height: 5%;
-}
-
 #messenger-items {
   height: 84%;
   overflow: auto;
   display: inline-block;
   width: 100%;
-}
-
-#messenger-new-message {
-  text-align: center;
 }
 
 .ui.button.emoji-messenger-input-button {
@@ -231,10 +143,6 @@ body {
   background-color: #006ac0;
   color: #ffffff;
   font-size: 1.25em;
-}
-
-#default-message {
-  text-align: center;
 }
 
 .ui.message.messenger-message {
@@ -247,14 +155,10 @@ body {
 
 .ui.message.messenger-message-non-self {
   background-color: lightcyan;
-  font-size: large;
-  width: 100%;
-  max-width: 60%;
   float: left;
 }
 
 #emoji-input {
-  font-size: xx-large;
   width: 200% !important;
 }
 
@@ -268,6 +172,160 @@ body {
 #google-maps-div {
   width: 100%;
   height: 82vh;
+}
+
+#emoji-selection-previews {
+  margin-top: 0.2em;
+  max-height: 24em;
+  overflow-y: scroll;
+}
+
+.ui.avatar.image.small-avatar {
+  font-size: small;
+}
+
+.ui.medium.image.profile-display {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 128px;
+  max-height: 128px;
+}
+
+.ui.form.profile-upload-form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25em;
+}
+
+.ui.button.profile-upload-button {
+  background-color: #006ac0;
+  color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.ui.button.profile-upload-button:hover {
+  background-color: #003e85;
+}
+
+.ui.form .field>label {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ui.form .field>label {
+  color: white;
+}
+
+.post-map {
+  width: 500px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+}
+
+#reaction-previews {
+  max-height: 28em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  min-height: 20em;
+}
+
+.ui.card.comment-right {
+  left: 3%;
+}
+
+.ui.card.comment {
+  width: 40%;
+}
+
+.ui.modal>.actions {
+  display: flow-root !important;
+  float: right;
+  width: 100%;
+}
+
+.ui.button.green {
+  background-color: #40bf40;
+  color: black;
+}
+
+.ui.button.green:hover {
+  background-color: #287728;
+}
+
+.ui.button.padding {
+  padding: 10px 20px 10px 20px;
+  margin: 5px;
+}
+
+.ui.button.profile-confirm {
+  font-size: medium;
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ui.button.profile-logout {
+  font-size: medium;
+  width: 100%;
+  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skip-to-content-link {
+  background: #e77e23;
+  height: 30px;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-200%);
+  transition: transform 0.3s;
+}
+
+.skip-to-content-link:focus {
+  transform: translateY(0%);
+}
+
+#top-bar {
+  background-color: #a0bdbd;
+  color: black;
+  text-align: center;
+  font-size: x-large;
+  transform: translateY(-25%);
+}
+
+.ui.button.load-more {
+  width: 100%;
+  font-size: large;
+  color: #ffffff;
+  background-color: #00851D;
+}
+
+.ui.button.load-more:hover {
+  background-color: #00470f;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: #17404A;
+}
+
+.invis-button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 }
 
 @media only screen and (max-height: 1024px) {
@@ -302,246 +360,3 @@ body {
     right: 100%;
   }
 }
-
-#emoji-selection-container {
-  margin-top: -2em;
-}
-
-#emoji-selection-previews {
-  margin-top: 0.2em;
-  max-height: 24em;
-  overflow-y: scroll;
-}
-
-.ui.avatar.image.small-avatar {
-  font-size: small;
-}
-
-.ui.medium.image.profile-display {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 128px;
-  max-height: 128px;
-}
-
-.ui.form.profile-upload-form {
-  margin-left: auto;
-  margin-right: auto;
-  width: 25em;
-}
-
-.ui.button.profile-upload-button {
-  color: #ffffff;
-  background-color: #006ac0;
-  color: #ffffff;
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-}
-
-.ui.form .field>label {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.ui.form .field>label {
-  color: white;
-}
-
-.map-explore-link {
-  font-size: 0px;
-}
-
-.ui.button.profile-upload-button:hover {
-  background-color: #003e85;
-}
-
-.emoji-profiles {
-  float: left;
-  display: flex;
-  margin: 5%;
-}
-
-.selected-emoji {
-  background-color: greenyellow;
-}
-
-.post-map {
-  width: 500px;
-  height: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  border-color: black;
-  border-width: 1px;
-  border-style: solid;
-}
-
-#reaction-previews {
-  max-height: 28em;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  min-height: 20em;
-}
-
-.ui.card.comment-right {
-  left: 3%;
-}
-
-.ui.card.comment {
-  width: 40%;
-}
-
-.emoji-selection-title {
-  margin-left: 1em;
-}
-
-.ui.modal>.actions {
-  display: flow-root !important;
-  float: right;
-  width: 100%;
-}
-
-.ui.button.emoji-selection {
-  font-size: xx-large;
-  padding: 10px 20px 10px 20px;
-  margin: 5px;
-  background-color: #40bf40;
-  color: black;
-}
-
-.ui.button.emoji-selection:hover {
-  background-color: #287728;
-}
-
-.ui.button.emoji-profile-selection {
-  max-width: 30%;
-  padding: 10px 20px 10px 20px;
-  margin: 5px;
-  background-color: #40bf40;
-  color: black;
-}
-
-.ui.button.emoji-profile-selected {
-  max-width: 30%;
-  padding: 10px 20px 10px 20px;
-  margin: 5px;
-  background-color: #287728;
-  color: black;
-}
-
-.ui.button.emoji-profile-selection:hover {
-  background-color: #287728;
-}
-
-.ui.button.profile-confirm {
-  font-size: medium;
-  margin: 5px;
-  background-color: #40bf40;
-  color: black;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.ui.button.profile-confirm:hover {
-  background-color: #287728;
-}
-
-.ui.button.profile-logout {
-  font-size: medium;
-  width: 100%;
-  margin: 5px;
-  background-color: #40bf40;
-  color: black;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.ui.button.profile-logout:hover {
-  background-color: #287728;
-}
-
-.ui.button.emoji-selection-button {
-  font-size: large;
-}
-
-.skip-to-content-link {
-  background: #e77e23;
-  height: 30px;
-  left: 50%;
-  padding: 8px;
-  position: absolute;
-  transform: translateY(-200%);
-  transition: transform 0.3s;
-}
-
-.skip-to-content-link:focus {
-  transform: translateY(0%);
-}
-
-#emoji-selection-creation-button {
-  font-size: large;
-  background-color: #006ac0;
-  color: #ffffff;
-}
-
-#emoji-selection-creation-button:hover {
-  background-color: #003e85;
-}
-
-#pagination {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: large;
-}
-
-#top-bar {
-  background-color: #a0bdbd;
-  color: black;
-  text-align: center;
-  font-size: x-large;
-  transform: translateY(-25%);
-}
-
-#load-more-posts {
-  width: 100%;
-  font-size: large;
-  color: #ffffff;
-  background-color: #00851D;
-}
-
-#load-more-posts:hover {
-  background-color: #00470f;
-}
-
-a {
-  color: black;
-}
-
-a:hover {
-  color: #17404A;
-}
-
-.invis-button {
-  background-color: Transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-}
-
-/*
-.ui.form {
-  margin-left: 300px;
-  margin-top: 100px;
-  width: 550px;
-  height: 400px;
-}
-
-.ui.button {
-  border-radius: 18px;
-  width: 200px;
-  background-color: #3865FE;
-}
-*/

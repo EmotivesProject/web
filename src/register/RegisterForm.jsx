@@ -156,7 +156,7 @@ const RegisterForm = ({ onCreateAuth }) => {
             />
           </label>
           <br />
-          <Button size="large" id="register-button">
+          <Button size="large" className="typical-button">
             Register now
           </Button>
         </Segment>

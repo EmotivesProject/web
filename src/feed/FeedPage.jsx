@@ -49,7 +49,7 @@ export const FeedPage = ({
 
   const loadMoreButton = !finished ? (
     <Button
-      id="load-more-posts"
+      className="load-more"
       onClick={() => loadPosts(auth, page)}
       tabIndex="0"
       content="Load more"

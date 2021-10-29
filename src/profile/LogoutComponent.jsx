@@ -22,7 +22,7 @@ export const LogoutComponent = ({ removeAuth }) => {
           <Button
             key={randomKey()}
             onClick={() => handleLogOutClick()}
-            className="profile-logout"
+            className="profile-logout green"
             content="Log out"
             icon="sign-out alternate"
           />

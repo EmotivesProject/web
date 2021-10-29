@@ -13,7 +13,7 @@ const MessengerMessage = ({ message, user, talkingTo }) => {
   return (
     <Message
       key={randomKey()}
-      className={user === message.username_from ? 'messenger-message' : 'messenger-message-non-self'}
+      className={user === message.username_from ? 'messenger-message' : 'messenger-message messenger-message-non-self'}
     >
       <Message.Header>
         <Avatar username={message.username_from} name="small-avatar" />

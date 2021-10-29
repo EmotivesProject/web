@@ -43,7 +43,7 @@ const AutoComplete = ({ panTo, currentPos }) => {
   };
 
   return (
-    <div id="autocomplete-search">
+    <div className="large" style={{ margin: '1%' }}>
       <Combobox onSelect={handleSelect}>
         <label htmlFor="ExploreComboBox">
           Search 🔎

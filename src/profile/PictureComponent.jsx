@@ -66,7 +66,8 @@ export const PictureComponent = ({ auth }) => {
     <div style={{ margin: 'auto', textAlign: 'center' }}>
       {defaultPictures.map((picture) => (
         <Button
-          className="emoji-profile-selection"
+          className="green padding"
+          style={{ width: '30%' }}
           key={randomKey()}
           aria-label="default emoji profile picture"
           alt-text={`default emoji profile picture ${picture}`}
@@ -140,7 +141,7 @@ export const PictureComponent = ({ auth }) => {
                   </Button>
                   <input type="file" id="file" hidden onChange={fileChange} />
                 </Form.Field>
-                <Button type="submit" className="profile-confirm">Confirm</Button>
+                <Button type="submit" className="profile-confirm green">Confirm</Button>
               </Form>
             </Grid.Row>
           </Grid>
