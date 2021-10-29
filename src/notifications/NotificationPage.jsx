@@ -52,7 +52,7 @@ export const NotificationPage = ({
 
   const button = !finished ? (
     <Button
-      id="load-more-posts"
+      className="load-more"
       onClick={loadMoreNotifications}
       loading={loading}
       disabled={loading}

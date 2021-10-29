@@ -36,11 +36,11 @@ const EmojiSelection = ({ action, initialInput }) => {
 
     return filteredEmojis.length !== 0 ? (
       <>
-        <h3 className="emoji-selection-title">{title}</h3>
+        <h3 style={{ marginLeft: '1em' }}>{title}</h3>
         <div style={{ margin: 'auto', textAlign: 'center' }}>
           {filteredEmojis.map((emoji) => (
             <Button
-              className="emoji-selection"
+              className="padding green xx-large"
               key={randomKey()}
               content={emoji}
               aria-label="Emoji selection button"
@@ -53,7 +53,7 @@ const EmojiSelection = ({ action, initialInput }) => {
   };
 
   return (
-    <div id="emoji-selection-container">
+    <div style={{ marginTop: '-2em' }}>
       <Input
         id="emoji-filter"
         name="EmojiFilter"

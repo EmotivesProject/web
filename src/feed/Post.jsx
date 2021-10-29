@@ -58,9 +58,8 @@ const Post = ({
         <a
           href={`/explore?id=${data.post.id}&lat=${content.latitude}&lng=${content.longitude}`}
           aria-label="Explore here"
-          className="map-explore-link"
           style={{
-            position: 'absolute', top: 0, left: '0px', display: 'inline-block', width: '500px', height: '400px',
+            position: 'absolute', fontSize: '0px', top: 0, left: '0px', display: 'inline-block', width: '500px', height: '400px',
           }}
         >
           Explore here
@@ -128,7 +127,7 @@ const Post = ({
             {getTimeAgoFromObject(data.post.updated_at)}
           </Header.Subheader>
         </Header>
-        <Container textAlign="center" id="main-post">
+        <Container textAlign="center" className="xx-large">
           {mainInformation}
         </Container>
       </Container>

@@ -100,12 +100,12 @@ export const MessengerPage = ({
 
   const defaultMessage = talkingTo === ''
     ? (
-      <Header id="default-message">
+      <Header className="centre">
         select someone to talk to
       </Header>
     )
     : (
-      <Header id="default-message">
+      <Header className="centre">
         Talking to&nbsp;
         {talkingTo}
         <Avatar username={talkingTo} name="small-avatar" />
@@ -159,7 +159,7 @@ export const MessengerPage = ({
                   return (
                     <div key={randomKey()}>
                       <Button
-                        className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
+                        className={user.username === talkingTo ? 'user-messenger talking' : 'user-messenger'}
                         content={content}
                         key={randomKey()}
                         onClick={() => {
@@ -179,7 +179,7 @@ export const MessengerPage = ({
                   return (
                     <div key={randomKey()}>
                       <Button
-                        className={user.username === talkingTo ? 'user-messenger-talking' : 'user-messenger'}
+                        className={user.username === talkingTo ? 'user-messenger talking' : 'user-messenger'}
                         content={user.username}
                         key={randomKey()}
                         onClick={() => switchPersonTalking(user.username, talkingTo)}
@@ -202,7 +202,7 @@ export const MessengerPage = ({
             </h1>
             <Segment id="messenger-feed">
               {errorMessage}
-              <Grid.Row id="messenger-title">
+              <Grid.Row style={{ height: '5%' }}>
                 {defaultMessage}
               </Grid.Row>
               <Divider />
@@ -212,7 +212,7 @@ export const MessengerPage = ({
                 </Grid.Row>
               </div>
               <Divider />
-              <Grid.Row id="messenger-new-message" key={randomKey()}>
+              <Grid.Row className="centre" key={randomKey()}>
                 {newMessageButton}
               </Grid.Row>
             </Segment>

@@ -219,7 +219,7 @@ export const ExplorePage = ({
                 <Button
                   tabIndex="0"
                   onClick={panToMe}
-                  id="pan-button"
+                  className="typical-button"
                   icon="map marker alternate"
                   content="To me"
                 />

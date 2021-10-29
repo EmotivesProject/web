@@ -69,15 +69,16 @@ const EmojiInput = ({
             value={currentInput}
             onChange={(e) => updateCurrentInputViaKeyboard(e.target.value)}
             id="emoji-input"
+            className="xx-large"
             fluid
           />
           {errorMes}
         </label>
         <EmojiSelection action={updateCurrentInput} initialInput="" />
       </Modal.Content>
-      <Modal.Actions style={{ display: 'flex', float: 'right' }}>
+      <Modal.Actions style={{ display: 'flex', float: 'right', fontSize: 'large' }}>
         <Button
-          className="emoji-selection-button"
+          className="large"
           icon
           labelPosition="left"
           onClick={() => setCurrentInput('')}
@@ -87,7 +88,7 @@ const EmojiInput = ({
           Delete Input
         </Button>
         <Button
-          className="emoji-selection-button"
+          className="large"
           onClick={() => {
             setOpen(false);
             setCurrentInput('');
@@ -96,7 +97,7 @@ const EmojiInput = ({
           Cancel
         </Button>
         <Button
-          id="emoji-selection-creation-button"
+          className="typical-button large"
           content="Finished!"
           labelPosition="right"
           icon="checkmark"
