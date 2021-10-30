@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import {
   Grid, Form, Button, Message,
 } from 'semantic-ui-react';
@@ -124,6 +125,13 @@ const Autologin = ({ auth }) => {
                 <Message.Header>{autologin.username}</Message.Header>
                 {`${autologin.site}${autologin.autologin_token}`}
                 <br />
+                <Link to={`/autologin_view/${autologin.id}`} aria-label="Notification" tabIndex="0">
+                  <Button
+                    primary
+                  >
+                    View QR Code
+                  </Button>
+                </Link>
                 <Button
                   onClick={() => (navigator.clipboard.writeText(`${autologin.site}${autologin.autologin_token}`))}
                   primary
