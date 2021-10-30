@@ -33,12 +33,42 @@ const EmojiInput = ({
     setErrorMessage('');
   };
 
-  const updateCurrentInputViaKeyboard = (str) => {
+  const updateCurrentInputViaKeyboard = (e) => {
+    const str = e.target.value;
     if (allowKeyboard) {
       setCurrentInput(str);
       setErrorMessage('');
     } else {
       setErrorMessage('Can only use emojis here');
+    }
+  };
+
+  const handleSubmit = () => {
+    switch (type) {
+      case 'post':
+        action(auth, 'emoji', currentInput);
+        break;
+      case 'comment':
+        action(auth, currentInput, postID);
+        break;
+      case 'message':
+        action(currentInput, from, to);
+        break;
+      case 'map':
+        action(auth, 'map', currentInput, info.lat, info.lng, title);
+        openState(false);
+        setNewPost(null);
+        break;
+      default:
+    }
+    setCurrentInput('');
+    setOpen(false);
+  };
+
+  const handleKeypress = (e) => {
+    // Key Code 13 is enter
+    if (e.keyCode === 13) {
+      handleSubmit();
     }
   };
 
@@ -67,7 +97,8 @@ const EmojiInput = ({
           <Input
             placeholder={`Your ${type}`}
             value={currentInput}
-            onChange={(e) => updateCurrentInputViaKeyboard(e.target.value)}
+            onKeyDown={(e) => handleKeypress(e)}
+            onChange={(e) => updateCurrentInputViaKeyboard(e)}
             id="emoji-input"
             className="xx-large"
             fluid
@@ -101,27 +132,7 @@ const EmojiInput = ({
           content="Finished!"
           labelPosition="right"
           icon="checkmark"
-          onClick={() => {
-            switch (type) {
-              case 'post':
-                action(auth, 'emoji', currentInput);
-                break;
-              case 'comment':
-                action(auth, currentInput, postID);
-                break;
-              case 'message':
-                action(currentInput, from, to);
-                break;
-              case 'map':
-                action(auth, 'map', currentInput, info.lat, info.lng, title);
-                openState(false);
-                setNewPost(null);
-                break;
-              default:
-            }
-            setCurrentInput('');
-            setOpen(false);
-          }}
+          onClick={() => handleSubmit()}
         />
       </Modal.Actions>
     </Modal>
