@@ -3,6 +3,12 @@
   src: local('Roboto-Regular'), url(./Roboto-Regular.ttf) format('opentype');
 }
 
+@media print {
+  .ui.button.no-print {
+    display: none;
+  }
+}
+
 html {
   overflow-x: hidden;
 }
