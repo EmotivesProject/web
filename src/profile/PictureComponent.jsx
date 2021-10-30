@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import {
   Button,
+  Divider,
   Form,
   Grid, Image, Message, Segment,
 } from 'semantic-ui-react';
@@ -127,11 +128,12 @@ export const PictureComponent = ({ auth }) => {
         </Grid.Column>
         <Grid.Column>
           <h3>New Picture</h3>
-          <Grid divided="vertically">
+          <Grid>
             <Grid.Row>
               <h4>Select a new one</h4>
               {profileSelections}
             </Grid.Row>
+            <Divider horizontal>OR</Divider>
             <Grid.Row>
               <h4>Upload a picture instead</h4>
               <Form onSubmit={onFormSubmit} className="profile-upload-form">
