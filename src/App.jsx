@@ -11,6 +11,7 @@ import DefaultNotificationPage from './notifications/NotificationPage';
 import DefaultExplorePage from './explore/ExplorePage';
 import NotFoundPage from './NotFound';
 import ConnectedProfilePage from './profile/ProfilePage';
+import AutologinView from './autologin/AutologinView';
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
         <Route path="/notifications" component={DefaultNotificationPage} />
         <Route path="/profile" component={ConnectedProfilePage} />
         <Route path="/post/:id" component={IndividualPostPage} />
-        <Route path="/autologin/" component={Autologin} />
+        <Route path="/autologin" component={Autologin} />
+        <Route path="/autologin_view/:id" component={AutologinView} />
         <Route path="/explore" component={DefaultExplorePage} />
         <Route component={NotFoundPage} />
       </Switch>
