@@ -94,7 +94,7 @@ export const AutologinComponent = ({ auth, setError }) => {
   return (
     <Segment>
       <h2>
-        Autologins
+        QR Code
       </h2>
       {messageDiv}
       <Grid columns={3} textAlign="center">
