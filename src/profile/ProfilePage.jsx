@@ -7,6 +7,7 @@ import getAuth from '../auth/selector';
 import TopBar from '../shared/TopBar';
 import useWindowDimensions from '../shared/useWindowDimensions';
 import randomKey from '../utils/randomKey';
+import { AutologinComponent } from './AutologinComponent';
 import { LogoutComponent } from './LogoutComponent';
 import { PictureComponent } from './PictureComponent';
 
@@ -20,7 +21,7 @@ export const ProfilePage = ({
     return <Redirect to="/" />;
   }
 
-  const [error] = React.useState(null);
+  const [error, setError] = React.useState(null);
 
   const errorMessage = error !== null ? (
     <Message negative>
@@ -46,6 +47,7 @@ export const ProfilePage = ({
             {errorMessage}
             <h1>Profile</h1>
             <PictureComponent auth={auth} key={randomKey()} />
+            <AutologinComponent auth={auth} setError={setError} key={randomKey()} />
             <LogoutComponent
               removeAuth={callRemoveAuth}
               key={randomKey()}
