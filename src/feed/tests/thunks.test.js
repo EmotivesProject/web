@@ -96,10 +96,11 @@ describe('The Post thunk', () => {
         },
         ],
         page: 1,
+        increasePage: true,
       },
     };
 
-    await fetchPostsRequest(fakeAuth, 1)(fakeDispatch);
+    await fetchPostsRequest(fakeAuth, 1, true)(fakeDispatch);
 
     expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedFirstAction);
     expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);

@@ -35,6 +35,8 @@ const fetchMorePostRate = 1000 * 10; // 10 seconds. Do not reduce to below 5 sec
 
 const defaultZoom = 15;
 
+const FIVE_SECONDS = 10000;
+
 let initialized = false;
 
 // Brisbane centre
@@ -69,16 +71,31 @@ export const ExplorePage = ({
   const [newPost, setNewPost] = React.useState(null);
   const [modelOpen, setModalOpen] = React.useState(false);
   const [viewingPost, setViewingPost] = React.useState(false);
+  const [refreshPageValue, setRefreshPageValue] = React.useState(0);
 
   const stateRef = useRef();
 
   stateRef.current = viewingPost;
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      loadPosts(auth, refreshPageValue, false);
+      if (refreshPageValue > page) {
+        setRefreshPageValue(0);
+      } else {
+        setRefreshPageValue(refreshPageValue + 1);
+      }
+    }, FIVE_SECONDS);
+
+    // This represents the unmount function, clears your interval to prevent memory leaks.
+    return () => clearInterval(interval);
+  }, []);
+
   // Used to constantly load new posts
   useEffect(() => {
     const interval = setInterval(() => {
       if (!finished) {
-        loadPosts(auth, page);
+        loadPosts(auth, page, true);
       }
     }, fetchMorePostRate);
     return () => clearInterval(interval);
@@ -97,7 +114,7 @@ export const ExplorePage = ({
 
   // Basic first initialized commands
   if (!initialized) {
-    loadPosts(auth, page);
+    loadPosts(auth, page, true);
     initialized = true;
 
     const query = useQuery();
@@ -250,7 +267,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadPosts: (auth, page) => dispatch(fetchPostsRequest(auth, page)),
+  loadPosts: (auth, page, increasePage) => dispatch(fetchPostsRequest(auth, page, increasePage)),
   fetchPost: (auth, postID) => dispatch(fetchIndividualPostRequest(auth, postID)),
   likePost: (auth, postID) => dispatch(likePostRequest(auth, postID)),
   unlikePost: (auth, postID, likeID) => dispatch(unlikePostRequest(auth, postID, likeID)),
