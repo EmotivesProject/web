@@ -29,9 +29,9 @@ export const commentPost = (comment) => ({
 });
 
 export const FETCH_POSTS = 'FETCH_POSTS';
-export const fetchPosts = (posts, page) => ({
+export const fetchPosts = (posts, page, increasePage) => ({
   type: FETCH_POSTS,
-  payload: { posts, page },
+  payload: { posts, page, increasePage },
 });
 
 export const FETCH_POST = 'FETCH_POST';

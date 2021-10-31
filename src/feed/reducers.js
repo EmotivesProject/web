@@ -42,16 +42,29 @@ const postState = (state = initialState, action) => {
       };
     }
     case FETCH_POSTS: {
-      const { posts, page } = payload;
-      const actualNewPosts = state.posts.concat(posts);
+      const { posts, page, increasePage } = payload;
+      const currentPosts = state.posts;
+
+      const newPosts = posts.concat(
+        currentPosts.filter((s) => !posts.find((t) => t.post.id === s.post.id)),
+      );
+
       let finished = false;
       if (posts.length < 5) {
         finished = true;
+      } else {
+        finished = false;
       }
-      const pageCount = page + 1;
+      let pageCount = page;
+      if (increasePage) {
+        pageCount += 1;
+      }
+
+      currentPosts.sort((a, b) => a.post.created_at > b.post.created_at);
+
       return {
         ...state,
-        posts: actualNewPosts,
+        posts: newPosts,
         page: pageCount,
         finished,
       };

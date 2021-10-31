@@ -15,7 +15,7 @@ import {
 const host = process.env.REACT_APP_API_HOST;
 const base = process.env.REACT_APP_POSTIT_BASE_URL;
 
-const fetchPostsRequest = (auth, page) => async (dispatch) => {
+const fetchPostsRequest = (auth, page, increasePage) => async (dispatch) => {
   dispatch(updateLoading(true));
   const path = 'post';
   const url = `${host}://${base}/${path}?page=${page}`;
@@ -29,7 +29,7 @@ const fetchPostsRequest = (auth, page) => async (dispatch) => {
       const fetchedPosts = result.data.result;
       dispatch(apiSuccess('posts'));
       dispatch(updateLoading(false));
-      dispatch(fetchPosts(fetchedPosts, page));
+      dispatch(fetchPosts(fetchedPosts, page, increasePage));
     })
     .catch(() => {
       dispatch(updateLoading(false));

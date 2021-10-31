@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Grid, Message, Button } from 'semantic-ui-react';
@@ -20,6 +20,8 @@ import {
   unlikePostRequest,
 } from './thunks';
 
+const FIVE_SECONDS = 10000;
+
 let initialized = false;
 
 export const FeedPage = ({
@@ -27,12 +29,28 @@ export const FeedPage = ({
 }) => {
   const { width } = useWindowDimensions();
 
+  const [refreshPageValue, setRefreshPageValue] = useState(0);
+
   if (auth === null) {
     return <Redirect to="/" />;
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      loadPosts(auth, refreshPageValue, false);
+      if (refreshPageValue > page) {
+        setRefreshPageValue(0);
+      } else {
+        setRefreshPageValue(refreshPageValue + 1);
+      }
+    }, FIVE_SECONDS);
+
+    // This represents the unmount function, clears your interval to prevent memory leaks.
+    return () => clearInterval(interval);
+  }, []);
+
   if (!initialized) {
-    loadPosts(auth, page);
+    loadPosts(auth, page, true);
     initialized = true;
   }
 
@@ -50,7 +68,7 @@ export const FeedPage = ({
   const loadMoreButton = !finished ? (
     <Button
       className="load-more"
-      onClick={() => loadPosts(auth, page)}
+      onClick={() => loadPosts(auth, page, true)}
       tabIndex="0"
       content="Load more"
       loading={loading}
@@ -102,7 +120,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadPosts: (auth, page) => dispatch(fetchPostsRequest(auth, page)),
+  loadPosts: (auth, page, increasePage) => dispatch(fetchPostsRequest(auth, page, increasePage)),
   likePost: (auth, postID) => dispatch(likePostRequest(auth, postID)),
   unlikePost: (auth, postID, likeID) => dispatch(unlikePostRequest(auth, postID, likeID)),
   commentPost: (auth, message, postID) => dispatch(commentPostRequest(auth, message, postID)),
