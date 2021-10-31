@@ -133,10 +133,22 @@ describe('The post reducer can interact with posts', () => {
     const fakeAction = {
       type: 'FETCH_POSTS',
       payload: {
-        posts: {
+        posts: [{
           id: 1,
-        },
+          content: {
+            message: 'previous post',
+          },
+          comments: [
+            {
+              id: 2,
+              username: 'john',
+              message: 'I like it',
+            },
+          ],
+          likes: [],
+        }],
         page: 0,
+        increasePage: true,
       },
     };
 
@@ -144,9 +156,20 @@ describe('The post reducer can interact with posts', () => {
       page: 1,
       loading: false,
       error: null,
-      finished: false,
+      finished: true,
       posts: [{
         id: 1,
+        content: {
+          message: 'previous post',
+        },
+        comments: [
+          {
+            id: 2,
+            username: 'john',
+            message: 'I like it',
+          },
+        ],
+        likes: [],
       }],
       errors: null,
     };
