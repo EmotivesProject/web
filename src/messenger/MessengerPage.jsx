@@ -167,7 +167,7 @@ export const MessengerPage = ({
                         }}
                       >
                         <Avatar username={user.username} name="small-avatar" />
-                        {user.username}
+                        {content}
                       </Button>
                     </div>
                   );
@@ -176,17 +176,21 @@ export const MessengerPage = ({
               })}
               {inactiveUsers.map((user) => {
                 if (user.username !== auth.username) {
+                  const data = pendingMessages.find((pendingMessage) => (
+                    pendingMessage.username_from === user.username
+                  ));
+                  const content = data ? `${user.username} (${data.total})` : `${user.username}`;
                   return (
                     <div key={randomKey()}>
                       <Button
                         className={user.username === talkingTo ? 'user-messenger talking' : 'user-messenger'}
-                        content={user.username}
+                        content={content}
                         key={randomKey()}
                         onClick={() => switchPersonTalking(user.username, talkingTo)}
                         positive={user.active}
                       >
                         <Avatar username={user.username} name="small-avatar" />
-                        {user.username}
+                        {content}
                       </Button>
                       <br />
                     </div>
