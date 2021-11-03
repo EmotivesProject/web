@@ -10,7 +10,7 @@ import defaultPictures from '../constants/DefaultPictures';
 import createProfileLink from '../utils/createProfileLink';
 import { extractErrorObject } from '../utils/extractObjects';
 import randomKey from '../utils/randomKey';
-import srcToFile from '../utils/SrcToFile';
+import srcToFile from '../utils/srcToFile';
 
 const host = process.env.REACT_APP_API_HOST;
 const base = process.env.REACT_APP_MEDIA_UPLOAD_BASE_URL;
