@@ -34,6 +34,33 @@ const Post = ({
   const { content } = data.post;
   if (data.post.content.type === 'emoji') {
     mainInformation = content.message;
+  } else if (data.post.content.type === 'map-suggest') {
+    const initialCentre = {
+      lat: data.post.content.latitude,
+      lng: data.post.content.longitude,
+    };
+
+    mainInformation = (
+      <div className="post-map" style={{ position: 'relative', width: '100%', height: '400px' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+          defaultCenter={initialCentre}
+          defaultZoom={defaultZoom}
+        >
+          <div
+            lat={content.latitude}
+            lng={content.longitude}
+            style={markerStyle}
+          >
+            <img
+              src={data.post.content.reaction}
+              alt="reaction"
+              style={{ width: '50px', height: '50px' }}
+            />
+          </div>
+        </GoogleMapReact>
+      </div>
+    );
   } else {
     const initialCentre = {
       lat: content.latitude,

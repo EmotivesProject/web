@@ -4,7 +4,7 @@ import {
   Grid,
   Modal,
 } from 'semantic-ui-react';
-import EmojiInput from '../shared/EmojiInput';
+import SuggestInput from '../shared/SuggestInput';
 
 const markerStyle = {
   height: 10,
@@ -74,7 +74,7 @@ const TempMarker = ({
               <label htmlFor="typical-button">
                 What is your reaction?
                 <br />
-                <EmojiInput
+                <SuggestInput
                   key="brand-new-temp-marker-create"
                   header="Initial Reaction?"
                   type="map"
