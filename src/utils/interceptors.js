@@ -24,7 +24,7 @@ const interceptor = (store) => {
       const { refreshToken } = authState;
 
       // Attempt to refresh the auth_token if we got the 401
-      // Finally reject if still erroring, Test
+      // Finally reject if still erroring
       return Axios.post(refreshURL, JSON.stringify({
         refresh_token: refreshToken,
       }))
